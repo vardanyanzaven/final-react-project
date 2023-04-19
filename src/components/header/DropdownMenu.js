@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { HEADER_TAB_LIST } from "../../constants/common";
 import styled from "styled-components";
@@ -16,7 +10,7 @@ const NavbarMenu = styled(Menu)({
     color: "white",
     background: "#192026",
     width: "100%",
-    padding: 0
+    padding: 0,
   },
 });
 

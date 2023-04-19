@@ -1,8 +1,8 @@
-const HEADER_TAB_LIST = {
-    "services": "Services",
-    "catalogue": "catalogue",
-    "about": "About us",
-    "contact": "Contact us"
+export const HEADER_TAB_LIST = {
+  services: "services",
+  catalogue: "catalogue",
+  about: "about us",
+  contact: "contact us",
 };
-   
-export { HEADER_TAB_LIST };
+
+export const reg = /^(?=.*\d)(?=.*[A-Z]).{8,20}$/;
