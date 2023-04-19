@@ -67,21 +67,12 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 flexGrow: 1,
               }}
             >
-              {HEADER_TAB_LIST.map((tab) => {
-                if (tab === "contact us") {
-                  return (
-                    <Button variant="navbar" id={tab} key={tab}>
-                      <Typography variant="h5" noWrap>
-                        {tab}
-                      </Typography>
-                    </Button>
-                  );
-                }
-                return (
+              {Object.keys(HEADER_TAB_LIST).map((tab) => 
+              (
                   <NavLink
-                    to={`/${tab.split(" ").join("-")}`}
+                    to={`/${tab}`}
                     className="navbar-link"
-                    key={tab.split(" ").join("-")}
+                    key={tab}
                   >
                     <Button
                       variant="navbar"
@@ -92,12 +83,12 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                       }`}
                     >
                       <Typography variant="h5" noWrap>
-                        {tab === "about" ? "about us" : tab}
+                        {HEADER_TAB_LIST[tab]}
                       </Typography>
                     </Button>
                   </NavLink>
-                );
-              })}
+                )
+              )}
             </Box>
 
             <AuthOptions />

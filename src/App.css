@@ -1,9 +1,8 @@
-.navbar-link {
+.navbar-link, a {
     color: white;
     text-decoration: none;
     transition: color 0.15s;
 }
-
 .navbar-link:hover {
     color: #F2B90D;
 } 

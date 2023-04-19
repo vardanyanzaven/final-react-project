@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { HEADER_TAB_LIST } from "../../constants/common";
 import styled from "styled-components";
@@ -10,6 +16,7 @@ const NavbarMenu = styled(Menu)({
     color: "white",
     background: "#192026",
     width: "100%",
+    padding: 0
   },
 });
 
@@ -57,56 +64,48 @@ const DropdownMenu = () => {
           flexGrow: 1,
         }}
       >
-        {HEADER_TAB_LIST.map((tab) => {
-          if (tab === "contact us") {
-            return (
-              <MenuItem
-                key={tab.split(" ").join("-")}
-                id={tab}
-                onClick={closeNavMenu}
-              >
-                <Typography
-                  sx={{
-                    fontSize: { sm: 24, xs: 15 },
-                    transition: "background 0.1s",
-                    "&:hover": {
-                      background: "rgb(37, 47, 57)",
-                    },
-                  }}
-                  variant="h5"
-                  noWrap
-                >
-                  {tab}
-                </Typography>
-              </MenuItem>
-            );
-          }
-          return (
-            <NavLink
-              key={tab.split(" ").join("-")}
-              to={tab}
-              className="navbar-link"
+        {Object.keys(HEADER_TAB_LIST).map((tab) => (
+          <NavLink key={tab} to={tab} className="navbar-link">
+            <MenuItem
+              onClick={closeNavMenu}
+              sx={{
+                borderBottom: tab === "contact" ? "none" : "2px solid #F2B90D",
+                transition: "background 0.1s",
+                "&:hover": {
+                  background: "rgb(37, 47, 57)",
+                },
+              }}
             >
-              <MenuItem
-                onClick={closeNavMenu}
-                sx={{
-                  borderBottom: "2px dotted #F2B90D",
-                  transition: "background 0.1s",
-                  "&:hover": {
-                    background: "rgb(37, 47, 57)",
-                  },
-                }}
+              <Typography
+                sx={{ fontSize: { sm: 24, xs: 17 } }}
+                textAlign="center"
               >
-                <Typography
-                  sx={{ fontSize: { sm: 24, xs: 15 } }}
-                  textAlign="center"
-                >
-                  {tab === "about" ? "about us" : tab}
-                </Typography>
-              </MenuItem>
-            </NavLink>
-          );
-        })}
+                {HEADER_TAB_LIST[tab]}
+              </Typography>
+            </MenuItem>
+          </NavLink>
+        ))}
+        <MenuItem
+          sx={{
+            display: { xs: "flex", sm: "none" },
+            borderTop: "2px solid #F2B90D",
+            transition: "background 0.15s",
+            "&:hover": {
+              background: "rgba(215, 182, 93, 0.3)",
+              color: "#F2B90D",
+            },
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: { sm: 24, xs: 19 },
+            }}
+            variant="h5"
+            noWrap
+          >
+            Sign In
+          </Typography>
+        </MenuItem>
       </NavbarMenu>
     </Box>
   );

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 const ContactUsPage = ({ setActiveLinkId }) => {
   useEffect(() => {
-    setActiveLinkId("contact-us");
+    setActiveLinkId("contact");
   }, []);
   return <div>ContactUsPage</div>;
 };
