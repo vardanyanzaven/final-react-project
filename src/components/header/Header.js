@@ -11,17 +11,32 @@ import {
 } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import HeaderTheme from "../../themes/HeaderTheme";
-import AuthOptions from "../authentication/AuthOptions";
 import { HEADER_TAB_LIST } from "../../constants/common";
 import DropdownMenu from "./DropdownMenu";
+import Auth from "../Auth";
 
 const Header = ({ activeLinkId, setActiveLinkId }) => {
-  const checkIfActive = (id) => {
-    return activeLinkId === id;
+  const [loginDialogOpen, setLoginDialogOpen] = useState(false);
+  const [signUpDialogOpen, setSignUpDialogOpen] = useState(false);
+
+  const handleOpenLogin = () => {
+    setLoginDialogOpen(true);
+    setSignUpDialogOpen(false);
   };
-  const activateEl = (e) => {
-    setActiveLinkId(e.currentTarget.id);
+
+  const handleOpenSignUp = () => {
+    setSignUpDialogOpen(true);
+    setLoginDialogOpen(false);
   };
+
+  const onClose = () => {
+    setSignUpDialogOpen(false);
+    setLoginDialogOpen(false);
+  };
+
+  const checkIfActive = (id) => activeLinkId === id;
+
+  const activateEl = (e) => setActiveLinkId(e.currentTarget.id);
 
   return (
     <ThemeProvider theme={HeaderTheme}>
@@ -33,8 +48,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
               display: "flex",
               alignItems: "center",
               height: 80,
-            }}
-          >
+            }}>
             <DropdownMenu />
 
             <Box sx={{ pb: { xs: 0, sm: 1 }, flexGrow: { xs: 1, md: 0 } }}>
@@ -42,8 +56,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 to="/"
                 className="navbar-link"
                 id="home"
-                onClick={activateEl}
-              >
+                onClick={activateEl}>
                 <Typography
                   noWrap
                   className="logo-text"
@@ -51,8 +64,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                     display: "flex",
                     alignItems: "center",
                     fontSize: { xs: 28, sm: 40 },
-                  }}
-                >
+                  }}>
                   <DirectionsCarIcon />
                   Logo
                 </Typography>
@@ -65,42 +77,30 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 alignItems: "center",
                 justifyContent: "space-evenly",
                 flexGrow: 1,
-              }}
-            >
-              {HEADER_TAB_LIST.map((tab) => {
-                if (tab === "contact us") {
-                  return (
-                    <Button variant="navbar" id={tab} key={tab}>
-                      <Typography variant="h5" noWrap>
-                        {tab}
-                      </Typography>
-                    </Button>
-                  );
-                }
-                return (
-                  <NavLink
-                    to={`/${tab.split(" ").join("-")}`}
-                    className="navbar-link"
-                    key={tab.split(" ").join("-")}
-                  >
-                    <Button
-                      variant="navbar"
-                      id={tab}
-                      onClick={activateEl}
-                      className={`${
-                        checkIfActive(tab) ? "active-navbar-btn" : ""
-                      }`}
-                    >
-                      <Typography variant="h5" noWrap>
-                        {tab === "about" ? "about us" : tab}
-                      </Typography>
-                    </Button>
-                  </NavLink>
-                );
-              })}
+              }}>
+              {Object.keys(HEADER_TAB_LIST).map((tab) => (
+                <NavLink to={`/${tab}`} className="navbar-link" key={tab}>
+                  <Button
+                    variant="navbar"
+                    id={tab}
+                    onClick={activateEl}
+                    className={`${
+                      checkIfActive(tab) ? "active-navbar-btn" : ""
+                    }`}>
+                    <Typography variant="h5" noWrap>
+                      {HEADER_TAB_LIST[tab]}
+                    </Typography>
+                  </Button>
+                </NavLink>
+              ))}
             </Box>
-
-            <AuthOptions />
+            <Auth
+              handleOpenLogin={handleOpenLogin}
+              handleOpenSignUp={handleOpenSignUp}
+              loginDialogOpen={loginDialogOpen}
+              signUpDialogOpen={signUpDialogOpen}
+              onClose={onClose}
+            />
           </Toolbar>
         </Container>
       </AppBar>

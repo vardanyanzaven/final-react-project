@@ -34,8 +34,7 @@ const DropdownMenu = () => {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={openNavMenu}
-        color="inherit"
-      >
+        color="inherit">
         <MenuIcon />
       </IconButton>
       <NavbarMenu
@@ -55,38 +54,10 @@ const DropdownMenu = () => {
         sx={{
           display: { xs: "block", md: "none" },
           flexGrow: 1,
-        }}
-      >
-        {HEADER_TAB_LIST.map((tab) => {
-          if (tab === "contact us") {
-            return (
-              <MenuItem
-                key={tab.split(" ").join("-")}
-                id={tab}
-                onClick={closeNavMenu}
-              >
-                <Typography
-                  sx={{
-                    fontSize: { sm: 24, xs: 15 },
-                    transition: "background 0.1s",
-                    "&:hover": {
-                      background: "rgb(37, 47, 57)",
-                    },
-                  }}
-                  variant="h5"
-                  noWrap
-                >
-                  {tab}
-                </Typography>
-              </MenuItem>
-            );
-          }
+        }}>
+        {Object.keys(HEADER_TAB_LIST).map((tab) => {
           return (
-            <NavLink
-              key={tab.split(" ").join("-")}
-              to={tab}
-              className="navbar-link"
-            >
+            <NavLink key={tab} to={tab} className="navbar-link">
               <MenuItem
                 onClick={closeNavMenu}
                 sx={{
@@ -95,13 +66,11 @@ const DropdownMenu = () => {
                   "&:hover": {
                     background: "rgb(37, 47, 57)",
                   },
-                }}
-              >
+                }}>
                 <Typography
                   sx={{ fontSize: { sm: 24, xs: 15 } }}
-                  textAlign="center"
-                >
-                  {tab === "about" ? "about us" : tab}
+                  textAlign="center">
+                  {HEADER_TAB_LIST[tab]}
                 </Typography>
               </MenuItem>
             </NavLink>
