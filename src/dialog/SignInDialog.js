@@ -7,7 +7,6 @@ import {
   DialogTitle,
   IconButton,
   InputAdornment,
-  Slide,
   TextField,
   Typography,
 } from "@mui/material";
@@ -15,13 +14,11 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Transition } from "./mui-style";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { useDispatch } from "react-redux";
 
 const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const disp = useDispatch();
 
   const handleShowPassword = () => {
     setShowPass(!showPass);
@@ -36,9 +33,9 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
 
   return (
     <>
-      <Button variant="login" onClick={handleOpenSignIn}>
+      {/* <Button variant="login" onClick={handleOpenSignIn}>
         Sign In
-      </Button>
+      </Button> */}
       <Dialog
         open={open}
         TransitionComponent={Transition}

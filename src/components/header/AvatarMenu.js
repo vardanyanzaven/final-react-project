@@ -13,12 +13,13 @@ import { Logout, Settings } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
-import { UserSettings } from "./UserSettings";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 const AvatarMenu = () => {
   const [isOpen, setOpen] = useState(false);
   const { email } = useSelector((state) => state.auth);
+  const { img } = useAuth();
 
   return (
     <>
@@ -31,7 +32,7 @@ const AvatarMenu = () => {
             aria-controls={isOpen ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={isOpen ? "true" : undefined}>
-            <Avatar>{email[0].toUpperCase()}</Avatar>
+            <Avatar src={img} />
           </IconButton>
         </Tooltip>
         <Menu

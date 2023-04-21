@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import SignInDialog from "../dialog/SignInDialog";
 import SignUpDialog from "../dialog/SignUpDialog";
@@ -22,30 +22,34 @@ const Auth = () => {
     setLoginDialogOpen(false);
   };
   return (
-    <Box sx={{ display: "flex", gap: 3 }}>
-      <Typography
-        variant="h6"
-        sx={{ fontSize: { xs: 15, sm: 21, md: 22 } }}
-        noWrap>
-        <SignInDialog
-          handleOpenSignIn={handleOpenLogin}
-          open={loginDialogOpen}
-          onClose={onClose}
-          onSignUpOpen={handleOpenSignUp}
-        />
-      </Typography>
-
-      <Typography
-        variant="h6"
-        sx={{ fontSize: { xs: 15, sm: 21, md: 22 } }}
-        noWrap>
-        <SignUpDialog
-          handleOpenSignUp={handleOpenSignUp}
-          open={signUpDialogOpen}
-          onClose={onClose}
-          onSignInOpen={handleOpenLogin}
-        />
-      </Typography>
+    <Box sx={{ display: "flex", gap: 2 }}>
+      <Box sx={{ display: "flex", gap: 1.5 }}>
+        <Button variant="login" onClick={handleOpenLogin}>
+          <Typography sx={{ fontSize: { xs: 13, sm: 19, md: 22 } }} noWrap>
+            Sign in
+          </Typography>
+        </Button>
+        <Button
+          variant="signup"
+          sx={{ display: { xs: "none", sm: "flex" } }}
+          onClick={handleOpenSignUp}>
+          <Typography sx={{ fontSize: { xs: 13, sm: 19, md: 22 } }} noWrap>
+            Sign up
+          </Typography>
+        </Button>
+      </Box>
+      <SignInDialog
+        handleOpenSignIn={handleOpenLogin}
+        open={loginDialogOpen}
+        onClose={onClose}
+        onSignUpOpen={handleOpenSignUp}
+      />
+      <SignUpDialog
+        handleOpenSignUp={handleOpenSignUp}
+        open={signUpDialogOpen}
+        onClose={onClose}
+        onSignInOpen={handleOpenLogin}
+      />
     </Box>
   );
 };

@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./store/slicers/userSlice";
 import { useAuth } from "./hooks/useAuth";
 import { UserSettings } from "./components/header/UserSettings";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -22,8 +23,8 @@ function App() {
   const { isAuth } = useAuth();
 
   useEffect(() => {
-    console.log();
     onAuthStateChanged(auth, (user) => {
+      console.log(auth);
       disp(
         setUser({
           email: user?.email,
@@ -67,6 +68,7 @@ function App() {
             ) : (
               <Route path="*" element={<Navigate to="/" />} />
             )}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Outlet />
           <Footer />
