@@ -1,7 +1,6 @@
 import { Box, Divider } from "@mui/material";
 import MainPhotoSettings from "./settings/MainPhotoSettings";
 import PersonalSettings from "./settings/PersonalSettings";
-import ThemeSettings from "./settings/ThemeSettings";
 
 export const UserSettings = () => {
   return (
@@ -17,7 +16,6 @@ export const UserSettings = () => {
         <PersonalSettings />
       </Box>
       <Divider />
-      <ThemeSettings />
     </>
   );
 };

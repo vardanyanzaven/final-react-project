@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -10,7 +10,12 @@ export default function PersonalSettings() {
   const settings = SETTINGS_NAME_LIST();
 
   return (
-    <TableContainer component={Paper} sx={{ m: 3 }}>
+    <TableContainer
+      component={Paper}
+      sx={{
+        m: 3,
+        background: "linear-gradient(to bottom, #333340, #444444)",
+      }}>
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <caption>Your information settings</caption>
         <TableBody>

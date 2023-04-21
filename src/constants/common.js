@@ -44,7 +44,3 @@ export const SETTINGS_NAME_LIST = () => {
     },
   ];
 };
-
-export const THEME_SETTINGS_NAME = {
-  
-}
