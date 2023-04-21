@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-const CataloguePage = ({setActiveLinkId}) => {
-    useEffect(() => {
-        setActiveLinkId("catalogue");
-    }, [])
-  return (
-    <div>CataloguePage</div>
-  )
-}
+const CataloguePage = ({ setActiveLinkId }) => {
+  useEffect(() => {
+    setActiveLinkId("catalogue");
+  }, []);
+
+  return <div>CataloguePage</div>;
+};
 
 export default CataloguePage;
