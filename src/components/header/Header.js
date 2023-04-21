@@ -14,7 +14,6 @@ import HeaderTheme from "../../themes/HeaderTheme";
 import { HEADER_TAB_LIST } from "../../constants/common";
 import DropdownMenu from "./DropdownMenu";
 import Auth from "../Auth";
-import { useSelector } from "react-redux";
 import AvatarMenu from "./AvatarMenu";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -49,44 +48,35 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    fontSize: { xs: 28, sm: 40 },
+                    fontSize: { xs: 30, sm: 40 },
                   }}>
                   <DirectionsCarIcon />
                   Logo
                 </Typography>
               </NavLink>
             </Box>
-
             <Box
               sx={{
                 display: { xs: "none", md: "flex" },
                 alignItems: "center",
                 justifyContent: "space-evenly",
                 flexGrow: 1,
-              }}
-            >
-              {Object.keys(HEADER_TAB_LIST).map((tab) => 
-              (
-                  <NavLink
-                    to={`/${tab}`}
-                    className="navbar-link"
-                    key={tab}
-                  >
-                    <Button
-                      variant="navbar"
-                      id={tab}
-                      onClick={activateEl}
-                      className={`${
-                        checkIfActive(tab) ? "active-navbar-btn" : ""
-                      }`}
-                    >
-                      <Typography variant="h5" noWrap>
-                        {HEADER_TAB_LIST[tab]}
-                      </Typography>
-                    </Button>
-                  </NavLink>
-                )
-              )}
+              }}>
+              {Object.keys(HEADER_TAB_LIST).map((tab) => (
+                <NavLink to={`/${tab}`} className="navbar-link" key={tab}>
+                  <Button
+                    variant="navbar"
+                    id={tab}
+                    onClick={activateEl}
+                    className={`${
+                      checkIfActive(tab) ? "active-navbar-btn" : ""
+                    }`}>
+                    <Typography variant="h5" noWrap>
+                      {HEADER_TAB_LIST[tab]}
+                    </Typography>
+                  </Button>
+                </NavLink>
+              ))}
             </Box>
             {isAuth ? <AvatarMenu /> : <Auth />}
           </Toolbar>

@@ -7,7 +7,6 @@ import {
   DialogTitle,
   IconButton,
   InputAdornment,
-  Slide,
   TextField,
   Typography,
 } from "@mui/material";
@@ -17,7 +16,6 @@ import { Transition } from "./mui-style";
 import { reg } from "../constants/common";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useDispatch } from "react-redux";
 
 const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
   const [email, setEmail] = useState("");
@@ -25,7 +23,6 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
   const [confPass, setConfPass] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [isValid, setValid] = useState(true);
-  const disp = useDispatch();
 
   const handleShowPassword = () => {
     setShowPass(!showPass);
@@ -55,9 +52,9 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
 
   return (
     <>
-      <Button variant="signup" onClick={handleOpenSignUp}>
+      {/* <Button variant="signup" onClick={handleOpenSignUp}>
         Sign up
-      </Button>
+      </Button> */}
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -77,7 +74,7 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
             />
             {!isValid && (
               <Typography variant="caption" color="red">
-                not currently
+                not valid
               </Typography>
             )}
             <TextField

@@ -35,8 +35,7 @@ const DropdownMenu = () => {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={openNavMenu}
-        color="inherit"
-      >
+        color="inherit">
         <MenuIcon />
       </IconButton>
       <NavbarMenu
@@ -56,8 +55,7 @@ const DropdownMenu = () => {
         sx={{
           display: { xs: "block", md: "none" },
           flexGrow: 1,
-        }}
-      >
+        }}>
         {Object.keys(HEADER_TAB_LIST).map((tab) => (
           <NavLink key={tab} to={tab} className="navbar-link">
             <MenuItem
@@ -68,12 +66,10 @@ const DropdownMenu = () => {
                 "&:hover": {
                   background: "rgb(37, 47, 57)",
                 },
-              }}
-            >
+              }}>
               <Typography
                 sx={{ fontSize: { sm: 24, xs: 17 } }}
-                textAlign="center"
-              >
+                textAlign="center">
                 {HEADER_TAB_LIST[tab]}
               </Typography>
             </MenuItem>
@@ -88,16 +84,14 @@ const DropdownMenu = () => {
               background: "rgba(215, 182, 93, 0.3)",
               color: "#F2B90D",
             },
-          }}
-        >
+          }}>
           <Typography
             sx={{
               fontSize: { sm: 24, xs: 19 },
             }}
             variant="h5"
-            noWrap
-          >
-            Sign In
+            noWrap>
+            Sign Up
           </Typography>
         </MenuItem>
       </NavbarMenu>

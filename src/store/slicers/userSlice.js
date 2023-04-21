@@ -4,6 +4,7 @@ const initialState = {
   email: null,
   token: null,
   id: null,
+  img: null,
 };
 
 const userSlice = createSlice({
@@ -15,9 +16,12 @@ const userSlice = createSlice({
       state.token = payload.token;
       state.id = payload.id;
     },
+    setPhoto(state, { payload }) {
+      state.img = payload;
+    },
   },
 });
 
 export default userSlice.reducer;
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setPhoto } = userSlice.actions;
