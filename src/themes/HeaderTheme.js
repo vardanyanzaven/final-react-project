@@ -48,9 +48,9 @@ const HeaderTheme = createTheme({
             border: "2px solid #F2B90D",
             color: "black",
             "&:hover": {
-              background: "rgba(215, 182, 93, 0.3)",
+              background: "rgb(37,47,57)",
               borderColor: "transparent",
-              color: "#D7B65D",
+              color: "#F2B90D",
             },
           },
         },

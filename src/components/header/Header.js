@@ -63,22 +63,30 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 alignItems: "center",
                 justifyContent: "space-evenly",
                 flexGrow: 1,
-              }}>
-              {Object.keys(HEADER_TAB_LIST).map((tab) => (
-                <NavLink to={`/${tab}`} className="navbar-link" key={tab}>
-                  <Button
-                    variant="navbar"
-                    id={tab}
-                    onClick={activateEl}
-                    className={`${
-                      checkIfActive(tab) ? "active-navbar-btn" : ""
-                    }`}>
-                    <Typography variant="h5" noWrap>
-                      {HEADER_TAB_LIST[tab]}
-                    </Typography>
-                  </Button>
-                </NavLink>
-              ))}
+              }}
+            >
+              {Object.keys(HEADER_TAB_LIST).map((tab) => 
+              (
+                  <NavLink
+                    to={`/${tab}`}
+                    className="navbar-link"
+                    key={tab}
+                  >
+                    <Button
+                      variant="navbar"
+                      id={tab}
+                      onClick={activateEl}
+                      className={`${
+                        checkIfActive(tab) ? "active-navbar-btn" : ""
+                      }`}
+                    >
+                      <Typography variant="h5" noWrap>
+                        {HEADER_TAB_LIST[tab]}
+                      </Typography>
+                    </Button>
+                  </NavLink>
+                )
+              )}
             </Box>
             {isAuth ? <AvatarMenu /> : <Auth />}
           </Toolbar>

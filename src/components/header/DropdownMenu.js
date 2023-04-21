@@ -10,6 +10,7 @@ const NavbarMenu = styled(Menu)({
     color: "white",
     background: "#192026",
     width: "100%",
+    padding: 0,
   },
 });
 
@@ -34,7 +35,8 @@ const DropdownMenu = () => {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={openNavMenu}
-        color="inherit">
+        color="inherit"
+      >
         <MenuIcon />
       </IconButton>
       <NavbarMenu
@@ -54,28 +56,50 @@ const DropdownMenu = () => {
         sx={{
           display: { xs: "block", md: "none" },
           flexGrow: 1,
-        }}>
-        {Object.keys(HEADER_TAB_LIST).map((tab) => {
-          return (
-            <NavLink key={tab} to={tab} className="navbar-link">
-              <MenuItem
-                onClick={closeNavMenu}
-                sx={{
-                  borderBottom: "2px dotted #F2B90D",
-                  transition: "background 0.1s",
-                  "&:hover": {
-                    background: "rgb(37, 47, 57)",
-                  },
-                }}>
-                <Typography
-                  sx={{ fontSize: { sm: 24, xs: 15 } }}
-                  textAlign="center">
-                  {HEADER_TAB_LIST[tab]}
-                </Typography>
-              </MenuItem>
-            </NavLink>
-          );
-        })}
+        }}
+      >
+        {Object.keys(HEADER_TAB_LIST).map((tab) => (
+          <NavLink key={tab} to={tab} className="navbar-link">
+            <MenuItem
+              onClick={closeNavMenu}
+              sx={{
+                borderBottom: tab === "contact" ? "none" : "2px solid #F2B90D",
+                transition: "background 0.1s",
+                "&:hover": {
+                  background: "rgb(37, 47, 57)",
+                },
+              }}
+            >
+              <Typography
+                sx={{ fontSize: { sm: 24, xs: 17 } }}
+                textAlign="center"
+              >
+                {HEADER_TAB_LIST[tab]}
+              </Typography>
+            </MenuItem>
+          </NavLink>
+        ))}
+        <MenuItem
+          sx={{
+            display: { xs: "flex", sm: "none" },
+            borderTop: "2px solid #F2B90D",
+            transition: "background 0.15s",
+            "&:hover": {
+              background: "rgba(215, 182, 93, 0.3)",
+              color: "#F2B90D",
+            },
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: { sm: 24, xs: 19 },
+            }}
+            variant="h5"
+            noWrap
+          >
+            Sign In
+          </Typography>
+        </MenuItem>
       </NavbarMenu>
     </Box>
   );
