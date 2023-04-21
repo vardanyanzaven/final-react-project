@@ -1,7 +1,12 @@
 import React from "react";
+import { useAuth } from "../hooks/useAuth";
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  const { isAuth, email } = useAuth();
+
+  return (
+    <>{isAuth ? <div>Welcome to my site {email}</div> : <div>HomePage</div>}</>
+  );
 };
 
 export default HomePage;

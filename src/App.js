@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/header/Header";
@@ -8,33 +8,70 @@ import CataloguePage from "./pages/CataloguePage";
 import ServicesPage from "./pages/ServicesPage";
 import AboutPage from "./pages/AboutPage";
 import ContactUsPage from "./pages/ContactUsPage";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { useDispatch } from "react-redux";
+import { setUser } from "./store/slicers/userSlice";
+import { useAuth } from "./hooks/useAuth";
+import { UserSettings } from "./components/header/UserSettings";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
+  const [loading, setLoading] = useState(true);
+  const disp = useDispatch();
+  const { isAuth } = useAuth();
+
+  useEffect(() => {
+    console.log();
+    onAuthStateChanged(auth, (user) => {
+      disp(
+        setUser({
+          email: user?.email,
+          token: user?.accessToken,
+          id: user?.uid,
+        })
+      );
+      setLoading(false);
+    });
+  }, []);
   return (
     <>
-      <Header activeLinkId={activeLinkId} setActiveLinkId={setActiveLinkId} />
-      <Routes>
-        <Route index element={<HomePage />} />
-        <Route
-          path="services"
-          element={<ServicesPage setActiveLinkId={setActiveLinkId} />}
-        />
-        <Route
-          path="catalogue"
-          element={<CataloguePage setActiveLinkId={setActiveLinkId} />}
-        />
-        <Route
-          path="about"
-          element={<AboutPage setActiveLinkId={setActiveLinkId} />}
-        />
-        <Route
-          path="contact"
-          element={<ContactUsPage setActiveLinkId={setActiveLinkId} />}
-        />
-      </Routes>
-      <Outlet />
-      <Footer />
+      {loading ? (
+        "Loading..."
+      ) : (
+        <>
+          <Header
+            activeLinkId={activeLinkId}
+            setActiveLinkId={setActiveLinkId}
+          />
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route
+              path="services"
+              element={<ServicesPage setActiveLinkId={setActiveLinkId} />}
+            />
+            <Route
+              path="catalogue"
+              element={<CataloguePage setActiveLinkId={setActiveLinkId} />}
+            />
+            <Route
+              path="about"
+              element={<AboutPage setActiveLinkId={setActiveLinkId} />}
+            />
+            <Route
+              path="contact"
+              element={<ContactUsPage setActiveLinkId={setActiveLinkId} />}
+            />
+            {isAuth ? (
+              <Route path="settings" element={<UserSettings />} />
+            ) : (
+              <Route path="*" element={<Navigate to="/" />} />
+            )}
+          </Routes>
+          <Outlet />
+          <Footer />
+        </>
+      )}
     </>
   );
 }

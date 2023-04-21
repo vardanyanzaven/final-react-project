@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import {
   AppBar,
@@ -14,27 +14,13 @@ import HeaderTheme from "../../themes/HeaderTheme";
 import { HEADER_TAB_LIST } from "../../constants/common";
 import DropdownMenu from "./DropdownMenu";
 import Auth from "../Auth";
+import { useSelector } from "react-redux";
+import AvatarMenu from "./AvatarMenu";
+import { useAuth } from "../../hooks/useAuth";
 
 const Header = ({ activeLinkId, setActiveLinkId }) => {
-  const [loginDialogOpen, setLoginDialogOpen] = useState(false);
-  const [signUpDialogOpen, setSignUpDialogOpen] = useState(false);
-
-  const handleOpenLogin = () => {
-    setLoginDialogOpen(true);
-    setSignUpDialogOpen(false);
-  };
-
-  const handleOpenSignUp = () => {
-    setSignUpDialogOpen(true);
-    setLoginDialogOpen(false);
-  };
-
-  const onClose = () => {
-    setSignUpDialogOpen(false);
-    setLoginDialogOpen(false);
-  };
-
   const checkIfActive = (id) => activeLinkId === id;
+  const { isAuth } = useAuth();
 
   const activateEl = (e) => setActiveLinkId(e.currentTarget.id);
 
@@ -94,13 +80,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 </NavLink>
               ))}
             </Box>
-            <Auth
-              handleOpenLogin={handleOpenLogin}
-              handleOpenSignUp={handleOpenSignUp}
-              loginDialogOpen={loginDialogOpen}
-              signUpDialogOpen={signUpDialogOpen}
-              onClose={onClose}
-            />
+            {isAuth ? <AvatarMenu /> : <Auth />}
           </Toolbar>
         </Container>
       </AppBar>

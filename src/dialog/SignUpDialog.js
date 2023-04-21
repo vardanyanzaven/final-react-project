@@ -15,6 +15,9 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Transition } from "./mui-style";
 import { reg } from "../constants/common";
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
 
 const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
   const [email, setEmail] = useState("");
@@ -22,6 +25,7 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
   const [confPass, setConfPass] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [isValid, setValid] = useState(true);
+  const disp = useDispatch();
 
   const handleShowPassword = () => {
     setShowPass(!showPass);
@@ -41,9 +45,12 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
     };
   }, [pass]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (pass !== confPass || !isValid) return;
+    createUserWithEmailAndPassword(auth, email, pass)
+      .then(onClose)
+      .catch(({ message }) => console.log(message));
   };
 
   return (
