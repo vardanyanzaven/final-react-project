@@ -6,6 +6,7 @@ import {
   Menu,
   MenuItem,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import { Logout, Settings } from "@mui/icons-material";
@@ -45,9 +46,11 @@ const AvatarMenu = () => {
             <Avatar /> {email}
           </MenuItem>
           <Divider />
-          <MenuItem>
+          <MenuItem color="red">
             <Settings />
-            <Link to="settings">Settings</Link>
+            <Link to="settings">
+              <Typography color="black">Settings</Typography>
+            </Link>
           </MenuItem>
           <MenuItem onClick={() => signOut(auth)}>
             <Logout /> Log Out
