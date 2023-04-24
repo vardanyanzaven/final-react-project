@@ -24,9 +24,12 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log(auth);
       disp(
         setUser({
+          userInfo: {
+            photoURL: user?.photoURL,
+            phoneNumber: user?.phoneNumber,
+          },
           email: user?.email,
           token: user?.accessToken,
           id: user?.uid,
@@ -35,6 +38,7 @@ function App() {
       setLoading(false);
     });
   }, []);
+
   return (
     <>
       {loading ? (

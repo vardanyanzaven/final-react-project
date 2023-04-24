@@ -1,15 +1,13 @@
 import { useSelector } from "react-redux";
-import { auth } from "../firebase";
 
 export const useAuth = () => {
-  const { email, id, token } = useSelector((state) => state.auth);
-  const img = auth.currentUser?.photoURL;
+  const { email, id, token, userInfo } = useSelector((state) => state.auth);
 
   return {
     isAuth: !!email,
+    userInfo,
     email,
     token,
-    img,
     id,
   };
 };

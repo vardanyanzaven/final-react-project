@@ -19,7 +19,7 @@ import { useAuth } from "../../hooks/useAuth";
 const AvatarMenu = () => {
   const [isOpen, setOpen] = useState(false);
   const { email } = useSelector((state) => state.auth);
-  const { img } = useAuth();
+  const { userInfo } = useAuth();
 
   return (
     <>
@@ -32,7 +32,7 @@ const AvatarMenu = () => {
             aria-controls={isOpen ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={isOpen ? "true" : undefined}>
-            <Avatar src={img} />
+            <Avatar src={userInfo?.photoURL} />
           </IconButton>
         </Tooltip>
         <Menu
@@ -47,12 +47,12 @@ const AvatarMenu = () => {
             <Avatar /> {email}
           </MenuItem>
           <Divider />
-          <MenuItem color="red">
-            <Settings />
-            <Link to="settings">
+          <Link to="settings">
+            <MenuItem>
+              <Settings sx={{ color: "black" }} />
               <Typography color="black">Settings</Typography>
-            </Link>
-          </MenuItem>
+            </MenuItem>
+          </Link>
           <MenuItem onClick={() => signOut(auth)}>
             <Logout /> Log Out
           </MenuItem>

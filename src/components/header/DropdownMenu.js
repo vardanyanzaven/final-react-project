@@ -17,6 +17,7 @@ const NavbarMenu = styled(Menu)({
 const DropdownMenu = () => {
   const [isNavOpened, setIsNavOpened] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState(null);
+
   const openNavMenu = (e) => {
     setIsNavOpened(!isNavOpened);
     setAnchorElNav(e.currentTarget);
