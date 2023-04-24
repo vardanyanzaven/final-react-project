@@ -17,6 +17,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 const AvatarMenu = () => {
   const [isOpen, setOpen] = useState(false);
+<<<<<<< HEAD:src/components/header/AvatarMenu.jsx
   const [anchorEl, setAnchorEl] = useState(null);
   const { userInfo } = useAuth();
 
@@ -24,6 +25,10 @@ const AvatarMenu = () => {
     setOpen(true);
     setAnchorEl(e.currentTarget);
   };
+=======
+  const { email } = useSelector((state) => state.auth);
+  const { userInfo } = useAuth();
+>>>>>>> fdb9862 (Co-authored-by: vardanyanzaven <vardanyanzaven@users.noreply.github.com>):src/components/header/AvatarMenu.js
 
   return (
     <>
