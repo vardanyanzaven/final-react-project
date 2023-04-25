@@ -52,9 +52,6 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
 
   return (
     <>
-      {/* <Button variant="signup" onClick={handleOpenSignUp}>
-        Sign up
-      </Button> */}
       <Dialog
         open={open}
         TransitionComponent={Transition}
