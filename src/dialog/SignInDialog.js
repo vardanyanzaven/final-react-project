@@ -41,11 +41,17 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description">
+        aria-describedby="alert-dialog-slide-description"
+      >
         <form onSubmit={handleSubmit}>
           <DialogTitle>Sign In</DialogTitle>
           <DialogContent
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
             <TextField
               type="email"
               label="Email"
@@ -65,7 +71,8 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end">
+                      edge="end"
+                    >
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -79,7 +86,8 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
                 onClick={(e) => {
                   e.preventDefault();
                   onSignUpOpen();
-                }}>
+                }}
+              >
                 Sign up
               </Button>
             </Typography>

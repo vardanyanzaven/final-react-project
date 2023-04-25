@@ -16,8 +16,10 @@ import { Transition } from "./mui-style";
 import { reg } from "../constants/common";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import PhoneInputComponent from "../pages/CountriesPhoneCode";
 
 const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [confPass, setConfPass] = useState("");
@@ -52,19 +54,23 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
 
   return (
     <>
-      {/* <Button variant="signup" onClick={handleOpenSignUp}>
-        Sign up
-      </Button> */}
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description">
+        aria-describedby="alert-dialog-slide-description"
+      >
         <form onSubmit={handleSubmit}>
           <DialogTitle>Sign Up</DialogTitle>
           <DialogContent
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1,
+            }}
+          >
+            <PhoneInputComponent />
             <TextField
               type="email"
               label="Email"
@@ -77,6 +83,7 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
                 not valid
               </Typography>
             )}
+
             <TextField
               value={pass}
               onChange={(e) => setPass(e.target.value)}
@@ -89,13 +96,15 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end">
+                      edge="end"
+                    >
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
+
             <TextField
               type={showPass ? "text" : "password"}
               label="Confirm password"
@@ -108,7 +117,8 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end">
+                      edge="end"
+                    >
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
