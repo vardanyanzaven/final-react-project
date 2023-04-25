@@ -35,8 +35,7 @@ const AvatarMenu = () => {
             sx={{ ml: 2 }}
             aria-controls={isOpen ? "account-menu" : undefined}
             aria-haspopup="true"
-            aria-expanded={isOpen ? "true" : undefined}
-          >
+            aria-expanded={isOpen ? "true" : undefined}>
             <Avatar src={userInfo?.photoURL} />
           </IconButton>
         </Tooltip>
@@ -47,14 +46,9 @@ const AvatarMenu = () => {
           onClick={() => setOpen(false)}
           onClose={() => setOpen(false)}
           transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "top" }}
-        >
+          anchorOrigin={{ horizontal: "right", vertical: "top" }}>
           <MenuItem onClick={() => setOpen(false)}>
-<<<<<<< HEAD:src/components/header/AvatarMenu.jsx
             <Avatar src={userInfo?.photoURL} /> {userInfo.fullName}
-=======
-            <Avatar src={userInfo?.photoURL} /> {email}
->>>>>>> bdc1e55 (Co-authored-by: Vahe-1810 <Vahe-1810@users.noreply.github.com>):src/components/header/AvatarMenu.js
           </MenuItem>
           <Divider />
           <Link to="settings">
