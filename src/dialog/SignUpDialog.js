@@ -60,11 +60,15 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description">
+        aria-describedby="alert-dialog-slide-description"
+        fullWidth
+        maxWidth="xs"
+      >
         <form onSubmit={handleSubmit}>
           <DialogTitle>Sign Up</DialogTitle>
           <DialogContent
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+          >
             <TextField
               type="email"
               label="Email"
@@ -73,8 +77,13 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
               required
             />
             {!isValid && (
-              <Typography variant="caption" color="red">
-                not valid
+              <Typography
+                sx={{ wordBreak: "break-word" }}
+                variant="caption"
+                color="red"
+              >
+                The password must contain at least 1 capital letter, 1 number
+                and have 8-16 characters.
               </Typography>
             )}
             <TextField
@@ -89,7 +98,8 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end">
+                      edge="end"
+                    >
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -108,7 +118,8 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end">
+                      edge="end"
+                    >
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>

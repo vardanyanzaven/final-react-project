@@ -1,4 +1,4 @@
-.navbar-link, a{
+.navbar-link {
     color: white;
     text-decoration: none;
     transition: color 0.15s;

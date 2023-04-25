@@ -29,6 +29,12 @@ const Auth = () => {
             Sign in
           </Typography>
         </Button>
+        <SignInDialog
+          handleOpenSignIn={handleOpenLogin}
+          open={loginDialogOpen}
+          onClose={onClose}
+          onSignUpOpen={handleOpenSignUp}
+        />
         <Button
           variant="signup"
           sx={{ display: { xs: "none", sm: "flex" } }}
@@ -38,12 +44,6 @@ const Auth = () => {
           </Typography>
         </Button>
       </Box>
-      <SignInDialog
-        handleOpenSignIn={handleOpenLogin}
-        open={loginDialogOpen}
-        onClose={onClose}
-        onSignUpOpen={handleOpenSignUp}
-      />
       <SignUpDialog
         handleOpenSignUp={handleOpenSignUp}
         open={signUpDialogOpen}

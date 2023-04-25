@@ -19,41 +19,54 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [showPass, setShowPass] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
   const handleShowPassword = () => {
     setShowPass(!showPass);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, pass)
-      .then(onClose)
-      .catch((error) => console.log(error.message));
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await signInWithEmailAndPassword(auth, email, pass);
+      await onClose();
+    } catch (err) {
+      setIsValid(false);
+    }
   };
 
   return (
     <>
-      {/* <Button variant="login" onClick={handleOpenSignIn}>
-        Sign In
-      </Button> */}
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description">
+        aria-describedby="alert-dialog-slide-description"
+        fullWidth
+        maxWidth="xs"
+      >
         <form onSubmit={handleSubmit}>
           <DialogTitle>Sign In</DialogTitle>
           <DialogContent
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+          >
+            {!isValid && (
+              <Typography color="red" variant="caption">
+                Incorrect email or password.
+              </Typography>
+            )}
             <TextField
               type="email"
               label="Email"
+              sx={{ mt: 1 }}
+              variant="standard"
               required
               onChange={({ target }) => setEmail(target.value)}
               value={email}
             />
             <TextField
+              variant="standard"
               type={showPass ? "text" : "password"}
               label="Password"
               value={pass}
@@ -65,7 +78,8 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end">
+                      edge="end"
+                    >
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -73,13 +87,14 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
               }}
             />
             <Typography>
-              don't have an account?
+              Don't have an account?
               <Button
-                href="#"
+                // href="#"
                 onClick={(e) => {
                   e.preventDefault();
                   onSignUpOpen();
-                }}>
+                }}
+              >
                 Sign up
               </Button>
             </Typography>
