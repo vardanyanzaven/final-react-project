@@ -44,7 +44,7 @@ const AvatarMenu = () => {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "top" }}>
           <MenuItem onClick={() => setOpen(false)}>
-            <Avatar /> {email}
+            <Avatar src={userInfo?.photoURL} /> {email}
           </MenuItem>
           <Divider />
           <Link to="settings">
