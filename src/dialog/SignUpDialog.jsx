@@ -81,8 +81,12 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
               required
             />
             {!isValid && (
-              <Typography variant="caption" color="red">
-                not valid
+              <Typography
+                sx={{ wordBreak: "break-word" }}
+                variant="caption"
+                color="red">
+                The password must contain at least 1 capital letter, 1 number
+                and have 8-16 characters.
               </Typography>
             )}
 

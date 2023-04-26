@@ -69,7 +69,7 @@ const DropdownMenu = () => {
                 },
               }}>
               <Typography
-                sx={{ fontSize: { sm: 24, xs: 17 } }}
+                sx={{ fontSize: { sm: 22, xs: 17 } }}
                 textAlign="center">
                 {HEADER_TAB_LIST[tab]}
               </Typography>

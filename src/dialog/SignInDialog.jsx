@@ -18,6 +18,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [showPass, setShowPass] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
   const handleShowPassword = () => {
     setShowPass(!showPass);
@@ -47,11 +48,14 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
             <TextField
               type="email"
               label="Email"
+              sx={{ mt: 1 }}
+              variant="standard"
               required
               onChange={({ target }) => setEmail(target.value)}
               value={email}
             />
             <TextField
+              variant="standard"
               type={showPass ? "text" : "password"}
               label="Password"
               value={pass}
@@ -71,9 +75,9 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
               }}
             />
             <Typography>
-              don't have an account?
+              Don't have an account?
               <Button
-                href="#"
+                // href="#"
                 onClick={(e) => {
                   e.preventDefault();
                   onSignUpOpen();

@@ -20,7 +20,6 @@ import { useAuth } from "../../hooks/useAuth";
 const Header = ({ activeLinkId, setActiveLinkId }) => {
   const checkIfActive = (id) => activeLinkId === id;
   const { isAuth } = useAuth();
-
   const activateEl = (e) => setActiveLinkId(e.currentTarget.id);
 
   return (

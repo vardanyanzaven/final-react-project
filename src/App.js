@@ -64,10 +64,6 @@ function App() {
               path="about"
               element={<AboutPage setActiveLinkId={setActiveLinkId} />}
             />
-            <Route
-              path="contact"
-              element={<ContactUsPage setActiveLinkId={setActiveLinkId} />}
-            />
             {isAuth ? (
               <Route path="settings" element={<UserSettings />} />
             ) : (
