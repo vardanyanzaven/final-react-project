@@ -13,8 +13,7 @@ const Footer = () => {
     <ThemeProvider theme={FooterTheme}>
       <ContainerBox>
         <Typography
-          sx={{ display: "flex", alignItems: "center", color: "white" }}
-        >
+          sx={{ display: "flex", alignItems: "center", color: "white" }}>
           <CopyrightIcon sx={{ mr: 1 }} />
           Company name.
         </Typography>
