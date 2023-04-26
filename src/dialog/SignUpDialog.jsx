@@ -15,7 +15,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Transition } from "./dialogTransition";
 import { testPassword } from "../utils/validation";
-import { emailSignUp } from "../services/handleAuth";
+import { emailSignUp } from "../services/singInSingUp";
 import PhoneField from "./components/PhoneField";
 import { LoadingButton } from "@mui/lab";
 import { setUserDB } from "../services/dataBaseConfig";

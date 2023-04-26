@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from "react-redux";
 import Footer from "./components/Footer";
 import Header from "./components/header/Header";
 import HomePage from "./pages/HomePage";
@@ -9,37 +7,18 @@ import CataloguePage from "./pages/CataloguePage";
 import ServicesPage from "./pages/ServicesPage";
 import AboutPage from "./pages/AboutPage";
 import ContactUsPage from "./pages/ContactUsPage";
-import { auth } from "./firebase";
-import { setUser } from "./store/slicers/userSlice";
 import { useAuth } from "./hooks/useAuth";
 import { UserSettings } from "./components/header/UserSettings";
 import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css";
+import { useAuthListener } from "./services/authChangeHook";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
   const [loading, setLoading] = useState(true);
-  const disp = useDispatch();
+
   const { isAuth } = useAuth();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      console.log("auth changed");
-      disp(
-        setUser({
-          userInfo: {
-            photoURL: user?.photoURL,
-            phoneNumber: user?.phoneNumber,
-          },
-          email: user?.email,
-          token: user?.accessToken,
-          id: user?.uid,
-        })
-      );
-      setLoading(false);
-    });
-  }, []);
-
+  useAuthListener( setLoading );
   return (
     <>
       {loading ? (

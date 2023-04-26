@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Transition } from "./dialogTransition";
-import { emailSignIn } from "../services/handleAuth";
+import { emailSignIn } from "../services/singInSingUp";
 
 const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
