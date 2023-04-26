@@ -11,6 +11,7 @@ import { UserSettings } from "./components/header/UserSettings";
 import NotFoundPage from "./pages/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
 import "./App.css";
+import { useAuthListener } from "./services/authChangeHook";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
