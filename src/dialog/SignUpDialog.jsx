@@ -5,6 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Divider,
   IconButton,
   InputAdornment,
   TextField,
@@ -12,44 +13,47 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Transition } from "./mui-style";
-import { reg } from "../constants/common";
-import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import PhoneInputComponent from "../pages/CountriesPhoneCode";
+import { Transition } from "./dialogTransition";
+import { testPassword } from "../utils/validation";
+import { emailSignUp } from "../services/handleAuth";
+import PhoneField from "./components/PhoneField";
+import { LoadingButton } from "@mui/lab";
+import { setUserDB } from "../services/dataBaseConfig";
 
-const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
+const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [confPass, setConfPass] = useState("");
-  const [showPass, setShowPass] = useState(false);
   const [isValid, setValid] = useState(true);
+  const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleShowPassword = () => {
-    setShowPass(!showPass);
-  };
+  const handleShowPassword = () => setShowPass(!showPass);
 
   useEffect(() => {
     let id = setTimeout(() => {
-      if (!reg.test(pass) && pass) {
-        setValid(false);
-      } else {
-        setValid(true);
-      }
+      if (!testPassword(pass) && pass) setValid(false);
+      else setValid(true);
     }, 500);
+
     return () => {
       setValid(true);
       clearTimeout(id);
     };
   }, [pass]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (pass !== confPass || !isValid) return;
-    createUserWithEmailAndPassword(auth, email, pass)
-      .then(onClose)
-      .catch(({ message }) => console.log(message));
+    else {
+      setLoading(true);
+      emailSignUp(email, pass)
+        .then(({ user }) => {
+          setUserDB(user);
+        })
+        .finally(() => setLoading(false));
+    }
   };
 
   return (
@@ -59,18 +63,16 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <form onSubmit={handleSubmit}>
+        aria-describedby="alert-dialog-slide-description">
+        <form onSubmit={handleSubmit} style={{ width: "330px" }}>
           <DialogTitle>Sign Up</DialogTitle>
           <DialogContent
             sx={{
               display: "flex",
               flexDirection: "column",
               gap: 1,
-            }}
-          >
-            <PhoneInputComponent />
+            }}>
+            <PhoneField phoneSett={[phone, setPhone]} />
             <TextField
               type="email"
               label="Email"
@@ -96,8 +98,7 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end"
-                    >
+                      edge="end">
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -117,22 +118,25 @@ const SignUpDialog = ({ open, onClose, handleOpenSignUp, onSignInOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end"
-                    >
+                      edge="end">
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
+            <Divider />
             <Typography>
               Already have an account?
               <Button onClick={onSignInOpen}>Sign In</Button>
             </Typography>
             <DialogActions>
-              <Button variant="contained" type="submit">
+              <LoadingButton
+                loading={loading}
+                variant="contained"
+                type="submit">
                 Sign Up
-              </Button>
+              </LoadingButton>
             </DialogActions>
           </DialogContent>
         </form>

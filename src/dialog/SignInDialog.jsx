@@ -11,11 +11,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Transition } from "./mui-style";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { Transition } from "./dialogTransition";
+import { emailSignIn } from "../services/handleAuth";
 
-const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
+const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -26,23 +25,17 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, pass)
-      .then(onClose)
-      .catch((error) => console.log(error.message));
+    emailSignIn(email, pass).then(onClose);
   };
 
   return (
     <>
-      {/* <Button variant="login" onClick={handleOpenSignIn}>
-        Sign In
-      </Button> */}
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
+        aria-describedby="alert-dialog-slide-description">
         <form onSubmit={handleSubmit}>
           <DialogTitle>Sign In</DialogTitle>
           <DialogContent
@@ -50,8 +43,7 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
               display: "flex",
               flexDirection: "column",
               gap: 2,
-            }}
-          >
+            }}>
             <TextField
               type="email"
               label="Email"
@@ -71,8 +63,7 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end"
-                    >
+                      edge="end">
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -86,8 +77,7 @@ const SignInDialog = ({ handleOpenSignIn, open, onClose, onSignUpOpen }) => {
                 onClick={(e) => {
                   e.preventDefault();
                   onSignUpOpen();
-                }}
-              >
+                }}>
                 Sign up
               </Button>
             </Typography>

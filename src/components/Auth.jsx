@@ -6,6 +6,7 @@ import SignUpDialog from "../dialog/SignUpDialog";
 const Auth = () => {
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
   const [signUpDialogOpen, setSignUpDialogOpen] = useState(false);
+  const [verifyDialogOpen, setVerifyDialogOpen] = useState(false);
 
   const handleOpenLogin = () => {
     setLoginDialogOpen(true);
@@ -15,6 +16,10 @@ const Auth = () => {
   const handleOpenSignUp = () => {
     setSignUpDialogOpen(true);
     setLoginDialogOpen(false);
+  };
+
+  const handleOpenPhoneVerify = () => {
+    setVerifyDialogOpen(true);
   };
 
   const onClose = () => {
@@ -49,6 +54,7 @@ const Auth = () => {
         open={signUpDialogOpen}
         onClose={onClose}
         onSignInOpen={handleOpenLogin}
+        onPhoneVerifyOpen={handleOpenPhoneVerify}
       />
     </Box>
   );

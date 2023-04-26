@@ -5,4 +5,4 @@ export const HEADER_TAB_LIST = {
   contact: "contact us",
 };
 
-export const reg = /^(?=.*\d)(?=.*[A-Z]).{8,20}$/;
+export const regex = /^(?=.*\d)(?=.*[A-Z]).{8,20}$/;
