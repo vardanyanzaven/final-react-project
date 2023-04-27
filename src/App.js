@@ -19,7 +19,6 @@ function App() {
   const { isAuth, userInfo } = useAuth();
 
   useAuthListener(setLoading);
-  console.log(userInfo);
 
   return (
     <>
