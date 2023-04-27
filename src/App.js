@@ -16,7 +16,7 @@ import "./App.css";
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
   const [loading, setLoading] = useState(true);
-  const { isAuth, userInfo } = useAuth();
+  const { isAuth } = useAuth();
 
   useAuthListener(setLoading);
 

@@ -13,19 +13,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 
 const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleShowPassword = () => {
     setShowPass(!showPass);
   };
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
-    emailSignIn(email, pass).then(onClose);
+    emailSignIn(email, pass, setLoading).then(onClose);
   };
 
   return (
@@ -85,9 +88,12 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
               </Button>
             </Typography>
             <DialogActions>
-              <Button variant="contained" type="submit">
+              <LoadingButton
+                loading={loading}
+                variant="contained"
+                type="submit">
                 Sign In
-              </Button>
+              </LoadingButton>
             </DialogActions>
           </DialogContent>
         </form>
