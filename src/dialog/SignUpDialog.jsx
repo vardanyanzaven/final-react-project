@@ -1,4 +1,10 @@
+import React, { useEffect, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { LoadingButton } from "@mui/lab";
+import { Transition } from "./dialogTransition";
+import PhoneField from "./components/PhoneField";
+import { testPassword } from "../utils/validation";
+import { emailSignUp } from "../services/handleAuth";
 import {
   Button,
   Dialog,
@@ -11,14 +17,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { Transition } from "./dialogTransition";
-import { testPassword } from "../utils/validation";
-import { emailSignUp } from "../services/singInSingUp";
-import PhoneField from "./components/PhoneField";
-import { LoadingButton } from "@mui/lab";
-import { setUserDB } from "../services/dataBaseConfig";
 
 const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [phone, setPhone] = useState("");
@@ -28,8 +26,6 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [isValid, setValid] = useState(true);
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const handleShowPassword = () => setShowPass(!showPass);
 
   useEffect(() => {
     let id = setTimeout(() => {
@@ -48,11 +44,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
     if (pass !== confPass || !isValid) return;
     else {
       setLoading(true);
-      emailSignUp(email, pass)
-        .then(({ user }) => {
-          setUserDB(user);
-        })
-        .finally(() => setLoading(false));
+      emailSignUp(email, pass, phone, setLoading);
     }
   };
 
@@ -100,7 +92,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={handleShowPassword}
+                      onClick={() => setShowPass(!showPass)}
                       onMouseDown={(e) => e.preventDefault()}
                       edge="end">
                       {showPass ? <VisibilityOff /> : <Visibility />}
@@ -120,7 +112,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={handleShowPassword}
+                      onClick={() => setShowPass(!showPass)}
                       onMouseDown={(e) => e.preventDefault()}
                       edge="end">
                       {showPass ? <VisibilityOff /> : <Visibility />}

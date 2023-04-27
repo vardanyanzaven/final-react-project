@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/header/Header";
@@ -10,15 +10,17 @@ import ContactUsPage from "./pages/ContactUsPage";
 import { useAuth } from "./hooks/useAuth";
 import { UserSettings } from "./components/header/UserSettings";
 import NotFoundPage from "./pages/NotFoundPage";
+import { useAuthListener } from "./services/handleAuth";
 import "./App.css";
-import { useAuthListener } from "./services/authChangeHook";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
   const [loading, setLoading] = useState(true);
+  const { isAuth, userInfo } = useAuth();
 
-  const { isAuth } = useAuth();
-  useAuthListener( setLoading );
+  useAuthListener(setLoading);
+  console.log(userInfo);
+
   return (
     <>
       {loading ? (

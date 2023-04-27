@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Transition } from "./dialogTransition";
+import { emailSignIn } from "../services/handleAuth";
 import {
   Button,
   Dialog,
@@ -10,15 +13,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Transition } from "./dialogTransition";
-import { emailSignIn } from "../services/singInSingUp";
 
 const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const [isValid, setIsValid] = useState(true);
 
   const handleShowPassword = () => {
     setShowPass(!showPass);
