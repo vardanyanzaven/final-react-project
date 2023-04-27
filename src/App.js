@@ -11,14 +11,20 @@ import { UserSettings } from "./components/header/UserSettings";
 import NotFoundPage from "./pages/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
 import "./App.css";
-import { useAuthListener } from "./services/authChangeHook";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
   const [loading, setLoading] = useState(true);
+<<<<<<< HEAD
   const { isAuth } = useAuth();
 
   useAuthListener(setLoading);
+=======
+  const { isAuth, userInfo } = useAuth();
+
+  useAuthListener(setLoading);
+  console.log(userInfo);
+>>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
 
   return (
     <>

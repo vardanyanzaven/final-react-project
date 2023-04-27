@@ -13,13 +13,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+<<<<<<< HEAD
 import { LoadingButton } from "@mui/lab";
+=======
+>>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
 
 const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [showPass, setShowPass] = useState(false);
+<<<<<<< HEAD
   const [loading, setLoading] = useState(false);
+=======
+>>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
 
   const handleShowPassword = () => {
     setShowPass(!showPass);

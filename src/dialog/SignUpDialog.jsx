@@ -1,4 +1,13 @@
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
+=======
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { LoadingButton } from "@mui/lab";
+import { Transition } from "./dialogTransition";
+import PhoneField from "./components/PhoneField";
+import { testPassword } from "../utils/validation";
+import { emailSignUp } from "../services/handleAuth";
+>>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
 import {
   Female,
   Male,
@@ -56,7 +65,11 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
     if (pass !== confPass || !isValid) return;
     else {
       setLoading(true);
+<<<<<<< HEAD
       emailSignUp(email, pass, phone, fullName, setLoading);
+=======
+      emailSignUp(email, pass, phone, setLoading);
+>>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
     }
   };
 
@@ -173,6 +186,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                 Already have an account?
                 <Button onClick={onSignInOpen}>Sign In</Button>
               </Typography>
+<<<<<<< HEAD
               <DialogActions>
                 <LoadingButton
                   loading={loading}
@@ -184,6 +198,64 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
             </DialogContent>
           </Grid>
         </Box>
+=======
+            )}
+
+            <TextField
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
+              type={showPass ? "text" : "password"}
+              label="Password"
+              required
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPass(!showPass)}
+                      onMouseDown={(e) => e.preventDefault()}
+                      edge="end">
+                      {showPass ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            <TextField
+              type={showPass ? "text" : "password"}
+              label="Confirm password"
+              value={confPass}
+              onChange={({ target }) => setConfPass(target.value)}
+              required
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPass(!showPass)}
+                      onMouseDown={(e) => e.preventDefault()}
+                      edge="end">
+                      {showPass ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Divider />
+            <Typography>
+              Already have an account?
+              <Button onClick={onSignInOpen}>Sign In</Button>
+            </Typography>
+            <DialogActions>
+              <LoadingButton
+                loading={loading}
+                variant="contained"
+                type="submit">
+                Sign Up
+              </LoadingButton>
+            </DialogActions>
+          </DialogContent>
+        </form>
+>>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
       </Dialog>
     </>
   );
