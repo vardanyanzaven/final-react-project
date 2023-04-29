@@ -9,7 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Logout, Settings } from "@mui/icons-material";
+import { Bookmark, Logout, Settings } from "@mui/icons-material";
+import HistoryIcon from "@mui/icons-material/History";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link } from "react-router-dom";
@@ -33,9 +34,9 @@ const AvatarMenu = () => {
             onClick={handleMenuOpen}
             size="small"
             sx={{ ml: 2 }}
-            aria-controls={isOpen ? "account-menu" : undefined}
+            aria-controls={isOpen && "account-menu"}
             aria-haspopup="true"
-            aria-expanded={isOpen ? "true" : undefined}>
+            aria-expanded={isOpen && "true"}>
             <Avatar src={userInfo?.photoURL} />
           </IconButton>
         </Tooltip>
@@ -48,15 +49,24 @@ const AvatarMenu = () => {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "top" }}>
           <MenuItem onClick={() => setOpen(false)}>
-            <Avatar src={userInfo?.photoURL} /> {userInfo.fullName}
+            <Avatar src={userInfo?.photoURL} sx={{ m: 1 }} />
+            {userInfo.fullName}
           </MenuItem>
-          <Divider />
           <Link to="settings">
             <MenuItem>
               <Settings sx={{ color: "black" }} />
               <Typography color="black">Settings</Typography>
             </MenuItem>
           </Link>
+          <MenuItem>
+            <HistoryIcon />
+            <Typography>History</Typography>
+          </MenuItem>
+          <MenuItem>
+            <Bookmark />
+            <Typography>Saved</Typography>
+          </MenuItem>
+          <Divider />
           <MenuItem onClick={() => signOut(auth)}>
             <Logout /> Log Out
           </MenuItem>
