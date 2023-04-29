@@ -39,7 +39,7 @@ export const useAuthListener = (setLoading) => {
   const disp = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, async (user) => {
       try {
         const dbData = user && (await getUserDB(user.uid));
         disp(
@@ -57,10 +57,9 @@ export const useAuthListener = (setLoading) => {
           })
         );
       } catch (e) {
-        console.log(e);
+        console.log(e.message);
       }
       setLoading(false);
     });
-    return () => unsubscribe();
-  }, [auth]);
+  }, []);
 };
