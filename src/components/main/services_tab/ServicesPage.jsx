@@ -1,3 +1,4 @@
+
 import {
   Box,
   ImageList,
@@ -7,9 +8,9 @@ import {
 } from "@mui/material";
 import { SERVICE_DATA } from "./booking_form/servicesData";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 // import ResponsiveGrid from "../services_tab/GridTabServices";
 // import { Booking } from "../services_tab/Booking";
+
 
 const ServicesPage = ({ setActiveLinkId }) => {
   useEffect(() => {
@@ -53,3 +54,4 @@ const ServicesPage = ({ setActiveLinkId }) => {
 };
 
 export default ServicesPage;
+
