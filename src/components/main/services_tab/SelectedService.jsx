@@ -1,13 +1,31 @@
 import * as React from "react";
 import { useParams } from "react-router";
-import { SERVICE_DATA } from "./booking_form/servicesData";
 import { Box, Button, Card, Typography } from "@mui/material";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { openDialog } from "../../../store/slicers/dialogSlice";
+import { useAuth } from "../../../hooks/useAuth";
+import { SERVICE_DATA } from "../../../constants/common";
 
 export default function SelectedService() {
   const { serve } = useParams();
   const [info] = SERVICE_DATA(serve);
   const [booking, setbooking] = useState(false);
+  const { isAuth } = useAuth();
+  const disp = useDispatch();
+
+  const openSignUp = () => {
+    disp(
+      openDialog({
+        isSignUpOpen: true,
+      })
+    );
+  };
+
+  const handleBookClick = () => {
+    alert("book success!");
+    // something...
+  };
 
   return (
     <Box
@@ -35,7 +53,7 @@ export default function SelectedService() {
           size="medium"
           variant="outlined"
           sx={{ m: 1 }}
-          onClick={() => setbooking(!booking)}>
+          onClick={isAuth ? handleBookClick : openSignUp}>
           Book now
         </Button>
       </Card>

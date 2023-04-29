@@ -8,14 +8,14 @@ import { useAuthListener } from "./services/handleAuth";
 import AboutPage from "./components/main/AboutPage";
 import HomePage from "./components/main/HomePage";
 import CataloguePage from "./components/main/catalogue/CataloguePage";
-import "./App.css";
 import ServicesPage from "./components/main/services_tab/ServicesPage";
 import Footer from "./components/footer/Footer";
-import { LinearProgress, Snackbar } from "@mui/material";
+import { LinearProgress } from "@mui/material";
 import SelectedService from "./components/main/services_tab/SelectedService";
 import Main from "./components/main/Main";
 import ScrollToTop from "./components/ScrollToTop";
 import ShowStatus from "./shared/show_bar/ShowStatus";
+import "./App.css";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
