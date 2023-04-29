@@ -44,3 +44,10 @@ export const SETTINGS_NAME_LIST = () => {
     },
   ];
 };
+<<<<<<< HEAD
+=======
+
+export const THEME_SETTINGS_NAME = {
+  
+}
+>>>>>>> 5fc7ead (push in my branch)

@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+=======
+import {
+  Female,
+  Male,
+  MoreHoriz,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
+>>>>>>> 5fc7ead (push in my branch)
 import { LoadingButton } from "@mui/lab";
 import { Transition } from "./dialogTransition";
 import PhoneField from "./components/PhoneField";
@@ -9,6 +19,7 @@ import { testPassword } from "../utils/validation";
 import { emailSignUp } from "../services/handleAuth";
 >>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
 import {
+<<<<<<< HEAD
   Female,
   Male,
   MoreHoriz,
@@ -21,6 +32,8 @@ import PhoneField from "./components/PhoneField";
 import { testPassword } from "../utils/validation";
 import { emailSignUp } from "../services/handleAuth";
 import {
+=======
+>>>>>>> 5fc7ead (push in my branch)
   Box,
   Button,
   Dialog,
@@ -66,10 +79,14 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
     else {
       setLoading(true);
 <<<<<<< HEAD
+<<<<<<< HEAD
       emailSignUp(email, pass, phone, fullName, setLoading);
 =======
       emailSignUp(email, pass, phone, setLoading);
 >>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
+=======
+      emailSignUp(email, pass, phone, fullName, setLoading);
+>>>>>>> 5fc7ead (push in my branch)
     }
   };
 
@@ -187,6 +204,9 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                 <Button onClick={onSignInOpen}>Sign In</Button>
               </Typography>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5fc7ead (push in my branch)
               <DialogActions>
                 <LoadingButton
                   loading={loading}
@@ -198,6 +218,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
             </DialogContent>
           </Grid>
         </Box>
+<<<<<<< HEAD
 =======
             )}
 
@@ -256,6 +277,8 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
           </DialogContent>
         </form>
 >>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
+=======
+>>>>>>> 5fc7ead (push in my branch)
       </Dialog>
     </>
   );
