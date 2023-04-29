@@ -3,16 +3,16 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { ContainerBoxForServices } from "../../themes/FooterTheme";
-import { machines } from "../../constants/common";
 import React from "react";
+import { Machine } from "../../constants/common";
+import { ContainerBoxForServices } from "../../themes/ContainerBoxForServices";
 
 export const CarsCatalogue = ({ cars, setCars }) => {
   return (
     <ContainerBoxForServices>
-      {machines.map((car) => (
+      {Machine.map((car) => (
         <Card
-          //   key={car.carId}
+          key={car.iid}
           sx={{
             maxWidth: 345,
             width: 250,
