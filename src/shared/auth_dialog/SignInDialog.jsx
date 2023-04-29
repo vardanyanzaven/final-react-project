@@ -69,9 +69,17 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
         onClose={onClose}
         aria-describedby="alert-dialog-slide-description">
         <Container sx={styles.container}>
-          <Box noValidate component="form" onSubmit={handleSubmit(onSubmit)}>
+          <Box
+            noValidate
+            component="form"
+            onSubmit={handleSubmit(onSubmit)}
+            sx={styles.formBox}>
             <DialogTitle>Sign In</DialogTitle>
-            <Grid container spacing={2.2}>
+            <Grid
+              container
+              spacing={2.2}
+              alignItems="center"
+              justifyContent="center">
               <Grid item sx={{ position: "relative" }} xs={12}>
                 <TextField
                   {...register("email")}
@@ -116,12 +124,14 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
                   </Button>
                 </Typography>
               </Grid>
-              <LoadingButton
-                loading={loading}
-                variant="contained"
-                type="submit">
-                Sign In
-              </LoadingButton>
+              <Grid item>
+                <LoadingButton
+                  loading={loading}
+                  variant="contained"
+                  type="submit">
+                  Sign In
+                </LoadingButton>
+              </Grid>
             </Grid>
           </Box>
         </Container>

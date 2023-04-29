@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Container, Button, Dialog, Grid, Box } from "@mui/material";
+import {
+  Container,
+  Button,
+  Dialog,
+  Grid,
+  Box,
+  DialogTitle,
+} from "@mui/material";
 import { IconButton, InputAdornment } from "@mui/material";
 import { MenuItem, TextField, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -63,7 +70,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
             noValidate
             onSubmit={handleSubmit(onSubmit)}
             sx={styles.formBox}>
-            <Typography variant="h5">Sign Up</Typography>
+            <DialogTitle>Sign Up</DialogTitle>
             <Box sx={{ mt: 2 }}>
               <Grid container spacing={2.2}>
                 <Grid item xs={12} sx={{ position: "relative" }}>
