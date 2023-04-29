@@ -1,15 +1,13 @@
 import React from "react";
 import {
-  Box,
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
 } from "@mui/material";
-import ComponentFamilies from "../bookingDetails/DatePickUP";
-import MultipleSelectPlaceholder from "../bookingDetails/SelectServiceType";
+import DatePickUP from "../services_tab/booking_details/DatePickUP";
+import SelectServiceType from "../services_tab/booking_details/SelectServiceType";
 
 export const Booking = ({ service, onClose }) => {
   return (
@@ -34,11 +32,11 @@ export const Booking = ({ service, onClose }) => {
             flexDirection: "column",
             gap: 1,
           }}>
-          <MultipleSelectPlaceholder />
+          <SelectServiceType />
           <Divider />
 
           <DialogActions> </DialogActions>
-          <ComponentFamilies />
+          <DatePickUP />
         </DialogContent>
       </form>
     </Dialog>

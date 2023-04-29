@@ -1,10 +1,18 @@
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
-export const updateUserProfile = async ({ uid }, prop) => {
+import { changeUserInfo } from "../store/slicers/userSlice";
+export const updateUserProfile = async ({ uid }, prop, dispatch) => {
+  const { userInfo, disp } = dispatch;
   try {
     await updateDoc(doc(db, "users", uid), {
       ...prop,
     });
+    disp(
+      changeUserInfo({
+        ...userInfo,
+        ...prop,
+      })
+    );
   } catch (error) {
     console.log(error + "in update profile");
   }
