@@ -56,10 +56,10 @@ export const useAuthListener = (setLoading) => {
             id: user?.uid,
           })
         );
+        setLoading(false);
       } catch (e) {
         console.log(e.message);
       }
-      setLoading(false);
     });
   }, []);
 };

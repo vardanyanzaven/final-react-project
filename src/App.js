@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
-import Footer from "./components/Footer";
 import Header from "./components/header/Header";
-import HomePage from "./pages/HomePage";
-import CataloguePage from "./pages/CataloguePage";
-import ServicesPage from "./pages/ServicesPage";
-import AboutPage from "./pages/AboutPage";
 import { useAuth } from "./hooks/useAuth";
 import { UserSettings } from "./components/header/UserSettings";
-import NotFoundPage from "./pages/NotFoundPage";
+import NotFoundPage from "./components/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
+import ServicesPage from "./components/navigation/ServicesPage";
+import AboutPage from "./components/navigation/AboutPage";
+import HomePage from "./components/navigation/HomePage";
+import Footer from "./components/navigation/Footer";
+import CataloguePage from "./components/navigation/CataloguePage";
 import "./App.css";
 
 function App() {
