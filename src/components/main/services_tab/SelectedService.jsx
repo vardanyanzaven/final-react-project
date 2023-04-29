@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Navigate, useLocation, useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { SERVICE_DATA } from "./booking_form/servicesData";
-import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
-import { CardContent } from "@material-ui/core";
+import { Box, Button, Card, Typography } from "@mui/material";
 import { useState } from "react";
 
 export default function SelectedService() {
