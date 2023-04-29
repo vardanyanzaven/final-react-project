@@ -29,11 +29,11 @@ export const SORT_OPTIONS = [
   },
   {
     value: "Newest",
-    sortCondition: (a,b) => a.carProdYear - b.carProdYear,
+    sortCondition: (a, b) => a.carProdYear - b.carProdYear,
   },
   {
     value: "Oldest",
-    sortCondition: (a,b) => b.carProdYear - a.carProdYear,
+    sortCondition: (a, b) => b.carProdYear - a.carProdYear,
   },
 ];
 
@@ -51,7 +51,10 @@ export const FILTER_OPTIONS = [
   },
 ];
 
-export const regex = /^(?=.*\d)(?=.*[A-Z]).{8,20}$/;
+export const PASSWORD_REGEX = /^(?=.*\d)(?=.*[A-Z]).{8,20}$/;
+
+export const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 export const SETTINGS_NAME_LIST = () => {
   const { id, email, userInfo } = useAuth();

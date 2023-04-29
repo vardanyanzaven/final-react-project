@@ -17,12 +17,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import FilterSort from "./FilterSort";
 import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
 import { useDispatch, useSelector } from "react-redux";
-import CatalogueTheme from "../../../themes/CatalogueTheme";
+import { CatalogueTheme } from "../../../themes/catalogTheme";
 import { setCatalogue } from "../../../store/slicers/catalogueSlice";
 
-
 const CataloguePage = ({ setActiveLinkId }) => {
-  
   // Redux
   const dispatch = useDispatch();
 
@@ -35,9 +33,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
 
   // Filter and sort select values
   const [sortValue, setSortValue] = useState(SORT_OPTIONS[0]);
-  const [filterValue, setFilterValue] = useState(
-    FILTER_OPTIONS[0]
-  );
+  const [filterValue, setFilterValue] = useState(FILTER_OPTIONS[0]);
   const changeOption = (type, value) =>
     type === "sort"
       ? setSortValue(value)
@@ -61,8 +57,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
       <Box ref={ref}>
         <AppBar
           position="static"
-          sx={{ height: 75, mt: 10, mb: height + 20, background: "#192026" }}
-        >
+          sx={{ height: 75, mt: 10, mb: height + 20, background: "#192026" }}>
           <Container>
             <Toolbar
               sx={{
@@ -71,8 +66,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-              }}
-            >
+              }}>
               <Box
                 sx={{
                   display: "flex",
@@ -83,8 +77,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   borderRadius: "5px",
                   color: "white",
                   width: "25%",
-                }}
-              >
+                }}>
                 <InputBase
                   type="text"
                   placeholder="Search..."
@@ -94,7 +87,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
                     // onChange-y req a uxarkum fb
                   }}
                   onChange={(e) => setSearchInputVal(e.target.value)}
-                  />
+                />
                 <SearchIcon
                   sx={{
                     cursor: "pointer",

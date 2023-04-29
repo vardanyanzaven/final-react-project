@@ -1,53 +1,41 @@
 import React, { useState } from "react";
-import { Box, Button, Dialog, Grid, Select } from "@mui/material";
-import { DialogActions, DialogContent, Divider } from "@mui/material";
-import { DialogTitle, IconButton, InputAdornment } from "@mui/material";
+import { Container, Button, Dialog, Grid, Box } from "@mui/material";
+import { IconButton, InputAdornment } from "@mui/material";
 import { MenuItem, TextField, Typography } from "@mui/material";
-import MoreHoriz from "@mui/icons-material/MoreHoriz";
-import { Female, Male, Visibility, VisibilityOff } from "@mui/icons-material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GoogleIcon from "@mui/icons-material/Google";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Transition } from "../../components/dialog/dialogTransition";
 import { emailSignUp } from "../../services/handleAuth";
-import PhoneField from "../../components/dialog/components/PhoneField";
-import { passwordValidation } from "../../utils/validation";
 import { changeMessage } from "../../store/slicers/statusSlice";
 import { SUCCESS_MESSAGE } from "../../constants/common";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm } from "react-hook-form";
+import { schema } from "../../utils/validation";
 import { getError } from "../../utils/errors";
+import PhoneInput from "react-phone-input-2";
+import { styles } from "./styles";
+import "react-phone-input-2/lib/style.css";
 
 const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
-  const [phone, setPhone] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [confPass, setConfPass] = useState("");
-  const [isValid, setValid] = useState(true);
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [errorText, setErrorText] = useState("");
-
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const errText = passwordValidation(pass);
-    if (errText) {
-      setErrorText(errText);
-      setValid(false);
-      return;
-    } else if (pass !== confPass) {
-      setErrorText("Passwords do not match. Please write right password!");
-      setValid(false);
-      return;
-    } else setValid(true);
+  const onSubmit = (data) => {
+    const { email, password, phone, fullName, gender } = data;
 
     setLoading(true);
 
-    emailSignUp(email, pass, phone, fullName, gender)
+    emailSignUp(email, password, phone, fullName, gender)
       .then(() => {
         dispatch(changeMessage(SUCCESS_MESSAGE));
         onClose();
@@ -65,142 +53,121 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
     <>
       <Dialog
         open={open}
-        TransitionComponent={Transition}
-        keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description">
-        <Box component="form" onSubmit={handleSubmit} sx={{ width: "330px" }}>
-          <DialogTitle>Sign Up</DialogTitle>
-          <Grid container>
-            <DialogContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-              }}>
-              <PhoneField phoneSett={[phone, setPhone]} />
-              <Grid container>
-                <Grid item>
+        keepMounted
+        sx={styles.dialog}
+        TransitionComponent={Transition}>
+        <Container sx={styles.container}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
+            sx={styles.formBox}>
+            <Typography variant="h5">Sign Up</Typography>
+            <Box sx={{ mt: 2 }}>
+              <Grid container spacing={2.2}>
+                <Grid item xs={12} sx={{ position: "relative" }}>
+                  <Controller
+                    control={control}
+                    name="mobile"
+                    rules={{ required: true }}
+                    render={({ field: { ...field } }) => (
+                      <PhoneInput
+                        {...field}
+                        inputExtraProps={{
+                          required: true,
+                          autoComplete: true,
+                        }}
+                        inputStyle={{
+                          ...styles.phone,
+                          outline: errors.mobile && "1px solid #d32f2f",
+                        }}
+                        country="am"
+                      />
+                    )}
+                  />
+                  <p style={styles.error}>{errors.mobile?.message}</p>
+                </Grid>
+                <Grid item xs={12} sm={9} sx={{ position: "relative" }}>
                   <TextField
-                    value={fullName}
-                    onChange={({ target }) => setFullName(target.value)}
+                    fullWidth
                     required
                     label="Fullname"
-                    name="fullname"
-                    autoComplete="Fullname"
+                    error={!!errors.fullName}
+                    {...register("fullName")}
                   />
+                  <p style={styles.error}>{errors.fullName?.message}</p>
                 </Grid>
-                <Grid item>
-                  <Select
+                <Grid item xs={12} sm={3} sx={{ position: "relative" }}>
+                  <TextField
+                    select
+                    fullWidth
+                    label="Gender"
+                    inputProps={{
+                      ...register("gender"),
+                      IconComponent: () => null,
+                    }}
+                    error={!!errors.gender}>
+                    <MenuItem value="Male">Male</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
+                  </TextField>
+                  <p style={styles.error}>{errors.gender?.message}</p>
+                </Grid>
+                <Grid item xs={12} sx={{ position: "relative" }}>
+                  <TextField
+                    fullWidth
+                    type="email"
+                    label="Email"
+                    error={!!errors.email}
+                    {...register("email")}
                     required
-                    value={gender}
-                    onChange={(e) => setGender(e.target.value)}
-                    label="Gender">
-                    <MenuItem value="Male">
-                      <Male />
-                    </MenuItem>
-                    <MenuItem value="Female">
-                      <Female />
-                    </MenuItem>
-                    <MenuItem value="other">
-                      <MoreHoriz />
-                    </MenuItem>
-                  </Select>
+                  />
+                  <p style={styles.error}>{errors.email?.message}</p>
+                </Grid>
+                <Grid item xs={12} sx={{ position: "relative" }}>
+                  <TextField
+                    {...register("password")}
+                    type={showPass ? "text" : "password"}
+                    label="Password"
+                    error={!!errors.password}
+                    fullWidth
+                    required
+                  />
+                  <p style={styles.error}>{errors.password?.message}</p>
+                </Grid>
+                <Grid item xs={12} sx={{ position: "relative" }}>
+                  <TextField
+                    {...register("confPass")}
+                    label={"Confirm password"}
+                    error={!!errors.confPass}
+                    type={showPass ? "text" : "password"}
+                    fullWidth
+                    required
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={() => setShowPass(!showPass)}
+                            edge="end">
+                            {showPass ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <p style={styles.error}>{errors.confPass?.message}</p>
                 </Grid>
               </Grid>
-              <Grid item>
-                <TextField
-                  fullWidth
-                  type="email"
-                  label="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  error={!isValid}
-                  value={pass}
-                  onChange={(e) => setPass(e.target.value)}
-                  type={showPass ? "text" : "password"}
-                  label={isValid ? "Password" : "Error password"}
-                  fullWidth
-                  required
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={() => setShowPass(!showPass)}
-                          onMouseDown={(e) => e.preventDefault()}
-                          edge="end">
-                          {showPass ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  type={showPass ? "text" : "password"}
-                  label={
-                    isValid ? "Confirm password" : "Error confirm password"
-                  }
-                  error={!isValid}
-                  fullWidth
-                  value={confPass}
-                  onChange={({ target }) => setConfPass(target.value)}
-                  required
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={() => setShowPass(!showPass)}
-                          onMouseDown={(e) => e.preventDefault()}
-                          edge="end">
-                          {showPass ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                {!isValid && (
-                  <Typography
-                    sx={{ wordBreak: "break-word" }}
-                    variant="caption"
-                    color="red">
-                    {errorText}
-                  </Typography>
-                )}
-              </Grid>
-              <Grid container>
-                <Grid item>
-                  <IconButton>
-                    <FacebookIcon sx={{ fontSize: "50px", color: "#4267B2" }} />
-                  </IconButton>
-                </Grid>
-                <Grid item>
-                  <IconButton>
-                    <GoogleIcon sx={{ fontSize: "47px" }} />
-                  </IconButton>
-                </Grid>
-              </Grid>
-              <Divider />
-              <Typography>
-                Already have an account?
-                <Button onClick={onSignInOpen}>Sign In</Button>
-              </Typography>
-              <DialogActions>
-                <LoadingButton
-                  loading={loading}
-                  variant="contained"
-                  type="submit">
-                  Sign Up
-                </LoadingButton>
-              </DialogActions>
-            </DialogContent>
-          </Grid>
-        </Box>
+            </Box>
+            <Typography>
+              Already have an account?
+              <Button onClick={onSignInOpen}>Sign In</Button>
+            </Typography>
+            <LoadingButton {...loading} type="submit" variant="contained">
+              Sign Up
+            </LoadingButton>
+          </Box>
+        </Container>
       </Dialog>
     </>
   );
