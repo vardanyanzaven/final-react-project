@@ -3,7 +3,7 @@ import "./HomePageSlider.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { IMAGES_FOR_HOME_PAGE_SLIDER } from "../../constants/common";
+import { IMAGES_FOR_HOME_PAGE_SLIDER } from "../../../constants/common";
 
 const settings = {
   dots: true,
@@ -31,8 +31,7 @@ const HomePageSlider = () => {
                 backgroundSize: "cover",
                 width: "100%",
                 height: "800px",
-              }}
-            >
+              }}>
               <div className="content">
                 <h2
                   className="title"
@@ -40,14 +39,12 @@ const HomePageSlider = () => {
                     fontSize: 80,
                     color: "white",
                     textAlign: "center",
-                  }}
-                >
+                  }}>
                   {slide.title}
                 </h2>
                 <p
                   className="subtitle"
-                  style={{ fontSize: 50, color: "white", textAlign: "center" }}
-                >
+                  style={{ fontSize: 50, color: "white", textAlign: "center" }}>
                   {slide.subtitle}
                 </p>
                 <button className="slide-button">Get Started!</button>

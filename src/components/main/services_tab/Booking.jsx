@@ -1,13 +1,11 @@
 import { useState } from "react";
+import "react-phone-input-2/lib/style.css";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import PhoneInput from "react-phone-input-2";
 import React from "react";
 import DateForBooking from "./booking_form/DateForBooking";
-import "react-phone-input-2/lib/style.css";
-import PhoneInput from "react-phone-input-2";
 import SelectServiceType from "./booking_form/SelectServiceType";
 import SelectCars from "./booking_form/SelectcCars";
-import { sendEmailVerification } from "firebase/auth";
-import { auth } from "../../../firebase";
 
 export const Booking = () => {
   const [page1, setpage1] = useState(true);
@@ -21,8 +19,7 @@ export const Booking = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Paper
         sx={{
           display: "flex",
@@ -32,8 +29,7 @@ export const Booking = () => {
           width: 1200,
           height: 800,
           mt: 3,
-        }}
-      >
+        }}>
         <Box
           sx={{
             width: "400px",
@@ -43,23 +39,20 @@ export const Booking = () => {
             alignItems: "center",
             textAlign: "center",
             ml: 10,
-          }}
-        >
+          }}>
           <Typography variant="h4"> Book Here </Typography>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-            }}
-          >
+            }}>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
                 width: "400px",
                 alignItems: "center",
-              }}
-            >
+              }}>
               <SelectServiceType sx={{ width: 195 }} />
               <SelectCars sx={{ width: 195 }} />
             </Box>
@@ -68,9 +61,8 @@ export const Booking = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                width: " 400px",
-              }}
-            >
+                width: "400px",
+              }}>
               <TextField type="name " label=" name" sx={{ width: 195 }} />
               <TextField type="surname " label="surname" sx={{ width: 195 }} />
             </Box>
@@ -96,8 +88,7 @@ export const Booking = () => {
             style={{ border: 0 }}
             allowfullscreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
         </Box>
       </Paper>
     </Box>
@@ -107,8 +98,7 @@ export const Booking = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Paper
         sx={{
           display: "flex",
@@ -118,12 +108,10 @@ export const Booking = () => {
           width: 1000,
           height: 800,
           mt: 3,
-        }}
-      >
+        }}>
         <Box>
           <Typography variant="h4" sx={{ mt: 8 }}>
-            {" "}
-            Pass the Authorization{" "}
+            Booked
           </Typography>
 
           <Button variant="contained" sx={{ mt: 2 }}>
