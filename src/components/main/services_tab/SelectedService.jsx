@@ -6,63 +6,40 @@ import { CardContent } from "@material-ui/core";
 import { useState } from "react";
 
 export default function SelectedService() {
-  const navigate = useNavigate();
   const { serve } = useParams();
   const [info] = SERVICE_DATA(serve);
   const [booking, setbooking] = useState(false);
 
- 
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        mt: 20,
         textAlign: "center",
-      }}
-    >
+      }}>
       <Card
         sx={{
-          maxWidth: 800,
+          maxWidth: "75%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-        }}
-      >
-        <Typography variant="h4"> {info.name}</Typography>
-        <CardMedia
-          component="img"
-          height="400"
-          width="400"
-          image={info.url}
-          alt="info.name"
-          sx={{ m: 4 }}
-        />
-        <CardContent
-        // sx={{
-        //   display: "flex",
-        //   flexDirection: "column",
-        //   justifyContent: "center",
-        //   alignItems: "center",
-
-        // }}
-        >
-          <Typography sx={{ mb: 2 }}> {info.title}</Typography>
-          <Button
-            color="primary"
-            disabled={false}
-            size="medium"
-            variant="outlined"
-            onClick={() => setbooking(!booking)}
-          >
-            Book now
-          </Button>
-        </CardContent>
+          p: 5,
+        }}>
+        <Typography variant="h4"> {info.name.toUpperCase()}</Typography>
+        <img component="img" height="400" src={info.url} alt="info.name" />
+        <Typography sx={{ m: 5, width: "65%" }}> {info.title}</Typography>
+        <Button
+          color="primary"
+          disabled={false}
+          size="medium"
+          variant="outlined"
+          sx={{ m: 1 }}
+          onClick={() => setbooking(!booking)}>
+          Book now
+        </Button>
       </Card>
     </Box>
-
   );
- 
 }
