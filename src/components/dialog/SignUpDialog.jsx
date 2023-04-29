@@ -1,37 +1,21 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  Grid,
-  IconButton,
-  InputAdornment,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
-import {
-  Female,
-  Male,
-  MoreHoriz,
-  Visibility,
-  VisibilityOff,
-} from "@mui/icons-material";
+import React, { useState } from "react";
+import { Box, Button, Dialog, Grid, Select } from "@mui/material";
+import { DialogActions, DialogContent, Divider } from "@mui/material";
+import { DialogTitle, IconButton, InputAdornment } from "@mui/material";
+import { MenuItem, TextField, Typography } from "@mui/material";
+import MoreHoriz from "@mui/icons-material/MoreHoriz";
+import { Female, Male, Visibility, VisibilityOff } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
-import React, { useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { useDispatch } from "react-redux";
 import { Transition } from "./dialogTransition";
 import { emailSignUp } from "../../services/handleAuth";
 import PhoneField from "./components/PhoneField";
 import { testPassword } from "../../utils/validation";
-import ShowStatus from "../../shared/snack_bar/ShowStatus";
-import { useDispatch } from "react-redux";
 import { changeMessage } from "../../store/slicers/statusSlice";
+// import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants/common";
+import { getError } from "../../utils/errors";
 
 const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [phone, setPhone] = useState("");
@@ -43,25 +27,33 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [isValid, setValid] = useState(true);
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!testPassword(pass) && pass) setValid(false);
-    else setValid(true);
+    if (pass) {
+      setValid(false);
+      setErrorText(testPassword(pass));
+    } else setValid(true);
     if (pass !== confPass || !isValid) {
-      dispatch(
-        changeMessage({
-          message: "invalid password or email",
-          type: "error",
-          isOpen: true,
-        })
-      );
+      // dispatch(changeMessage(ERROR_MESSAGE));
       return;
     } else {
       setLoading(true);
-      emailSignUp(email, pass, phone, fullName, gender, setLoading);
+      emailSignUp(email, pass, phone, fullName, gender)
+        .then(() => {
+          // dispatch(changeMessage(SUCCESS_MESSAGE));
+          onClose();
+        })
+        .catch((e) => {
+          const err = getError(e);
+          dispatch(changeMessage(err));
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   };
 
@@ -72,8 +64,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
+        aria-describedby="alert-dialog-slide-description">
         <Box component="form" onSubmit={handleSubmit} sx={{ width: "330px" }}>
           <DialogTitle>Sign Up</DialogTitle>
           <Grid container>
@@ -81,8 +72,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-              }}
-            >
+              }}>
               <PhoneField phoneSett={[phone, setPhone]} />
               <Grid container>
                 <Grid item>
@@ -100,8 +90,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                     required
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                    label="Gender"
-                  >
+                    label="Gender">
                     <MenuItem value="Male">
                       <Male />
                     </MenuItem>
@@ -128,10 +117,8 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                 <Typography
                   sx={{ wordBreak: "break-word" }}
                   variant="caption"
-                  color="red"
-                >
-                  The password must contain at least 1 capital letter, 1 number
-                  and have 8-16 characters.
+                  color="red">
+                  {errorText}
                 </Typography>
               )}
               <Grid item>
@@ -149,8 +136,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                         <IconButton
                           onClick={() => setShowPass(!showPass)}
                           onMouseDown={(e) => e.preventDefault()}
-                          edge="end"
-                        >
+                          edge="end">
                           {showPass ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       </InputAdornment>
@@ -172,8 +158,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                         <IconButton
                           onClick={() => setShowPass(!showPass)}
                           onMouseDown={(e) => e.preventDefault()}
-                          edge="end"
-                        >
+                          edge="end">
                           {showPass ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       </InputAdornment>
@@ -202,8 +187,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                 <LoadingButton
                   loading={loading}
                   variant="contained"
-                  type="submit"
-                >
+                  type="submit">
                   Sign Up
                 </LoadingButton>
               </DialogActions>

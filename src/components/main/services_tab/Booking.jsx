@@ -1,21 +1,10 @@
 import React from "react";
-import {
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, TextField, Typography } from "@mui/material";
 import DateForBooking from "./booking_form/DateForBooking";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import SelectServiceType from "./booking_form/SelectServiceType";
 import SelectCars from "./booking_form/SelectcCars";
-import { handleOpen } from "../../../store/slicers/serviceSlice";
-import { AddBox } from "@mui/icons-material";
 
 export const Booking = ({ value, dispatch }) => {
   return (
@@ -26,8 +15,7 @@ export const Booking = ({ value, dispatch }) => {
         alignItems: "center",
         textAlign: "center",
         mt: 2,
-      }}
-    >
+      }}>
       <Box sx={{ display: "flex" }}>
         {/* <Box
           open={!value}
@@ -43,8 +31,7 @@ export const Booking = ({ value, dispatch }) => {
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
-          }}
-        >
+          }}>
           <Box>
             <Typography variant="h4"> Book Here</Typography>
           </Box>
@@ -55,16 +42,14 @@ export const Booking = ({ value, dispatch }) => {
               flexDirection: "column",
               gap: 1,
               mt: 1,
-            }}
-          >
+            }}>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
                 width: "350px",
                 alignItems: "center",
-              }}
-            >
+              }}>
               <SelectServiceType sx={{ width: 170 }} />
               <SelectCars sx={{ width: 170 }} />
             </Box>
@@ -74,8 +59,7 @@ export const Booking = ({ value, dispatch }) => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "350px",
-              }}
-            >
+              }}>
               <TextField type="name " label=" name" sx={{ width: 170 }} />
               <TextField type="surname " label="surname" sx={{ width: 170 }} />
             </Box>

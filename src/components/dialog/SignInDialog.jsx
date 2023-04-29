@@ -18,13 +18,16 @@ import { LoadingButton } from "@mui/lab";
 import { emailSignIn } from "../../services/handleAuth";
 import { Transition } from "./dialogTransition";
 import { useDispatch } from "react-redux";
+import { changeMessage } from "../../store/slicers/statusSlice";
+import { getError } from "../../utils/errors";
+// import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants/common";
 
 const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
+  const disp = useDispatch();
   const handleShowPassword = () => {
     setShowPass(!showPass);
   };
@@ -32,7 +35,17 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
-    emailSignIn(email, pass, setLoading).then(onClose()).catch(onClose());
+    emailSignIn(email, pass)
+      .then(() => {
+        // disp(changeMessage(SUCCESS_MESSAGE));
+      })
+      .catch((e) => {
+        const err = getError(e);
+        disp(changeMessage(err));
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -42,8 +55,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
+        aria-describedby="alert-dialog-slide-description">
         <form onSubmit={handleSubmit}>
           <DialogTitle>Sign In</DialogTitle>
           <DialogContent
@@ -51,8 +63,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
               display: "flex",
               flexDirection: "column",
               gap: 1,
-            }}
-          >
+            }}>
             <TextField
               type="email"
               label="Email"
@@ -75,8 +86,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
                     <IconButton
                       onClick={handleShowPassword}
                       onMouseDown={(e) => e.preventDefault()}
-                      edge="end"
-                    >
+                      edge="end">
                       {showPass ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -101,8 +111,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
                 onClick={(e) => {
                   e.preventDefault();
                   onSignUpOpen();
-                }}
-              >
+                }}>
                 Sign up
               </Button>
             </Typography>
@@ -110,8 +119,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
               <LoadingButton
                 loading={loading}
                 variant="contained"
-                type="submit"
-              >
+                type="submit">
                 Sign In
               </LoadingButton>
             </DialogActions>
