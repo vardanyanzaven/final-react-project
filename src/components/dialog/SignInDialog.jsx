@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import { Transition } from "./dialogTransition";
-import { emailSignIn } from "../services/handleAuth";
 import {
   Button,
   Dialog,
@@ -17,6 +15,8 @@ import {
   Typography,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import { emailSignIn } from "../../services/handleAuth";
+import { Transition } from "./dialogTransition";
 
 const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");

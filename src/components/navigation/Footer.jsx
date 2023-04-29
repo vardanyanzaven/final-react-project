@@ -6,7 +6,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import PhoneIcon from "@mui/icons-material/Phone";
-import { ContainerBox, FooterTheme } from "../themes/FooterTheme";
+import { ContainerBox, FooterTheme } from "../../themes/FooterTheme";
 
 const Footer = () => {
   return (

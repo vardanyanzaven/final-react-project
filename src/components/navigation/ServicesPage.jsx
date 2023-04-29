@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import ResponsiveGrid from "./servicesTabContent/GridTabServices";
-import { Booking } from "./servicesTabContent/Booking";
+import ResponsiveGrid from "../servicesTabContent/GridTabServices";
+import { Booking } from "../servicesTabContent/Booking";
 
 const ServicesPage = ({ setActiveLinkId }) => {
   const [service, setService] = useState(true);

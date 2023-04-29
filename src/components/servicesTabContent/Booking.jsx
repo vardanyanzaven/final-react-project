@@ -17,8 +17,7 @@ export const Booking = ({ service, onClose }) => {
       open={!service}
       onClose={onClose}
       keepMounted
-      aria-describedby="alert-dialog-slide-description"
-    >
+      aria-describedby="alert-dialog-slide-description">
       <form
         style={{
           width: "400px",
@@ -27,16 +26,14 @@ export const Booking = ({ service, onClose }) => {
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
-        }}
-      >
+        }}>
         <DialogTitle> Book Here </DialogTitle>
         <DialogContent
           sx={{
             display: "flex",
             flexDirection: "column",
             gap: 1,
-          }}
-        >
+          }}>
           <MultipleSelectPlaceholder />
           <Divider />
 

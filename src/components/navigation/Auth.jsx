@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
-import SignInDialog from "../dialog/SignInDialog";
 import SignUpDialog from "../dialog/SignUpDialog";
+import SignInDialog from "../dialog/SignInDialog";
 
 const Auth = () => {
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
@@ -38,8 +38,7 @@ const Auth = () => {
         <Button
           variant="signup"
           sx={{ display: { xs: "none", sm: "flex" } }}
-          onClick={handleOpenSignUp}
-        >
+          onClick={handleOpenSignUp}>
           <Typography sx={{ fontSize: { xs: 13, sm: 19, md: 22 } }} noWrap>
             Sign up
           </Typography>

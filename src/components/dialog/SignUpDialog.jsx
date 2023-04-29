@@ -26,9 +26,9 @@ import GoogleIcon from "@mui/icons-material/Google";
 import React, { useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import { Transition } from "./dialogTransition";
+import { emailSignUp } from "../../services/handleAuth";
 import PhoneField from "./components/PhoneField";
-import { testPassword } from "../utils/validation";
-import { emailSignUp } from "../services/handleAuth";
+import { testPassword } from "../../utils/validation";
 
 const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [phone, setPhone] = useState("");
