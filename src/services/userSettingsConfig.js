@@ -10,7 +10,7 @@ export const changingSetting = (name, newProp) => {
         .catch(console.log);
       break;
     case "Gender":
-      console.log(name, newProp);
+      updateUserProfile(auth.currentUser, { gender: newProp });
       break;
     case "Mobile":
       updateUserProfile(auth.currentUser, { phone: newProp });

@@ -13,13 +13,14 @@ export const emailSignUp = async (
   password,
   phone,
   fullName,
+  gender,
   setLoading
 ) => {
   return createUserWithEmailAndPassword(auth, email, password)
     .then(({ user }) => {
-      setUserDB(user, phone, fullName);
+      setUserDB(user, phone, fullName, gender);
     })
-    .catch(({ message }) => console.log(message))
+    .catch(({ message }) => console.log(message + "in signup"))
     .finally(() => setLoading(false));
 };
 
@@ -36,6 +37,7 @@ export const emailSignIn = async (email, password, setLoading) => {
 export const useAuthListener = (setLoading) => {
   const { userInfo } = useAuth();
   const disp = useDispatch();
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       try {

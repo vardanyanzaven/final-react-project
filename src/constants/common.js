@@ -20,34 +20,27 @@ export const SETTINGS_NAME_LIST = () => {
     },
     {
       name: "Gender",
-      value: "male/female",
-      edit: true,
+      value: userInfo.gender,
+      edit: "select",
       editTitle: "Enter your gender",
     },
     {
       name: "Email",
       value: email,
-      edit: true,
+      edit: "text",
       editTitle: "Enter your new Email",
     },
     {
       name: "Mobile",
       value: userInfo.phone,
-      edit: true,
+      edit: "text",
       editTitle: "Enter your mobile",
     },
     {
       name: "Fullname",
       value: userInfo.fullName,
-      edit: true,
+      edit: "text",
       editTitle: "Enter your new fullname",
     },
   ];
 };
-<<<<<<< HEAD
-=======
-
-export const THEME_SETTINGS_NAME = {
-  
-}
->>>>>>> 5fc7ead (push in my branch)

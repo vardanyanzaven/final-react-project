@@ -15,19 +15,9 @@ import "./App.css";
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
   const [loading, setLoading] = useState(true);
-<<<<<<< HEAD
   const { isAuth } = useAuth();
 
   useAuthListener(setLoading);
-=======
-  const { isAuth, userInfo } = useAuth();
-
-  useAuthListener(setLoading);
-<<<<<<< HEAD
-  console.log(userInfo);
->>>>>>> 6e2238d (connecting db coll and coll push in redux store, authChangeHook logic moved to handleAuth.js)
-=======
->>>>>>> edadecb (+)
 
   return (
     <>
