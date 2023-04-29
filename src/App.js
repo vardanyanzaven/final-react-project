@@ -24,23 +24,22 @@ function App() {
 
   useAuthListener(setLoading);
 
+  if (loading) return <LinearProgress />;
+
   return (
     <>
-      {loading ? (
-        <LinearProgress />
-      ) : (
-        <>
-          <ShowStatus />
-          <Header
-            activeLinkId={activeLinkId}
-            setActiveLinkId={setActiveLinkId}
-          />
+      <>
+        <ShowStatus />
+        <Header activeLinkId={activeLinkId} setActiveLinkId={setActiveLinkId} />
+        <ScrollToTop />
+        <Main>
           <Routes>
             <Route index element={<HomePageSlider />} />
             <Route
               path="services"
               element={<ServicesPage setActiveLinkId={setActiveLinkId} />}
             />
+            <Route path="services/:serve" element={<SelectedService />} />
             <Route
               path="catalogue"
               element={<CataloguePage setActiveLinkId={setActiveLinkId} />}
@@ -56,10 +55,10 @@ function App() {
             )}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-          <Outlet />
-          <Footer />
-        </>
-      )}
+        </Main>
+        <Outlet />
+        <Footer />
+      </>
     </>
   );
 }

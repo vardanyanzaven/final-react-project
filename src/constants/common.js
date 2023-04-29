@@ -180,3 +180,25 @@ export const SUCCESS_MESSAGE = {
   type: "success",
   isOpen: true,
 };
+
+export const IMAGES_FOR_HOME_PAGE_SLIDER = [
+  {
+    id: 1,
+    title: "Rent a Car Today!",
+    subtitle: "Affordable and Flexible Rental Options",
+    imgUrl: "images/sliderImg1.jpg",
+  },
+
+  {
+    id: 2,
+    title: "Explore Your Next Adventure",
+    subtitle: "Choose from a Wide Range of Car Models",
+    imgUrl: "images/sliderImg2.jpg",
+  },
+  {
+    id: 3,
+    title: "Drive in Style",
+    subtitle: "Luxury Cars for Special Occasions",
+    imgUrl: "images/sliderImg3.jpg",
+  },
+];
