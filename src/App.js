@@ -12,7 +12,8 @@ import "./App.css";
 import ServicesPage from "./components/main/services_tab/ServicesPage";
 import Footer from "./components/footer/Footer";
 import { LinearProgress } from "@mui/material";
-import ResponsiveGrid from "./components/main/services_tab/SelectedService";
+import SelectedService from "./components/main/services_tab/SelectedService";
+import Main from "./components/main/Main";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -31,28 +32,30 @@ function App() {
             activeLinkId={activeLinkId}
             setActiveLinkId={setActiveLinkId}
           />
-          <Routes>
-            <Route index element={<HomePage />} />
-            <Route
-              path="services"
-              element={<ServicesPage setActiveLinkId={setActiveLinkId} />}
-            />
-            <Route path="services/:serve" element={<ResponsiveGrid />} />
-            <Route
-              path="catalogue"
-              element={<CataloguePage setActiveLinkId={setActiveLinkId} />}
-            />
-            <Route
-              path="about"
-              element={<AboutPage setActiveLinkId={setActiveLinkId} />}
-            />
-            {isAuth ? (
-              <Route path="settings" element={<UserSettings />} />
-            ) : (
-              <Route path="*" element={<Navigate to="/" />} />
-            )}
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+          <Main>
+            <Routes>
+              <Route index element={<HomePage />} />
+              <Route
+                path="services"
+                element={<ServicesPage setActiveLinkId={setActiveLinkId} />}
+              />
+              <Route path="services/:serve" element={<SelectedService />} />
+              <Route
+                path="catalogue"
+                element={<CataloguePage setActiveLinkId={setActiveLinkId} />}
+              />
+              <Route
+                path="about"
+                element={<AboutPage setActiveLinkId={setActiveLinkId} />}
+              />
+              {isAuth ? (
+                <Route path="settings" element={<UserSettings />} />
+              ) : (
+                <Route path="*" element={<Navigate to="/" />} />
+              )}
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Main>
           <Outlet />
           <Footer />
         </>
