@@ -8,10 +8,16 @@ import { setUser } from "../store/slicers/userSlice";
 import { getUserDB, setUserDB } from "./dataBaseConfig";
 import { useAuth } from "../hooks/useAuth";
 
-export const emailSignUp = async (email, password, phone, setLoading) => {
+export const emailSignUp = async (
+  email,
+  password,
+  phone,
+  fullName,
+  setLoading
+) => {
   return createUserWithEmailAndPassword(auth, email, password)
     .then(({ user }) => {
-      setUserDB(user, phone);
+      setUserDB(user, phone, fullName);
     })
     .catch(({ message }) => console.log(message))
     .finally(() => setLoading(false));
@@ -34,7 +40,6 @@ export const useAuthListener = (setLoading) => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       try {
         const dbData = user && (await getUserDB(user.uid));
-
         disp(
           setUser({
             userInfo: user

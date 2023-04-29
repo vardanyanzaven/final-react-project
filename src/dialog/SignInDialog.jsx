@@ -79,7 +79,6 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
             <Typography>
               Don't have an account?
               <Button
-                // href="#"
                 onClick={(e) => {
                   e.preventDefault();
                   onSignUpOpen();

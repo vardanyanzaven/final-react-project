@@ -6,7 +6,6 @@ import HomePage from "./pages/HomePage";
 import CataloguePage from "./pages/CataloguePage";
 import ServicesPage from "./pages/ServicesPage";
 import AboutPage from "./pages/AboutPage";
-import ContactUsPage from "./pages/ContactUsPage";
 import { useAuth } from "./hooks/useAuth";
 import { UserSettings } from "./components/header/UserSettings";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -43,10 +42,6 @@ function App() {
             <Route
               path="about"
               element={<AboutPage setActiveLinkId={setActiveLinkId} />}
-            />
-            <Route
-              path="contact"
-              element={<ContactUsPage setActiveLinkId={setActiveLinkId} />}
             />
             {isAuth ? (
               <Route path="settings" element={<UserSettings />} />

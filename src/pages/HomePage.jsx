@@ -2,10 +2,16 @@ import React from "react";
 import { useAuth } from "../hooks/useAuth";
 
 const HomePage = () => {
-  const { isAuth, email } = useAuth();
+  const { isAuth, userInfo } = useAuth();
 
   return (
-    <>{isAuth ? <div>Welcome to my site {email}</div> : <div>HomePage</div>}</>
+    <>
+      {isAuth ? (
+        <div>Welcome to my site {userInfo.fullName}</div>
+      ) : (
+        <div>HomePage</div>
+      )}
+    </>
   );
 };
 

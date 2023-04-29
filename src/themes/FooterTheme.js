@@ -9,8 +9,8 @@ const FooterTheme = createTheme({
           color: "white",
           transition: "color 0.15s",
           "&:hover": {
-            color: "#F2B90D"
-          }
+            color: "#F2B90D",
+          },
         },
       },
     },
