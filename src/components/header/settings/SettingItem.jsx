@@ -1,7 +1,7 @@
 import { DriveFileRenameOutline } from "@mui/icons-material";
 import { Button, TableCell, TableRow } from "@mui/material";
 import React from "react";
-import SettingModal from "../shared/SettingModal";
+import SettingModal from "./SettingModal";
 import { useState } from "react";
 
 const SettingItem = ({ sett }) => {

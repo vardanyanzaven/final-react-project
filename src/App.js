@@ -5,12 +5,12 @@ import { useAuth } from "./hooks/useAuth";
 import { UserSettings } from "./components/header/UserSettings";
 import NotFoundPage from "./components/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
-import ServicesPage from "./components/navigation/ServicesPage";
-import AboutPage from "./components/navigation/AboutPage";
-import HomePage from "./components/navigation/HomePage";
-import Footer from "./components/navigation/Footer";
-import CataloguePage from "./components/navigation/CataloguePage";
+import AboutPage from "./components/main/AboutPage";
+import HomePage from "./components/main/HomePage";
+import CataloguePage from "./components/main/CataloguePage";
 import "./App.css";
+import ServicesPage from "./components/main/services_tab/ServicesPage";
+import Footer from "./components/footer/Footer";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();

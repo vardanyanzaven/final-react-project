@@ -1,9 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
-import SignUpDialog from "../dialog/SignUpDialog";
-import SignInDialog from "../dialog/SignInDialog";
+import SignUpDialog from "./SignUpDialog";
+import SignInDialog from "./SignInDialog";
 
-const Auth = () => {
+const AuthDraw = () => {
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
   const [signUpDialogOpen, setSignUpDialogOpen] = useState(false);
 
@@ -54,4 +54,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default AuthDraw;

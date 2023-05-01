@@ -13,7 +13,7 @@ const names = [
   "Casino",
 ];
 
-export default function MultipleSelectPlaceholder() {
+export default function SelectServiceType() {
   const [ServiceName, setServiceName] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -36,8 +36,7 @@ export default function MultipleSelectPlaceholder() {
           open={open}
           onClose={onClose}
           onClick={() => setOpen(!open)}
-          inputProps={{ "aria-label": "Without label" }}
-        >
+          inputProps={{ "aria-label": "Without label" }}>
           <MenuItem disabled value="">
             <em>Select Service Type</em>
           </MenuItem>

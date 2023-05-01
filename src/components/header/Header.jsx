@@ -15,7 +15,7 @@ import { HEADER_TAB_LIST } from "../../constants/common";
 import DropdownMenu from "./DropdownMenu";
 import AvatarMenu from "./AvatarMenu";
 import { useAuth } from "../../hooks/useAuth";
-import Auth from "../navigation/Auth";
+import AuthDraw from "../dialog/AuthDraw";
 
 const Header = ({ activeLinkId, setActiveLinkId }) => {
   const checkIfActive = (id) => activeLinkId === id;
@@ -77,7 +77,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 </NavLink>
               ))}
             </Box>
-            {isAuth ? <AvatarMenu /> : <Auth />}
+            {isAuth ? <AvatarMenu /> : <AuthDraw />}
           </Toolbar>
         </Container>
       </AppBar>

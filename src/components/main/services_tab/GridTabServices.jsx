@@ -3,7 +3,7 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { Machine } from "../../constants/common";
+import { Machine } from "../../../constants/common";
 import { Typography } from "@material-ui/core";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -24,8 +24,7 @@ export default function ResponsiveGrid({ service, setService }) {
       <Grid
         container
         spacing={{ xs: 2, md: 8 }}
-        columns={{ xs: 6, sm: 10, md: 16 }}
-      >
+        columns={{ xs: 6, sm: 10, md: 16 }}>
         {Machine.map((car, index) => (
           <Grid item xs={8} sm={8} md={6} key={index}>
             <Item sx={{ justifyContent: "center", width: 400, height: 300 }}>
