@@ -9,17 +9,20 @@ import {
 } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { auth, storage } from "../../../firebase";
-import { Avatar, Box, Button, ImageListItem } from "@mui/material";
+import { Avatar, Box, Button, IconButton, Menu, MenuItem } from "@mui/material";
 import { changeUserInfo } from "../../../store/slicers/userSlice";
+import { AddAPhoto, Check, DeleteForever } from "@mui/icons-material";
 
 const MainPhotoSettings = () => {
-  const [photoFile, setPhotoFile] = useState(null);
+  const { photoURL } = useSelector((state) => state.auth.userInfo);
   const [previewPhoto, setPreviewPhoto] = useState(null);
+  const [photoFile, setPhotoFile] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [el, setEl] = useState(null);
   const [disabled, setDisabled] = useState(true);
   const { id, userInfo } = useAuth();
-  const { photoURL } = useSelector((state) => state.auth.userInfo);
-  const disp = useDispatch();
   const storageRef = useMemo(() => ref(storage, id + ".png"));
+  const disp = useDispatch();
 
   const handleFileChange = (e) => {
     if (!e.target.files[0]) {
@@ -69,13 +72,55 @@ const MainPhotoSettings = () => {
   };
   return (
     <Box>
-      <Avatar src={previewPhoto || photoURL} sx={{ width: 200, height: 200 }} />
-      <input type="file" accept="image/*" onChange={handleFileChange} />
-      <Button onClick={handleAddUrl} disabled={disabled}>
-        add photo
+      <IconButton
+        disableRipple
+        onClick={(e) => {
+          setOpen(true);
+          setEl(e.currentTarget);
+        }}>
+        <Avatar
+          src={previewPhoto || photoURL}
+          sx={{ width: 200, height: 200 }}
+        />
+      </IconButton>
+      <Menu
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        open={open}
+        onClose={() => setOpen(false)}
+        anchorEl={el}>
+        <MenuItem
+          onClick={handleRemovePhoto}
+          disabled={!photoURL}
+          disableRipple>
+          <DeleteForever color="error"></DeleteForever>
+        </MenuItem>
+      </Menu>
+      <Button
+        variant="text"
+        component="label"
+        sx={{
+          left: "120px",
+          bottom: "30px",
+          borderRadius: "50%",
+          color: "#009900",
+        }}>
+        <AddAPhoto sx={{ fontSize: "35px" }}></AddAPhoto>
+        <input
+          type="file"
+          hidden
+          accept="image/*"
+          onChange={handleFileChange}
+        />
       </Button>
-      <Button onClick={handleRemovePhoto} disabled={!photoURL}>
-        Remove Photo
+      <Button
+        color="success"
+        onClick={handleAddUrl}
+        disabled={disabled}
+        variant={disabled ? "" : "contained"}>
+        {!disabled && <Check></Check>}
       </Button>
     </Box>
   );

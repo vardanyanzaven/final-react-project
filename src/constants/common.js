@@ -1,3 +1,5 @@
+import { useAuth } from "../hooks/useAuth";
+
 export const HEADER_TAB_LIST = {
   services: "services",
   catalogue: "catalogue",

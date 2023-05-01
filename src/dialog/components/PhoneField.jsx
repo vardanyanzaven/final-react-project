@@ -15,7 +15,7 @@ const PhoneField = ({ phoneSett }) => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} width="100%">
       <PhoneInput
         inputProps={{ name: "phone", required: false }}
         inputStyle={{ height: "56px", width: "100%" }}
