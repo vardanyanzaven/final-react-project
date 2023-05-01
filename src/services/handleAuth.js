@@ -58,8 +58,8 @@ export const useAuthListener = (setLoading) => {
         );
         setLoading(false);
       } catch (e) {
-        console.log(e);
+        console.log(e.message);
       }
     });
-  }, [auth]);
+  }, []);
 };
