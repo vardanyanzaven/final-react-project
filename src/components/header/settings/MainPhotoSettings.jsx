@@ -65,8 +65,8 @@ const MainPhotoSettings = () => {
           photoURL: null,
         })
       );
+      setPreviewPhoto(null);
     } catch (e) {
-      console.log(photoURL);
       console.log(`handleRemovePhoto ERROR ${e}`);
     }
   };

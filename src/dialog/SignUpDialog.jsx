@@ -21,6 +21,8 @@ import {
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GoogleIcon from "@mui/icons-material/Google";
 import React, { useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import { Transition } from "./dialogTransition";
@@ -168,6 +170,18 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                     ),
                   }}
                 />
+              </Grid>
+              <Grid container>
+                <Grid item>
+                  <IconButton>
+                    <FacebookIcon sx={{ fontSize: "50px", color: "#4267B2" }} />
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <IconButton>
+                    <GoogleIcon sx={{ fontSize: "47px" }} />
+                  </IconButton>
+                </Grid>
               </Grid>
               <Divider />
               <Typography>

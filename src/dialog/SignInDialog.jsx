@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import { Transition } from "./dialogTransition";
 import { emailSignIn } from "../services/handleAuth";
 import {
@@ -8,6 +10,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   IconButton,
   InputAdornment,
   TextField,
@@ -45,7 +48,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: 2,
+              gap: 1,
             }}>
             <TextField
               type="email"
@@ -76,6 +79,18 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
                 ),
               }}
             />
+            <Grid container>
+              <Grid item>
+                <IconButton>
+                  <FacebookIcon sx={{ fontSize: "50px", color: "#4267B2" }} />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton>
+                  <GoogleIcon sx={{ fontSize: "47px" }} />
+                </IconButton>
+              </Grid>
+            </Grid>
             <Typography>
               Don't have an account?
               <Button
