@@ -38,7 +38,8 @@ const Auth = () => {
         <Button
           variant="signup"
           sx={{ display: { xs: "none", sm: "flex" } }}
-          onClick={handleOpenSignUp}>
+          onClick={handleOpenSignUp}
+        >
           <Typography sx={{ fontSize: { xs: 13, sm: 19, md: 22 } }} noWrap>
             Sign up
           </Typography>

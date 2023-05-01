@@ -1,21 +1,33 @@
+import React from "react";
 import {
+  Box,
+  Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
 } from "@mui/material";
-import React from "react";
+import ComponentFamilies from "../bookingDetails/DatePickUP";
+import MultipleSelectPlaceholder from "../bookingDetails/SelectServiceType";
 
-export const Booking = () => {
+export const Booking = ({ service, onClose }) => {
   return (
     <Dialog
-      open={true}
-        keepMounted
+      open={!service}
+      onClose={onClose}
+      keepMounted
       aria-describedby="alert-dialog-slide-description"
     >
       <form
-        style={{ width: "330px", display: "flex", flexDirection: "column" }}
+        style={{
+          width: "400px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+        }}
       >
         <DialogTitle> Book Here </DialogTitle>
         <DialogContent
@@ -25,8 +37,11 @@ export const Booking = () => {
             gap: 1,
           }}
         >
+          <MultipleSelectPlaceholder />
           <Divider />
-          <DialogActions></DialogActions>
+
+          <DialogActions> </DialogActions>
+          <ComponentFamilies />
         </DialogContent>
       </form>
     </Dialog>

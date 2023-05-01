@@ -1,15 +1,24 @@
 import React, { useEffect } from "react";
-import { Booking } from "./servicesTabContent/Booking";
-import { CarsCatalogue } from "./servicesTabContent/CarsCatalogue";
 import { useState } from "react";
+import ResponsiveGrid from "./servicesTabContent/GridTabServices";
+import { Booking } from "./servicesTabContent/Booking";
 
 const ServicesPage = ({ setActiveLinkId }) => {
-  const [cars, setCars] = useState(true);
+  const [service, setService] = useState(true);
   useEffect(() => {
     setActiveLinkId("services");
     return () => setActiveLinkId(null);
   }, []);
-  return cars ? <CarsCatalogue cars={cars} setCars={setCars} /> : <Booking />;
+
+  const onClose = () => {
+    setService(!service);
+  };
+
+  return service ? (
+    <ResponsiveGrid service={service} setService={setService} />
+  ) : (
+    <Booking service={service} onClose={onClose} />
+  );
 };
 
 export default ServicesPage;
