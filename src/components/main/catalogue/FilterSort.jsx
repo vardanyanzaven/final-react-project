@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SortIcon from "@mui/icons-material/Sort";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
-import { SORT_OPTIONS, FILTER_OPTIONS } from "../../constants/common";
+import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
 
 const FilterSort = ({ sortValue, filterValue, changeOption }) => {
   // Logic for opening filter and sort menus
