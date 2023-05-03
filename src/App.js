@@ -11,6 +11,7 @@ import CataloguePage from "./components/main/CataloguePage";
 import "./App.css";
 import ServicesPage from "./components/main/services_tab/ServicesPage";
 import Footer from "./components/footer/Footer";
+import { LinearProgress } from "@mui/material";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
       {loading ? (
-        "Loading..."
+        <LinearProgress />
       ) : (
         <>
           <Header
