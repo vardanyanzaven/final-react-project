@@ -9,8 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Logout, Settings } from "@mui/icons-material";
-import { useSelector } from "react-redux";
+import { Bookmark, Logout, Settings } from "@mui/icons-material";
+import HistoryIcon from "@mui/icons-material/History";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link } from "react-router-dom";
@@ -18,43 +18,55 @@ import { useAuth } from "../../hooks/useAuth";
 
 const AvatarMenu = () => {
   const [isOpen, setOpen] = useState(false);
-  const { email } = useSelector((state) => state.auth);
+  const [anchorEl, setAnchorEl] = useState(null);
   const { userInfo } = useAuth();
+
+  const handleMenuOpen = (e) => {
+    setOpen(true);
+    setAnchorEl(e.currentTarget);
+  };
 
   return (
     <>
       <Box>
         <Tooltip title="Account settings">
           <IconButton
-            onClick={(e) => setOpen(e.currentTarget)}
+            onClick={handleMenuOpen}
             size="small"
             sx={{ ml: 2 }}
-            aria-controls={isOpen ? "account-menu" : undefined}
+            aria-controls={isOpen && "account-menu"}
             aria-haspopup="true"
-            aria-expanded={isOpen ? "true" : undefined}
-          >
+            aria-expanded={isOpen && "true"}>
             <Avatar src={userInfo?.photoURL} />
           </IconButton>
         </Tooltip>
         <Menu
-          anchorEl={isOpen}
+          anchorEl={anchorEl}
           id="account-menu"
-          open={!!isOpen}
+          open={isOpen}
           onClick={() => setOpen(false)}
           onClose={() => setOpen(false)}
           transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "top" }}
-        >
+          anchorOrigin={{ horizontal: "right", vertical: "top" }}>
           <MenuItem onClick={() => setOpen(false)}>
-            <Avatar src={userInfo?.photoURL} /> {email}
+            <Avatar src={userInfo?.photoURL} sx={{ m: 1 }} />
+            {userInfo.fullName}
           </MenuItem>
-          <Divider />
           <Link to="settings">
             <MenuItem>
               <Settings sx={{ color: "black" }} />
               <Typography color="black">Settings</Typography>
             </MenuItem>
           </Link>
+          <MenuItem>
+            <HistoryIcon />
+            <Typography>History</Typography>
+          </MenuItem>
+          <MenuItem>
+            <Bookmark />
+            <Typography>Saved</Typography>
+          </MenuItem>
+          <Divider />
           <MenuItem onClick={() => signOut(auth)}>
             <Logout /> Log Out
           </MenuItem>

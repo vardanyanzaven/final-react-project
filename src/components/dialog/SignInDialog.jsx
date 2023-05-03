@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Transition } from "./dialogTransition";
-import { emailSignIn } from "../services/handleAuth";
+import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   IconButton,
   InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import { emailSignIn } from "../../services/handleAuth";
+import { Transition } from "./dialogTransition";
 
 const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
@@ -45,7 +48,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: 2,
+              gap: 1,
             }}>
             <TextField
               type="email"
@@ -76,10 +79,21 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
                 ),
               }}
             />
+            <Grid container>
+              <Grid item>
+                <IconButton>
+                  <FacebookIcon sx={{ fontSize: "50px", color: "#4267B2" }} />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton>
+                  <GoogleIcon sx={{ fontSize: "47px" }} />
+                </IconButton>
+              </Grid>
+            </Grid>
             <Typography>
               Don't have an account?
               <Button
-                // href="#"
                 onClick={(e) => {
                   e.preventDefault();
                   onSignUpOpen();

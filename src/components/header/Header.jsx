@@ -13,9 +13,9 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import HeaderTheme from "../../themes/HeaderTheme";
 import { HEADER_TAB_LIST } from "../../constants/common";
 import DropdownMenu from "./DropdownMenu";
-import Auth from "./Auth";
 import AvatarMenu from "./AvatarMenu";
 import { useAuth } from "../../hooks/useAuth";
+import AuthDraw from "../dialog/AuthDraw";
 
 const Header = ({ activeLinkId, setActiveLinkId }) => {
   const checkIfActive = (id) => activeLinkId === id;
@@ -77,7 +77,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 </NavLink>
               ))}
             </Box>
-            {isAuth ? <AvatarMenu /> : <Auth />}
+            {isAuth ? <AvatarMenu /> : <AuthDraw />}
           </Toolbar>
         </Container>
       </AppBar>

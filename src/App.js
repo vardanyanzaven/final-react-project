@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
-import Footer from "./components/Footer";
 import Header from "./components/header/Header";
-import HomePage from "./pages/HomePage";
-import CataloguePage from "./pages/catalogue/CataloguePage";
-import ServicesPage from "./pages/ServicesPage";
-import AboutPage from "./pages/AboutPage";
 import { useAuth } from "./hooks/useAuth";
 import { UserSettings } from "./components/header/UserSettings";
-import NotFoundPage from "./pages/NotFoundPage";
+import NotFoundPage from "./components/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
+import AboutPage from "./components/main/AboutPage";
+import HomePage from "./components/main/HomePage";
+import CataloguePage from "./components/main/CataloguePage";
 import "./App.css";
+import ServicesPage from "./components/main/services_tab/ServicesPage";
+import Footer from "./components/footer/Footer";
+import { LinearProgress } from "@mui/material";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
       {loading ? (
-        "Loading..."
+        <LinearProgress />
       ) : (
         <>
           <Header

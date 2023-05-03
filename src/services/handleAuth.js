@@ -8,12 +8,19 @@ import { setUser } from "../store/slicers/userSlice";
 import { getUserDB, setUserDB } from "./dataBaseConfig";
 import { useAuth } from "../hooks/useAuth";
 
-export const emailSignUp = async (email, password, phone, setLoading) => {
+export const emailSignUp = async (
+  email,
+  password,
+  phone,
+  fullName,
+  gender,
+  setLoading
+) => {
   return createUserWithEmailAndPassword(auth, email, password)
     .then(({ user }) => {
-      setUserDB(user, phone);
+      setUserDB(user, phone, fullName, gender);
     })
-    .catch(({ message }) => console.log(message))
+    .catch(({ message }) => console.log(message + "in signup"))
     .finally(() => setLoading(false));
 };
 
@@ -30,11 +37,11 @@ export const emailSignIn = async (email, password, setLoading) => {
 export const useAuthListener = (setLoading) => {
   const { userInfo } = useAuth();
   const disp = useDispatch();
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, async (user) => {
       try {
         const dbData = user && (await getUserDB(user.uid));
-
         disp(
           setUser({
             userInfo: user
@@ -49,11 +56,10 @@ export const useAuthListener = (setLoading) => {
             id: user?.uid,
           })
         );
+        setLoading(false);
       } catch (e) {
-        console.log(e);
+        console.log(e.message);
       }
-      setLoading(false);
     });
-    return () => unsubscribe();
-  }, [auth]);
+  }, []);
 };

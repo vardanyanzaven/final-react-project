@@ -1,4 +1,3 @@
-import { LoadingButton } from "@mui/lab";
 import { Box } from "@mui/material";
 import React from "react";
 import { useState } from "react";
@@ -15,7 +14,7 @@ const PhoneField = ({ phoneSett }) => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} width="100%">
       <PhoneInput
         inputProps={{ name: "phone", required: false }}
         inputStyle={{ height: "56px", width: "100%" }}
