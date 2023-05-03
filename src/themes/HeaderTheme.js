@@ -76,7 +76,9 @@ const HeaderTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: [ "Quicksand", "IBM Plex Sans", "Roboto", "sans-serif"].join(","),
+    fontFamily: ["Quicksand", "IBM Plex Sans", "Roboto", "sans-serif"].join(
+      ","
+    ),
   },
   breakpoints: {
     values: {

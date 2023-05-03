@@ -13,7 +13,7 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import HeaderTheme from "../../themes/HeaderTheme";
 import { HEADER_TAB_LIST } from "../../constants/common";
 import DropdownMenu from "./DropdownMenu";
-import Auth from "../Auth";
+import Auth from "./Auth";
 import AvatarMenu from "./AvatarMenu";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -24,7 +24,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
 
   return (
     <ThemeProvider theme={HeaderTheme}>
-      <AppBar position="static" sx={{ backgroundColor: "#192026" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "#192026" }}>
         <Container maxWidth="xl">
           <Toolbar
             disableGutters

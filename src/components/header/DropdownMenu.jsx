@@ -62,7 +62,7 @@ const DropdownMenu = () => {
             <MenuItem
               onClick={closeNavMenu}
               sx={{
-                borderBottom: tab === "contact" ? "none" : "2px solid #F2B90D",
+                borderBottom: tab === "about" ? "none" : "2px solid #F2B90D",
                 transition: "background 0.1s",
                 "&:hover": {
                   background: "rgb(37, 47, 57)",
