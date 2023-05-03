@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteObject,
@@ -8,9 +8,9 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
-import { auth, storage } from "../../../firebase";
+import { auth, storage } from "../../firebase";
 import { Avatar, Box, Button, IconButton, Menu, MenuItem } from "@mui/material";
-import { changeUserInfo } from "../../../store/slicers/userSlice";
+import { changeUserInfo } from "../../store/slicers/userSlice";
 import { AddAPhoto, Check, DeleteForever } from "@mui/icons-material";
 
 const MainPhotoSettings = () => {

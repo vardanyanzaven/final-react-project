@@ -10,9 +10,9 @@ import {
 import { Male, Female, MoreHoriz } from "@mui/icons-material";
 import React from "react";
 import { useState } from "react";
-import { changingSetting } from "../../../services/userSettingsConfig";
+import { changingSetting } from "../../services/userSettingsConfig";
 import { useDispatch } from "react-redux";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 
 const SettingModal = ({ open, setOpen, setting }) => {
   const { edit, name, value, editTitle } = setting;

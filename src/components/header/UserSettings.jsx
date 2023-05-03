@@ -1,6 +1,6 @@
 import { Box, Divider } from "@mui/material";
-import MainPhotoSettings from "./settings/MainPhotoSettings";
-import PersonalSettings from "./settings/PersonalSettings";
+import MainPhotoSettings from "../settings/MainPhotoSettings";
+import PersonalSettings from "../settings/PersonalSettings";
 
 export const UserSettings = () => {
   return (
