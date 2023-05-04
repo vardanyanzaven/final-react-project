@@ -7,10 +7,11 @@ import NotFoundPage from "./components/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
 import AboutPage from "./components/main/AboutPage";
 import HomePage from "./components/main/HomePage";
-import CataloguePage from "./components/main/CataloguePage";
+import CataloguePage from "./components/main/catalogue/CataloguePage";
 import "./App.css";
 import ServicesPage from "./components/main/services_tab/ServicesPage";
 import Footer from "./components/footer/Footer";
+import { LinearProgress } from "@mui/material";
 import ResponsiveGrid from "./components/main/services_tab/SelectedService";
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
   return (
     <>
       {loading ? (
-        "Loading..."
+        <LinearProgress />
       ) : (
         <>
           <Header

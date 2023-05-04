@@ -7,6 +7,9 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { SERVICE_DATA } from "./booking_form/servicesData";
+import React, { useEffect, useState } from "react";
+// import ResponsiveGrid from "../services_tab/GridTabServices";
+// import { Booking } from "../services_tab/Booking";
 
 const ServicesPage = ({ setActiveLinkId }) => {
   useEffect(() => {

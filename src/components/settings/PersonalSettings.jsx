@@ -3,7 +3,7 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import { SETTINGS_NAME_LIST } from "../../../constants/common";
+import { SETTINGS_NAME_LIST } from "../../constants/common";
 import SettingItem from "./SettingItem";
 
 export default function PersonalSettings() {

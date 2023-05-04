@@ -41,20 +41,10 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    let id = setTimeout(() => {
-      if (!testPassword(pass) && pass) setValid(false);
-      else setValid(true);
-    }, 500);
-
-    return () => {
-      setValid(true);
-      clearTimeout(id);
-    };
-  }, [pass]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!testPassword(pass) && pass) setValid(false);
+    else setValid(true);
     if (pass !== confPass || !isValid) return;
     else {
       setLoading(true);
@@ -129,10 +119,11 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
               )}
               <Grid item>
                 <TextField
+                  error={!isValid}
                   value={pass}
                   onChange={(e) => setPass(e.target.value)}
                   type={showPass ? "text" : "password"}
-                  label="Password"
+                  label={isValid ? "Password" : "Error"}
                   fullWidth
                   required
                   InputProps={{

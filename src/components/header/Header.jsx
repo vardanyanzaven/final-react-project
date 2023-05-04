@@ -24,7 +24,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
 
   return (
     <ThemeProvider theme={HeaderTheme}>
-      <AppBar position="static" sx={{ backgroundColor: "#192026" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "#192026" }}>
         <Container maxWidth="xl">
           <Toolbar
             disableGutters
