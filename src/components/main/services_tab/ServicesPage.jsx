@@ -2,13 +2,7 @@ import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import {
-  Box,
-  ImageList,
-  ImageListItem,
-  ListSubheader,
-  Typography,
-} from "@mui/material";
+import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
 import { SERVICE_DATA } from "./booking_form/servicesData";
 // import ResponsiveGrid from "../services_tab/GridTabServices";
 // import { Booking } from "../services_tab/Booking";
