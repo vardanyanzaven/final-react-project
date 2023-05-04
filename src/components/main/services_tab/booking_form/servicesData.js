@@ -17,7 +17,7 @@ export const SERVICE_DATA =(f) => {
             round the world, and they offer a variety of entertainment options in addition to gambling.`,
     },
     {
-      url: "https://cdn.pixabay.com/photo/2014/11/13/17/04/heart-529607_960_720.jpg",
+      url: "https://www.empirelimousine.net/wp-content/uploads/2017/07/Empire_limousine_1.jpg",
       name: "airport",
       car: "BMW",
     },
@@ -27,11 +27,11 @@ export const SERVICE_DATA =(f) => {
       car: "Lexus",
     },
     {
-      url: "https://cdn.pixabay.com/photo/2014/11/13/17/04/heart-529607_960_720.jpg",
-      name: "bappy-birthday",
+      url: "https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/08/14/16/istock-945885714.jpg?width=1200",
+      name: "happy-birthday",
     },
     {
-      url: "https://cdn.pixabay.com/photo/2014/11/13/17/04/heart-529607_960_720.jpg",
+      url: "https://www.bhg.com/thmb/asoM6Zj_sJvoXqq3sGUIoMwzmec=/1983x0/filters:no_upscale():strip_icc()/Obsessed-with-picnicking-2-02de801d4e8d443280c30c1ec3e93453.jpg",
       name: "out-of-city",
     },
   ];

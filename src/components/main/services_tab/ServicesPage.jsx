@@ -22,12 +22,14 @@ const ServicesPage = ({ setActiveLinkId }) => {
         justifyContent: "center",
         textAlign: "center",
         flexDirection: "column",
+
       }}
     >
       <Typography sx={{ mt: 10 }} variant="h5">
         Our services
       </Typography>
       <ImageList cols={3} gap={40} sx={{ p: "7rem" }}>
+
         {SERVICE_DATA().map((ser) => (
           <Link to={ser.name} key={Math.random()}>
             <ImageListItem

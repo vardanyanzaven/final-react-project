@@ -1,16 +1,17 @@
 import * as React from "react";
-import { useParams } from "react-router";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router";
 import { SERVICE_DATA } from "./booking_form/servicesData";
 import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
 import { CardContent } from "@material-ui/core";
 import { useState } from "react";
 
 export default function SelectedService() {
+  const navigate = useNavigate();
   const { serve } = useParams();
   const [info] = SERVICE_DATA(serve);
   const [booking, setbooking] = useState(false);
 
-  // return booking ? (
+ 
   return (
     <Box
       sx={{
@@ -61,8 +62,7 @@ export default function SelectedService() {
         </CardContent>
       </Card>
     </Box>
+
   );
-  // ) : (
-  //   <Booking />
-  // );
+ 
 }
