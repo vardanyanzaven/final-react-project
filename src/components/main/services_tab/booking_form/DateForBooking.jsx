@@ -26,7 +26,7 @@ ProLabel.propTypes = {
   children: PropTypes.node,
 };
 
-export default function ComponentFamilies() {
+export default function DateForBooking() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DateField", "TimeField"]}>

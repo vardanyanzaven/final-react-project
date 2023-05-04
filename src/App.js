@@ -11,6 +11,7 @@ import CataloguePage from "./components/main/CataloguePage";
 import "./App.css";
 import ServicesPage from "./components/main/services_tab/ServicesPage";
 import Footer from "./components/footer/Footer";
+import ResponsiveGrid from "./components/main/services_tab/SelectedService";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -35,6 +36,7 @@ function App() {
               path="services"
               element={<ServicesPage setActiveLinkId={setActiveLinkId} />}
             />
+            <Route path="services/:serve" element={<ResponsiveGrid />} />
             <Route
               path="catalogue"
               element={<CataloguePage setActiveLinkId={setActiveLinkId} />}

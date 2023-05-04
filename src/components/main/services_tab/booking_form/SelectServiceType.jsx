@@ -3,15 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
-
-const names = [
-  " Airport ",
-  "Wedding",
-  "Happy Birthday",
-  "Baptizm",
-  "Out of city",
-  "Casino",
-];
+import { servicesData } from "./servicesData";
 
 export default function SelectServiceType() {
   const [ServiceName, setServiceName] = useState("");
@@ -27,7 +19,7 @@ export default function SelectServiceType() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 250, mt: 3 }}>
+      <FormControl sx={{ width: 170, mt: 3 }}>
         <Select
           required
           displayEmpty
@@ -36,13 +28,14 @@ export default function SelectServiceType() {
           open={open}
           onClose={onClose}
           onClick={() => setOpen(!open)}
-          inputProps={{ "aria-label": "Without label" }}>
+          inputProps={{ "aria-label": "Without label" }}
+        >
           <MenuItem disabled value="">
             <em>Select Service Type</em>
           </MenuItem>
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
+          {servicesData.map((s) => (
+            <MenuItem key={Math.random()} value={s.name}>
+              {s.name}
             </MenuItem>
           ))}
         </Select>
