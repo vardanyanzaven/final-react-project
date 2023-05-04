@@ -1,18 +1,68 @@
 import * as React from "react";
 import { Navigate, useLocation, useNavigate, useParams } from "react-router";
 import { SERVICE_DATA } from "./booking_form/servicesData";
+import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
+import { CardContent } from "@material-ui/core";
+import { useState } from "react";
 
 export default function SelectedService() {
   const navigate = useNavigate();
   const { serve } = useParams();
   const [info] = SERVICE_DATA(serve);
+  const [booking, setbooking] = useState(false);
 
+ 
   return (
-    <div style={{ margin: "100px" }}>
-      <img src={info.url} width={600} />
-      <p style={{ width: "600px" }}>{info.title}</p>
-      <button>Book now</button>
-      <button onClick={() => navigate(-1)}>back</button>
-    </div>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        mt: 20,
+        textAlign: "center",
+      }}
+    >
+      <Card
+        sx={{
+          maxWidth: 800,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography variant="h4"> {info.name}</Typography>
+        <CardMedia
+          component="img"
+          height="400"
+          width="400"
+          image={info.url}
+          alt="info.name"
+          sx={{ m: 4 }}
+        />
+        <CardContent
+        // sx={{
+        //   display: "flex",
+        //   flexDirection: "column",
+        //   justifyContent: "center",
+        //   alignItems: "center",
+
+        // }}
+        >
+          <Typography sx={{ mb: 2 }}> {info.title}</Typography>
+          <Button
+            color="primary"
+            disabled={false}
+            size="medium"
+            variant="outlined"
+            onClick={() => setbooking(!booking)}
+          >
+            Book now
+          </Button>
+        </CardContent>
+      </Card>
+    </Box>
+
   );
+ 
 }
