@@ -1,4 +1,4 @@
-import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
+import { ImageList, ImageListItem, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 

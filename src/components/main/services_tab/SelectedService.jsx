@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import { SERVICE_DATA } from "./booking_form/servicesData";
 import { Box, Button, Card, CardMedia, Typography } from "@mui/material";
 import { CardContent } from "@material-ui/core";
-import { Booking } from "./Booking";
 import { useState } from "react";
 
 export default function SelectedService() {
