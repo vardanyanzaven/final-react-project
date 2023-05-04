@@ -1,3 +1,4 @@
+
 import {
   Box,
   ImageList,
@@ -9,6 +10,7 @@ import { SERVICE_DATA } from "./booking_form/servicesData";
 import { useEffect } from "react";
 // import ResponsiveGrid from "../services_tab/GridTabServices";
 // import { Booking } from "../services_tab/Booking";
+
 
 const ServicesPage = ({ setActiveLinkId }) => {
   useEffect(() => {
@@ -23,22 +25,28 @@ const ServicesPage = ({ setActiveLinkId }) => {
         justifyContent: "center",
         textAlign: "center",
         flexDirection: "column",
-      }}
-    >
+      }}>
       <Typography> Our services </Typography>
-      <ImageList cols={3}>
-        {SERVICE_DATA.map((ser) => (
-          <ImageListItem sx={{ gap: "10px" }}>
-            <img
-              src={ser.url}
-              alt={ser.name}
-              style={{
+      <ImageList cols={3} gap={30} sx={{ p: "3rem" }}>
+        {SERVICE_DATA().map((ser) => (
+          <Link to={ser.name} key={Math.random()}>
+            <ImageListItem
+              sx={{
                 "&:hover": {
-                  transform: "translateY(-40px)",
+                  transform: "translateY(-20px)",
                 },
-              }}
-            />
-          </ImageListItem>
+              }}>
+              <img
+                src={ser.url}
+                alt={ser.name}
+                style={{
+                  "&:hover": {
+                    transform: "translateY(-40px)",
+                  },
+                }}
+              />
+            </ImageListItem>
+          </Link>
         ))}
       </ImageList>
     </Box>
@@ -47,10 +55,3 @@ const ServicesPage = ({ setActiveLinkId }) => {
 
 export default ServicesPage;
 
-{
-  
-  //   "&:hover": {
-  //     transform: "translateY(-40px)",
-  //   },
-  // }));
-}
