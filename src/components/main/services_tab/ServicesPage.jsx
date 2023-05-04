@@ -1,16 +1,13 @@
-import {
-  Box,
-  ImageList,
-  ImageListItem,
-  ListSubheader,
-  Typography,
-} from "@mui/material";
+import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { SERVICE_DATA } from "./booking_form/servicesData";
-import { useEffect } from "react";
 // import ResponsiveGrid from "../services_tab/GridTabServices";
 // import { Booking } from "../services_tab/Booking";
 
 const ServicesPage = ({ setActiveLinkId }) => {
+  const [notBooked, setnotBooked] = useState(true);
+
   useEffect(() => {
     setActiveLinkId("services");
     return () => setActiveLinkId(null);
@@ -25,20 +22,30 @@ const ServicesPage = ({ setActiveLinkId }) => {
         flexDirection: "column",
       }}
     >
-      <Typography> Our services </Typography>
-      <ImageList cols={3}>
-        {SERVICE_DATA.map((ser) => (
-          <ImageListItem sx={{ gap: "10px" }}>
-            <img
-              src={ser.url}
-              alt={ser.name}
-              style={{
+      <Typography sx={{ mt: 10 }} variant="h5">
+        Our services
+      </Typography>
+      <ImageList cols={3} gap={40} sx={{ p: "7rem" }}>
+        {SERVICE_DATA().map((ser) => (
+          <Link to={ser.name} key={Math.random()}>
+            <ImageListItem
+              sx={{
                 "&:hover": {
-                  transform: "translateY(-40px)",
+                  transform: "translateY(-20px)",
                 },
               }}
-            />
-          </ImageListItem>
+            >
+              <img
+                src={ser.url}
+                alt={ser.name}
+                style={{
+                  "&:hover": {
+                    transform: "translateY(-40px)",
+                  },
+                }}
+              />
+            </ImageListItem>
+          </Link>
         ))}
       </ImageList>
     </Box>
@@ -46,11 +53,3 @@ const ServicesPage = ({ setActiveLinkId }) => {
 };
 
 export default ServicesPage;
-
-{
-  
-  //   "&:hover": {
-  //     transform: "translateY(-40px)",
-  //   },
-  // }));
-}

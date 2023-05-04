@@ -3,7 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
-import { servicesData } from "./servicesData";
+import { SERVICE_DATA } from "./servicesData";
 
 export default function SelectServiceType() {
   const [ServiceName, setServiceName] = useState("");
@@ -33,7 +33,7 @@ export default function SelectServiceType() {
           <MenuItem disabled value="">
             <em>Select Service Type</em>
           </MenuItem>
-          {servicesData.map((s) => (
+          {SERVICE_DATA().map((s) => (
             <MenuItem key={Math.random()} value={s.name}>
               {s.name}
             </MenuItem>
