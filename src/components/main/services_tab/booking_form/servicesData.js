@@ -1,4 +1,4 @@
-export const SERVICE_DATA = (f) => {
+export const SERVICE_DATA =(f) => {
   const serviceData = [
     {
       url: "https://cdn.pixabay.com/photo/2014/11/13/17/04/heart-529607_960_720.jpg",

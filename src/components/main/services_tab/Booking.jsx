@@ -1,13 +1,3 @@
-// import React from "react";
-// import {
-//   Dialog,
-//   DialogActions,
-//   DialogContent,
-//   DialogTitle,
-//   Divider,
-// } from "@mui/material";
-// import DatePickUP from "../services_tab/booking_details/DatePickUP";
-// import SelectServiceType from "../services_tab/booking_details/SelectServiceType";
 import React from "react";
 import {
   Box,
@@ -23,7 +13,7 @@ import DateForBooking from "./booking_form/DateForBooking";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import SelectServiceType from "./booking_form/SelectServiceType";
-import SelectCars from "./booking_form/SelectcCars";
+// import SelectCars from "./booking_form/SelectcCars";
 
 export const Booking = ({ service, onClose }) => {
   return (
@@ -44,7 +34,6 @@ export const Booking = ({ service, onClose }) => {
         }}
       >
         <DialogTitle>
-          {" "}
           <Typography variant="h4"> Book Here</Typography>{" "}
         </DialogTitle>
         <Divider />
@@ -65,7 +54,7 @@ export const Booking = ({ service, onClose }) => {
             }}
           >
             <SelectServiceType sx={{ width: 170 }} />
-            <SelectCars sx={{ width: 170 }} />
+            {/* <SelectCars sx={{ width: 170 }} /> */}
           </Box>
           <Box
             sx={{

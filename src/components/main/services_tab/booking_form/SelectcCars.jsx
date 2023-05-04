@@ -1,6 +1,6 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
-import { servicesData } from "./servicesData";
+import { SERVICE_DATA } from "./servicesData";
 
 export default function SelectCars() {
   const [car, setCar] = useState("");
@@ -30,7 +30,7 @@ export default function SelectCars() {
           <MenuItem disabled value="">
             <em>Select Car</em>
           </MenuItem>
-          {servicesData.map((c) => (
+          {SERVICE_DATA().map((c) => (
             <MenuItem key={Math.random()} value={c.car}>
               {c.car}
             </MenuItem>
