@@ -14,6 +14,7 @@ import Footer from "./components/footer/Footer";
 import { LinearProgress } from "@mui/material";
 import SelectedService from "./components/main/services_tab/SelectedService";
 import Main from "./components/main/Main";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -33,6 +34,7 @@ function App() {
             setActiveLinkId={setActiveLinkId}
           />
           <Main>
+            <ScrollToTop />
             <Routes>
               <Route index element={<HomePage />} />
               <Route

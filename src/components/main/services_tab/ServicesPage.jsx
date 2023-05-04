@@ -27,7 +27,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
         flexDirection: "column",
       }}>
       <Typography> Our services </Typography>
-      <ImageList cols={3} gap={30} sx={{ p: "3rem" }}>
+      <ImageList rowHeight={300} cols={3} gap={30} sx={{ p: "3rem" }}>
         {SERVICE_DATA().map((ser) => (
           <Link to={ser.name} key={Math.random()}>
             <ImageListItem
