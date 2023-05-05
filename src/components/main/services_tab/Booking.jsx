@@ -13,72 +13,89 @@ import DateForBooking from "./booking_form/DateForBooking";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import SelectServiceType from "./booking_form/SelectServiceType";
-// import SelectCars from "./booking_form/SelectcCars";
+import SelectCars from "./booking_form/SelectcCars";
+import { handleOpen } from "../../../store/slicers/serviceSlice";
+import { AddBox } from "@mui/icons-material";
 
-export const Booking = ({ service, onClose }) => {
+export const Booking = ({ value, dispatch }) => {
   return (
-    <Dialog
-      open={!service}
-      onClose={onClose}
-      keepMounted
-      aria-describedby="alert-dialog-slide-description"
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        mt: 2,
+      }}
     >
-      <form
-        style={{
-          width: "400px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
-        <DialogTitle>
-          <Typography variant="h4"> Book Here</Typography>{" "}
-        </DialogTitle>
-        <Divider />
-        <DialogContent
-          sx={{
+      <Box sx={{ display: "flex" }}>
+        {/* <Box
+          open={!value}
+          onClose={() => dispatch(handleOpen(!value))}
+          keepMounted
+          aria-describedby="alert-dialog-slide-description"
+        > */}
+        <form
+          style={{
+            width: "400px",
             display: "flex",
             flexDirection: "column",
-            gap: 1,
-            mt: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
           }}
         >
+          <Box>
+            <Typography variant="h4"> Book Here</Typography>
+          </Box>
+          <Divider />
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
-              width: "350px",
-              alignItems: "center",
+              flexDirection: "column",
+              gap: 1,
+              mt: 1,
             }}
           >
-            <SelectServiceType sx={{ width: 170 }} />
-            {/* <SelectCars sx={{ width: 170 }} /> */}
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "350px",
-            }}
-          >
-            <TextField type="name " label=" name" sx={{ width: 170 }} />
-            <TextField type="surname " label="surname" sx={{ width: 170 }} />
-          </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "350px",
+                alignItems: "center",
+              }}
+            >
+              <SelectServiceType sx={{ width: 170 }} />
+              <SelectCars sx={{ width: 170 }} />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "350px",
+              }}
+            >
+              <TextField type="name " label=" name" sx={{ width: 170 }} />
+              <TextField type="surname " label="surname" sx={{ width: 170 }} />
+            </Box>
 
-          <TextField fullWidth type="email" label="Email" required />
-          <PhoneInput
-            inputProps={{ name: "phone", required: false }}
-            inputStyle={{ height: "56px", width: "100%" }}
-            country={"am"}
-          />
+            <TextField fullWidth type="email" label="Email" required />
+            <PhoneInput
+              inputProps={{ name: "phone", required: false }}
+              inputStyle={{ height: "56px", width: "100%" }}
+              country={"am"}
+            />
 
-          <DialogActions> </DialogActions>
-          <DateForBooking />
-        </DialogContent>
-      </form>
-    </Dialog>
+            {/* <DialogActions> </DialogActions> */}
+            <DateForBooking />
+          </Box>
+        </form>
+
+        <Box sx={{ width: 500, height: 500, border: 1 }}>
+          <Typography> Here will be map </Typography>
+        </Box>
+      </Box>
+    </Box>
   );
 };

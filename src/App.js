@@ -11,10 +11,11 @@ import CataloguePage from "./components/main/catalogue/CataloguePage";
 import "./App.css";
 import ServicesPage from "./components/main/services_tab/ServicesPage";
 import Footer from "./components/footer/Footer";
-import { LinearProgress } from "@mui/material";
+import { LinearProgress, Snackbar } from "@mui/material";
 import SelectedService from "./components/main/services_tab/SelectedService";
 import Main from "./components/main/Main";
 import ScrollToTop from "./components/ScrollToTop";
+import ShowStatus from "./shared/snack_bar/ShowStatus";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -29,6 +30,8 @@ function App() {
         <LinearProgress />
       ) : (
         <>
+          <ShowStatus />
+          ;
           <Header
             activeLinkId={activeLinkId}
             setActiveLinkId={setActiveLinkId}
