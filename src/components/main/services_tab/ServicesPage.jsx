@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
 import { SERVICE_DATA } from "./booking_form/servicesData";
-// import ResponsiveGrid from "../services_tab/GridTabServices";
-// import { Booking } from "../services_tab/Booking";
 
 const ServicesPage = ({ setActiveLinkId }) => {
   useEffect(() => {
@@ -19,11 +17,13 @@ const ServicesPage = ({ setActiveLinkId }) => {
         textAlign: "center",
         alignItems: "center",
         flexDirection: "column",
-      }}>
+      }}
+    >
       <Typography
         variant="h3"
         sx={{ mt: 1, outline: "1px solid #F2B918" }}
-        color="#F2B918">
+        color="#F2B918"
+      >
         Our services
       </Typography>
       <ImageList cols={3}>
@@ -35,7 +35,8 @@ const ServicesPage = ({ setActiveLinkId }) => {
                   transform: "scale(1.1)",
                 },
                 m: 2,
-              }}>
+              }}
+            >
               <img
                 src={ser.url}
                 alt={ser.name}
