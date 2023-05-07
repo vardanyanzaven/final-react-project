@@ -6,7 +6,7 @@ import { UserSettings } from "./components/header/UserSettings";
 import NotFoundPage from "./components/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
 import AboutPage from "./components/main/AboutPage";
-import HomePage from "./components/main/HomePage";
+import HomePageSlider from "./components/main/HomePageSlider";
 import CataloguePage from "./components/main/catalogue/CataloguePage";
 import "./App.css";
 import ServicesPage from "./components/main/services_tab/ServicesPage";
@@ -31,7 +31,7 @@ function App() {
             setActiveLinkId={setActiveLinkId}
           />
           <Routes>
-            <Route index element={<HomePage />} />
+            <Route index element={<HomePageSlider />} />
             <Route
               path="services"
               element={<ServicesPage setActiveLinkId={setActiveLinkId} />}
