@@ -23,8 +23,7 @@ export const FILTER_OPTIONS = {
   sport: "Sports cars",
 };
 
-
-export const regex = /^(?=.*\d)(?=.*[A-Z]).{8,20}$/;
+export const regex = [/[A-Z]/, /[0-9]/, /.{8,16}/, /[a-z]/];
 
 export const SETTINGS_NAME_LIST = () => {
   const { id, email, userInfo } = useAuth();
@@ -89,3 +88,32 @@ export const Machine = [
     url: "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=1200",
   },
 ];
+
+export const ERROR_MESSAGES = {
+  invalidPassword: {
+    message: "Invalid password!",
+    type: "error",
+    isOpen: true,
+  },
+  userNotFound: {
+    message: "User not found!",
+    type: "error",
+    isOpen: true,
+  },
+  emailExists: {
+    message: "Email already exists!",
+    type: "error",
+    isOpen: true,
+  },
+  something: {
+    message: "Something went wrong!",
+    type: "error",
+    isOpen: true,
+  },
+};
+
+export const SUCCESS_MESSAGE = {
+  message: "invalid password or email",
+  type: "error",
+  isOpen: true,
+};

@@ -42,14 +42,12 @@ const CataloguePage = ({ setActiveLinkId }) => {
 
   // Catalogue cars data
   const { cars } = useSelector((state) => state.catalogue);
-  console.log(cars);
 
   return (
     <ThemeProvider theme={CatalogueTheme}>
       <AppBar
         position="static"
-        sx={{ height: 75, mt: 10, background: "#192026" }}
-      >
+        sx={{ height: 75, mt: 10, background: "#192026" }}>
         <Container>
           <Toolbar
             sx={{
@@ -58,8 +56,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-            }}
-          >
+            }}>
             <Box
               sx={{
                 display: "flex",
@@ -70,8 +67,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
                 borderRadius: "5px",
                 color: "white",
                 width: "25%",
-              }}
-            >
+              }}>
               <InputBase
                 type="text"
                 placeholder="Search..."
@@ -91,7 +87,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
           </Toolbar>
           <Grid container spacing={3} sx={{ mt: 6 }}>
             {cars.map((car) => (
-              <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={car.photoURL}>
                 <Card sx={{ maxWidth: { xs: "280px", sm: "450px" } }}>
                   <CardMedia
                     component="img"
