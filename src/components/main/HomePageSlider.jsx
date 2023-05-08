@@ -30,8 +30,9 @@ const HomePageSlider = () => {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 width: "100%",
-                height: "500px",
-              }}>
+                height: "800px",
+              }}
+            >
               <div className="content">
                 <h2
                   className="title"
@@ -39,12 +40,14 @@ const HomePageSlider = () => {
                     fontSize: 80,
                     color: "white",
                     textAlign: "center",
-                  }}>
+                  }}
+                >
                   {slide.title}
                 </h2>
                 <p
                   className="subtitle"
-                  style={{ fontSize: 50, color: "white", textAlign: "center" }}>
+                  style={{ fontSize: 50, color: "white", textAlign: "center" }}
+                >
                   {slide.subtitle}
                 </p>
                 <button className="slide-button">Get Started!</button>

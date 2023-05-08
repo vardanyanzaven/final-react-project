@@ -6,11 +6,12 @@ import { useDispatch } from "react-redux";
 import { openDialog } from "../../../store/slicers/dialogSlice";
 import { useAuth } from "../../../hooks/useAuth";
 import { SERVICE_DATA } from "../../../constants/common";
+import { Booking } from "./Booking";
 
 export default function SelectedService() {
   const { serve } = useParams();
   const [info] = SERVICE_DATA(serve);
-  const [booking, setbooking] = useState(false);
+  const [booking, setbooking] = useState(true);
   const { isAuth } = useAuth();
   const disp = useDispatch();
 
@@ -23,11 +24,10 @@ export default function SelectedService() {
   };
 
   const handleBookClick = () => {
-    alert("book success!");
-    // something...
+    setbooking(false);
   };
 
-  return (
+  return booking ? (
     <Box
       sx={{
         display: "flex",
@@ -38,12 +38,12 @@ export default function SelectedService() {
     >
       <Card
         sx={{
-          maxWidth: "75%",
+          maxWidth: "65%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          p: 5,
+          mt: 6,
         }}
       >
         <Typography variant="h4"> {info.name.toUpperCase()}</Typography>
@@ -61,5 +61,7 @@ export default function SelectedService() {
         </Button>
       </Card>
     </Box>
+  ) : (
+    <Booking />
   );
 }
