@@ -13,11 +13,7 @@ export const Booking = () => {
   const [page1, setpage1] = useState(true);
 
   const anotherStep = () => {
-    sendEmailVerification(auth.currentUser)
-      .then(() => {
-        setpage1(false);
-      })
-      .catch((e) => console.log(e));
+    setpage1(false);
   };
   return page1 ? (
     <Box
