@@ -31,7 +31,6 @@ const catalogueSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(setCatalogue.fulfilled, (state, { payload }) => {
-      console.log(payload);
       state.cars = [...payload];
     });
   },

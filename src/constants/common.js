@@ -51,7 +51,7 @@ export const FILTER_OPTIONS = [
   },
 ];
 
-export const regex = /^(?=.*\d)(?=.*[A-Z]).{8,20}$/;
+export const regex = [/[A-Z]/, /[0-9]/, /.{8,16}/, /[a-z]/];
 
 export const SETTINGS_NAME_LIST = () => {
   const { id, email, userInfo } = useAuth();
