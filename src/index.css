@@ -1,3 +1,7 @@
+*:focus {
+  outline: none;
+}
+
 body {
   margin: 0;
   box-sizing: border-box;
@@ -7,6 +11,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #48484f;
+  overflow-x: hidden;
 }
 
 code {

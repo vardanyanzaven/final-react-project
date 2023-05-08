@@ -8,30 +8,16 @@ import { setUser } from "../store/slicers/userSlice";
 import { getUserDB, setUserDB } from "./dataBaseConfig";
 import { useAuth } from "../hooks/useAuth";
 
-export const emailSignUp = async (
-  email,
-  password,
-  phone,
-  fullName,
-  gender,
-  setLoading
-) => {
-  return createUserWithEmailAndPassword(auth, email, password)
-    .then(({ user }) => {
+export const emailSignUp = async (email, password, phone, fullName, gender) => {
+  return createUserWithEmailAndPassword(auth, email, password).then(
+    ({ user }) => {
       setUserDB(user, phone, fullName, gender);
-    })
-    .catch(({ message }) => console.log(message + "in signup"))
-    .finally(() => setLoading(false));
+    }
+  );
 };
 
-export const emailSignIn = async (email, password, setLoading) => {
-  try {
-    return await signInWithEmailAndPassword(auth, email, password);
-  } catch ({ message }) {
-    return console.log(message);
-  } finally {
-    setLoading(false);
-  }
+export const emailSignIn = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
 export const useAuthListener = (setLoading) => {

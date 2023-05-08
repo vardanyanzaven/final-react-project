@@ -1,26 +1,40 @@
 import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
-import SignUpDialog from "./SignUpDialog";
-import SignInDialog from "./SignInDialog";
+import React from "react";
+import SignUpDialog from "../../shared/auth_dialog/SignUpDialog";
+import SignInDialog from "../../shared/auth_dialog/SignInDialog";
+import { useDispatch, useSelector } from "react-redux";
+import { openDialog } from "../../store/slicers/dialogSlice";
 
 const AuthDraw = () => {
-  const [loginDialogOpen, setLoginDialogOpen] = useState(false);
-  const [signUpDialogOpen, setSignUpDialogOpen] = useState(false);
+  const dialog = useSelector((state) => state.dialog);
+  const disp = useDispatch();
 
   const handleOpenLogin = () => {
-    setLoginDialogOpen(true);
-    setSignUpDialogOpen(false);
+    disp(
+      openDialog({
+        isSignUpOpen: false,
+        isSignInOpen: true,
+      })
+    );
   };
 
   const handleOpenSignUp = () => {
-    setSignUpDialogOpen(true);
-    setLoginDialogOpen(false);
+    disp(
+      openDialog({
+        isSignInOpen: false,
+        isSignUpOpen: true,
+      })
+    );
+  };
+  const onClose = () => {
+    disp(
+      openDialog({
+        isSignUpOpen: false,
+        isSignInOpen: false,
+      })
+    );
   };
 
-  const onClose = () => {
-    setSignUpDialogOpen(false);
-    setLoginDialogOpen(false);
-  };
   return (
     <Box sx={{ display: "flex", gap: 2 }}>
       <Box sx={{ display: "flex", gap: 1.5 }}>
@@ -31,9 +45,9 @@ const AuthDraw = () => {
         </Button>
         <SignInDialog
           handleOpenSignIn={handleOpenLogin}
-          open={loginDialogOpen}
-          onClose={onClose}
           onSignUpOpen={handleOpenSignUp}
+          open={dialog.isSignInOpen}
+          onClose={onClose}
         />
         <Button
           variant="signup"
@@ -46,9 +60,9 @@ const AuthDraw = () => {
       </Box>
       <SignUpDialog
         handleOpenSignUp={handleOpenSignUp}
-        open={signUpDialogOpen}
-        onClose={onClose}
         onSignInOpen={handleOpenLogin}
+        onClose={onClose}
+        open={dialog.isSignUpOpen}
       />
     </Box>
   );

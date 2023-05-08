@@ -1,0 +1,68 @@
+.homepage-slider {
+    margin-bottom: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.subtitle {
+    margin: 0 auto;
+}
+
+.title {
+    margin: 0 auto;
+}
+
+.slide-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 90%;
+}
+
+
+.slide-button {
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 20px;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: .3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+    box-shadow: inset 0 0 0 2px #616467;
+    background-color: transparent;
+    height: 48px;
+
+    :hover {
+        color: #fff;
+        background-color: #616467;
+    }
+
+
+}
+
+.button-container {
+    justify-content: center;
+    align-items: center;
+    width: 100%
+}

@@ -1,34 +1,21 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  Grid,
-  IconButton,
-  InputAdornment,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
-import {
-  Female,
-  Male,
-  MoreHoriz,
-  Visibility,
-  VisibilityOff,
-} from "@mui/icons-material";
+import React, { useState } from "react";
+import { Box, Button, Dialog, Grid, Select } from "@mui/material";
+import { DialogActions, DialogContent, Divider } from "@mui/material";
+import { DialogTitle, IconButton, InputAdornment } from "@mui/material";
+import { MenuItem, TextField, Typography } from "@mui/material";
+import MoreHoriz from "@mui/icons-material/MoreHoriz";
+import { Female, Male, Visibility, VisibilityOff } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
-import React, { useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
-import { Transition } from "./dialogTransition";
+import { useDispatch, useSelector } from "react-redux";
+import { Transition } from "../../components/dialog/dialogTransition";
 import { emailSignUp } from "../../services/handleAuth";
-import PhoneField from "./components/PhoneField";
-import { testPassword } from "../../utils/validation";
+import PhoneField from "../../components/dialog/components/PhoneField";
+import { passwordValidation } from "../../utils/validation";
+import { changeMessage } from "../../store/slicers/statusSlice";
+import { SUCCESS_MESSAGE } from "../../constants/common";
+import { getError } from "../../utils/errors";
 
 const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [phone, setPhone] = useState("");
@@ -40,16 +27,38 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [isValid, setValid] = useState(true);
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorText, setErrorText] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!testPassword(pass) && pass) setValid(false);
-    else setValid(true);
-    if (pass !== confPass || !isValid) return;
-    else {
-      setLoading(true);
-      emailSignUp(email, pass, phone, fullName, gender, setLoading);
-    }
+
+    const errText = passwordValidation(pass);
+    if (errText) {
+      setErrorText(errText);
+      setValid(false);
+      return;
+    } else if (pass !== confPass) {
+      setErrorText("Passwords do not match. Please write right password!");
+      setValid(false);
+      return;
+    } else setValid(true);
+
+    setLoading(true);
+
+    emailSignUp(email, pass, phone, fullName, gender)
+      .then(() => {
+        dispatch(changeMessage(SUCCESS_MESSAGE));
+        onClose();
+      })
+      .catch((e) => {
+        const err = getError(e);
+        dispatch(changeMessage(err));
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -108,22 +117,13 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                   required
                 />
               </Grid>
-              {!isValid && (
-                <Typography
-                  sx={{ wordBreak: "break-word" }}
-                  variant="caption"
-                  color="red">
-                  The password must contain at least 1 capital letter, 1 number
-                  and have 8-16 characters.
-                </Typography>
-              )}
               <Grid item>
                 <TextField
                   error={!isValid}
                   value={pass}
                   onChange={(e) => setPass(e.target.value)}
                   type={showPass ? "text" : "password"}
-                  label={isValid ? "Password" : "Error"}
+                  label={isValid ? "Password" : "Error password"}
                   fullWidth
                   required
                   InputProps={{
@@ -143,7 +143,10 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
               <Grid item>
                 <TextField
                   type={showPass ? "text" : "password"}
-                  label="Confirm password"
+                  label={
+                    isValid ? "Confirm password" : "Error confirm password"
+                  }
+                  error={!isValid}
                   fullWidth
                   value={confPass}
                   onChange={({ target }) => setConfPass(target.value)}
@@ -161,6 +164,14 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                     ),
                   }}
                 />
+                {!isValid && (
+                  <Typography
+                    sx={{ wordBreak: "break-word" }}
+                    variant="caption"
+                    color="red">
+                    {errorText}
+                  </Typography>
+                )}
               </Grid>
               <Grid container>
                 <Grid item>
