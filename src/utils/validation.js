@@ -1,6 +1,6 @@
 import { regex } from "../constants/common";
 
-export const testPassword = (password) => {
+export const passwordValidation = (password) => {
   let str = "Password must contain at least ";
   let sentence = [];
 
@@ -11,7 +11,7 @@ export const testPassword = (password) => {
     "one lowercase",
   ];
 
-  const notValids = regex.filter((reg, i) => {
+  regex.filter((reg, i) => {
     if (!reg.test(password)) {
       sentence.push(showString[i]);
       return false;
@@ -20,6 +20,6 @@ export const testPassword = (password) => {
   });
 
   if (!sentence.length) return "";
-  console.log(str + sentence.join(","));
-  return str + sentence.join(",");
+  const result = str + sentence.join(",");
+  return result;
 };

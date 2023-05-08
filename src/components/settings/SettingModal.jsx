@@ -1,4 +1,4 @@
-import { ModalDialog } from "@mui/joy";
+import ModalDialog from "@mui/joy/ModalDialog";
 import {
   Button,
   Modal,

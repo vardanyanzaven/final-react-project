@@ -8,13 +8,13 @@ import { Female, Male, Visibility, VisibilityOff } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import { LoadingButton } from "@mui/lab";
-import { useDispatch } from "react-redux";
-import { Transition } from "./dialogTransition";
+import { useDispatch, useSelector } from "react-redux";
+import { Transition } from "../../components/dialog/dialogTransition";
 import { emailSignUp } from "../../services/handleAuth";
-import PhoneField from "./components/PhoneField";
-import { testPassword } from "../../utils/validation";
+import PhoneField from "../../components/dialog/components/PhoneField";
+import { passwordValidation } from "../../utils/validation";
 import { changeMessage } from "../../store/slicers/statusSlice";
-// import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants/common";
+import { SUCCESS_MESSAGE } from "../../constants/common";
 import { getError } from "../../utils/errors";
 
 const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
@@ -33,28 +33,32 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (pass) {
+
+    const errText = passwordValidation(pass);
+    if (errText) {
+      setErrorText(errText);
       setValid(false);
-      setErrorText(testPassword(pass));
-    } else setValid(true);
-    if (pass !== confPass || !isValid) {
-      // dispatch(changeMessage(ERROR_MESSAGE));
       return;
-    } else {
-      setLoading(true);
-      emailSignUp(email, pass, phone, fullName, gender)
-        .then(() => {
-          // dispatch(changeMessage(SUCCESS_MESSAGE));
-          onClose();
-        })
-        .catch((e) => {
-          const err = getError(e);
-          dispatch(changeMessage(err));
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
+    } else if (pass !== confPass) {
+      setErrorText("Passwords do not match. Please write right password!");
+      setValid(false);
+      return;
+    } else setValid(true);
+
+    setLoading(true);
+
+    emailSignUp(email, pass, phone, fullName, gender)
+      .then(() => {
+        dispatch(changeMessage(SUCCESS_MESSAGE));
+        onClose();
+      })
+      .catch((e) => {
+        const err = getError(e);
+        dispatch(changeMessage(err));
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -113,21 +117,13 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                   required
                 />
               </Grid>
-              {!isValid && (
-                <Typography
-                  sx={{ wordBreak: "break-word" }}
-                  variant="caption"
-                  color="red">
-                  {errorText}
-                </Typography>
-              )}
               <Grid item>
                 <TextField
                   error={!isValid}
                   value={pass}
                   onChange={(e) => setPass(e.target.value)}
                   type={showPass ? "text" : "password"}
-                  label={isValid ? "Password" : "Error"}
+                  label={isValid ? "Password" : "Error password"}
                   fullWidth
                   required
                   InputProps={{
@@ -147,7 +143,10 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
               <Grid item>
                 <TextField
                   type={showPass ? "text" : "password"}
-                  label="Confirm password"
+                  label={
+                    isValid ? "Confirm password" : "Error confirm password"
+                  }
+                  error={!isValid}
                   fullWidth
                   value={confPass}
                   onChange={({ target }) => setConfPass(target.value)}
@@ -165,6 +164,14 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                     ),
                   }}
                 />
+                {!isValid && (
+                  <Typography
+                    sx={{ wordBreak: "break-word" }}
+                    variant="caption"
+                    color="red">
+                    {errorText}
+                  </Typography>
+                )}
               </Grid>
               <Grid container>
                 <Grid item>
