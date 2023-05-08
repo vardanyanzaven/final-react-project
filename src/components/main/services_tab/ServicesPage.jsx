@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 
 const ServicesPage = ({ setActiveLinkId }) => {
   // const [service, setService] = useState(true);
-  // useEffect(() => {
-  //   setActiveLinkId("services");
-  //   return () => setActiveLinkId(null);
-  // }, []);
+  useEffect(() => {
+    setActiveLinkId("services");
+    return () => setActiveLinkId(null);
+  }, []);
 
   // const onClose = () => {
   //   setService(!service);

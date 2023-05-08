@@ -11,7 +11,8 @@ import CataloguePage from "./components/main/catalogue/CataloguePage";
 import "./App.css";
 import ServicesPage from "./components/main/services_tab/ServicesPage";
 import Footer from "./components/footer/Footer";
-import { LinearProgress } from "@mui/material";
+import { Container, LinearProgress } from "@mui/material";
+import { Box } from "@material-ui/core";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -51,7 +52,6 @@ function App() {
             )}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-          <Outlet />
           <Footer />
         </>
       )}
