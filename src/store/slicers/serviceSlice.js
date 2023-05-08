@@ -1,16 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  value: true,
-};
+const initialState = {};
 
 const serviceSlice = createSlice({
   name: "services",
   initialState,
   reducers: {
-    handleOpen(state, { payload }) {
-      state.value = payload;
-    },
+    handleOpen(state, { payload }) {},
   },
 });
 

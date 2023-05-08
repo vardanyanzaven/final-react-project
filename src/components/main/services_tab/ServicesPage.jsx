@@ -16,6 +16,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
   }, []);
 
   return (
+    // <ThemeProvider theme={ServiceTheme}>
     <Box
       sx={{
         display: "flex",
@@ -63,6 +64,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
         </div>
       </ImageList>
     </Box>
+    // </ThemeProvider>
   );
 };
 

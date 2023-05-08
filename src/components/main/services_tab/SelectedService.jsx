@@ -34,7 +34,8 @@ export default function SelectedService() {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-      }}>
+      }}
+    >
       <Card
         sx={{
           maxWidth: "75%",
@@ -43,7 +44,8 @@ export default function SelectedService() {
           justifyContent: "center",
           alignItems: "center",
           p: 5,
-        }}>
+        }}
+      >
         <Typography variant="h4"> {info.name.toUpperCase()}</Typography>
         <img component="img" height="400" src={info.url} alt="info.name" />
         <Typography sx={{ m: 5, width: "65%" }}> {info.title}</Typography>
@@ -53,7 +55,8 @@ export default function SelectedService() {
           size="medium"
           variant="outlined"
           sx={{ m: 1 }}
-          onClick={isAuth ? handleBookClick : openSignUp}>
+          onClick={isAuth ? handleBookClick : openSignUp}
+        >
           Book now
         </Button>
       </Card>

@@ -16,7 +16,7 @@ export default function SelectCars() {
 
   return (
     <div>
-      <FormControl sx={{ width: 170, mt: 3 }}>
+      <FormControl sx={{ width: 195, mt: 3 }}>
         <Select
           required
           displayEmpty
