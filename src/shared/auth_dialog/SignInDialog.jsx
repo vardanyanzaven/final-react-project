@@ -16,11 +16,11 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { emailSignIn } from "../../services/handleAuth";
-import { Transition } from "./dialogTransition";
+import { Transition } from "../../components/dialog/dialogTransition";
 import { useDispatch } from "react-redux";
 import { changeMessage } from "../../store/slicers/statusSlice";
 import { getError } from "../../utils/errors";
-// import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants/common";
+import { SUCCESS_MESSAGE } from "../../constants/common";
 
 const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
   const [email, setEmail] = useState("");
@@ -37,7 +37,8 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
     e.preventDefault();
     emailSignIn(email, pass)
       .then(() => {
-        // disp(changeMessage(SUCCESS_MESSAGE));
+        disp(changeMessage(SUCCESS_MESSAGE));
+        onClose();
       })
       .catch((e) => {
         const err = getError(e);

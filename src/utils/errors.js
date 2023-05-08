@@ -6,6 +6,6 @@ export const getError = ({ message }) => {
   if (message.includes("email-already-in-use")) return emailExists;
   if (message.includes("wrong-password")) return invalidPassword;
   if (message.includes("user-not-found")) return userNotFound;
-  console.log(message);
+
   return something;
 };
