@@ -1,12 +1,12 @@
-export const SERVICE_DATA = (f) => {
+export const SERVICE_DATA = (ser) => {
   const serviceData = [
     {
       url: "https://cdn.pixabay.com/photo/2014/11/13/17/04/heart-529607_960_720.jpg",
       name: "wedding",
       car: "Mercedes",
       title: `A wedding is one of the most special days in anyone's life, and many couples want every detail 
-            to be perfect. One detail that can really make a difference on this special day is the wedding car serv
-            ice. Choosing the right car service can add a touch of elegance and luxury to the event and make the br
+            to be perfect. One detail that can really make a difference on this special day is the wedding car service. 
+            Choosing the right car service can add a touch of elegance and luxury to the event and make the br
             ide and groom feel like royalty.`,
     },
     {
@@ -57,6 +57,6 @@ export const SERVICE_DATA = (f) => {
     },
   ];
 
-  if (f) return serviceData.filter((s) => s.name === f);
+  if (ser) return serviceData.filter((s) => s.name === ser);
   return serviceData;
 };

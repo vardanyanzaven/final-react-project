@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
 import { SERVICE_DATA } from "./booking_form/servicesData";
+// import ServiceTheme from "../../../themes/serviceTheme";
 
 const ServicesPage = ({ setActiveLinkId }) => {
   useEffect(() => {
@@ -10,6 +11,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
   }, []);
 
   return (
+    // <ThemeProvider theme={ServiceTheme}>
     <Box
       sx={{
         display: "flex",
@@ -49,6 +51,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
         ))}
       </ImageList>
     </Box>
+    // </ThemeProvider>
   );
 };
 

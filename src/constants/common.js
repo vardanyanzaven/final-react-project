@@ -113,7 +113,7 @@ export const ERROR_MESSAGES = {
 };
 
 export const SUCCESS_MESSAGE = {
-  message: "invalid password or email",
-  type: "error",
+  message: "Sign up was successfully done",
+  type: "success",
   isOpen: true,
 };
