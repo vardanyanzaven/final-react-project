@@ -2,16 +2,15 @@ import { FormControl, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import { SERVICE_DATA } from "./servicesData";
 
-export default function SelectCars() {
-  const [car, setCar] = useState("");
+export default function SelectCars({ car, setcar }) {
   const [open, setOpen] = useState(false);
 
   const onClose = () => {
     setOpen(!open);
   };
 
-  const handleChange = (event) => {
-    setCar(event.target.value);
+  const handleChange = (e) => {
+    setcar(e.target.value);
   };
 
   return (

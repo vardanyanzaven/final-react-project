@@ -1,25 +1,59 @@
 import { useState } from "react";
 import "react-phone-input-2/lib/style.css";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-import PhoneInput from "react-phone-input-2";
 import React from "react";
 import DateForBooking from "./booking_form/DateForBooking";
 import SelectServiceType from "./booking_form/SelectServiceType";
 import SelectCars from "./booking_form/SelectcCars";
+import { useDispatch } from "react-redux";
+import { changeMessage } from "../../../store/slicers/statusSlice";
+import { SUCCESS_MESSAGE } from "../../../constants/common";
+import dayjs from "dayjs";
+import { db } from "../../../firebase";
+import PhoneField from "../../dialog/components/PhoneField";
+import { addDoc, collection } from "@firebase/firestore";
 
 export const Booking = () => {
+  const [service, setservice] = useState("");
+  const [car, setcar] = useState("");
+  const [name, setname] = useState("");
+  const [surname, setsurname] = useState("");
+  const [email, setemail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [date, setdate] = useState(dayjs(new Date()));
+  const [time, settime] = useState(dayjs(Date.now()));
   const [page1, setpage1] = useState(true);
+  const disp = useDispatch();
+  const TEXT_FEEDBACK_FOR_USER = `The booking has been successfully done, we inform you that ${car} type 
+  machine will be at the place on ${date} time, wish you enjoyable service.`;
 
-  const anotherStep = () => {
-    setpage1(false);
+  const anotherStep = async () => {
+    return await addDoc(collection(db, "bookings"), {
+      name: name,
+      surName: surname,
+      service: service,
+      car: car,
+      email: email,
+      date: date.$d && time.$d,
+      phoneNumber: phone,
+      carriedOut: "",
+    })
+      .then(() => {
+        setpage1(false);
+        disp(changeMessage(SUCCESS_MESSAGE.booked));
+        console.log(db);
+      })
+      .catch(({ message }) => console.log(message));
   };
+
   return page1 ? (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}>
+      }}
+    >
       <Paper
         sx={{
           display: "flex",
@@ -29,7 +63,8 @@ export const Booking = () => {
           width: 1200,
           height: 800,
           mt: 3,
-        }}>
+        }}
+      >
         <Box
           sx={{
             width: "400px",
@@ -39,22 +74,29 @@ export const Booking = () => {
             alignItems: "center",
             textAlign: "center",
             ml: 10,
-          }}>
+          }}
+        >
           <Typography variant="h4"> Book Here </Typography>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-            }}>
+            }}
+          >
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
                 width: "400px",
                 alignItems: "center",
-              }}>
-              <SelectServiceType sx={{ width: 195 }} />
-              <SelectCars sx={{ width: 195 }} />
+              }}
+            >
+              <SelectServiceType
+                sx={{ width: 195 }}
+                service={service}
+                setservice={setservice}
+              />
+              <SelectCars sx={{ width: 195 }} car={car} setcar={setcar} />
             </Box>
             <Box
               sx={{
@@ -62,18 +104,46 @@ export const Booking = () => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "400px",
-              }}>
-              <TextField type="name " label=" name" sx={{ width: 195 }} />
-              <TextField type="surname " label="surname" sx={{ width: 195 }} />
+              }}
+            >
+              <TextField
+                type="name "
+                label=" name"
+                value={name}
+                sx={{ width: 195 }}
+                onChange={(e) => setname(e.target.value)}
+              />
+              <TextField
+                type="surname "
+                label="surname"
+                value={surname}
+                sx={{ width: 195 }}
+                onChange={(e) => setsurname(e.target.value)}
+              />
             </Box>
 
-            <TextField fullWidth type="email" label="Email" required />
-            <PhoneInput
+            <TextField
+              fullWidth
+              type="email"
+              label="Email"
+              value={email}
+              required
+              onChange={(e) => setemail(e.target.value)}
+            />
+            {/* <PhoneInput
               inputProps={{ name: "phone", required: false }}
               inputStyle={{ height: "56px", width: "100%" }}
               country={"am"}
+              value={phone}
+              onChange={(e) => setphone(e.target.value)}
+            /> */}
+            <PhoneField phoneSett={[phone, setPhone]} />
+            <DateForBooking
+              date={date}
+              setdate={setdate}
+              time={time}
+              settime={settime}
             />
-            <DateForBooking />
             <Button variant="contained" sx={{ mt: 2 }} onClick={anotherStep}>
               Continue
             </Button>
@@ -88,7 +158,8 @@ export const Booking = () => {
             style={{ border: 0 }}
             allowfullscreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </Box>
       </Paper>
     </Box>
@@ -98,7 +169,8 @@ export const Booking = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}>
+      }}
+    >
       <Paper
         sx={{
           display: "flex",
@@ -108,15 +180,12 @@ export const Booking = () => {
           width: 1000,
           height: 800,
           mt: 3,
-        }}>
+        }}
+      >
         <Box>
           <Typography variant="h4" sx={{ mt: 8 }}>
-            Booked
+            {TEXT_FEEDBACK_FOR_USER}
           </Typography>
-
-          <Button variant="contained" sx={{ mt: 2 }}>
-            finish
-          </Button>
         </Box>
       </Paper>
     </Box>
