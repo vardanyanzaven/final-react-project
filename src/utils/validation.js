@@ -1,25 +1,37 @@
-import { regex } from "../constants/common";
+import * as Yup from "yup";
+import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/common";
 
-export const passwordValidation = (password) => {
-  let str = "Password must contain at least ";
-  let sentence = [];
+export const schema = Yup.object().shape({
+  fullName: Yup.string()
+    .required("Please enter your full name")
+    .matches(
+      /^[a-zA-Z]+( [a-zA-Z]+)?$/,
+      "Enter full name with letters and single space only."
+    ),
+  email: Yup.string()
+    .email("Please enter a valid email address")
+    .required("Email is required")
+    .matches(
+      EMAIL_REGEX,
+      "Please enter your email address in the format name@example.com"
+    ),
+  password: Yup.string()
+    .required("Password is required")
+    .matches(
+      PASSWORD_REGEX,
+      "Password must have 8+ chars, uppercase, lowercase, and number."
+    ),
+  confPass: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Please confirm your password"),
+  mobile: Yup.string()
+    .matches(/^\+?[1-9]\d{1,14}$/, "Phone number is not valid")
+    .required("Phone number is required")
+    .min(11, "Write correct mobile"),
+  gender: Yup.string().required("Required"),
+});
 
-  const showString = [
-    "one capital letter",
-    "one number",
-    "8-16 characters",
-    "one lowercase",
-  ];
-
-  regex.filter((reg, i) => {
-    if (!reg.test(password)) {
-      sentence.push(showString[i]);
-      return false;
-    }
-    return true;
-  });
-
-  if (!sentence.length) return "";
-  const result = str + sentence.join(",");
-  return result;
-};
+export const signInSchema = Yup.object().shape({
+  email: Yup.string().required("Please enter your email"),
+  password: Yup.string().required("Password is required"),
+});
