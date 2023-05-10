@@ -1,9 +1,9 @@
 import { useState } from "react";
+import "react-phone-input-2/lib/style.css";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import PhoneInput from "react-phone-input-2";
 import React from "react";
 import DateForBooking from "./booking_form/DateForBooking";
-import "react-phone-input-2/lib/style.css";
-import PhoneInput from "react-phone-input-2";
 import SelectServiceType from "./booking_form/SelectServiceType";
 import SelectCars from "./booking_form/SelectcCars";
 import { useDispatch } from "react-redux";
@@ -71,7 +71,7 @@ export const Booking = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                width: " 400px",
+                width: "400px",
               }}
             >
               <TextField type="name " label=" name" sx={{ width: 195 }} />

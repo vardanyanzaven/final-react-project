@@ -3,6 +3,8 @@ import SortIcon from "@mui/icons-material/Sort";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
 import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
+import { useDispatch, useSelector } from "react-redux";
+import { setCatalogue } from "../../../store/slicers/catalogueSlice";
 
 const FilterSort = ({ sortValue, filterValue, changeOption }) => {
   // Logic for opening filter and sort menus
@@ -10,8 +12,8 @@ const FilterSort = ({ sortValue, filterValue, changeOption }) => {
   const [filterAnchorEl, setFilterAnchorEl] = useState(null);
   const sortOpen = !!sortAnchorEl;
   const filterOpen = !!filterAnchorEl;
-  const [activeSortOpt, setActiveSortOpt] = useState(sortValue[0]);
-  const [activeFilterOpt, setActiveFilterOpt] = useState(filterValue[0]);
+  const [activeSortOpt, setActiveSortOpt] = useState(sortValue.value);
+  const [activeFilterOpt, setActiveFilterOpt] = useState(filterValue.value);
   const handleSortClick = (e) => {
     setSortAnchorEl(e.currentTarget);
   };
@@ -26,6 +28,10 @@ const FilterSort = ({ sortValue, filterValue, changeOption }) => {
       : console.log("Error when opening sort/filter menu");
   };
 
+  // Redux
+  const dispatch = useDispatch();
+  const { cars } = useSelector((state) => state.catalogue);
+
   return (
     <Box sx={{ display: "flex", gap: 1 }}>
       <Button
@@ -39,7 +45,7 @@ const FilterSort = ({ sortValue, filterValue, changeOption }) => {
         <Typography sx={{ display: { xs: "none", md: "inline" }, mr: 1 }}>
           Sort By:
         </Typography>
-        {`${sortValue ? sortValue[1] : ""}`}
+        {`${sortValue ? sortValue.value : ""}`}
       </Button>
       {/* xs-i hamar IconButton-ov kareli a sarqel */}
       <Button
@@ -53,7 +59,7 @@ const FilterSort = ({ sortValue, filterValue, changeOption }) => {
         <Typography sx={{ display: { xs: "none", md: "inline" }, mr: 1 }}>
           Filter:
         </Typography>
-        {filterValue ? filterValue[1] : ""}
+        {filterValue ? filterValue.value : ""}
       </Button>
       <Menu
         id="sort-by-menu"
@@ -70,18 +76,21 @@ const FilterSort = ({ sortValue, filterValue, changeOption }) => {
           horizontal: "left",
         }}
       >
-        {Object.entries(SORT_OPTIONS).map((opt) => (
+        {SORT_OPTIONS.map((opt) => (
           <MenuItem
-            key={opt[0]}
+            key={opt.value}
             onClick={() => {
               changeOption("sort", opt);
               handleClose("sort");
-              setActiveSortOpt(opt[0]);
+              setActiveSortOpt(opt.value);
+              dispatch(
+                setCatalogue((arr) => arr.sort(opt.sortCondition))
+              );
             }}
-            className={activeSortOpt === opt[0] ? "active-opt" : ""}
+            className={activeSortOpt === opt.value ? "active-opt" : ""}
           >
-            {activeSortOpt === opt[0] ? <SortIcon sx={{ mr: 1 }} /> : ""}
-            {opt[1]}
+            {activeSortOpt === opt.value ? <SortIcon sx={{ mr: 1 }} /> : ""}
+            {opt.value}
           </MenuItem>
         ))}
       </Menu>
@@ -100,18 +109,23 @@ const FilterSort = ({ sortValue, filterValue, changeOption }) => {
           horizontal: "right",
         }}
       >
-        {Object.entries(FILTER_OPTIONS).map((opt) => (
+        {FILTER_OPTIONS.map((opt) => (
           <MenuItem
-            key={opt[0]}
+            key={opt.value}
             onClick={() => {
               changeOption("filter", opt);
               handleClose("filter");
-              setActiveFilterOpt(opt[0]);
+              setActiveFilterOpt(opt.value);
+              dispatch(setCatalogue((arr) => arr.filter(opt.filterCondition)));
             }}
-            className={activeFilterOpt === opt[0] ? "active-opt" : ""}
+            className={activeFilterOpt === opt.value ? "active-opt" : ""}
           >
-            {activeFilterOpt === opt[0] ? <FilterAltIcon sx={{ mr: 1 }} /> : ""}
-            {opt[1]}
+            {activeFilterOpt === opt.value ? (
+              <FilterAltIcon sx={{ mr: 1 }} />
+            ) : (
+              ""
+            )}
+            {opt.value}
           </MenuItem>
         ))}
       </Menu>

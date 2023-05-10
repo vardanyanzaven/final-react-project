@@ -1,4 +1,7 @@
 import { useAuth } from "../hooks/useAuth";
+import img1 from "../assets/home_page_slider_images/sliderImg1.jpg";
+import img2 from "../assets/home_page_slider_images/sliderImg2.jpg";
+import img3 from "../assets/home_page_slider_images/sliderImg3.jpg";
 
 export const HEADER_TAB_LIST = {
   services: "services",
@@ -6,22 +9,47 @@ export const HEADER_TAB_LIST = {
   about: "about us",
 };
 
-export const SORT_OPTIONS = {
-  noSort: "Don't sort",
-  aToZ: "A-Z",
-  highToLow: "Price: highest to lowest",
-  lowToHigh: "Price: lowest to highest",
-  newest: "Newest",
-  oldest: "Oldest",
-};
+export const SORT_OPTIONS = [
+  {
+    value: "Don't sort",
+    sortCondition: () => null,
+  },
+  {
+    value: "A-Z",
+    sortCondition: (a, b) =>
+      a.carBrand < b.carBrand ? -1 : a.carBrand > b.carBrand ? 1 : 0,
+  },
+  {
+    value: "Price: high to low",
+    sortCondition: (a, b) => b.price - a.price,
+  },
+  {
+    value: "Price: low to high",
+    sortCondition: (a, b) => a.price - b.price,
+  },
+  {
+    value: "Newest",
+    sortCondition: (a,b) => a.carProdYear - b.carProdYear,
+  },
+  {
+    value: "Oldest",
+    sortCondition: (a,b) => b.carProdYear - a.carProdYear,
+  },
+];
 
-export const FILTER_OPTIONS = {
-  all: "All",
-  limo: "Limousines",
-  sedans: "Sedans",
-  suvs: "SUVs",
-  sport: "Sports cars",
-};
+export const FILTER_OPTIONS = [
+  { value: "All", filterCondition: () => null },
+  {
+    value: "Limousines",
+    filterCondition: (car) => car.carType === "limousine",
+  },
+  { value: "Sedans", filterCondition: (car) => car.carType === "sedan" },
+  { value: "SUVs", filterCondition: (car) => car.carType === "SUV" },
+  {
+    value: "Sports cars",
+    filterCondition: (car) => car.carType === "sports-car",
+  },
+];
 
 export const regex = [/[A-Z]/, /[0-9]/, /.{8,16}/, /[a-z]/];
 
@@ -193,19 +221,19 @@ export const IMAGES_FOR_HOME_PAGE_SLIDER = [
     id: 1,
     title: "Rent a Car Today!",
     subtitle: "Affordable and Flexible Rental Options",
-    imgUrl: "images/sliderImg1.jpg",
+    imgUrl: img1,
   },
 
   {
     id: 2,
     title: "Explore Your Next Adventure",
     subtitle: "Choose from a Wide Range of Car Models",
-    imgUrl: "images/sliderImg2.jpg",
+    imgUrl: img2,
   },
   {
     id: 3,
     title: "Drive in Style",
     subtitle: "Luxury Cars for Special Occasions",
-    imgUrl: "images/sliderImg3.jpg",
+    imgUrl: img3,
   },
 ];
