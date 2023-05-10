@@ -176,9 +176,16 @@ export const ERROR_MESSAGES = {
 };
 
 export const SUCCESS_MESSAGE = {
-  message: "Welcome! You have successfully logged in.",
-  type: "success",
-  isOpen: true,
+  loggedIn: {
+    message: "Welcome! You have successfully logged in.",
+    type: "success",
+    isOpen: true,
+  },
+  booked: {
+    message: " Your booking has been successfully done",
+    type: "success",
+    isOpen: true,
+  },
 };
 
 export const IMAGES_FOR_HOME_PAGE_SLIDER = [

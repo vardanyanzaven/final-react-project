@@ -6,14 +6,17 @@ import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import SelectServiceType from "./booking_form/SelectServiceType";
 import SelectCars from "./booking_form/SelectcCars";
-import { sendEmailVerification } from "firebase/auth";
-import { auth } from "../../../firebase";
+import { useDispatch } from "react-redux";
+import { changeMessage } from "../../../store/slicers/statusSlice";
+import { SUCCESS_MESSAGE } from "../../../constants/common";
 
 export const Booking = () => {
   const [page1, setpage1] = useState(true);
+  const disp = useDispatch();
 
   const anotherStep = () => {
     setpage1(false);
+    disp(changeMessage(SUCCESS_MESSAGE.booked));
   };
   return page1 ? (
     <Box
@@ -122,8 +125,7 @@ export const Booking = () => {
       >
         <Box>
           <Typography variant="h4" sx={{ mt: 8 }}>
-            {" "}
-            Pass the Authorization{" "}
+            Booked
           </Typography>
 
           <Button variant="contained" sx={{ mt: 2 }}>
