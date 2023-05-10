@@ -29,11 +29,11 @@ export const SORT_OPTIONS = [
   },
   {
     value: "Newest",
-    sortCondition: (a,b) => a.carProdYear - b.carProdYear,
+    sortCondition: (a, b) => a.carProdYear - b.carProdYear,
   },
   {
     value: "Oldest",
-    sortCondition: (a,b) => b.carProdYear - a.carProdYear,
+    sortCondition: (a, b) => b.carProdYear - a.carProdYear,
   },
 ];
 
