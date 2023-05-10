@@ -1,14 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {
-  AppBar,
-  Container,
-  Toolbar,
-  Typography,
-  Button,
-  Box,
-  ThemeProvider,
-} from "@mui/material";
+import { Typography, Button, Box, ThemeProvider, Avatar } from "@mui/material";
+import { AppBar, Container, Toolbar } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import HeaderTheme from "../../themes/HeaderTheme";
 import { HEADER_TAB_LIST } from "../../constants/common";
@@ -49,8 +42,11 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                     alignItems: "center",
                     fontSize: { xs: 30, sm: 40 },
                   }}>
-                  <DirectionsCarIcon />
-                  Logo
+                  <Avatar
+                    src="favicon.ico"
+                    sx={{ width: "60px", height: "60px" }}
+                  />
+                  LUXE DRIVE
                 </Typography>
               </NavLink>
             </Box>
