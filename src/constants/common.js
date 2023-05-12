@@ -185,6 +185,42 @@ export const SERVICE_DATA = (f) => {
   return serviceData;
 };
 
+export const ERROR_MESSAGES = {
+  invalidPassword: {
+    message: "Invalid password!",
+    type: "error",
+    isOpen: true,
+  },
+  userNotFound: {
+    message: "User not found!",
+    type: "error",
+    isOpen: true,
+  },
+  emailExists: {
+    message: "Email already exists!",
+    type: "error",
+    isOpen: true,
+  },
+  something: {
+    message: "Something went wrong!",
+    type: "error",
+    isOpen: true,
+  },
+};
+
+export const SUCCESS_MESSAGE = {
+  loggedIn: {
+    message: "Welcome! You have successfully logged in.",
+    type: "success",
+    isOpen: true,
+  },
+  booked: {
+    message: " Your booking has been successfully done",
+    type: "success",
+    isOpen: true,
+  },
+};
+
 export const IMAGES_FOR_HOME_PAGE_SLIDER = [
   {
     id: 1,
