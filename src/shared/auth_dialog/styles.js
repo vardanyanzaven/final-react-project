@@ -25,5 +25,6 @@ export const styles = {
   phone: {
     height: "56px",
     width: "100%",
+    background: "transparent",
   },
 };

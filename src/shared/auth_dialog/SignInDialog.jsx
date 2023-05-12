@@ -1,21 +1,7 @@
 import React, { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import GoogleIcon from "@mui/icons-material/Google";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Grid,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Box,
-  Typography,
-  Container,
-} from "@mui/material";
+import { Button, Grid, Typography, Container } from "@mui/material";
+import { TextField, Dialog, DialogTitle, Box, IconButton } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { emailSignIn } from "../../services/handleAuth";
 import { Transition } from "../../components/dialog/dialogTransition";
@@ -67,7 +53,8 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description">
+        aria-describedby="alert-dialog-slide-description"
+        sx={styles.dialog}>
         <Container sx={styles.container}>
           <Box
             noValidate
@@ -99,14 +86,12 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
                   required
                   InputProps={{
                     endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={handleShowPassword}
-                          onMouseDown={(e) => e.preventDefault()}
-                          edge="end">
-                          {showPass ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
+                      <IconButton
+                        onClick={handleShowPassword}
+                        onMouseDown={(e) => e.preventDefault()}
+                        edge="end">
+                        {showPass ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
                     ),
                   }}
                 />
