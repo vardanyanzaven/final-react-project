@@ -79,12 +79,6 @@ export const ERROR_MESSAGES = {
   },
 };
 
-export const SUCCESS_MESSAGE = {
-  message: "Welcome! You have successfully logged in.",
-  type: "success",
-  isOpen: true,
-};
-
 export const SETTINGS_NAME_LIST = () => {
   const { id, email, userInfo } = useAuth();
 
@@ -183,29 +177,6 @@ export const SERVICE_DATA = (f) => {
 
   if (f) return serviceData.filter((s) => s.name === f);
   return serviceData;
-};
-
-export const ERROR_MESSAGES = {
-  invalidPassword: {
-    message: "Invalid password!",
-    type: "error",
-    isOpen: true,
-  },
-  userNotFound: {
-    message: "User not found!",
-    type: "error",
-    isOpen: true,
-  },
-  emailExists: {
-    message: "Email already exists!",
-    type: "error",
-    isOpen: true,
-  },
-  something: {
-    message: "Something went wrong!",
-    type: "error",
-    isOpen: true,
-  },
 };
 
 export const SUCCESS_MESSAGE = {
