@@ -1,28 +1,21 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Button,
-  Dialog,
-  Grid,
-  Box,
-  DialogTitle,
-} from "@mui/material";
-import { IconButton, InputAdornment } from "@mui/material";
+import { Button, Dialog, Grid, Box, DialogTitle } from "@mui/material";
+import { Container, IconButton } from "@mui/material";
 import { MenuItem, TextField, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { useDispatch } from "react-redux";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import PhoneInput from "react-phone-input-2";
 import { Transition } from "../../components/dialog/dialogTransition";
 import { emailSignUp } from "../../services/handleAuth";
 import { changeMessage } from "../../store/slicers/statusSlice";
 import { SUCCESS_MESSAGE } from "../../constants/common";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Controller, useForm } from "react-hook-form";
 import { schema } from "../../utils/validation";
 import { getError } from "../../utils/errors";
-import PhoneInput from "react-phone-input-2";
 import { styles } from "./styles";
-import "react-phone-input-2/lib/style.css";
+import "react-phone-input-2/lib/material.css";
 
 const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   const [showPass, setShowPass] = useState(false);
@@ -37,9 +30,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    const { email, password, phone, fullName, gender } = data;
-
+  const onSubmit = ({ email, password, phone, fullName, gender }) => {
     setLoading(true);
 
     emailSignUp(email, password, phone, fullName, gender)
@@ -95,17 +86,17 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                   />
                   <p style={styles.error}>{errors.mobile?.message}</p>
                 </Grid>
-                <Grid item xs={12} sm={9} sx={{ position: "relative" }}>
+                <Grid item xs={12} sm={8.5}>
                   <TextField
                     fullWidth
                     required
                     label="Fullname"
                     error={!!errors.fullName}
+                    helperText={errors.fullName?.message}
                     {...register("fullName")}
                   />
-                  <p style={styles.error}>{errors.fullName?.message}</p>
                 </Grid>
-                <Grid item xs={12} sm={3} sx={{ position: "relative" }}>
+                <Grid item xs={12} sm={3.5} sx={{ position: "relative" }}>
                   <TextField
                     select
                     fullWidth
@@ -114,6 +105,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                       ...register("gender"),
                       IconComponent: () => null,
                     }}
+                    defaultValue=""
                     error={!!errors.gender}>
                     <MenuItem value="Male">Male</MenuItem>
                     <MenuItem value="Female">Female</MenuItem>
@@ -152,13 +144,11 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                     required
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            onClick={() => setShowPass(!showPass)}
-                            edge="end">
-                            {showPass ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
+                        <IconButton
+                          onClick={() => setShowPass(!showPass)}
+                          edge="end">
+                          {showPass ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
                       ),
                     }}
                   />
