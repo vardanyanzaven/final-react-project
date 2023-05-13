@@ -3,7 +3,6 @@ import L from "leaflet";
 import { useState } from "react";
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 import React from "react";
-import { useEffect } from "react";
 
 const icon = L.icon({
   iconSize: [25, 41],

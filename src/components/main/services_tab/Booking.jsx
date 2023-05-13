@@ -7,7 +7,7 @@ import SelectServiceType from "./booking_form/SelectServiceType";
 import SelectCars from "./booking_form/SelectcCars";
 import { useDispatch } from "react-redux";
 import { changeMessage } from "../../../store/slicers/statusSlice";
-import { SUCCESS_MESSAGES } from "../../../constants/common";
+import { SUCCESS_MESSAGE } from "../../../constants/common";
 import dayjs from "dayjs";
 import { db } from "../../../firebase";
 import PhoneField from "../../dialog/components/PhoneField";
@@ -36,11 +36,6 @@ export const Booking = () => {
     .toString()
     .slice(16, 21)} time, wish you enjoyable service.`;
 
-  const onChangeRoute = () => {
-    console.log(111);
-    return <NavLink to="/" />;
-  };
-
   const anotherStep = async () => {
     return await addDoc(collection(db, "bookings"), {
       name: name,
@@ -55,7 +50,7 @@ export const Booking = () => {
     })
       .then(() => {
         setpage1(false);
-        disp(changeMessage(SUCCESS_MESSAGES.booked));
+        disp(changeMessage(SUCCESS_MESSAGE.booked));
         ShowStatus();
       })
       .catch(({ message }) => console.log(message));
@@ -189,7 +184,7 @@ export const Booking = () => {
             {TEXT_FEEDBACK_FOR_USER}
           </Typography>
         </Box>
-        <Button variant="contained" onClick={onChangeRoute} sx={{ mb: 6 }}>
+        <Button variant="contained" sx={{ mb: 6 }}>
           <Link to={"/"}>Got it</Link>
         </Button>
       </Paper>
