@@ -34,20 +34,40 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 className="navbar-link"
                 id="home"
                 onClick={activateEl}>
-                <Typography
+                <Box
                   noWrap
-                  className="logo-text"
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    fontSize: { xs: 30, sm: 40 },
                   }}>
-                  <Avatar
+                  <Box
+                    component="img"
                     src="favicon.ico"
-                    sx={{ width: "60px", height: "60px" }}
+                    sx={{ width: "70px", height: "70px", borderRadius: "50%" }}
                   />
-                  LUXE DRIVE
-                </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: { xs: 25, sm: 30 },
+                      color: "#799979",
+                      bgcolor: "#161617",
+                      p: "0 5px",
+                      borderTopLeftRadius: "20px",
+                    }}>
+                    LUXE
+                  </Typography>
+                  <Typography
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      fontSize: { xs: 25, sm: 30 },
+                      p: "0 5px",
+                      color: "#161617",
+                      bgcolor: "#799979",
+                      borderBottomRightRadius: "20px",
+                    }}>
+                    DRIVE
+                  </Typography>
+                </Box>
               </NavLink>
             </Box>
             <Box
