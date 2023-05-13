@@ -56,7 +56,7 @@ export const PASSWORD_REGEX = /^(?=.*\d)(?=.*[A-Z]).{8,20}$/;
 export const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-export const ERROR_MESSAGES = {
+export const ERROR_MESSAGE = {
   invalidPassword: {
     message: "Invalid password!",
     type: "error",
@@ -208,7 +208,7 @@ export const ERROR_MESSAGES = {
   },
 };
 
-export const SUCCESS_MESSAGE = {
+export const SUCCESS_MESSAGES = {
   loggedIn: {
     message: "Welcome! You have successfully logged in.",
     type: "success",
