@@ -30,7 +30,8 @@ export default function ShowStatus() {
             anchorOrigin={{
               horizontal: "center",
               vertical: "bottom",
-            }}>
+            }}
+          >
             <Alert onClose={handleClose} severity={type}>
               {message}
             </Alert>
