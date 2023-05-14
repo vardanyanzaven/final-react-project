@@ -128,6 +128,17 @@ export const SERVICE_DATA = (f) => {
             ide and groom feel like royalty.`,
     },
     {
+      url: "https://www.empirelimousine.net/wp-content/uploads/2017/07/Empire_limousine_1.jpg",
+      name: "airport",
+      car: "BMW",
+      title: `
+      Airports are important transportation hubs that connect people and
+      goods to destinations all over the world. They provide a variety of
+      services, including check-in and baggage handling, security screening,
+      and various retail and dining options for travelers.
+      `,
+    },
+    {
       url: "https://img.traveltriangle.com/blog/wp-content/uploads/2018/09/hong-kong-casinos-cover.jpg",
       name: "casino",
       title: `A casino is a facility where people can participate in gambling activities such as slot machines, 
@@ -135,19 +146,8 @@ export const SERVICE_DATA = (f) => {
             round the world, and they offer a variety of entertainment options in addition to gambling.`,
     },
     {
-      url: "https://www.empirelimousine.net/wp-content/uploads/2017/07/Empire_limousine_1.jpg",
-      name: "airport",
-      car: "BMW",
-      title: `
-          Airports are important transportation hubs that connect people and
-          goods to destinations all over the world. They provide a variety of
-          services, including check-in and baggage handling, security screening,
-          and various retail and dining options for travelers.
-        `,
-    },
-    {
       url: "https://sevenrooms.com/wp-content/uploads/2022/06/nightclub-girls-768x512.jpg",
-      name: "night-club",
+      name: "party",
       car: "Lexus",
       title: `
               If you're looking to throw a memorable party, there's no better way to make a statement than by 
@@ -157,7 +157,7 @@ export const SERVICE_DATA = (f) => {
     },
     {
       url: "https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/08/14/16/istock-945885714.jpg?width=1200",
-      name: "happy-birthday",
+      name: "birthday",
       title: `
             Happy Birthday! I hope this day is filled with joy, laughter, and all the things that make you happy. May this new 
             year of your life bring you exciting adventures, personal growth, and new opportunities to fulfill your dreams. Enjoy
@@ -166,7 +166,7 @@ export const SERVICE_DATA = (f) => {
     },
     {
       url: "https://www.bhg.com/thmb/asoM6Zj_sJvoXqq3sGUIoMwzmec=/1983x0/filters:no_upscale():strip_icc()/Obsessed-with-picnicking-2-02de801d4e8d443280c30c1ec3e93453.jpg",
-      name: "out-of-city",
+      name: "picnic",
       title: `
       Spending time in nature can be a wonderful way to relax and recharge. Whether you're taking a hike through the mountains,
        strolling through a peaceful forest, or simply
@@ -178,7 +178,6 @@ export const SERVICE_DATA = (f) => {
   if (f) return serviceData.filter((s) => s.name === f);
   return serviceData;
 };
-
 
 export const SUCCESS_MESSAGE = {
   loggedIn: {
