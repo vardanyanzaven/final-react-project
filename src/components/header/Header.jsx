@@ -25,7 +25,8 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
               display: "flex",
               alignItems: "center",
               height: 80,
-            }}>
+            }}
+          >
             <DropdownMenu />
 
             <Box sx={{ pb: { xs: 0, sm: 1 }, flexGrow: { xs: 1, md: 0 } }}>
@@ -33,38 +34,47 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 to="/"
                 className="navbar-link"
                 id="home"
-                onClick={activateEl}>
+                onClick={activateEl}
+              >
                 <Box
                   noWrap
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                  }}>
+                  }}
+                >
                   <Box
                     component="img"
                     src="favicon.ico"
-                    sx={{ width: "70px", height: "70px", borderRadius: "50%" }}
+                    sx={{
+                      width: { xs: "40px", sm: "70px" },
+                      height: { xs: "40px", sm: "70px" },
+                      borderRadius: "50%",
+                    }}
                   />
                   <Typography
                     sx={{
-                      fontSize: { xs: 25, sm: 30 },
+                      fontSize: { xs: 15, sm: 30 },
                       color: "#799979",
                       bgcolor: "#161617",
                       p: "0 5px",
                       borderTopLeftRadius: "20px",
-                    }}>
+                    }}
+                  >
                     LUXE
                   </Typography>
                   <Typography
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      fontSize: { xs: 25, sm: 30 },
+                      fontSize: { xs: 15, sm: 30 },
                       p: "0 5px",
                       color: "#161617",
                       bgcolor: "#799979",
                       borderBottomRightRadius: "20px",
-                    }}>
+                      mr: 1,
+                    }}
+                  >
                     DRIVE
                   </Typography>
                 </Box>
@@ -76,7 +86,8 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 alignItems: "center",
                 justifyContent: "space-evenly",
                 flexGrow: 1,
-              }}>
+              }}
+            >
               {Object.keys(HEADER_TAB_LIST).map((tab) => (
                 <NavLink to={`/${tab}`} className="navbar-link" key={tab}>
                   <Button
@@ -85,7 +96,8 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                     onClick={activateEl}
                     className={`${
                       checkIfActive(tab) ? "active-navbar-btn" : ""
-                    }`}>
+                    }`}
+                  >
                     <Typography variant="h5" noWrap>
                       {HEADER_TAB_LIST[tab]}
                     </Typography>
