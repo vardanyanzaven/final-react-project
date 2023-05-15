@@ -88,30 +88,35 @@ export const SETTINGS_NAME_LIST = () => {
       value: id,
       edit: false,
       editTitle: null,
+      type: "readOnly",
     },
     {
       name: "Gender",
-      value: "male/female",
+      value: userInfo.gender,
       edit: true,
       editTitle: "Enter your gender",
+      type: "select",
     },
     {
       name: "Email",
       value: email,
       edit: true,
       editTitle: "Enter your new Email",
+      type: "input",
     },
     {
       name: "Mobile",
       value: userInfo.phone,
       edit: true,
       editTitle: "Enter your mobile",
+      type: "input",
     },
     {
       name: "Fullname",
       value: userInfo.fullName,
       edit: true,
       editTitle: "Enter your new fullname",
+      type: "input",
     },
   ];
 };
