@@ -12,42 +12,37 @@ export const HEADER_TAB_LIST = {
 export const SORT_OPTIONS = [
   {
     value: "Don't sort",
-    sortCondition: () => null,
-  },
-  {
-    value: "A-Z",
-    sortCondition: (a, b) =>
-      a.carBrand < b.carBrand ? -1 : a.carBrand > b.carBrand ? 1 : 0,
+    sortCondition: null,
   },
   {
     value: "Price: high to low",
-    sortCondition: (a, b) => b.price - a.price,
+    sortCondition: {price: "desc"},
   },
   {
     value: "Price: low to high",
-    sortCondition: (a, b) => a.price - b.price,
+    sortCondition: {price: "asc"},
   },
   {
     value: "Newest",
-    sortCondition: (a, b) => a.carProdYear - b.carProdYear,
+    sortCondition: {carProdYear: "desc"},
   },
   {
     value: "Oldest",
-    sortCondition: (a, b) => b.carProdYear - a.carProdYear,
+    sortCondition: {carProdYear: "asc"},
   },
 ];
 
 export const FILTER_OPTIONS = [
-  { value: "All", filterCondition: () => null },
+  { value: "All", filterCondition:  null },
   {
     value: "Limousines",
-    filterCondition: (car) => car.carType === "limousine",
+    filterCondition: "limousine",
   },
-  { value: "Sedans", filterCondition: (car) => car.carType === "sedan" },
-  { value: "SUVs", filterCondition: (car) => car.carType === "SUV" },
+  { value: "Sedans", filterCondition: "sedan" },
+  { value: "SUVs", filterCondition: "SUV" },
   {
     value: "Sports cars",
-    filterCondition: (car) => car.carType === "sports-car",
+    filterCondition: "sports-car",
   },
 ];
 
