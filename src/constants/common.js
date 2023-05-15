@@ -218,3 +218,15 @@ export const IMAGES_FOR_HOME_PAGE_SLIDER = [
     imgUrl: img3,
   },
 ];
+
+export const DRIVER_REGISTER_STEPS = [
+  {
+    title: "Enter your passport or social card number",
+  },
+  {
+    title: "Upload your driver's license photo file",
+  },
+  {
+    title: "Selfie with your passport",
+  },
+];

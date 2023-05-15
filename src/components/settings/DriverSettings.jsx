@@ -1,23 +1,27 @@
 import { ModalDialog } from "@mui/joy";
-import {
-  Box,
-  Button,
-  Modal,
-  Step,
-  StepLabel,
-  Stepper,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Modal, Step, StepButton, TextField } from "@mui/material";
+import { StepLabel, Stepper, Typography } from "@mui/material";
 import React from "react";
 import { useState } from "react";
+import { DRIVER_REGISTER_STEPS } from "../../constants/common";
+import PassportStep from "./all_steps/PassportStep";
 
 const DriverSettings = () => {
   const [openModal, setOpenModal] = useState(false);
   const [showStepper, setShowStepper] = useState(false);
   const [step, setStep] = useState(0);
+  const [completed, setCompleted] = useState({});
 
   const modalClose = () => {
     setOpenModal(false);
+  };
+
+  const handleStep = () => {
+    setStep(step + 1);
+  };
+
+  const handleReset = () => {
+    setStep(0);
   };
 
   return (
@@ -32,21 +36,62 @@ const DriverSettings = () => {
             borderRadius: "8px",
             textAlign: "center",
           }}>
-          <Typography
-            variant="h6"
-            sx={{ lineHeight: "50px", paddingInline: "50px" }}>
-            Here will be your settings if you register as a driver. If you want
-            to register as a driver, you can find out by clicking
-            <Button onClick={() => setOpenModal(true)} color="secondary">
-              HERE
-            </Button>
-          </Typography>
-          {showStepper && (
-            <Stepper activeStep={step} alternativeLabel>
-              <Step>
-                <StepLabel>alternativeLabel</StepLabel>
-              </Step>
-            </Stepper>
+          {!showStepper ? (
+            <Typography
+              variant="h6"
+              sx={{ lineHeight: "50px", paddingInline: "50px" }}>
+              Here will be your settings if you register as a driver. If you
+              want to register as a driver, you can find out by clicking
+              <Button onClick={() => setOpenModal(true)} color="secondary">
+                HERE
+              </Button>
+            </Typography>
+          ) : (
+            <>
+              <Stepper activeStep={step}>
+                {DRIVER_REGISTER_STEPS.map((step, i) => (
+                  <Step key={step}>
+                    <StepLabel>{step.title}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+              {step === DRIVER_REGISTER_STEPS.length ? (
+                <>
+                  <Typography>
+                    Thank you for your message. We appreciate your feedback. Our
+                    team will review it, and we will provide a response within
+                    48 hours.
+                  </Typography>
+                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                    <Box sx={{ flex: "1 1 auto" }} />
+                    <Button onClick={handleReset}>Reset</Button>
+                  </Box>
+                </>
+              ) : (
+                <>
+                  <Typography sx={{ mt: 2, mb: 1 }}>Step {step + 1}</Typography>
+                  <PassportStep />
+                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                    <Button
+                      color="inherit"
+                      disabled={step === 0}
+                      onClick={() => setStep(step - 1)}
+                      sx={{ mr: 1 }}>
+                      Back
+                    </Button>
+                    <Box sx={{ flex: "1 1 auto" }} />
+                    <Button
+                      onClick={handleStep}
+                      color="warning"
+                      variant="outlined">
+                      {step === DRIVER_REGISTER_STEPS.length - 1
+                        ? "Finish"
+                        : "Next"}
+                    </Button>
+                  </Box>
+                </>
+              )}
+            </>
           )}
         </Box>
       </Box>
