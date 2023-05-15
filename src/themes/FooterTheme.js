@@ -36,7 +36,7 @@ const ContainerBox = styled.div({
   justifyContent: "space-between",
   backgroundColor: "#192026",
   height: "80px",
-  // marginTop: "1000px",
+  marginTop: "100px",
   padding: "15px 50px",
   [FooterTheme.breakpoints.up("sm")]: {
     flexDirection: "row",

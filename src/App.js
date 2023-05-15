@@ -28,7 +28,6 @@ function App() {
   if (loading) return <LinearProgress />;
 
   return (
-    <>
       <>
         <ShowStatus />
         <Header activeLinkId={activeLinkId} setActiveLinkId={setActiveLinkId} />
@@ -60,7 +59,6 @@ function App() {
         <Outlet />
         <Footer />
       </>
-    </>
   );
 }
 

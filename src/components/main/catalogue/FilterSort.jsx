@@ -4,16 +4,29 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
 import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
 import { useDispatch, useSelector } from "react-redux";
-import { setCatalogue } from "../../../store/slicers/catalogueSlice";
+import {
+  setCatalogue,
+  setFetchVal,
+} from "../../../store/slicers/catalogueSlice";
+import CatalogueTheme from "../../../themes/CatalogueTheme";
+import { ThemeProvider } from "styled-components";
 
-const FilterSort = ({ sortValue, filterValue, changeOption }) => {
+const FilterSort = ({
+  activeSortOpt,
+  activeFilterOpt,
+  setActiveSortOpt,
+  setActiveFilterOpt,
+  sortValue,
+  setSortValue,
+  filterValue,
+  setFilterValue,
+  changeOption,
+}) => {
   // Logic for opening filter and sort menus
   const [sortAnchorEl, setSortAnchorEl] = useState(null);
   const [filterAnchorEl, setFilterAnchorEl] = useState(null);
   const sortOpen = !!sortAnchorEl;
   const filterOpen = !!filterAnchorEl;
-  const [activeSortOpt, setActiveSortOpt] = useState(sortValue.value);
-  const [activeFilterOpt, setActiveFilterOpt] = useState(filterValue.value);
   const handleSortClick = (e) => {
     setSortAnchorEl(e.currentTarget);
   };
@@ -30,106 +43,145 @@ const FilterSort = ({ sortValue, filterValue, changeOption }) => {
 
   // Redux
   const dispatch = useDispatch();
-  const { cars } = useSelector((state) => state.catalogue);
 
   return (
-    <Box sx={{ display: "flex", gap: 1 }}>
-      <Button
-        id="sort-by-btn"
-        aria-controls={sortOpen ? "sort-by-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={sortOpen ? "true" : undefined}
-        onClick={handleSortClick}
-        startIcon={<SortIcon />}
-      >
-        <Typography sx={{ display: { xs: "none", md: "inline" }, mr: 1 }}>
-          Sort By:
-        </Typography>
-        {`${sortValue ? sortValue.value : ""}`}
-      </Button>
-      {/* xs-i hamar IconButton-ov kareli a sarqel */}
-      <Button
-        id="filter-btn"
-        aria-controls={filterOpen ? "filter-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={filterOpen ? "true" : undefined}
-        onClick={handleFilterClick}
-        startIcon={<FilterAltIcon />}
-      >
-        <Typography sx={{ display: { xs: "none", md: "inline" }, mr: 1 }}>
-          Filter:
-        </Typography>
-        {filterValue ? filterValue.value : ""}
-      </Button>
-      <Menu
-        id="sort-by-menu"
-        aria-labelledby="sort-by-btn"
-        anchorEl={sortAnchorEl}
-        open={sortOpen}
-        onClose={() => handleClose("sort")}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-      >
-        {SORT_OPTIONS.map((opt) => (
-          <MenuItem
-            key={opt.value}
-            onClick={() => {
-              changeOption("sort", opt);
-              handleClose("sort");
-              setActiveSortOpt(opt.value);
-              dispatch(
-                setCatalogue((arr) => arr.sort(opt.sortCondition))
-              );
+    <ThemeProvider theme={CatalogueTheme}>
+      <Box sx={{ display: "flex", gap: 2 }}>
+        <Button
+          id="sort-by-btn"
+          aria-controls={sortOpen ? "sort-by-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={sortOpen ? "true" : undefined}
+          onClick={handleSortClick}
+          startIcon={<SortIcon />}
+          sx={{
+            color: "#F2B90D",
+            border: "1px solid #F2B90D",
+            borderRadius: "10px",
+            p: "7px 15px",
+          }}
+        >
+          <Typography
+            sx={{
+              display: { xs: "none", md: "inline" },
+              fontSize: "16px",
+              mr: 1,
             }}
-            className={activeSortOpt === opt.value ? "active-opt" : ""}
           >
-            {activeSortOpt === opt.value ? <SortIcon sx={{ mr: 1 }} /> : ""}
-            {opt.value}
-          </MenuItem>
-        ))}
-      </Menu>
-      <Menu
-        id="filter-menu"
-        aria-labelledby="filter-btn"
-        anchorEl={filterAnchorEl}
-        open={filterOpen}
-        onClose={() => handleClose("filter")}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        {FILTER_OPTIONS.map((opt) => (
-          <MenuItem
-            key={opt.value}
-            onClick={() => {
-              changeOption("filter", opt);
-              handleClose("filter");
-              setActiveFilterOpt(opt.value);
-              dispatch(setCatalogue((arr) => arr.filter(opt.filterCondition)));
+            Sort By:
+          </Typography>
+          <Typography
+            sx={{
+              display: { xs: "none", sm: "inline" },
             }}
-            className={activeFilterOpt === opt.value ? "active-opt" : ""}
           >
-            {activeFilterOpt === opt.value ? (
-              <FilterAltIcon sx={{ mr: 1 }} />
-            ) : (
-              ""
-            )}
-            {opt.value}
-          </MenuItem>
-        ))}
-      </Menu>
-    </Box>
+            {`${sortValue ? sortValue.value : ""}`}
+          </Typography>
+        </Button>
+        {/* xs-i hamar IconButton-ov kareli a sarqel */}
+        <Button
+          id="filter-btn"
+          aria-controls={filterOpen ? "filter-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={filterOpen ? "true" : undefined}
+          onClick={handleFilterClick}
+          startIcon={<FilterAltIcon />}
+          sx={{
+            color: "#F2B90D",
+            border: "1px solid #F2B90D",
+            borderRadius: "10px",
+            p: "7px 15px",
+            fontSize: { xs: "14px", sm: "16px" },
+          }}
+        >
+          <Typography sx={{display: { xs: "none", md: "inline" },
+              fontSize: { xs: "16px" }, mr: 1 }}>
+            Filter:
+          </Typography>
+          <Typography
+            sx={{
+              display: { xs: "none", sm: "inline" },
+            }}
+          >
+            {filterValue ? filterValue.value : ""}
+          </Typography>
+        </Button>
+        <Menu
+          id="sort-by-menu"
+          aria-labelledby="sort-by-btn"
+          anchorEl={sortAnchorEl}
+          open={sortOpen}
+          onClose={() => handleClose("sort")}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+        >
+          {SORT_OPTIONS.map((opt) => (
+            <MenuItem
+              key={opt.value}
+              onClick={() => {
+                changeOption("sort", opt);
+                handleClose("sort");
+                setActiveSortOpt(opt.value);
+                dispatch(setFetchVal(["sortVal", opt.sortCondition]));
+                dispatch(setCatalogue("sort"));
+                setFilterValue(FILTER_OPTIONS[0]);
+                setActiveFilterOpt(FILTER_OPTIONS[0].value)
+                dispatch(setFetchVal(["filterVal", null]));
+              }}
+              className={activeSortOpt === opt.value ? "active-opt" : ""}
+            >
+              {activeSortOpt === opt.value ? <SortIcon sx={{ mr: 1 }} /> : ""}
+              {opt.value}
+            </MenuItem>
+          ))}
+        </Menu>
+        <Menu
+          id="filter-menu"
+          aria-labelledby="filter-btn"
+          anchorEl={filterAnchorEl}
+          open={filterOpen}
+          onClose={() => handleClose("filter")}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          {FILTER_OPTIONS.map((opt) => (
+            <MenuItem
+              key={opt.value}
+              onClick={() => {
+                changeOption("filter", opt);
+                handleClose("filter");
+                setActiveFilterOpt(opt.value);
+                dispatch(setFetchVal(["filterVal", opt.filterCondition]));
+                dispatch(setCatalogue("filter"));
+                setSortValue(SORT_OPTIONS[0]);
+                setActiveSortOpt(SORT_OPTIONS[0].value);
+                dispatch(setFetchVal(["sortVal", null]));
+              }}
+              className={activeFilterOpt === opt.value ? "active-opt" : ""}
+            >
+              {activeFilterOpt === opt.value ? (
+                <FilterAltIcon sx={{ mr: 1 }} />
+              ) : (
+                ""
+              )}
+              {opt.value}
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>
+    </ThemeProvider>
   );
 };
 
