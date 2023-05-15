@@ -1,14 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {
-  AppBar,
-  Container,
-  Toolbar,
-  Typography,
-  Button,
-  Box,
-  ThemeProvider,
-} from "@mui/material";
+import { Typography, Button, Box, ThemeProvider, Avatar } from "@mui/material";
+import { AppBar, Container, Toolbar } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import HeaderTheme from "../../themes/HeaderTheme";
 import { HEADER_TAB_LIST } from "../../constants/common";
@@ -41,17 +34,40 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 className="navbar-link"
                 id="home"
                 onClick={activateEl}>
-                <Typography
+                <Box
                   noWrap
-                  className="logo-text"
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    fontSize: { xs: 30, sm: 40 },
                   }}>
-                  <DirectionsCarIcon />
-                  Logo
-                </Typography>
+                  <Box
+                    component="img"
+                    src="favicon.ico"
+                    sx={{ width: "70px", height: "70px", borderRadius: "50%" }}
+                  />
+                  <Typography
+                    sx={{
+                      fontSize: { xs: 25, sm: 30 },
+                      color: "#799979",
+                      bgcolor: "#161617",
+                      p: "0 5px",
+                      borderTopLeftRadius: "20px",
+                    }}>
+                    LUXE
+                  </Typography>
+                  <Typography
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      fontSize: { xs: 25, sm: 30 },
+                      p: "0 5px",
+                      color: "#161617",
+                      bgcolor: "#799979",
+                      borderBottomRightRadius: "20px",
+                    }}>
+                    DRIVE
+                  </Typography>
+                </Box>
               </NavLink>
             </Box>
             <Box

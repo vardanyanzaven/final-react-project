@@ -5,16 +5,16 @@ import Select from "@mui/material/Select";
 import { useState } from "react";
 import { SERVICE_DATA } from "./servicesData";
 
-export default function SelectServiceType() {
-  const [ServiceName, setServiceName] = useState("");
+export default function SelectServiceType({ service, setservice }) {
   const [open, setOpen] = useState(false);
+  console.log(service);
 
   const onClose = () => {
     setOpen(!open);
   };
 
-  const handleChange = (event) => {
-    setServiceName(event.target.value);
+  const handleChange = (e) => {
+    setservice(e.target.value);
   };
 
   return (
@@ -23,7 +23,7 @@ export default function SelectServiceType() {
         <Select
           required
           displayEmpty
-          value={ServiceName}
+          value={service}
           onChange={handleChange}
           open={open}
           onClose={onClose}

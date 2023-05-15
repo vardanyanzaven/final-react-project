@@ -37,6 +37,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
   // Filter and sort select values
   const [sortValue, setSortValue] = useState(SORT_OPTIONS[0]);
   const [filterValue, setFilterValue] = useState(FILTER_OPTIONS[0]);
+  const [filterValue, setFilterValue] = useState(FILTER_OPTIONS[0]);
   const changeOption = (type, value) =>
     type === "sort"
       ? setSortValue(value)

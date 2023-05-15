@@ -3,9 +3,8 @@ import "./HomePageSlider.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { IMAGES_FOR_HOME_PAGE_SLIDER } from "../../../constants/common";
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { IMAGES_FOR_HOME_PAGE_SLIDER } from "../../constants/common";
+import { NavLink } from "react-router-dom";
 
 const settings = {
   dots: true,
@@ -52,9 +51,9 @@ const HomePageSlider = () => {
                 >
                   {slide.subtitle}
                 </p>
-                <Button variant="contained">
-                  <Link to={"/services"}>Get Started </Link>
-                </Button>
+                <NavLink to="services" className="slide-button">
+                  Get Started!
+                </NavLink>
               </div>
             </div>
           </div>
