@@ -46,5 +46,13 @@ export const passportSchema = Yup.object().shape({
   lastName: Yup.string()
     .required("Last name is required")
     .matches(/^[A-Za-z\s-]{1,50}$/, "Letters only and in latin"),
+  homeAddress: Yup.string().required("Address is required"),
+  birthday: Yup.string().required("Birthday is required"),
+  passportDate: Yup.string().required("Passport date is required"),
 });
-// AIzaSyCDM7ihQsS_y21HFp7DSjMeck4kvZpir0w
+
+export const licenseSchema = Yup.object().shape({
+  license: Yup.string()
+    .required("license number is required")
+    .matches(/^(?!^0+$)[a-zA-Z0-9]{3,20}$/, "Not valid!"),
+});

@@ -71,11 +71,10 @@ const HeaderTheme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "capitalize",
-          color: "white",
           transition: "color 0.2s",
           "&:hover": {
-            color: "#F2B90D"
-          }
+            color: "#F2B90D",
+          },
         },
       },
     },
