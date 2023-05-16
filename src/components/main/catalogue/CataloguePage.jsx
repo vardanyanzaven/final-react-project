@@ -21,7 +21,7 @@ import {
   setCatalogue,
   setFetchVal,
 } from "../../../store/slicers/catalogueSlice";
-import CatalogueTheme from "../../../themes/CatalogueTheme";
+import catalogueTheme from "../../../themes/catalogueTheme";
 
 const CataloguePage = ({ setActiveLinkId }) => {
   // Redux
@@ -74,7 +74,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
   };
 
   return (
-    <ThemeProvider theme={CatalogueTheme}>
+    <ThemeProvider theme={catalogueTheme}>
       <Box sx={{ minHeight: "100vh", fontFamily: "Quicksand" }}>
         <AppBar
           position="static"
@@ -88,7 +88,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                gap: 2
+                gap: 2,
               }}
             >
               <Box
@@ -100,7 +100,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   border: "1px solid #f2b90d",
                   borderRadius: "5px",
                   color: "white",
-                  width: {xs: "50%", sm: "40%", md: "25%"},
+                  width: { xs: "50%", sm: "40%", md: "25%" },
                 }}
               >
                 <InputBase
@@ -113,7 +113,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   value={searchInputVal}
                   sx={{
                     color: "white",
-                    width: "100%"
+                    width: "100%",
                   }}
                   onChange={(e) => setSearchInputVal(e.target.value)}
                   onKeyDown={(e) => {
@@ -148,8 +148,13 @@ const CataloguePage = ({ setActiveLinkId }) => {
             </Toolbar>
           </Container>
         </AppBar>
-        <Box sx={{width: "100%", mt: 10}}>
-          <Grid container rowSpacing={{xs: 2, sm: 4}} columnSpacing={{xs: 0, sm: 2, md: 3}} sx={{ mt: 6, p: "0 50px",}}>
+        <Box sx={{ width: "100%", mt: 10 }}>
+          <Grid
+            container
+            rowSpacing={{ xs: 2, sm: 4 }}
+            columnSpacing={{ xs: 0, sm: 2, md: 3 }}
+            sx={{ mt: 6, p: "0 50px" }}
+          >
             {cars.map((car) => (
               <Grid item key={car.id} xs={12} sm={6} md={4} lg={3}>
                 <Card sx={{ maxWidth: { xs: "280px", sm: "450px" } }}>
@@ -160,8 +165,9 @@ const CataloguePage = ({ setActiveLinkId }) => {
                     alt={`${car.carBrand} ${car.carModel}`}
                     sx={{ objectFit: "cover" }}
                   />
-                  <CardContent>{car.carBrand} {car.carModel}
-                    <Typography sx={{fontSize: {xs: "18px"}}}>
+                  <CardContent>
+                    {car.carBrand} {car.carModel}
+                    <Typography sx={{ fontSize: { xs: "18px" } }}>
                       ({car.carProdYear})
                     </Typography>
                     <Typography sx={{ color: "#F2A800" }}>
