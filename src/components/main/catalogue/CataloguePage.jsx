@@ -33,13 +33,12 @@ const CataloguePage = ({ setActiveLinkId }) => {
     dispatch(setCatalogue());
     return () => setActiveLinkId(null);
   }, []);
-
   // Filter and sort select values
   const [sortValue, setSortValue] = useState(SORT_OPTIONS[0]);
   const [filterValue, setFilterValue] = useState(FILTER_OPTIONS[0]);
   const changeOption = (type, value) =>
     type === "sort"
-      ? setSortValue(value)
+      ? setSortValue(value) //https://positionstack.com/documentation
       : type === "filter"
       ? setFilterValue(value)
       : console.log("Error when setting sort/filter value");
@@ -78,8 +77,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
       <Box sx={{ minHeight: "100vh", fontFamily: "Quicksand" }}>
         <AppBar
           position="static"
-          sx={{ height: 75, mt: 10, background: "#192026" }}
-        >
+          sx={{ height: 75, mt: 10, background: "#192026" }}>
           <Container>
             <Toolbar
               sx={{

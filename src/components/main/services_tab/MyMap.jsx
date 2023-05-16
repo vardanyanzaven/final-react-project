@@ -54,8 +54,7 @@ export default function MyMap({ setcordinates }) {
         center={{ lat: 40.7, lng: -74 }}
         zoom={15}
         scrollWheelZoom={false}
-        style={{ height: "500px" }}
-      >
+        style={{ height: "500px" }}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -1,6 +1,7 @@
 import { Box, Divider } from "@mui/material";
 import MainPhotoSettings from "../settings/MainPhotoSettings";
 import PersonalSettings from "../settings/PersonalSettings";
+import DriverSettings from "../settings/DriverSettings";
 
 export const UserSettings = () => {
   return (
@@ -16,6 +17,7 @@ export const UserSettings = () => {
         <PersonalSettings />
       </Box>
       <Divider />
+      <DriverSettings />
     </>
   );
 };

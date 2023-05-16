@@ -30,13 +30,11 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = ({ email, password, phone, fullName, gender }) => {
+  const onSubmit = ({ email, password, mobile, fullName, gender }) => {
     setLoading(true);
-
-    emailSignUp(email, password, phone, fullName, gender)
+    emailSignUp(email, password, mobile, fullName, gender, onClose)
       .then(() => {
         dispatch(changeMessage(SUCCESS_MESSAGE));
-        onClose();
       })
       .catch((e) => {
         const err = getError(e);
