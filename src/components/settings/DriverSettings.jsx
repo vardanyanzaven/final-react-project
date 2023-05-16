@@ -1,5 +1,14 @@
 import { ModalDialog } from "@mui/joy";
-import { Box, Button, Modal, Step, StepButton, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Link,
+  Modal,
+  Step,
+  StepButton,
+  TextField,
+} from "@mui/material";
 import { StepLabel, Stepper, Typography } from "@mui/material";
 import React from "react";
 import { useState } from "react";
@@ -7,12 +16,13 @@ import { DRIVER_REGISTER_STEPS } from "../../constants/common";
 import PassportStep from "./all_steps/PassportStep";
 
 const DriverSettings = () => {
-  const [openModal, setOpenModal] = useState(false);
   const [showStepper, setShowStepper] = useState(false);
-  const [step, setStep] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
   const [completed, setCompleted] = useState({});
+  const [disable, setDisable] = useState(true);
+  const [step, setStep] = useState(0);
 
-  const modalClose = () => {
+  const handleOpenModal = () => {
     setOpenModal(false);
   };
 
@@ -29,28 +39,45 @@ const DriverSettings = () => {
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
           sx={{
+            textAlign: "center",
+            borderRadius: "8px",
             bgcolor: "#787878",
-            minHeight: "100px",
+            minHeight: "250px",
             width: "70%",
             mt: "50px",
-            borderRadius: "8px",
-            textAlign: "center",
           }}>
           {!showStepper ? (
-            <Typography
-              variant="h6"
-              sx={{ lineHeight: "50px", paddingInline: "50px" }}>
-              Here will be your settings if you register as a driver. If you
-              want to register as a driver, you can find out by clicking
-              <Button onClick={() => setOpenModal(true)} color="secondary">
-                HERE
-              </Button>
-            </Typography>
+            <>
+              <Typography
+                variant="h6"
+                sx={{ lineHeight: "50px", paddingInline: "50px" }}>
+                Here will be your settings if you register as a driver. If you
+                want to register as a driver, you can find out by clicking
+                <Checkbox
+                  checked={!disable}
+                  color="success"
+                  onChange={() => setDisable(!disable)}
+                />
+                <Button
+                  onClick={() => setShowStepper(true)}
+                  disabled={disable}
+                  sx={{ mr: "5px" }}
+                  variant="contained">
+                  accept
+                </Button>
+              </Typography>
+              <Link
+                onClick={() => setOpenModal(true)}
+                sx={{ color: "blue", cursor: "pointer" }}
+                variant="subtitle2">
+                copyright
+              </Link>
+            </>
           ) : (
             <>
-              <Stepper activeStep={step}>
-                {DRIVER_REGISTER_STEPS.map((step, i) => (
-                  <Step key={step}>
+              <Stepper activeStep={step} sx={{ p: 3 }}>
+                {DRIVER_REGISTER_STEPS.map((step) => (
+                  <Step key={step.title}>
                     <StepLabel>{step.title}</StepLabel>
                   </Step>
                 ))}
@@ -62,7 +89,7 @@ const DriverSettings = () => {
                     team will review it, and we will provide a response within
                     48 hours.
                   </Typography>
-                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                  <Box sx={{ display: "flex", pt: 2 }}>
                     <Box sx={{ flex: "1 1 auto" }} />
                     <Button onClick={handleReset}>Reset</Button>
                   </Box>
@@ -70,18 +97,19 @@ const DriverSettings = () => {
               ) : (
                 <>
                   <Typography sx={{ mt: 2, mb: 1 }}>Step {step + 1}</Typography>
-                  <PassportStep />
-                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                  <PassportStep setDisable={setCompleted} />
+                  <Box sx={{ display: "flex", p: 2 }}>
                     <Button
                       color="inherit"
-                      disabled={step === 0}
+                      disabled={!step}
                       onClick={() => setStep(step - 1)}
-                      sx={{ mr: 1 }}>
+                      sx={{ m: 1 }}>
                       Back
                     </Button>
                     <Box sx={{ flex: "1 1 auto" }} />
                     <Button
                       onClick={handleStep}
+                      disabled={!!completed}
                       color="warning"
                       variant="outlined">
                       {step === DRIVER_REGISTER_STEPS.length - 1
@@ -95,7 +123,8 @@ const DriverSettings = () => {
           )}
         </Box>
       </Box>
-      <Modal open={openModal} onClose={modalClose}>
+
+      <Modal open={openModal} onClose={handleOpenModal}>
         <ModalDialog variant="soft">
           Data collection: Explain what types of personal information you
           collect from users, such as name, address, email address, phone
@@ -117,10 +146,9 @@ const DriverSettings = () => {
           changes that they do not agree with.
           <Button
             onClick={() => {
-              setShowStepper(true);
               setOpenModal(false);
             }}>
-            agree
+            close
           </Button>
         </ModalDialog>
       </Modal>

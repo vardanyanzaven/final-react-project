@@ -8,7 +8,7 @@ import {
   setCatalogue,
   setFetchVal,
 } from "../../../store/slicers/catalogueSlice";
-import CatalogueTheme from "../../../themes/CatalogueTheme";
+import CatalogueTheme from "../../../themes/catalogueTheme";
 import { ThemeProvider } from "styled-components";
 
 const FilterSort = ({
@@ -59,22 +59,19 @@ const FilterSort = ({
             border: "1px solid #F2B90D",
             borderRadius: "10px",
             p: "7px 15px",
-          }}
-        >
+          }}>
           <Typography
             sx={{
               display: { xs: "none", md: "inline" },
               fontSize: "16px",
               mr: 1,
-            }}
-          >
+            }}>
             Sort By:
           </Typography>
           <Typography
             sx={{
               display: { xs: "none", sm: "inline" },
-            }}
-          >
+            }}>
             {`${sortValue ? sortValue.value : ""}`}
           </Typography>
         </Button>
@@ -92,17 +89,19 @@ const FilterSort = ({
             borderRadius: "10px",
             p: "7px 15px",
             fontSize: { xs: "14px", sm: "16px" },
-          }}
-        >
-          <Typography sx={{display: { xs: "none", md: "inline" },
-              fontSize: { xs: "16px" }, mr: 1 }}>
+          }}>
+          <Typography
+            sx={{
+              display: { xs: "none", md: "inline" },
+              fontSize: { xs: "16px" },
+              mr: 1,
+            }}>
             Filter:
           </Typography>
           <Typography
             sx={{
               display: { xs: "none", sm: "inline" },
-            }}
-          >
+            }}>
             {filterValue ? filterValue.value : ""}
           </Typography>
         </Button>
@@ -119,8 +118,7 @@ const FilterSort = ({
           transformOrigin={{
             vertical: "top",
             horizontal: "left",
-          }}
-        >
+          }}>
           {SORT_OPTIONS.map((opt) => (
             <MenuItem
               key={opt.value}
@@ -131,11 +129,10 @@ const FilterSort = ({
                 dispatch(setFetchVal(["sortVal", opt.sortCondition]));
                 dispatch(setCatalogue("sort"));
                 setFilterValue(FILTER_OPTIONS[0]);
-                setActiveFilterOpt(FILTER_OPTIONS[0].value)
+                setActiveFilterOpt(FILTER_OPTIONS[0].value);
                 dispatch(setFetchVal(["filterVal", null]));
               }}
-              className={activeSortOpt === opt.value ? "active-opt" : ""}
-            >
+              className={activeSortOpt === opt.value ? "active-opt" : ""}>
               {activeSortOpt === opt.value ? <SortIcon sx={{ mr: 1 }} /> : ""}
               {opt.value}
             </MenuItem>
@@ -154,8 +151,7 @@ const FilterSort = ({
           transformOrigin={{
             vertical: "top",
             horizontal: "right",
-          }}
-        >
+          }}>
           {FILTER_OPTIONS.map((opt) => (
             <MenuItem
               key={opt.value}
@@ -169,8 +165,7 @@ const FilterSort = ({
                 setActiveSortOpt(SORT_OPTIONS[0].value);
                 dispatch(setFetchVal(["sortVal", null]));
               }}
-              className={activeFilterOpt === opt.value ? "active-opt" : ""}
-            >
+              className={activeFilterOpt === opt.value ? "active-opt" : ""}>
               {activeFilterOpt === opt.value ? (
                 <FilterAltIcon sx={{ mr: 1 }} />
               ) : (

@@ -7,6 +7,7 @@ const AboutPage = ({ setActiveLinkId }) => {
     setActiveLinkId("about");
     return () => setActiveLinkId(null);
   }, []);
+
   return (
     <div
       style={{

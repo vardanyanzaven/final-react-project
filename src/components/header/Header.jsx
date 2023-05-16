@@ -35,7 +35,6 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 id="home"
                 onClick={activateEl}>
                 <Box
-                  noWrap
                   sx={{
                     display: "flex",
                     alignItems: "center",

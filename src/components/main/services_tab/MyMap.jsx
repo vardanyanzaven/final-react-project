@@ -24,9 +24,8 @@ function MyComponent({ setcordinates }) {
       setmarker(newMarker);
       setcordinates([lat, lng]);
       getAddressFromCoordinates(lat, lng)
-        .then((address) => {
-          console.log(`The address is: ${address}`);
-        })
+        .then((data) => data.json())
+        .then((res) => console.log(res))
         .catch(({ message }) => {
           console.error(message);
         });
@@ -35,32 +34,9 @@ function MyComponent({ setcordinates }) {
   return null;
 }
 const getAddressFromCoordinates = (lat, lng) => {
-  return new Promise((resolve, reject) => {
-    window.onload = function () {
-      // Create a new geocoder instance
-      const geocoder = new window.google.maps.Geocoder();
-      if (geocoder === undefined) {
-        console.log(111);
-      }
-
-      // Create a LatLng object from the given latitude and longitude values
-      const latLng = new window.google.maps.LatLng(lat, lng);
-
-      // Use the geocoder to perform reverse geocoding
-      geocoder.geocode({ location: latLng }, (results, status) => {
-        if (status === "OK") {
-          // If the geocoding was successful, return the first result's formatted address
-          if (results[0]) {
-            resolve(results[0].formatted_address);
-          } else {
-            reject("No results found");
-          }
-        } else {
-          reject(`Geocoder failed due to: ${status}`);
-        }
-      });
-    };
-  });
+  return fetch(
+    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCDM7ihQsS_y21HFp7DSjMeck4kvZpir0w`
+  );
 };
 
 export default function MyMap({ setcordinates }) {
@@ -73,8 +49,7 @@ export default function MyMap({ setcordinates }) {
         center={{ lat: 40.7, lng: -74 }}
         zoom={15}
         scrollWheelZoom={false}
-        style={{ height: "500px" }}
-      >
+        style={{ height: "500px" }}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
