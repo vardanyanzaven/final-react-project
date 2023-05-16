@@ -1,24 +1,16 @@
 import ModalDialog from "@mui/joy/ModalDialog";
-import {
-  Button,
-  Modal,
-  TextField,
-  Typography,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import { Male, Female, MoreHoriz } from "@mui/icons-material";
-import React from "react";
-import { useState } from "react";
-import { changingSetting } from "../../services/userSettingsConfig";
+import { Button, Modal, TextField } from "@mui/material";
+import { Typography, Select, MenuItem } from "@mui/material";
 import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { changingSetting } from "../../services/userSettingsConfig";
 import { useAuth } from "../../hooks/useAuth";
 
 const SettingModal = ({ open, setOpen, setting }) => {
-  const { edit, name, value, editTitle } = setting;
+  const { name, value, editTitle, type } = setting;
   const [newValue, setNewValue] = useState(value);
-  const disp = useDispatch();
   const { userInfo } = useAuth();
+  const disp = useDispatch();
 
   const handleSettingChange = () => {
     changingSetting(name, newValue, { userInfo, disp });
@@ -34,27 +26,20 @@ const SettingModal = ({ open, setOpen, setting }) => {
     <Modal open={open} onClose={handleModalClose}>
       <ModalDialog>
         <Typography>{editTitle}</Typography>
-        {edit == "text" && (
+        {type === "input" && (
           <TextField
             value={newValue}
             onChange={(e) => setNewValue(e.target.value)}
           />
         )}
-        {edit == "select" && (
+        {type === "select" && (
           <Select
             required
             value={newValue}
             onChange={(e) => setNewValue(e.target.value)}
             label="Gender">
-            <MenuItem value="Male">
-              <Male />
-            </MenuItem>
-            <MenuItem value="Female">
-              <Female />
-            </MenuItem>
-            <MenuItem value="other">
-              <MoreHoriz />
-            </MenuItem>
+            <MenuItem value="Male">Male</MenuItem>
+            <MenuItem value="Female">Female</MenuItem>
           </Select>
         )}
         <Button onClick={handleSettingChange}>Confirm</Button>

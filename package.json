@@ -23,6 +23,7 @@
     "leaflet": "^1.9.3",
     "material-ui-phone-number": "^3.0.0",
     "npm": "^9.6.3",
+    "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
