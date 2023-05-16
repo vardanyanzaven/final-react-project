@@ -31,18 +31,19 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
   });
 
   const onSubmit = ({ email, password, mobile, fullName, gender }) => {
+    console.log(email);
     setLoading(true);
-    emailSignUp(email, password, mobile, fullName, gender, onClose)
-      .then(() => {
-        dispatch(changeMessage(SUCCESS_MESSAGE));
-      })
-      .catch((e) => {
-        const err = getError(e);
-        dispatch(changeMessage(err));
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    emailSignUp(
+      email,
+      password,
+      mobile,
+      fullName,
+      gender,
+      onClose,
+      dispatch
+    ).finally(() => {
+      setLoading(false);
+    });
   };
 
   return (

@@ -16,24 +16,24 @@ export const SORT_OPTIONS = [
   },
   {
     value: "Price: high to low",
-    sortCondition: {price: "desc"},
+    sortCondition: { price: "desc" },
   },
   {
     value: "Price: low to high",
-    sortCondition: {price: "asc"},
+    sortCondition: { price: "asc" },
   },
   {
     value: "Newest",
-    sortCondition: {carProdYear: "desc"},
+    sortCondition: { carProdYear: "desc" },
   },
   {
     value: "Oldest",
-    sortCondition: {carProdYear: "asc"},
+    sortCondition: { carProdYear: "asc" },
   },
 ];
 
 export const FILTER_OPTIONS = [
-  { value: "All", filterCondition:  null },
+  { value: "All", filterCondition: null },
   {
     value: "Limousines",
     filterCondition: "limousine",
@@ -69,6 +69,11 @@ export const ERROR_MESSAGE = {
   },
   something: {
     message: "Something went wrong!",
+    type: "error",
+    isOpen: true,
+  },
+  driverRegError: {
+    message: "Something went wrong please try later",
     type: "error",
     isOpen: true,
   },
@@ -187,6 +192,11 @@ export const SUCCESS_MESSAGE = {
   },
   booked: {
     message: " Your booking has been successfully done",
+    type: "success",
+    isOpen: true,
+  },
+  driverBecomingSuccess: {
+    message: "You have successfully become a driver",
     type: "success",
     isOpen: true,
   },

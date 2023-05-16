@@ -7,6 +7,9 @@ import { auth } from "../firebase";
 import { setUser } from "../store/slicers/userSlice";
 import { getUserDB, setUserDB } from "./dataBaseConfig";
 import { useAuth } from "../hooks/useAuth";
+import { getError } from "../utils/errors";
+import { changeMessage } from "../store/slicers/statusSlice";
+import { SUCCESS_MESSAGE } from "../constants/common";
 
 export const emailSignUp = async (
   email,
@@ -14,21 +17,17 @@ export const emailSignUp = async (
   mobile,
   fullName,
   gender,
-  onClose
+  onClose,
+  dispatch
 ) => {
+  const { user } = await createUserWithEmailAndPassword(auth, email, password);
   try {
-    const { user } = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    console.log(user, mobile, fullName, gender);
-    setUserDB(user, mobile, fullName, gender).catch((e) => {
-      throw new Error(e);
-    });
+    setUserDB(user, mobile, fullName, gender);
     onClose();
+    dispatch(changeMessage(SUCCESS_MESSAGE.loggedIn));
   } catch (e) {
-    console.log(e);
+    const err = getError(e);
+    dispatch(changeMessage(err));
   }
 };
 

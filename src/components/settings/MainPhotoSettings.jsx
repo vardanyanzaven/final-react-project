@@ -20,8 +20,8 @@ const MainPhotoSettings = () => {
   const [open, setOpen] = useState(false);
   const [el, setEl] = useState(null);
   const [disabled, setDisabled] = useState(true);
-  const { id, userInfo } = useAuth();
-  const storageRef = useMemo(() => ref(storage, id + ".png"));
+  const { id, userInfo, email } = useAuth();
+  const storageRef = useMemo(() => ref(storage, id + "/" + email + ".png"));
   const disp = useDispatch();
 
   const handleFileChange = (e) => {
@@ -67,7 +67,7 @@ const MainPhotoSettings = () => {
       );
       setPreviewPhoto(null);
     } catch (e) {
-      console.log(`handleRemovePhoto ERROR ${e}`);
+      console.log(`IM ERRORNERIC ERROR ${e}`);
     }
   };
   return (
