@@ -28,7 +28,7 @@ const DropdownMenu = () => {
   };
 
   return (
-    <Box sx={{ display: { xs: "flex", md: "none" }, flexGrow: 1 }}>
+    <Box sx={{ display: { xs: "flex", md: "none" }, flexGrow: 1, ml: -1 }}>
       <IconButton
         className={isNavOpened ? "nav-active" : ""}
         size="large"
