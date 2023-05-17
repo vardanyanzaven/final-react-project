@@ -4,7 +4,7 @@ import { Comments } from "./Comments";
 
 export const HomePage = () => {
   return (
-    <div className="homepage-slider">
+    <div>
       <HomePageSlider />
       <Comments />
     </div>

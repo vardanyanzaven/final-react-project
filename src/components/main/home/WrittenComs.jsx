@@ -28,11 +28,10 @@ export const WrittenComs = () => {
                         sx={{ display: "inline" }}
                         component="span"
                         variant="body2"
-                        color="text.primary"
-                      >
+                        color="text.primary">
                         {m?.fullName}
                       </Typography>
-                      {m.com}
+                      {m.comment}
                     </React.Fragment>
                   }
                 />

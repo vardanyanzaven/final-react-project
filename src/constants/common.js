@@ -198,6 +198,9 @@ export const SUCCESS_MESSAGE = {
 
   comment: {
     message: " Your comment was successfully done",
+    type: "success",
+    isOpen: true,
+  },
   driverBecomingSuccess: {
     message: "You have successfully become a driver",
     type: "success",
