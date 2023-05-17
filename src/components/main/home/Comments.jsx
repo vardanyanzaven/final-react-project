@@ -2,36 +2,40 @@ import * as React from "react";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import { useState } from "react";
-import { Avatar } from "@mui/material";
 import Input from "@mui/joy/Input";
-import { addDoc, collection, doc, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 import { useAuth } from "../../../hooks/useAuth";
 import { SUCCESS_MESSAGE } from "../../../constants/common";
-import ShowStatus from "../../../shared/show_bar/ShowStatus";
-import { auth, db } from "../../../firebase";
+import { db } from "../../../firebase";
 import { useDispatch } from "react-redux";
 import { changeMessage } from "../../../store/slicers/statusSlice";
+import Avatar from "@mui/material/Avatar";
+import { WrittenComs } from "./WrittenComs";
+import { getCommentsCollection } from "../../../store/slicers/commentSlice";
+import { useEffect } from "react";
 
 export const Comments = () => {
   const [text, setText] = useState();
-  const { id } = useAuth();
+  const { id, userInfo } = useAuth();
   const disp = useDispatch();
 
-  //   const q = query(collection(db, "cities"))
-
-  //   const querySnapshot = await getDocs(q)
+  useEffect(() => {
+    disp(getCommentsCollection());
+  }, []);
 
   const onHandleButton = async () => {
-    setText("");
-    return await addDoc(collection(db, "comments"), {
-      comment: text,
-      writer: doc(db, "users", auth.currentUser.uid),
-    })
-      .then(() => {
+    try {
+      setText("");
+      return await addDoc(collection(db, "comments"), {
+        comment: text,
+        writerId: doc(db, "users", id),
+        photoURL: userInfo.photoURL,
+      }).then(() => {
         disp(changeMessage(SUCCESS_MESSAGE.comment));
-        ShowStatus();
-      })
-      .catch(({ message }) => console.log(message));
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Box
@@ -41,27 +45,33 @@ export const Comments = () => {
         alignItems: "center",
       }}
     >
-      <Box>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Box
-          sx={{ display: "flex", background: "white", width: 800, height: 600 }}
+          sx={{
+            display: "flex",
+            background: "white",
+            width: 800,
+            alignItems: "center",
+            justifyContent: "space-around",
+          }}
         >
-          <Avatar
-            alt="Remy Sharp"
-            src="/static/images/avatar/1.jpg"
-            size="lg"
-          />
+          <Avatar src={userInfo.photoURL} size="lg" sx={{ mt: 2, ml: 12 }} />
           <Input
-            sx={{ width: 250, height: 20, border: "none" }}
-            placeholder="Write comment us here…"
+            sx={{ width: 350, height: 20, border: 1, mt: 2 }}
+            placeholder="Write us comment here…"
             variant="outlined"
             color="primary"
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <Button sx={{ width: 50, height: 20 }} onClick={onHandleButton}>
+          <Button
+            sx={{ width: 100, height: 20, mt: 2, mr: 12 }}
+            onClick={onHandleButton}
+          >
             Send
           </Button>
         </Box>
+        <WrittenComs />
       </Box>
     </Box>
   );
