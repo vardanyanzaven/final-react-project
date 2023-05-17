@@ -72,6 +72,11 @@ export const ERROR_MESSAGE = {
     type: "error",
     isOpen: true,
   },
+  driverRegError: {
+    message: "Something went wrong please try later",
+    type: "error",
+    isOpen: true,
+  },
 };
 
 export const SETTINGS_NAME_LIST = () => {
@@ -190,8 +195,11 @@ export const SUCCESS_MESSAGE = {
     type: "success",
     isOpen: true,
   },
+
   comment: {
     message: " Your comment was successfully done",
+  driverBecomingSuccess: {
+    message: "You have successfully become a driver",
     type: "success",
     isOpen: true,
   },

@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, IconButton, Typography } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@material-ui/core";
 import { useForm } from "react-hook-form";
@@ -6,20 +6,29 @@ import { LoadingButton } from "@mui/lab";
 import React, { useState } from "react";
 import { passportSchema } from "../../../utils/validation";
 
-const PassportStep = ({ setDisable }) => {
+const PassportStep = ({ setIsNext, setCompleted }) => {
   const [sended, setSended] = useState(false);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(passportSchema),
   });
 
-  const onSubmit = ({ passport, fullName }) => {
+  const onSubmit = (data, e) => {
+    console.log(sended);
+    if (sended) {
+      e.target.reset();
+      reset();
+      setSended(false);
+      setIsNext(true);
+      return;
+    }
     setSended(true);
-    setDisable(false);
-    console.log(passport, fullName);
+    setIsNext(false);
+    setCompleted({ ...data });
   };
 
   return (
@@ -60,6 +69,10 @@ const PassportStep = ({ setDisable }) => {
             label="Home address"
             fullWidth
             variant="outlined"
+            type="text"
+            error={!!errors.homeAddress}
+            helperText={errors.homeAddress?.message}
+            {...register("homeAddress")}
           />
         </Grid>
         <Grid item xs={12}>
@@ -70,6 +83,9 @@ const PassportStep = ({ setDisable }) => {
             InputLabelProps={{ shrink: true }}
             variant="outlined"
             type="date"
+            error={!!errors.birthday}
+            helperText={errors.birthday?.message}
+            {...register("birthday")}
           />
         </Grid>
         <Grid item xs={6}>
@@ -91,6 +107,9 @@ const PassportStep = ({ setDisable }) => {
             InputLabelProps={{ shrink: true }}
             type="date"
             variant="outlined"
+            error={!!errors.passportDate}
+            helperText={errors.passportDate?.message}
+            {...register("passportDate")}
           />
         </Grid>
         <Grid item xs={12}>

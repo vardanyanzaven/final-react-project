@@ -16,7 +16,6 @@ const SettingModal = ({ open, setOpen, setting }) => {
     changingSetting(name, newValue, { userInfo, disp });
     setOpen(false);
   };
-
   const handleModalClose = () => {
     setNewValue(value);
     setOpen(false);
