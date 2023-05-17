@@ -1,8 +1,8 @@
 import * as React from "react";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
-import { useState } from "react";
 import Input from "@mui/joy/Input";
+import { useState } from "react";
 import { addDoc, collection, doc } from "firebase/firestore";
 import { useAuth } from "../../../hooks/useAuth";
 import { SUCCESS_MESSAGE } from "../../../constants/common";
@@ -15,7 +15,7 @@ import { getCommentsCollection } from "../../../store/slicers/commentSlice";
 import { useEffect } from "react";
 
 export const Comments = () => {
-  const [text, setText] = useState();
+  const [text, setText] = useState("");
   const { id, userInfo } = useAuth();
   const disp = useDispatch();
 
@@ -43,8 +43,7 @@ export const Comments = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Box
           sx={{
@@ -53,8 +52,7 @@ export const Comments = () => {
             width: 800,
             alignItems: "center",
             justifyContent: "space-around",
-          }}
-        >
+          }}>
           <Avatar src={userInfo.photoURL} size="lg" sx={{ mt: 2, ml: 12 }} />
           <Input
             sx={{ width: 350, height: 20, border: 1, mt: 2 }}
@@ -66,8 +64,7 @@ export const Comments = () => {
           />
           <Button
             sx={{ width: 100, height: 20, mt: 2, mr: 12 }}
-            onClick={onHandleButton}
-          >
+            onClick={onHandleButton}>
             Send
           </Button>
         </Box>

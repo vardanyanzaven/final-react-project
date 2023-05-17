@@ -8,18 +8,24 @@ export const getCommentsCollection = createAsyncThunk(
     const result = [];
     const col = query(collection(db, "comments"));
     const docs = await getDocs(col);
-    docs.forEach(async (com) => {
+    docs.forEach((com) => {
       const data = com.data();
-      const fullName = await getDoc(data.writerId);
 
-      result.push({ ...data, ...fullName.data() });
+      result.push(data);
     });
 
-    return result.map((com) => ({
-      com: com.comment,
-      photoURL: com.photoURL,
-      fullName: com.fullName,
-    }));
+    const lastRes = [];
+
+    for (let i = 0; i < result.length; i++) {
+      const { comment, photoURL, writerId } = result[i];
+      const snap = await getDoc(writerId);
+      lastRes.push({
+        comment,
+        photoURL,
+        fullName: snap.data().fullName,
+      });
+    }
+    return lastRes;
   }
 );
 
