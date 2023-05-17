@@ -8,8 +8,8 @@ import {
   setCatalogue,
   setFetchVal,
 } from "../../../store/slicers/catalogueSlice";
-import CatalogueTheme from "../../../themes/catalogueTheme";
 import { ThemeProvider } from "styled-components";
+import catalogueTheme from "../../../themes/catalogueTheme";
 
 const FilterSort = ({
   activeSortOpt,
@@ -45,7 +45,7 @@ const FilterSort = ({
   const dispatch = useDispatch();
 
   return (
-    <ThemeProvider theme={CatalogueTheme}>
+    <ThemeProvider theme={catalogueTheme}>
       <Box sx={{ display: "flex", gap: 2 }}>
         <Button
           id="sort-by-btn"
@@ -89,13 +89,15 @@ const FilterSort = ({
             borderRadius: "10px",
             p: "7px 15px",
             fontSize: { xs: "14px", sm: "16px" },
-          }}>
-          <Typography
-            sx={{
+     }}
+        >
+         <Typography
+           sx={{
               display: { xs: "none", md: "inline" },
               fontSize: { xs: "16px" },
               mr: 1,
-            }}>
+            }}
+          >
             Filter:
           </Typography>
           <Typography

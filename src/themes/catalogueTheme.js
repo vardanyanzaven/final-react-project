@@ -1,7 +1,7 @@
 import { Menu, createTheme, styled } from "@material-ui/core";
 import { Button } from "@mui/material";
 
-const CatalogueTheme = createTheme({
+const catalogueTheme = createTheme({
   components: {
     MuiMenu: {
       styleOverrides: {
@@ -35,4 +35,4 @@ export const FilterSortBtn = styled(Button)({
   fontSize: { xs: "14px", sm: "16px" },
 });
 
-export default CatalogueTheme;
+export default catalogueTheme;

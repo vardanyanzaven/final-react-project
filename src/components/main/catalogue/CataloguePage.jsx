@@ -21,7 +21,7 @@ import {
   setCatalogue,
   setFetchVal,
 } from "../../../store/slicers/catalogueSlice";
-import CatalogueTheme from "../../../themes/catalogueTheme";
+import catalogueTheme from "../../../themes/catalogueTheme";
 
 const CataloguePage = ({ setActiveLinkId }) => {
   // Redux
@@ -73,7 +73,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
   };
 
   return (
-    <ThemeProvider theme={CatalogueTheme}>
+    <ThemeProvider theme={catalogueTheme}>
       <Box sx={{ minHeight: "100vh", fontFamily: "Quicksand" }}>
         <AppBar
           position="static"
@@ -87,7 +87,8 @@ const CataloguePage = ({ setActiveLinkId }) => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 gap: 2,
-              }}>
+              }}
+            >
               <Box
                 sx={{
                   display: "flex",
@@ -98,7 +99,8 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   borderRadius: "5px",
                   color: "white",
                   width: { xs: "50%", sm: "40%", md: "25%" },
-                }}>
+                }}
+              >
                 <InputBase
                   type="text"
                   placeholder={
@@ -149,7 +151,8 @@ const CataloguePage = ({ setActiveLinkId }) => {
             container
             rowSpacing={{ xs: 2, sm: 4 }}
             columnSpacing={{ xs: 0, sm: 2, md: 3 }}
-            sx={{ mt: 6, p: "0 50px" }}>
+            sx={{ mt: 6, p: "0 50px" }}
+          >
             {cars.map((car) => (
               <Grid item key={car.id} xs={12} sm={6} md={4} lg={3}>
                 <Card sx={{ maxWidth: { xs: "280px", sm: "450px" } }}>

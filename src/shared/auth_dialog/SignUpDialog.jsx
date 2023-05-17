@@ -53,13 +53,15 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
         onClose={onClose}
         keepMounted
         sx={styles.dialog}
-        TransitionComponent={Transition}>
+        TransitionComponent={Transition}
+      >
         <Container sx={styles.container}>
           <Box
             component="form"
             noValidate
             onSubmit={handleSubmit(onSubmit)}
-            sx={styles.formBox}>
+            sx={styles.formBox}
+          >
             <DialogTitle>Sign Up</DialogTitle>
             <Box sx={{ mt: 2 }}>
               <Grid container spacing={2.2}>
@@ -105,7 +107,8 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                       IconComponent: () => null,
                     }}
                     defaultValue=""
-                    error={!!errors.gender}>
+                    error={!!errors.gender}
+                  >
                     <MenuItem value="Male">Male</MenuItem>
                     <MenuItem value="Female">Female</MenuItem>
                   </TextField>
@@ -145,7 +148,8 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
                       endAdornment: (
                         <IconButton
                           onClick={() => setShowPass(!showPass)}
-                          edge="end">
+                          edge="end"
+                        >
                           {showPass ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       ),

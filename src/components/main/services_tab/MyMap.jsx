@@ -17,6 +17,7 @@ function MyComponent({ setcordinates }) {
   const map = useMapEvents({
     click: (e) => {
       const { lat, lng } = e.latlng;
+      console.log(e);
       if (marker) {
         marker.remove();
       }
@@ -24,8 +25,9 @@ function MyComponent({ setcordinates }) {
       setmarker(newMarker);
       setcordinates([lat, lng]);
       getAddressFromCoordinates(lat, lng)
-        .then((data) => data.json())
-        .then((res) => console.log(res))
+        .then((address) => {
+          console.log(` Address is ${address}`);
+        })
         .catch(({ message }) => {
           console.error(message);
         });
@@ -33,10 +35,13 @@ function MyComponent({ setcordinates }) {
   });
   return null;
 }
-const getAddressFromCoordinates = (lat, lng) => {
-  return fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCDM7ihQsS_y21HFp7DSjMeck4kvZpir0w`
+const getAddressFromCoordinates = async (lat, lng) => {
+  const data = await fetch(
+    `http://api.positionstack.com/v1/reverse?access_key=b8ed63f1fcdf51a8dbec592013c34f6b&query=${lat},${lng}`
   );
+
+  const res = await data.json();
+  console.log(res);
 };
 
 export default function MyMap({ setcordinates }) {
