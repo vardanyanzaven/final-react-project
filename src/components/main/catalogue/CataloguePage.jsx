@@ -2,15 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   AppBar,
   Box,
-  Card,
-  CardContent,
-  CardMedia,
   Container,
-  Grid,
   InputBase,
   ThemeProvider,
   Toolbar,
-  Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterSort from "./FilterSort";
@@ -22,6 +17,7 @@ import {
   setFetchVal,
 } from "../../../store/slicers/catalogueSlice";
 import CatalogueTheme from "../../../themes/CatalogueTheme";
+import CarsGrid from "../../../shared/CarsGrid";
 
 const CataloguePage = ({ setActiveLinkId }) => {
   // Redux
@@ -86,9 +82,9 @@ const CataloguePage = ({ setActiveLinkId }) => {
                 pt: 0.7,
                 pl: 0,
                 display: "flex",
-                alignItems: "center",
+                pt: {xs: 1.2, sm: 0.7},
                 justifyContent: "space-between",
-                gap: 2
+                gap: 2,
               }}
             >
               <Box
@@ -100,7 +96,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   border: "1px solid #f2b90d",
                   borderRadius: "5px",
                   color: "white",
-                  width: {xs: "50%", sm: "40%", md: "25%"},
+                  width: { xs: "50%", sm: "40%", md: "25%" },
                 }}
               >
                 <InputBase
@@ -108,12 +104,12 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   placeholder={
                     lastSearch === ""
                       ? "Search..."
-                      : `Searched for "${lastSearch}"`
+                      : `Last searched for "${lastSearch}"`
                   }
                   value={searchInputVal}
                   sx={{
                     color: "white",
-                    width: "100%"
+                    width: "100%",
                   }}
                   onChange={(e) => setSearchInputVal(e.target.value)}
                   onKeyDown={(e) => {
@@ -148,31 +144,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
             </Toolbar>
           </Container>
         </AppBar>
-        <Box sx={{width: "100%", mt: 10}}>
-          <Grid container rowSpacing={{xs: 2, sm: 4}} columnSpacing={{xs: 0, sm: 2, md: 3}} sx={{ mt: 6, p: "0 50px",}}>
-            {cars.map((car) => (
-              <Grid item key={car.id} xs={12} sm={6} md={4} lg={3}>
-                <Card sx={{ maxWidth: { xs: "280px", sm: "450px" } }}>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={car.photoURL}
-                    alt={`${car.carBrand} ${car.carModel}`}
-                    sx={{ objectFit: "cover" }}
-                  />
-                  <CardContent>{car.carBrand} {car.carModel}
-                    <Typography sx={{fontSize: {xs: "18px"}}}>
-                      ({car.carProdYear})
-                    </Typography>
-                    <Typography sx={{ color: "#F2A800" }}>
-                      ${car.price.toLocaleString()}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
+        <CarsGrid carsObj={cars}/>
       </Box>
     </ThemeProvider>
   );

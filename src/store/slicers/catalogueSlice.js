@@ -1,31 +1,51 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { and, collection, getDocs, or, orderBy, query, where } from "firebase/firestore";
+import {
+  and,
+  collection,
+  getDocs,
+  or,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 
 export const setCatalogue = createAsyncThunk(
   "catalogue/setCatalogue",
   async (actionType, thunkAPI) => {
-    const catalogueCarsRef = collection(db, "catalogueCars");
-    const { filterVal, searchVal, sortVal } = thunkAPI.getState().catalogue;
-    const carList = [];
-    const carQuery = await getDocs(
-      query(
-        catalogueCarsRef,
-        actionType === "filter" && filterVal !== null
-          ? where("carType", "==", filterVal)
-          : actionType === "search" && searchVal !== ""
-          ? or(
-              where("carBrand", "==", searchVal.charAt(0).toUpperCase() + searchVal.slice(1).toLowerCase()),
-              where("carModel", "==", searchVal.charAt(0).toUpperCase() + searchVal.slice(1).toLowerCase())
-            )
-          : actionType === "sort" && sortVal !== null
-          ? orderBy(Object.keys(sortVal)[0], Object.values(sortVal)[0])
-          : ""
-      )
-    );
-    carQuery.forEach((car) => carList.push({ id: car.id, ...car.data() }));
+    try {
+      const catalogueCarsRef = collection(db, "catalogueCars");
+      const { filterVal, searchVal, sortVal } = thunkAPI.getState().catalogue;
+      const carList = [];
+      const carQuery = await getDocs(
+        query(
+          catalogueCarsRef,
+          actionType === "filter" && filterVal !== null
+            ? where("carType", "==", filterVal)
+            : actionType === "search" && searchVal !== ""
+            ? or(
+                where(
+                  "carBrand",
+                  "==",
+                  searchVal.charAt(0).toUpperCase() + searchVal.slice(1)
+                ),
+                where(
+                  "carModel",
+                  "==",
+                  searchVal.charAt(0).toUpperCase() + searchVal.slice(1)
+                )
+              )
+            : actionType === "sort" && sortVal !== null
+            ? orderBy(Object.keys(sortVal)[0], Object.values(sortVal)[0])
+            : ""
+        )
+      );
+      carQuery.forEach((car) => carList.push({ id: car.id, ...car.data() }));
 
-    return carList;
+      return carList;
+    } catch (err) {
+      console.error(err);
+    }
   }
 );
 

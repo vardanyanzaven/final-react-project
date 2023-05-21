@@ -37,7 +37,6 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 onClick={activateEl}
               >
                 <Box
-                  noWrap
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -55,7 +54,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                   <Typography
                     sx={{
                       fontSize: { xs: 15, sm: 30 },
-                      color: "#799979",
+                      color: "#F2B90D",
                       bgcolor: "#161617",
                       p: "0 5px",
                       borderTopLeftRadius: "20px",
@@ -70,7 +69,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                       fontSize: { xs: 15, sm: 30 },
                       p: "0 5px",
                       color: "#161617",
-                      bgcolor: "#799979",
+                      bgcolor: "#F2B90D",
                       borderBottomRightRadius: "20px",
                       mr: 1,
                     }}

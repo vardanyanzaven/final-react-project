@@ -9,9 +9,8 @@ const CatalogueTheme = createTheme({
           "& .MuiMenu-paper": {
             minWidth: "175px",
           },
-
-        }
-      }
+        },
+      },
     },
     MuiMenuItem: {
       styleOverrides: {
@@ -25,6 +24,15 @@ const CatalogueTheme = createTheme({
     fontFamily: ["Quicksand", "IBM Plex Sans", "Roboto", "sans-serif"].join(
       ","
     ),
+  },
+  // Nayi inchi chi ashxatum, pagination, nor grid itemner
+  palette: {
+    gold: {
+      light: "#FFC30F",
+      main: "#F2B90D",
+      dark: "#E8AE00",
+      contrastText: "#007292",
+    },
   },
 });
 

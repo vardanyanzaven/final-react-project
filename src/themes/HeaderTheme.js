@@ -71,7 +71,7 @@ const HeaderTheme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "capitalize",
-          color: "white",
+          color: "black",
           transition: "color 0.2s",
           "&:hover": {
             color: "#F2B90D"

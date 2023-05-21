@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SortIcon from "@mui/icons-material/Sort";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Button, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -47,7 +47,23 @@ const FilterSort = ({
   return (
     <ThemeProvider theme={CatalogueTheme}>
       <Box sx={{ display: "flex", gap: 2 }}>
+        <IconButton
+          color="gold"
+          id="sort-by-btn"
+          aria-controls={sortOpen ? "sort-by-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={sortOpen ? "true" : undefined}
+          onClick={handleSortClick}
+          size="large"
+          sx={{
+            display: { xs: "flex", sm: "none" },
+
+          }}
+        >
+          <SortIcon />
+        </IconButton>
         <Button
+          color="gold"
           id="sort-by-btn"
           aria-controls={sortOpen ? "sort-by-menu" : undefined}
           aria-haspopup="true"
@@ -55,10 +71,11 @@ const FilterSort = ({
           onClick={handleSortClick}
           startIcon={<SortIcon />}
           sx={{
-            color: "#F2B90D",
+            // color: "#F2B90D",
             border: "1px solid #F2B90D",
             borderRadius: "10px",
             p: "7px 15px",
+            display: { xs: "none", sm: "flex" },
           }}
         >
           <Typography
@@ -79,7 +96,20 @@ const FilterSort = ({
           </Typography>
         </Button>
         {/* xs-i hamar IconButton-ov kareli a sarqel */}
+        <IconButton
+          color="gold"
+          id="filter-btn"
+          aria-controls={filterOpen ? "filter-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={filterOpen ? "true" : undefined}
+          onClick={handleFilterClick}
+          size="large"
+          sx={{ display: { xs: "flex", sm: "none" } }}
+        >
+          <FilterAltIcon />
+        </IconButton>
         <Button
+        color="gold"
           id="filter-btn"
           aria-controls={filterOpen ? "filter-menu" : undefined}
           aria-haspopup="true"
@@ -87,15 +117,20 @@ const FilterSort = ({
           onClick={handleFilterClick}
           startIcon={<FilterAltIcon />}
           sx={{
-            color: "#F2B90D",
             border: "1px solid #F2B90D",
             borderRadius: "10px",
             p: "7px 15px",
             fontSize: { xs: "14px", sm: "16px" },
+            display: { xs: "none", sm: "flex" },
           }}
         >
-          <Typography sx={{display: { xs: "none", md: "inline" },
-              fontSize: { xs: "16px" }, mr: 1 }}>
+          <Typography
+            sx={{
+              display: { xs: "none", md: "inline" },
+              fontSize: { xs: "16px" },
+              mr: 1,
+            }}
+          >
             Filter:
           </Typography>
           <Typography
@@ -103,7 +138,7 @@ const FilterSort = ({
               display: { xs: "none", sm: "inline" },
             }}
           >
-            {filterValue ? filterValue.value : ""}
+            {filterValue.value}
           </Typography>
         </Button>
         <Menu
@@ -131,12 +166,12 @@ const FilterSort = ({
                 dispatch(setFetchVal(["sortVal", opt.sortCondition]));
                 dispatch(setCatalogue("sort"));
                 setFilterValue(FILTER_OPTIONS[0]);
-                setActiveFilterOpt(FILTER_OPTIONS[0].value)
+                setActiveFilterOpt(FILTER_OPTIONS[0].value);
                 dispatch(setFetchVal(["filterVal", null]));
               }}
               className={activeSortOpt === opt.value ? "active-opt" : ""}
             >
-              {activeSortOpt === opt.value ? <SortIcon sx={{ mr: 1 }} /> : ""}
+              {activeSortOpt === opt.value && <SortIcon sx={{ mr: 1 }} />}
               {opt.value}
             </MenuItem>
           ))}
@@ -171,10 +206,8 @@ const FilterSort = ({
               }}
               className={activeFilterOpt === opt.value ? "active-opt" : ""}
             >
-              {activeFilterOpt === opt.value ? (
+              {activeFilterOpt === opt.value && (
                 <FilterAltIcon sx={{ mr: 1 }} />
-              ) : (
-                ""
               )}
               {opt.value}
             </MenuItem>
