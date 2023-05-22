@@ -2,6 +2,11 @@
   outline: none;
 }
 
+
+:root {
+  --background-color: #48484f;
+}
+
 body {
   margin: 0;
   box-sizing: border-box;
@@ -10,7 +15,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #48484f;
+  background-color: var(--background-color);
   overflow-x: hidden;
 }
 

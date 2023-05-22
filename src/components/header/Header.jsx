@@ -9,6 +9,7 @@ import DropdownMenu from "./DropdownMenu";
 import AvatarMenu from "./AvatarMenu";
 import { useAuth } from "../../hooks/useAuth";
 import AuthDraw from "../dialog/AuthDraw";
+import { SwitchButton } from "../main/home/SwitchButton";
 
 const Header = ({ activeLinkId, setActiveLinkId }) => {
   const checkIfActive = (id) => activeLinkId === id;
@@ -104,6 +105,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
                 </NavLink>
               ))}
             </Box>
+            <SwitchButton />
             {isAuth ? <AvatarMenu /> : <AuthDraw />}
           </Toolbar>
         </Container>
