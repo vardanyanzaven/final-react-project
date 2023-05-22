@@ -32,7 +32,7 @@ const HomePageSlider = () => {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 width: "100%",
-                height: "800px",
+                height: "500px",
               }}
             >
               <div className="content">

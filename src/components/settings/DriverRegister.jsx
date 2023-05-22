@@ -27,7 +27,7 @@ import { v4 } from "uuid";
 import { useMemo } from "react";
 import { ref, uploadBytes } from "firebase/storage";
 import { auth, db, storage } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 async function finalPart(data, passportRef, selfieRef) {
   const {
@@ -44,14 +44,16 @@ async function finalPart(data, passportRef, selfieRef) {
   try {
     await uploadBytes(passportRef, photo);
     await uploadBytes(selfieRef, selfie);
-    await setDoc(doc(db, "drivers", auth.currentUser.uid), {
-      firstName,
-      lastName,
-      homeAddress,
-      birthday,
-      passport,
-      passportDate,
-      license,
+    await updateDoc(doc(db, "users", auth.currentUser.uid), {
+      driverInfo: {
+        firstName,
+        lastName,
+        homeAddress,
+        birthday,
+        passport,
+        passportDate,
+        license,
+      },
     });
   } catch (error) {
     console.error(error.message);
@@ -84,15 +86,17 @@ const DriverSettings = () => {
 
       changingSetting("Driver", null, { userInfo, disp })
         .then(() => {
-          setIsNext(true);
           disp(changeMessage(SUCCESS_MESSAGE.driverBecomingSuccess));
           setStep(step + 1);
-          setLoading(false);
         })
-        .catch(() => {
+        .catch((e) => {
+          console.log(e);
           disp(changeMessage(ERROR_MESSAGE.driverRegError));
+        })
+        .finally(() => {
+          setLoading(false);
+          setIsNext(true);
         });
-      return;
     }
     setStep(step + 1);
     setIsNext(true);

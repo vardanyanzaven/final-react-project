@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { db } from "../../firebase";
-import { collection, getDoc, getDocs, query } from "firebase/firestore";
+import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 
 export const getCommentsCollection = createAsyncThunk(
   "comments/getCommentsCollection",
@@ -8,24 +8,29 @@ export const getCommentsCollection = createAsyncThunk(
     const result = [];
     const col = query(collection(db, "comments"));
     const docs = await getDocs(col);
+
     docs.forEach((com) => {
       const data = com.data();
 
       result.push(data);
     });
 
-    const lastRes = [];
-
-    for (let i = 0; i < result.length; i++) {
-      const { comment, photoURL, writerId } = result[i];
-      const snap = await getDoc(writerId);
-      lastRes.push({
-        comment,
-        photoURL,
-        fullName: snap.data().fullName,
-      });
-    }
-    return lastRes;
+    const res = await Promise.all(
+      result.map(async ({ comment, writerId, commentTime }) => {
+        const refData = await getDoc(writerId);
+        const { fullName, photoURL } = refData.data();
+        return {
+          comment,
+          fullName,
+          photoURL,
+          commentTime,
+        };
+      })
+    ).catch((e) => {
+      console.log(e, "dafjkfdkj");
+      return [];
+    });
+    return res;
   }
 );
 
