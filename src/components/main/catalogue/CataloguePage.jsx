@@ -17,7 +17,7 @@ import {
 } from "../../../store/slicers/catalogueSlice";
 
 import CarsGrid from "../../../shared/CarsGrid";
-import CatalogueTheme from "../../../themes/CatalogueTheme";
+import CatalogueTheme from "../../../themes/catalogueTheme";
 
 const CataloguePage = ({ setActiveLinkId }) => {
   // Redux
@@ -70,7 +70,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
 
   return (
     <ThemeProvider theme={CatalogueTheme}>
-      <Box sx={{ minHeight: "100vh"}}>
+      <Box sx={{ minHeight: "100vh" }}>
         <AppBar
           position="static"
           sx={{ height: 75, mt: 10, background: "#192026" }}>
@@ -78,11 +78,10 @@ const CataloguePage = ({ setActiveLinkId }) => {
             <Toolbar
               sx={{
                 display: "flex",
-                pt: {xs: 1.2, sm: 0.7},
+                pt: { xs: 1.2, sm: 0.7 },
                 justifyContent: "space-between",
                 gap: 2,
-              }}
-            >
+              }}>
               <Box
                 sx={{
                   display: "flex",
@@ -93,15 +92,14 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   color: "white",
                   pr: "8px",
                   width: { xs: "50%", sm: "40%", md: "25%" },
-                }}
-              >
+                }}>
                 <InputBase
                   type="text"
                   sx={{
                     color: "white",
                     width: "100%",
                     pl: "10px",
-                    pr: "10px"
+                    pr: "10px",
                   }}
                   placeholder={
                     lastSearch === ""
@@ -142,7 +140,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
             </Toolbar>
           </Container>
         </AppBar>
-        <CarsGrid carsList={cars}/>
+        <CarsGrid carsList={cars} />
       </Box>
     </ThemeProvider>
   );
