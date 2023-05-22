@@ -1,9 +1,18 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import { SERVICE_DATA } from "./servicesData";
+import { useDispatch, useSelector } from "react-redux";
+import { setCatalogue } from "../../../../store/slicers/catalogueSlice";
+import { useEffect } from "react";
 
 export default function SelectCars({ car, setcar }) {
   const [open, setOpen] = useState(false);
+  const { cars } = useSelector((state) => state.catalogue);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCatalogue());
+  }, []);
 
   const onClose = () => {
     setOpen(!open);
@@ -27,11 +36,11 @@ export default function SelectCars({ car, setcar }) {
           inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem disabled value="">
-            <em>Select Car</em>
+            <em>Select Car Brand </em>
           </MenuItem>
-          {SERVICE_DATA().map((c) => (
-            <MenuItem key={Math.random()} value={c.car}>
-              {c.car}
+          {cars.map((c) => (
+            <MenuItem key={Math.random()} value={c.carBrand}>
+              {c.carBrand}
             </MenuItem>
           ))}
         </Select>

@@ -4,17 +4,25 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
 import { SERVICE_DATA } from "./servicesData";
+import { useDispatch, useSelector } from "react-redux";
+import { setCatalogue } from "../../../../store/slicers/catalogueSlice";
+import { useEffect } from "react";
 
-export default function SelectServiceType({ service, setservice }) {
+export default function SelectCarModel({ carModel, setCarModel }) {
   const [open, setOpen] = useState(false);
-  console.log(service);
+  const { cars } = useSelector((state) => state.catalogue);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCatalogue());
+  }, []);
 
   const onClose = () => {
     setOpen(!open);
   };
 
   const handleChange = (e) => {
-    setservice(e.target.value);
+    setCarModel(e.target.value);
   };
 
   return (
@@ -23,7 +31,7 @@ export default function SelectServiceType({ service, setservice }) {
         <Select
           required
           displayEmpty
-          value={service}
+          value={carModel}
           onChange={handleChange}
           open={open}
           onClose={onClose}
@@ -31,11 +39,11 @@ export default function SelectServiceType({ service, setservice }) {
           inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem disabled value="">
-            <em>Select Service Type</em>
+            <em>Select Car Model </em>
           </MenuItem>
-          {SERVICE_DATA().map((s) => (
-            <MenuItem key={Math.random()} value={s.name}>
-              {s.name}
+          {cars.map((s) => (
+            <MenuItem key={Math.random()} value={s.carModel}>
+              {s.carModel}
             </MenuItem>
           ))}
         </Select>

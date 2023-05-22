@@ -18,7 +18,8 @@ const ServicesPage = ({ setActiveLinkId }) => {
         textAlign: "center",
         alignItems: "center",
         flexDirection: "column",
-      }}>
+      }}
+    >
       <Typography className="heading" variant="h3" color="#F2B918">
         Our services
       </Typography>
@@ -33,6 +34,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
         ))}
       </ImageList>
     </Box>
+
     // </ThemeProvider>
   );
 };

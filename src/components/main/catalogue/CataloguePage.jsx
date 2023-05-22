@@ -77,7 +77,8 @@ const CataloguePage = ({ setActiveLinkId }) => {
       <Box sx={{ minHeight: "100vh", fontFamily: "Quicksand" }}>
         <AppBar
           position="static"
-          sx={{ height: 75, mt: 10, background: "#192026" }}>
+          sx={{ height: 75, mt: 10, background: "#192026" }}
+        >
           <Container>
             <Toolbar
               sx={{
