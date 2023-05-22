@@ -74,8 +74,8 @@ const HeaderTheme = createTheme({
           color: "black",
           transition: "color 0.2s",
           "&:hover": {
-            color: "#F2B90D"
-          }
+            color: "#F2B90D",
+          },
         },
       },
     },

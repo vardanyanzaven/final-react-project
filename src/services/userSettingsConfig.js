@@ -18,6 +18,8 @@ export const changingSetting = (name, newProp, dispatch) => {
     case "Fullname":
       updateUserProfile(auth.currentUser, { fullName: newProp }, dispatch);
       break;
+    case "Driver":
+      return updateUserProfile(auth.currentUser, { type: "driver" }, dispatch);
     default:
       console.log("default");
   }

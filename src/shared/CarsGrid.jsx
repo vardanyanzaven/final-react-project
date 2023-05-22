@@ -1,3 +1,5 @@
+import { db } from "../firebase";
+import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "@firebase/firestore";
 import {
   Box,
   Button,
@@ -8,6 +10,7 @@ import {
   Grid,
   IconButton,
   Paper,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -15,17 +18,41 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useDispatch } from "react-redux";
 import { useAuth } from "../hooks/useAuth";
 import { openDialog } from "../store/slicers/dialogSlice";
+import { changeUserInfo } from "../store/slicers/userSlice";
+// doc(db, "catalogueCars", carId)
 
-const CarsGrid = ({ carsObj }) => {
-  const { isAuth } = useAuth();
+const CarsGrid = ({ carsList }) => {
   const dispatch = useDispatch();
+  const { isAuth, id, userInfo } = useAuth();
+  const {savedCars} = userInfo;
+  
+  const handleSaveClick = async (carId) => {
+    try {
+      const userRef = doc(db, "users", id);
+      await updateDoc(userRef, {
+        savedCars: savedCars.includes(carId) ? arrayRemove(doc(db, "catalogueCars", carId)) : arrayUnion(doc(db, "catalogueCars", carId)),
+      });
+      
+      const isIdInSavedCars = savedCars.includes(carId);
+      dispatch(changeUserInfo({
+        ...userInfo,
+        savedCars: isIdInSavedCars ? savedCars.filter(cId => cId !== carId) : [...savedCars, carId]
+      }));
+    } catch(err) {
+      console.log(err);
+    }
+  };
+
   const openSignIn = () => {
     dispatch(
       openDialog({
         isSignInOpen: true,
+        isSignUpOpen: false,
       })
     );
   };
+  console.log(carsList)
+
   return (
     <Box sx={{ width: "100%", mt: { xs: 5, sm: 7, md: 10 } }}>
       <Grid
@@ -34,7 +61,7 @@ const CarsGrid = ({ carsObj }) => {
         columnSpacing={{ xs: 0, sm: 2, md: 3 }}
         sx={{ mt: 6, p: "0 50px" }}
       >
-        {carsObj.map((car) => (
+        {carsList.map((car) => (
           <Grid item key={car.id} xs={12} sm={12} md={6} lg={6}>
             <Paper sx={{ height: "100%" }}>
               <Card
@@ -58,6 +85,7 @@ const CarsGrid = ({ carsObj }) => {
                     width: "35%",
                     display: "flex",
                     flexDirection: "column",
+                    pt: 1
                   }}
                 >
                   <CardContent
@@ -67,19 +95,19 @@ const CarsGrid = ({ carsObj }) => {
                       gap: 0.8,
                     }}
                   >
-                    <Typography sx={{ color: "#FFBD00", fontSize: "20px" }}>
+                    <Typography sx={{ color: "#FFBD00", fontSize: "18px" }} noWrap>
                       <span style={{ color: "black" }}>Brand: </span>{" "}
                       {car.carBrand}
                     </Typography>
-                    <Typography sx={{ color: "#FFBD00", fontSize: "20px" }}>
+                    <Typography sx={{ color: "#FFBD00", fontSize: "18px" }} noWrap>
                       <span style={{ color: "black" }}>Model: </span>
                       {car.carModel}
                     </Typography>
-                    <Typography sx={{ color: "#FFBD00", fontSize: "20px" }}>
+                    <Typography sx={{ color: "#FFBD00", fontSize: "18px" }} noWrap>
                       <span style={{ color: "black" }}>Production year: </span>
                       {car.carProdYear}
                     </Typography>
-                    <Typography sx={{ color: "#FFBD00", fontSize: "20px" }}>
+                    <Typography sx={{ color: "#FFBD00", fontSize: "18px" }}>
                       <span style={{ color: "black" }}>Price</span>: $
                       {car.price.toLocaleString()}
                     </Typography>
@@ -93,23 +121,27 @@ const CarsGrid = ({ carsObj }) => {
                     }}
                   >
                     <Button
-                      color="gold"
+                      // color="gold"
                       variant="outlined"
                       sx={{
                         border: "2px solid",
                         fontWeight: "bold",
                         "&:hover": { border: "2px solid" },
+                        fontSize: "13px"
                       }}
-                      onClick={isAuth && openSignIn}
+                      onClick={() => !isAuth && openSignIn()}
                     >
-                      Order Now!
+                      Buy Now
                     </Button>
+                    <Tooltip title='Add or remove from "Saved"' placement="bottom">
                     <IconButton
-                      color="gold"
-                      onClick={isAuth && openSignIn}
+                      // color="gold"
+                      sx={{ mr: 1 }}
+                      onClick={() => isAuth ? handleSaveClick(car.id) : openSignIn()}
                     >
-                      <BookmarkBorderIcon />
+                      {savedCars?.includes(car.id) ? <BookmarkIcon/> : <BookmarkBorderIcon />}
                     </IconButton>
+                  </Tooltip>
                   </CardActions>
                 </Box>
               </Card>
@@ -124,7 +156,7 @@ const CarsGrid = ({ carsObj }) => {
               >
                 <CardMedia
                   component="img"
-                  height="200"
+                  height="150"
                   image={car.photoURL}
                   alt={`${car.carBrand} ${car.carModel}`}
                   sx={{ objectFit: "cover" }}
@@ -146,7 +178,7 @@ const CarsGrid = ({ carsObj }) => {
                   }}
                 >
                   <Button
-                    color="gold"
+                    // color="gold"
                     variant="outlined"
                     sx={{
                       border: "2px solid",
@@ -154,17 +186,19 @@ const CarsGrid = ({ carsObj }) => {
                       "&:hover": { border: "2px solid" },
                       fontSize: "12px",
                     }}
-                    onClick={isAuth && openSignIn}
+                    onClick={() => !isAuth && openSignIn()}
                   >
-                    Order Now!
+                    Buy Now
                   </Button>
-                  <IconButton
-                    color="gold"
-                    sx={{ mr: 1 }}
-                    onClick={isAuth && openSignIn}
-                  >
-                    <BookmarkBorderIcon />
-                  </IconButton>
+                  <Tooltip title='Add or remove from "Saved"' placement="bottom">
+                    <IconButton
+                      // color="gold"
+                      sx={{ mr: 1 }}
+                      onClick={() => isAuth ? handleSaveClick(car.id) : openSignIn()}
+                    >
+                      {savedCars?.includes(car.id) ? <BookmarkIcon/> : <BookmarkBorderIcon />}
+                    </IconButton>
+                  </Tooltip>
                 </CardActions>
               </Card>
             </Paper>

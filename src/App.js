@@ -16,6 +16,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import ShowStatus from "./shared/show_bar/ShowStatus";
 import { HomePage } from "./components/main/home/HomePage";
 import "./App.css";
+import SavedCars from "./components/header/SavedCars";
+
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -48,7 +50,10 @@ function App() {
             element={<AboutPage setActiveLinkId={setActiveLinkId} />}
           />
           {isAuth ? (
-            <Route path="settings" element={<UserSettings />} />
+            <>
+              <Route path="settings" element={<UserSettings />} />
+              <Route path="saved" element={<SavedCars />} />
+            </>
           ) : (
             <Route path="*" element={<Navigate to="/" />} />
           )}

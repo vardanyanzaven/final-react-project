@@ -11,13 +11,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import FilterSort from "./FilterSort";
 import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   setCatalogue,
   setFetchVal,
 } from "../../../store/slicers/catalogueSlice";
-import CatalogueTheme from "../../../themes/CatalogueTheme";
+
 import CarsGrid from "../../../shared/CarsGrid";
+import CatalogueTheme from "../../../themes/CatalogueTheme";
 
 const CataloguePage = ({ setActiveLinkId }) => {
   // Redux
@@ -29,7 +29,6 @@ const CataloguePage = ({ setActiveLinkId }) => {
     dispatch(setCatalogue());
     return () => setActiveLinkId(null);
   }, []);
-
   // Filter and sort select values
   const [sortValue, setSortValue] = useState(SORT_OPTIONS[0]);
   const [filterValue, setFilterValue] = useState(FILTER_OPTIONS[0]);
@@ -71,16 +70,13 @@ const CataloguePage = ({ setActiveLinkId }) => {
 
   return (
     <ThemeProvider theme={CatalogueTheme}>
-      <Box sx={{ minHeight: "100vh", fontFamily: "Quicksand" }}>
+      <Box sx={{ minHeight: "100vh"}}>
         <AppBar
           position="static"
-          sx={{ height: 75, mt: 10, background: "#192026" }}
-        >
+          sx={{ height: 75, mt: 10, background: "#192026" }}>
           <Container>
             <Toolbar
               sx={{
-                pt: 0.7,
-                pl: 0,
                 display: "flex",
                 pt: {xs: 1.2, sm: 0.7},
                 justifyContent: "space-between",
@@ -92,25 +88,27 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  padding: "2px 10px 2px 15px",
                   border: "1px solid #f2b90d",
                   borderRadius: "5px",
                   color: "white",
+                  pr: "8px",
                   width: { xs: "50%", sm: "40%", md: "25%" },
                 }}
               >
                 <InputBase
                   type="text"
+                  sx={{
+                    color: "white",
+                    width: "100%",
+                    pl: "10px",
+                    pr: "10px"
+                  }}
                   placeholder={
                     lastSearch === ""
                       ? "Search..."
                       : `Last searched for "${lastSearch}"`
                   }
                   value={searchInputVal}
-                  sx={{
-                    color: "white",
-                    width: "100%",
-                  }}
                   onChange={(e) => setSearchInputVal(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -144,7 +142,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
             </Toolbar>
           </Container>
         </AppBar>
-        <CarsGrid carsObj={cars}/>
+        <CarsGrid carsList={cars}/>
       </Box>
     </ThemeProvider>
   );

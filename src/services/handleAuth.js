@@ -7,13 +7,28 @@ import { auth } from "../firebase";
 import { setUser } from "../store/slicers/userSlice";
 import { getUserDB, setUserDB } from "./dataBaseConfig";
 import { useAuth } from "../hooks/useAuth";
+import { getError } from "../utils/errors";
+import { changeMessage } from "../store/slicers/statusSlice";
+import { SUCCESS_MESSAGE } from "../constants/common";
 
-export const emailSignUp = async (email, password, phone, fullName, gender) => {
-  return createUserWithEmailAndPassword(auth, email, password).then(
-    ({ user }) => {
-      setUserDB(user, phone, fullName, gender);
-    }
-  );
+export const emailSignUp = async (
+  email,
+  password,
+  mobile,
+  fullName,
+  gender,
+  onClose,
+  dispatch
+) => {
+  const { user } = await createUserWithEmailAndPassword(auth, email, password);
+  try {
+    setUserDB(user, mobile, fullName, gender);
+    onClose();
+    dispatch(changeMessage(SUCCESS_MESSAGE.loggedIn));
+  } catch (e) {
+    const err = getError(e);
+    dispatch(changeMessage(err));
+  }
 };
 
 export const emailSignIn = (email, password) => {
@@ -34,6 +49,7 @@ export const useAuthListener = (setLoading) => {
               ? {
                   ...userInfo,
                   ...dbData,
+                  savedCars: dbData.savedCars.map(ref => ref.id),
                   photoURL: user.photoURL,
                 }
               : {},

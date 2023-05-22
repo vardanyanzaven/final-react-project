@@ -25,7 +25,7 @@ const CatalogueTheme = createTheme({
       ","
     ),
   },
-  // Nayi inchi chi ashxatum, pagination, nor grid itemner
+
   palette: {
     gold: {
       light: "#FFC30F",
@@ -41,7 +41,7 @@ export const FilterSortBtn = styled(Button)({
   border: "1px solid #F2B90D",
   borderRadius: "10px",
   p: "7px 15px",
-  fontSize: {xs: "14px", sm: "16px"}
+  fontSize: { xs: "14px", sm: "16px" },
 });
 
 export default CatalogueTheme;
