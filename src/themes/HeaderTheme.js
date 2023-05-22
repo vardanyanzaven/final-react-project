@@ -71,6 +71,10 @@ const HeaderTheme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "capitalize",
+          transition: "color 0.2s",
+          "&:hover": {
+            color: "#F2B90D",
+          },
         },
       },
     },
@@ -83,7 +87,7 @@ const HeaderTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 600,
+      sm: 500,
       md: 1000,
       lg: 1200,
       xl: 1536,

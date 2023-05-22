@@ -1,13 +1,5 @@
-import {
-  Avatar,
-  Box,
-  Divider,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Divider, IconButton } from "@mui/material";
+import { Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Bookmark, Logout, Settings } from "@mui/icons-material";
 import HistoryIcon from "@mui/icons-material/History";
@@ -38,6 +30,11 @@ const AvatarMenu = () => {
             aria-haspopup="true"
             aria-expanded={isOpen && "true"}>
             <Avatar src={userInfo?.photoURL} />
+            {userInfo.type === "driver" && (
+              <Typography sx={{ ml: 1 }} variant="subtitle2" color="white">
+                Driver
+              </Typography>
+            )}
           </IconButton>
         </Tooltip>
         <Menu
@@ -45,9 +42,7 @@ const AvatarMenu = () => {
           id="account-menu"
           open={isOpen}
           onClick={() => setOpen(false)}
-          onClose={() => setOpen(false)}
-          transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "top" }}>
+          onClose={() => setOpen(false)}>
           <MenuItem onClick={() => setOpen(false)}>
             <Avatar src={userInfo?.photoURL} sx={{ m: 1 }} />
             {userInfo.fullName}

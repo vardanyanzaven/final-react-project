@@ -35,3 +35,24 @@ export const signInSchema = Yup.object().shape({
   email: Yup.string().required("Please enter your email"),
   password: Yup.string().required("Password is required"),
 });
+
+export const passportSchema = Yup.object().shape({
+  passport: Yup.string()
+    .required("Passport is required")
+    .matches(/^(?!^0+$)[a-zA-Z0-9]{3,20}$/, "Passport is not valid"),
+  firstName: Yup.string()
+    .required("First name is required")
+    .matches(/^[A-Za-z\s-]{1,50}$/, "Letters only and in latin"),
+  lastName: Yup.string()
+    .required("Last name is required")
+    .matches(/^[A-Za-z\s-]{1,50}$/, "Letters only and in latin"),
+  homeAddress: Yup.string().required("Address is required"),
+  birthday: Yup.string().required("Birthday is required"),
+  passportDate: Yup.string().required("Passport date is required"),
+});
+
+export const licenseSchema = Yup.object().shape({
+  license: Yup.string()
+    .required("license number is required")
+    .matches(/^(?!^0+$)[a-zA-Z0-9]{3,20}$/, "Not valid!"),
+});

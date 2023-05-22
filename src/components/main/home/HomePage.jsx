@@ -13,6 +13,7 @@ export const HomePage = () => {
       <WhoWeAre/>
       <HowWeWork/>
       <ContactUsInput/>
+
     </div>
     
   );

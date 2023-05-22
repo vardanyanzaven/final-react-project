@@ -28,7 +28,7 @@ const DropdownMenu = () => {
   };
 
   return (
-    <Box sx={{ display: { xs: "flex", md: "none" }, flexGrow: 1 }}>
+    <Box sx={{ display: { xs: "flex", md: "none" }, flexGrow: 1, ml: -1 }}>
       <IconButton
         className={isNavOpened ? "nav-active" : ""}
         size="large"
@@ -76,25 +76,6 @@ const DropdownMenu = () => {
             </MenuItem>
           </NavLink>
         ))}
-        <MenuItem
-          sx={{
-            display: { xs: "flex", sm: "none" },
-            borderTop: "2px solid #F2B90D",
-            transition: "background 0.15s",
-            "&:hover": {
-              background: "rgba(215, 182, 93, 0.3)",
-              color: "#F2B90D",
-            },
-          }}>
-          <Typography
-            sx={{
-              fontSize: { sm: 24, xs: 19 },
-            }}
-            variant="h5"
-            noWrap>
-            Sign Up
-          </Typography>
-        </MenuItem>
       </NavbarMenu>
     </Box>
   );

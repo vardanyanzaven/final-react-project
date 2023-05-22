@@ -12,42 +12,37 @@ export const HEADER_TAB_LIST = {
 export const SORT_OPTIONS = [
   {
     value: "Don't sort",
-    sortCondition: () => null,
-  },
-  {
-    value: "A-Z",
-    sortCondition: (a, b) =>
-      a.carBrand < b.carBrand ? -1 : a.carBrand > b.carBrand ? 1 : 0,
+    sortCondition: null,
   },
   {
     value: "Price: high to low",
-    sortCondition: (a, b) => b.price - a.price,
+    sortCondition: { price: "desc" },
   },
   {
     value: "Price: low to high",
-    sortCondition: (a, b) => a.price - b.price,
+    sortCondition: { price: "asc" },
   },
   {
     value: "Newest",
-    sortCondition: (a, b) => a.carProdYear - b.carProdYear,
+    sortCondition: { carProdYear: "desc" },
   },
   {
     value: "Oldest",
-    sortCondition: (a, b) => b.carProdYear - a.carProdYear,
+    sortCondition: { carProdYear: "asc" },
   },
 ];
 
 export const FILTER_OPTIONS = [
-  { value: "All", filterCondition: () => null },
+  { value: "All", filterCondition: null },
   {
     value: "Limousines",
-    filterCondition: (car) => car.carType === "limousine",
+    filterCondition: "limousine",
   },
-  { value: "Sedans", filterCondition: (car) => car.carType === "sedan" },
-  { value: "SUVs", filterCondition: (car) => car.carType === "SUV" },
+  { value: "Sedans", filterCondition: "sedan" },
+  { value: "SUVs", filterCondition: "SUV" },
   {
     value: "Sports cars",
-    filterCondition: (car) => car.carType === "sports-car",
+    filterCondition: "sports-car",
   },
 ];
 
@@ -77,6 +72,11 @@ export const ERROR_MESSAGE = {
     type: "error",
     isOpen: true,
   },
+  driverRegError: {
+    message: "Something went wrong please try later",
+    type: "error",
+    isOpen: true,
+  },
 };
 
 export const SETTINGS_NAME_LIST = () => {
@@ -88,30 +88,35 @@ export const SETTINGS_NAME_LIST = () => {
       value: id,
       edit: false,
       editTitle: null,
+      type: "readOnly",
     },
     {
       name: "Gender",
-      value: "male/female",
+      value: userInfo.gender,
       edit: true,
       editTitle: "Enter your gender",
+      type: "select",
     },
     {
       name: "Email",
       value: email,
       edit: true,
       editTitle: "Enter your new Email",
+      type: "input",
     },
     {
       name: "Mobile",
       value: userInfo.phone,
       edit: true,
       editTitle: "Enter your mobile",
+      type: "input",
     },
     {
       name: "Fullname",
       value: userInfo.fullName,
       edit: true,
       editTitle: "Enter your new fullname",
+      type: "input",
     },
   ];
 };
@@ -190,6 +195,17 @@ export const SUCCESS_MESSAGE = {
     type: "success",
     isOpen: true,
   },
+
+  comment: {
+    message: " Your comment was successfully done",
+    type: "success",
+    isOpen: true,
+  },
+  driverBecomingSuccess: {
+    message: "You have successfully become a driver",
+    type: "success",
+    isOpen: true,
+  },
 };
 
 export const IMAGES_FOR_HOME_PAGE_SLIDER = [
@@ -211,5 +227,17 @@ export const IMAGES_FOR_HOME_PAGE_SLIDER = [
     title: "Drive in Style",
     subtitle: "Luxury Cars for Special Occasions",
     imgUrl: img3,
+  },
+];
+
+export const DRIVER_REGISTER_STEPS = [
+  {
+    title: "Enter your passport or social card number",
+  },
+  {
+    title: "Upload your driver's license photo file",
+  },
+  {
+    title: "Selfie with your passport",
   },
 ];

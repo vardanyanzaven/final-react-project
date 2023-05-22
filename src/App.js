@@ -6,7 +6,7 @@ import { useAuth } from "./hooks/useAuth";
 import { UserSettings } from "./components/header/UserSettings";
 import NotFoundPage from "./components/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
-import AboutPage from "./components/main/aboute_page/AboutPage";
+import AboutPage from "./components/main/about_page/AboutPage";
 import CataloguePage from "./components/main/catalogue/CataloguePage";
 import ServicesPage from "./components/main/services_tab/ServicesPage";
 import Footer from "./components/footer/Footer";
