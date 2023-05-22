@@ -1,23 +1,25 @@
-import { useState } from "react";
-import "react-phone-input-2/lib/style.css";
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-import React from "react";
-import DateForBooking from "./booking_form/DateForBooking";
-import SelectServiceType from "./booking_form/SelectServiceType";
-import SelectCars from "./booking_form/SelectcCars";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeMessage } from "../../../store/slicers/statusSlice";
 import { SUCCESS_MESSAGE } from "../../../constants/common";
-import dayjs from "dayjs";
+import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { useCallback, useState } from "react";
 import { db } from "../../../firebase";
-import PhoneField from "../../dialog/components/PhoneField";
+import { Link } from "react-router-dom";
 import { addDoc, collection } from "@firebase/firestore";
-import ShowStatus from "../../../shared/show_bar/ShowStatus";
+import { PayPal } from "./PayPal";
+import "react-phone-input-2/lib/style.css";
+import React from "react";
+import DateForBooking from "./booking_form/DateForBooking";
+import SelectCars from "./booking_form/SelectcCars";
+import dayjs from "dayjs";
+import PhoneField from "../../dialog/components/PhoneField";
 import MyMap from "./MyMap";
+import SelectCarModel from "./booking_form/SelectCarModel";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export const Booking = () => {
-  const [service, setservice] = useState("");
+  const [carModel, setCarModel] = useState("");
   const [car, setcar] = useState("");
   const [name, setname] = useState("");
   const [surname, setsurname] = useState("");
@@ -27,20 +29,30 @@ export const Booking = () => {
   const [time, settime] = useState(dayjs(Date.now()));
   const [page1, setpage1] = useState(true);
   const [cordinates, setcordinates] = useState();
+  const [disabled, setdisabled] = useState(true);
+  const [value, setvalue] = useState(50);
   const disp = useDispatch();
+  const { cars } = useSelector((state) => state.catalogue);
 
-  const TEXT_FEEDBACK_FOR_USER = `The booking has been successfully done, we inform you that ${car} type 
+  const TEXT_FEEDBACK_FOR_USER = `The booking has been successfully done, we inform you that ${car} ${carModel}
   machine will be on the ${cordinates} cordinates you provided, on ${date.$d
     .toString()
     .slice(0, 15)} at ${time.$d
     .toString()
     .slice(16, 21)} time, wish you enjoyable service.`;
 
+  useEffect(() => {
+    const newValue = cars.filter((v) => v.carModel === carModel);
+    if (newValue.length >= 1 && newValue[0].price) {
+      setvalue(newValue[0].price);
+    }
+  }, [carModel]);
+
   const anotherStep = async () => {
     return await addDoc(collection(db, "bookings"), {
       name: name,
       surName: surname,
-      service: service,
+      carModel: carModel,
       car: car,
       email: email,
       date: date.$d && time.$d,
@@ -51,7 +63,6 @@ export const Booking = () => {
       .then(() => {
         setpage1(false);
         disp(changeMessage(SUCCESS_MESSAGE.booked));
-        ShowStatus();
       })
       .catch(({ message }) => console.log(message));
   };
@@ -95,13 +106,13 @@ export const Booking = () => {
                 justifyContent: "space-between",
                 width: "400px",
                 alignItems: "center",
-              }}>
+              <SelectCars sx={{ width: 195 }} car={car} setcar={setcar} />
+              <SelectCarModel
               <SelectServiceType
                 sx={{ width: 195 }}
-                service={service}
-                setservice={setservice}
+                carModel={carModel}
+                setCarModel={setCarModel}
               />
-              <SelectCars sx={{ width: 195 }} car={car} setcar={setcar} />
             </Box>
             <Box
               sx={{
@@ -142,7 +153,13 @@ export const Booking = () => {
               time={time}
               settime={settime}
             />
-            <Button variant="contained" sx={{ mt: 2 }} onClick={anotherStep}>
+            <PayPal setdisabled={setdisabled} value={value} />
+            <Button
+              variant="contained"
+              sx={{ mt: 2 }}
+              onClick={anotherStep}
+              disabled={disabled}
+            >
               Continue
             </Button>
           </Box>
