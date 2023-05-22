@@ -3,20 +3,21 @@ import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Input from "@mui/joy/Input";
 import { useState } from "react";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "../../../hooks/useAuth";
 import { SUCCESS_MESSAGE } from "../../../constants/common";
-import { db } from "../../../firebase";
+import { auth, db } from "../../../firebase";
 import { useDispatch } from "react-redux";
 import { changeMessage } from "../../../store/slicers/statusSlice";
 import Avatar from "@mui/material/Avatar";
 import { WrittenComs } from "./WrittenComs";
 import { getCommentsCollection } from "../../../store/slicers/commentSlice";
 import { useEffect } from "react";
+import { openDialog } from "../../../store/slicers/dialogSlice";
 
 export const Comments = () => {
   const [text, setText] = useState("");
-  const { id, userInfo } = useAuth();
+  const { userInfo, isAuth } = useAuth();
   const disp = useDispatch();
 
   useEffect(() => {
@@ -24,14 +25,20 @@ export const Comments = () => {
   }, []);
 
   const onHandleButton = async () => {
+    if (!text) return;
+    if (!isAuth) {
+      disp(openDialog({ isSignUpOpen: true }));
+      return;
+    }
     try {
       setText("");
-      return await addDoc(collection(db, "comments"), {
+      await addDoc(collection(db, "comments"), {
         comment: text,
-        writerId: doc(db, "users", id),
-        photoURL: userInfo.photoURL,
+        writerId: doc(db, "users", auth.currentUser.uid),
+        commentTime: new Date().getTime(),
       }).then(() => {
         disp(changeMessage(SUCCESS_MESSAGE.comment));
+        disp(getCommentsCollection());
       });
     } catch (error) {
       console.log(error);

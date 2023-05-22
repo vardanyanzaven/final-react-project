@@ -14,7 +14,7 @@ import PhoneField from "../../dialog/components/PhoneField";
 import { addDoc, collection } from "@firebase/firestore";
 import ShowStatus from "../../../shared/show_bar/ShowStatus";
 import MyMap from "./MyMap";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Booking = () => {
   const [service, setservice] = useState("");
@@ -62,8 +62,7 @@ export const Booking = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Paper
         sx={{
           display: "flex",
@@ -73,8 +72,7 @@ export const Booking = () => {
           width: 1200,
           height: 800,
           mt: 3,
-        }}
-      >
+        }}>
         <Box
           sx={{
             width: "400px",
@@ -84,23 +82,20 @@ export const Booking = () => {
             alignItems: "center",
             textAlign: "center",
             ml: 10,
-          }}
-        >
+          }}>
           <Typography variant="h4"> Book Here </Typography>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-            }}
-          >
+            }}>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
                 width: "400px",
                 alignItems: "center",
-              }}
-            >
+              }}>
               <SelectServiceType
                 sx={{ width: 195 }}
                 service={service}
@@ -114,8 +109,7 @@ export const Booking = () => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "400px",
-              }}
-            >
+              }}>
               <TextField
                 type="name "
                 label=" name"
@@ -165,8 +159,7 @@ export const Booking = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Paper
         sx={{
           display: "flex",
@@ -177,8 +170,7 @@ export const Booking = () => {
           width: 800,
           height: 600,
           mt: 10,
-        }}
-      >
+        }}>
         <Box>
           <Typography variant="h4" sx={{ mt: 10 }}>
             {TEXT_FEEDBACK_FOR_USER}
