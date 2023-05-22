@@ -59,10 +59,12 @@ const AvatarMenu = () => {
             <HistoryIcon />
             <Typography>History</Typography>
           </MenuItem>
-          <MenuItem>
-            <Bookmark />
-            <Typography>Saved</Typography>
-          </MenuItem>
+          <Link to="saved">
+            <MenuItem>
+              <Bookmark />
+              <Typography>Saved</Typography>
+            </MenuItem>
+          </Link>
           <Divider />
           <MenuItem onClick={() => signOut(auth)}>
             <Logout /> Log Out
