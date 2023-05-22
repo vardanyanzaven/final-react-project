@@ -36,6 +36,9 @@ export const Comments = () => {
         comment: text,
         writerId: doc(db, "users", auth.currentUser.uid),
         commentTime: new Date().getTime(),
+        thumbUp: 0,
+        thumbDown: 0,
+        favorite: 0,
       }).then(() => {
         disp(changeMessage(SUCCESS_MESSAGE.comment));
         disp(getCommentsCollection());

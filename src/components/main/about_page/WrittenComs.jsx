@@ -7,6 +7,12 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import { Box, Button } from "@mui/material";
+import { getDoc, updateDoc, doc } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 function formatDate(timestamp) {
   var date = new Date(timestamp);
@@ -21,7 +27,29 @@ function formatDate(timestamp) {
 
 export const WrittenComs = () => {
   const commentsArr = useSelector((state) => state.comments.commentsCol);
-  const curArr = [...commentsArr].sort((a, b) => b.commentTime - a.commentTime);
+  const curArr = [...commentsArr];
+
+  const onHandleIcons = async (id, icon) => {
+    const mainRef = doc(db, "comments", id);
+    const currentCommentRef = await getDoc(mainRef);
+    const { thumbUp, thumbDown, favorite } = currentCommentRef.data();
+
+    if (icon === "thumbUp") {
+      updateDoc(mainRef, {
+        thumbUp: parseInt(thumbUp) + 1,
+      });
+    }
+    if (icon === "thumbDown") {
+      updateDoc(mainRef, {
+        thumbDown: parseInt(thumbDown) + 1,
+      });
+    }
+    if (icon === "favorite") {
+      updateDoc(mainRef, {
+        favorite: parseInt(favorite) + 1,
+      });
+    }
+  };
 
   return (
     <div style={{ overflow: "auto", maxHeight: "400px" }}>
@@ -37,15 +65,29 @@ export const WrittenComs = () => {
                 <ListItemText
                   sx={{ mt: 2 }}
                   secondary={
-                    <Typography
-                      sx={{ display: "inline", mr: "10px" }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary">
-                      {m.fullName}
-                      <Typography variant="body1">{m.comment}</Typography>
-                      <Typography variant="subtitle2">{time}</Typography>
-                    </Typography>
+                    <>
+                      <Typography
+                        sx={{ display: "inline", mr: "10px" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary">
+                        {m.fullName}
+                        <Typography variant="body1">{m.comment}</Typography>
+                        <Typography variant="subtitle2">{time}</Typography>
+                      </Typography>
+                      <Box sx={{ display: "flex", ml: 1 }}>
+                        <Button onClick={() => onHandleIcons(m.id, "thumbUp")}>
+                          <ThumbUpAltIcon /> {m.thumbUp}
+                        </Button>
+                        <Button onClick={() => onHandleIcons(m.id, "favorite")}>
+                          <FavoriteIcon /> {m.favorite}
+                        </Button>
+                        <Button
+                          onClick={() => onHandleIcons(m.id, "thumbDown")}>
+                          <ThumbDownAltIcon /> {m.thumbDown}
+                        </Button>
+                      </Box>
+                    </>
                   }
                 />
               </ListItem>

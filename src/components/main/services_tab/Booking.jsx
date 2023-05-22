@@ -148,7 +148,7 @@ export const Booking = () => {
           </Box>
         </Box>
 
-        <Box sx={{ width: 600, height: 500, border: 1, mr: 6, mt: 6 }}>
+        <Box sx={{ width: 600, height: 500, mr: 6, mt: 6 }}>
           <MyMap setcordinates={setcordinates} />
         </Box>
       </Paper>

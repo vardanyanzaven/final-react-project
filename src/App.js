@@ -16,6 +16,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import ShowStatus from "./shared/show_bar/ShowStatus";
 import { HomePage } from "./components/main/home/HomePage";
 import "./App.css";
+import User from "./components/user_page/User";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -48,7 +49,10 @@ function App() {
             element={<AboutPage setActiveLinkId={setActiveLinkId} />}
           />
           {isAuth ? (
-            <Route path="settings" element={<UserSettings />} />
+            <>
+              <Route path="settings" element={<UserSettings />} />
+              <Route path="user" element={<User />} />
+            </>
           ) : (
             <Route path="*" element={<Navigate to="/" />} />
           )}

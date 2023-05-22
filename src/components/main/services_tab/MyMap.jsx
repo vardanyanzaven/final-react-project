@@ -102,20 +102,7 @@ export default function MyMap({ setcordinates }) {
   };
 
   return (
-    <div>
-      <MapContainer
-        className="Map"
-        center={{ lat: 40.180094, lng: 44.515229 }}
-        zoom={15}
-        scrollWheelZoom={false}
-        style={{ height: "500px" }}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <MyComponent setcordinates={setcordinates} setPlace={setPlace} />
-      </MapContainer>
-
+    <>
       <GeoapifyContext apiKey={props.apiKey}>
         <GeoapifyGeocoderAutocomplete
           placeholder="Search address here"
@@ -132,6 +119,20 @@ export default function MyMap({ setcordinates }) {
           }
         />
       </GeoapifyContext>
-    </div>
+      <div>
+        <MapContainer
+          className="Map"
+          center={{ lat: 40.180094, lng: 44.515229 }}
+          zoom={15}
+          scrollWheelZoom={false}
+          style={{ height: "500px" }}>
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <MyComponent setcordinates={setcordinates} setPlace={setPlace} />
+        </MapContainer>
+      </div>
+    </>
   );
 }
