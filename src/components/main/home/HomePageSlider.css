@@ -1,5 +1,4 @@
 .homepage-slider {
-    margin-bottom: 50px;
     justify-content: center;
     align-items: center;
 }
@@ -63,8 +62,3 @@
 
 }
 
-.button-container {
-    justify-content: center;
-    align-items: center;
-    width: 100%
-}

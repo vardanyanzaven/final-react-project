@@ -1,0 +1,19 @@
+.whatwedo-container {
+    background-color: white;
+    max-width: 100%;
+    height: 300px;
+    padding: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:row;
+}
+
+.whatwedo-item {
+  align-items: center;
+  justify-content: center;
+  margin: 20px ; 
+  height: 50%;
+  width: auto;
+  
+}
