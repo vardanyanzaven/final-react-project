@@ -2,26 +2,22 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   AppBar,
   Box,
-  Card,
-  CardContent,
-  CardMedia,
   Container,
-  Grid,
   InputBase,
   ThemeProvider,
   Toolbar,
-  Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterSort from "./FilterSort";
 import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   setCatalogue,
   setFetchVal,
 } from "../../../store/slicers/catalogueSlice";
-import catalogueTheme from "../../../themes/catalogueTheme";
+
+import CarsGrid from "../../../shared/CarsGrid";
+import CatalogueTheme from "../../../themes/CatalogueTheme";
 
 const CataloguePage = ({ setActiveLinkId }) => {
   // Redux
@@ -38,7 +34,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
   const [filterValue, setFilterValue] = useState(FILTER_OPTIONS[0]);
   const changeOption = (type, value) =>
     type === "sort"
-      ? setSortValue(value) //https://positionstack.com/documentation
+      ? setSortValue(value)
       : type === "filter"
       ? setFilterValue(value)
       : console.log("Error when setting sort/filter value");
@@ -73,8 +69,8 @@ const CataloguePage = ({ setActiveLinkId }) => {
   };
 
   return (
-    <ThemeProvider theme={catalogueTheme}>
-      <Box sx={{ minHeight: "100vh", fontFamily: "Quicksand" }}>
+    <ThemeProvider theme={CatalogueTheme}>
+      <Box sx={{ minHeight: "100vh"}}>
         <AppBar
           position="static"
           sx={{ height: 75, mt: 10, background: "#192026" }}
@@ -82,10 +78,8 @@ const CataloguePage = ({ setActiveLinkId }) => {
           <Container>
             <Toolbar
               sx={{
-                pt: 0.7,
-                pl: 0,
                 display: "flex",
-                alignItems: "center",
+                pt: {xs: 1.2, sm: 0.7},
                 justifyContent: "space-between",
                 gap: 2,
               }}
@@ -95,25 +89,27 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  padding: "2px 10px 2px 15px",
                   border: "1px solid #f2b90d",
                   borderRadius: "5px",
                   color: "white",
+                  pr: "8px",
                   width: { xs: "50%", sm: "40%", md: "25%" },
                 }}
               >
                 <InputBase
                   type="text"
-                  placeholder={
-                    lastSearch === ""
-                      ? "Search..."
-                      : `Searched for "${lastSearch}"`
-                  }
-                  value={searchInputVal}
                   sx={{
                     color: "white",
                     width: "100%",
+                    pl: "10px",
+                    pr: "10px"
                   }}
+                  placeholder={
+                    lastSearch === ""
+                      ? "Search..."
+                      : `Last searched for "${lastSearch}"`
+                  }
+                  value={searchInputVal}
                   onChange={(e) => setSearchInputVal(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -147,37 +143,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
             </Toolbar>
           </Container>
         </AppBar>
-        <Box sx={{ width: "100%", mt: 10 }}>
-          <Grid
-            container
-            rowSpacing={{ xs: 2, sm: 4 }}
-            columnSpacing={{ xs: 0, sm: 2, md: 3 }}
-            sx={{ mt: 6, p: "0 50px" }}
-          >
-            {cars.map((car) => (
-              <Grid item key={car.id} xs={12} sm={6} md={4} lg={3}>
-                <Card sx={{ maxWidth: { xs: "280px", sm: "450px" } }}>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={car.photoURL}
-                    alt={`${car.carBrand} ${car.carModel}`}
-                    sx={{ objectFit: "cover" }}
-                  />
-                  <CardContent>
-                    {car.carBrand} {car.carModel}
-                    <Typography sx={{ fontSize: { xs: "18px" } }}>
-                      ({car.carProdYear})
-                    </Typography>
-                    <Typography sx={{ color: "#F2A800" }}>
-                      ${car.price.toLocaleString()}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
+        <CarsGrid carsList={cars}/>
       </Box>
     </ThemeProvider>
   );

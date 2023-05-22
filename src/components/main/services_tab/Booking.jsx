@@ -16,6 +16,7 @@ import PhoneField from "../../dialog/components/PhoneField";
 import MyMap from "./MyMap";
 import SelectCarModel from "./booking_form/SelectCarModel";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const Booking = () => {
   const [carModel, setCarModel] = useState("");
@@ -72,8 +73,7 @@ export const Booking = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Paper
         sx={{
           display: "flex",
@@ -83,8 +83,7 @@ export const Booking = () => {
           width: 1200,
           height: 800,
           mt: 3,
-        }}
-      >
+        }}>
         <Box
           sx={{
             width: "400px",
@@ -94,25 +93,22 @@ export const Booking = () => {
             alignItems: "center",
             textAlign: "center",
             ml: 10,
-          }}
-        >
+          }}>
           <Typography variant="h4"> Book Here </Typography>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-            }}
-          >
+            }}>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
                 width: "400px",
                 alignItems: "center",
-              }}
-            >
               <SelectCars sx={{ width: 195 }} car={car} setcar={setcar} />
               <SelectCarModel
+              <SelectServiceType
                 sx={{ width: 195 }}
                 carModel={carModel}
                 setCarModel={setCarModel}
@@ -124,8 +120,7 @@ export const Booking = () => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "400px",
-              }}
-            >
+              }}>
               <TextField
                 type="name "
                 label=" name"
@@ -170,7 +165,7 @@ export const Booking = () => {
           </Box>
         </Box>
 
-        <Box sx={{ width: 600, height: 500, border: 1, mr: 6, mt: 6 }}>
+        <Box sx={{ width: 600, height: 500, mr: 6, mt: 6 }}>
           <MyMap setcordinates={setcordinates} />
         </Box>
       </Paper>
@@ -181,8 +176,7 @@ export const Booking = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Paper
         sx={{
           display: "flex",
@@ -193,8 +187,7 @@ export const Booking = () => {
           width: 800,
           height: 600,
           mt: 10,
-        }}
-      >
+        }}>
         <Box>
           <Typography variant="h4" sx={{ mt: 10 }}>
             {TEXT_FEEDBACK_FOR_USER}
