@@ -25,7 +25,7 @@ export const WrittenComs = () => {
 
   return (
     <div style={{ overflow: "auto", maxHeight: "400px" }}>
-      <List sx={{ width: "100%", maxWidth: 800, bgcolor: "background.paper" }}>
+      <List sx={{ width: "100%", maxWidth: 800, bgcolor: "lightgray" }}>
         {curArr.map((m) => {
           const time = formatDate(m.commentTime);
           return (
