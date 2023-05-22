@@ -50,6 +50,8 @@ export const Comments = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        mt: 2,
+        bgcolor: "#454545",
       }}>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Box
@@ -59,6 +61,7 @@ export const Comments = () => {
             width: 800,
             alignItems: "center",
             justifyContent: "space-around",
+            bgcolor: "#878787",
           }}>
           <Avatar src={userInfo.photoURL} size="lg" sx={{ mt: 2, ml: 12 }} />
           <Input
