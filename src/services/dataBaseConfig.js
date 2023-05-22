@@ -24,6 +24,7 @@ export const setUserDB = async ({ uid }, phone, fullName, gender) => {
     fullName,
     gender,
     type: "client",
+    photoURL: null,
   });
 };
 
