@@ -16,48 +16,52 @@ import PhoneField from "../../dialog/components/PhoneField";
 import MyMap from "./MyMap";
 import SelectCarModel from "./booking_form/SelectCarModel";
 import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { bookScheme } from "../../../utils/validation";
+import PhoneInput from "react-phone-input-2";
+import { styles } from "../../../shared/auth_dialog/styles";
 
 export const Booking = () => {
-  const [carModel, setCarModel] = useState("");
-  const [car, setcar] = useState("");
-  const [name, setname] = useState("");
-  const [surname, setsurname] = useState("");
-  const [email, setemail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [date, setdate] = useState(dayjs(new Date()));
-  const [time, settime] = useState(dayjs(Date.now()));
+  console.log(new Date());
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    control,
+  } = useForm({
+    resolver: yupResolver(bookScheme),
+  });
   const [page1, setpage1] = useState(true);
   const [cordinates, setcordinates] = useState();
-  const [disabled, setdisabled] = useState(true);
-  const [value, setvalue] = useState(50);
+  const [disabled, setdisabled] = useState(false);
+  const [value, setvalue] = useState(10);
   const disp = useDispatch();
   const { cars } = useSelector((state) => state.catalogue);
 
-  const TEXT_FEEDBACK_FOR_USER = `The booking has been successfully done, we inform you that ${car} ${carModel}
-  machine will be on the ${cordinates} cordinates you provided, on ${date.$d
-    .toString()
-    .slice(0, 15)} at ${time.$d
-    .toString()
-    .slice(16, 21)} time, wish you enjoyable service.`;
+  // const TEXT_FEEDBACK_FOR_USER = `The booking has been successfully done, we inform you that ${} ${}
+  // machine will be on the ${cordinates} cordinates you provided, on ${date.$d
+  //   .toString()
+  //   .slice(0, 15)} at ${time.$d
+  //   .toString()
+  //   .slice(16, 21)} time, wish you enjoyable service.`;
 
-  useEffect(() => {
-    const newValue = cars.filter((v) => v.carModel === carModel);
-    if (newValue.length >= 1 && newValue[0].price) {
-      setvalue(newValue[0].price);
-    }
-  }, [carModel]);
+  // useEffect(() => {
+  //   const newValue = cars.filter((v) => v.carModel === carModel);
+  //   if (newValue.length >= 1 && newValue[0].price) {
+  //     setvalue(newValue[0].price);
+  //   }
+  // }, [carModel]);
 
-  const anotherStep = async () => {
+  const anotherStep = async (data) => {
+    const { car, carModel, pickUpDate, phone } = data;
     return await addDoc(collection(db, "bookings"), {
-      name: name,
-      surName: surname,
       carModel: carModel,
       car: car,
-      email: email,
-      date: date.$d && time.$d,
+      bookDate: new Date().getTime,
       phoneNumber: phone,
       carriedOut: "",
-      id: Math.random(),
+      pickUpTime: pickUpDate,
     })
       .then(() => {
         setpage1(false);
@@ -68,6 +72,9 @@ export const Booking = () => {
 
   return page1 ? (
     <Box
+      component="form"
+      noValidate
+      onSubmit={handleSubmit(anotherStep)}
       sx={{
         display: "flex",
         justifyContent: "center",
@@ -111,55 +118,42 @@ export const Booking = () => {
                 alignItems: "center",
               }}
             >
-              <SelectCars sx={{ width: 195 }} car={car} setcar={setcar} />
+              <SelectCars register={register} sx={{ width: 195 }} />
               <SelectCarModel />
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "400px",
-              }}
-            >
-              <TextField
-                type="name "
-                label=" name"
-                value={name}
-                sx={{ width: 195, mt: 2 }}
-                onChange={(e) => setname(e.target.value)}
-              />
-              <TextField
-                type="surname "
-                label="surname"
-                value={surname}
-                sx={{ width: 195, mt: 2 }}
-                onChange={(e) => setsurname(e.target.value)}
-              />
-            </Box>
-
-            <TextField
-              fullWidth
-              type="email"
-              label="Email"
-              value={email}
-              required
-              onChange={(e) => setemail(e.target.value)}
-              sx={{ mt: 2 }}
+            <Controller
+              control={control}
+              name="phone"
+              rules={{ required: true }}
+              render={({ field: { ...field } }) => (
+                <PhoneInput
+                  {...field}
+                  inputExtraProps={{
+                    required: true,
+                    autoComplete: true,
+                  }}
+                  inputStyle={{
+                    ...styles.phone,
+                    outline: errors.mobile && "1px solid #D32F2F",
+                  }}
+                  country="am"
+                />
+              )}
             />
-            <PhoneField phoneSett={[phone, setPhone]} sx={{ mt: 2 }} />
-            <DateForBooking
+            {/* <PhoneField phoneSett={[phone, setPhone]} sx={{ mt: 2 }} /> */}
+            <TextField type="date" variant="outlined" />
+            {/* <DateForBooking
               date={date}
               setdate={setdate}
               time={time}
               settime={settime}
-            />
+            /> */}
             <PayPal setdisabled={setdisabled} value={value} />
             <Button
               variant="contained"
               sx={{ mt: 2 }}
-              onClick={anotherStep}
               disabled={disabled}
+              component="submit"
             >
               Continue
             </Button>
@@ -193,7 +187,7 @@ export const Booking = () => {
       >
         <Box>
           <Typography variant="h4" sx={{ mt: 10 }}>
-            {TEXT_FEEDBACK_FOR_USER}
+            {/* {TEXT_FEEDBACK_FOR_USER} */}
           </Typography>
         </Box>
         <Button variant="contained" sx={{ mb: 6 }}>
