@@ -6,13 +6,15 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import { Box, Button } from "@mui/material";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { getCommentsCollection } from "../../../store/slicers/commentSlice";
+import { useAuth } from "../../../hooks/useAuth";
 
 function formatDate(timestamp) {
   var date = new Date(timestamp);
@@ -26,28 +28,53 @@ function formatDate(timestamp) {
 }
 
 export const WrittenComs = () => {
+  const dispatch = useDispatch();
   const commentsArr = useSelector((state) => state.comments.commentsCol);
   const curArr = [...commentsArr];
+  console.log(curArr);
+  const auth = useAuth();
 
   const onHandleIcons = async (id, icon) => {
+    const point = -1;
     const mainRef = doc(db, "comments", id);
     const currentCommentRef = await getDoc(mainRef);
-    const { thumbUp, thumbDown, favorite } = currentCommentRef.data();
+    const { thumbUp, thumbDown, favorite, handleLikedPeople } =
+      currentCommentRef.data();
+
+    const { thumbUpList, thumbDownList, favoriteList } = handleLikedPeople;
 
     if (icon === "thumbUp") {
-      updateDoc(mainRef, {
-        thumbUp: parseInt(thumbUp) + 1,
-      });
+      if (thumbUpList.includes(auth.id)) {
+        const changedList = thumbUpList.splice(thumbUpList.indexOf(auth.id), 1);
+        await updateDoc(mainRef, {
+          handleLikedPeople: {
+            thumbUpList: changedList,
+          },
+
+          thumbUp: parseInt(thumbUp) + 1,
+        });
+      } else {
+        await updateDoc(mainRef, {
+          handleLikedPeople: {
+            thumbUpList: [...thumbUpList, auth.id],
+          },
+
+          thumbUp: parseInt(thumbUp) + 1,
+        });
+      }
+      dispatch(getCommentsCollection());
     }
     if (icon === "thumbDown") {
-      updateDoc(mainRef, {
+      await updateDoc(mainRef, {
         thumbDown: parseInt(thumbDown) + 1,
       });
+      dispatch(getCommentsCollection());
     }
     if (icon === "favorite") {
-      updateDoc(mainRef, {
+      await updateDoc(mainRef, {
         favorite: parseInt(favorite) + 1,
       });
+      dispatch(getCommentsCollection());
     }
   };
 
@@ -70,7 +97,8 @@ export const WrittenComs = () => {
                         sx={{ display: "inline", mr: "10px" }}
                         component="span"
                         variant="body2"
-                        color="text.primary">
+                        color="text.primary"
+                      >
                         {m.fullName}
                         <Typography variant="body1">{m.comment}</Typography>
                         <Typography variant="subtitle2">{time}</Typography>
@@ -83,7 +111,8 @@ export const WrittenComs = () => {
                           <FavoriteIcon /> {m.favorite}
                         </Button>
                         <Button
-                          onClick={() => onHandleIcons(m.id, "thumbDown")}>
+                          onClick={() => onHandleIcons(m.id, "thumbDown")}
+                        >
                           <ThumbDownAltIcon /> {m.thumbDown}
                         </Button>
                       </Box>

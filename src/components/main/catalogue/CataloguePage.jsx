@@ -17,7 +17,7 @@ import {
 } from "../../../store/slicers/catalogueSlice";
 
 import CarsGrid from "../../../shared/CarsGrid";
-import CatalogueTheme from "../../../themes/CatalogueTheme";
+import CatalogueTheme from "../../../themes/catalogueTheme";
 
 const CataloguePage = ({ setActiveLinkId }) => {
   // Redux
