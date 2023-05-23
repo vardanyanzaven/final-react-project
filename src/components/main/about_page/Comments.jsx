@@ -3,7 +3,7 @@ import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Input from "@mui/joy/Input";
 import { useState } from "react";
-import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 import { useAuth } from "../../../hooks/useAuth";
 import { SUCCESS_MESSAGE } from "../../../constants/common";
 import { auth, db } from "../../../firebase";
@@ -17,7 +17,7 @@ import { openDialog } from "../../../store/slicers/dialogSlice";
 
 export const Comments = () => {
   const [text, setText] = useState("");
-  const { userInfo, isAuth } = useAuth();
+  const { userInfo, isAuth, id } = useAuth();
   const disp = useDispatch();
 
   useEffect(() => {
@@ -44,6 +44,7 @@ export const Comments = () => {
         thumbUp: 0,
         thumbDown: 0,
         favorite: 0,
+        personId: id,
       }).then(() => {
         disp(changeMessage(SUCCESS_MESSAGE.comment));
         disp(getCommentsCollection());

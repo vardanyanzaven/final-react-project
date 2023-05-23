@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeMessage } from "../../../store/slicers/statusSlice";
 import { SUCCESS_MESSAGE } from "../../../constants/common";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
@@ -12,13 +12,13 @@ import React from "react";
 import SelectCars from "./booking_form/SelectcCars";
 import MyMap from "./MyMap";
 import SelectCarModel from "./booking_form/SelectCarModel";
-import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { bookScheme } from "../../../utils/validation";
 import PhoneInput from "react-phone-input-2";
 import { styles } from "../../../shared/auth_dialog/styles";
 import { ERROR_MESSAGE } from "../../../constants/common";
+import { useAuth } from "../../../hooks/useAuth";
 
 export const Booking = () => {
   const {
@@ -39,7 +39,7 @@ export const Booking = () => {
   const [complitedData, setComplitedData] = useState({});
   const [address, setAddress] = useState("");
   const disp = useDispatch();
-  const { cars } = useSelector((state) => state.catalogue);
+  const { id } = useAuth();
   const TEXT_FEEDBACK_FOR_USER = `The booking has been successfully done, we inform you that ${
     complitedData.pickUpDate
   } ${"1"}
@@ -70,6 +70,7 @@ export const Booking = () => {
       pickUpTime: pickUpDate,
       price: value,
       address: address,
+      personId: id,
     })
       .then(() => {
         setPage1(false);

@@ -3,10 +3,30 @@ import { useAuth } from "../../hooks/useAuth";
 import { Edit, AutoStories, Inventory, Forum } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
+import { useState } from "react";
+import { WrittenComs } from "../main/about_page/WrittenComs";
+import { useDispatch } from "react-redux";
+import { getCommentsCollection } from "../../store/slicers/commentSlice";
 
 const User = () => {
+  const [comp, setComp] = useState("services");
   const { userInfo } = useAuth();
   const registered = auth.currentUser.metadata.creationTime;
+  const disp = useDispatch();
+
+  const currentComponent = (cmpName) => {
+    switch (cmpName) {
+      case "services":
+        return "services";
+        break;
+      case "comments":
+        disp(getCommentsCollection());
+        return <WrittenComs dontShowAll />;
+      default:
+        break;
+    }
+  };
+
   return (
     <Box sx={{ minHeight: "600px" }}>
       <Box
@@ -82,7 +102,8 @@ const User = () => {
             sx={{ height: "60px", fontSize: "20px" }}
             color="secondary"
             fullWidth
-            variant="contained">
+            variant="contained"
+            onClick={() => setComp("comments")}>
             <Forum />
             my comments
           </Button>
@@ -90,7 +111,9 @@ const User = () => {
           <Typography>I have been registered </Typography>
           <Typography>{registered} </Typography>
         </Box>
-        <Box sx={{ width: "73%", bgcolor: "grey" }}></Box>
+        <Box sx={{ width: "73%", bgcolor: "grey" }}>
+          {currentComponent(comp)}
+        </Box>
       </Box>
     </Box>
   );
