@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import { useState } from "react";
 import { WrittenComs } from "../main/about_page/WrittenComs";
+import { useDispatch } from "react-redux";
+import { getCommentsCollection } from "../../store/slicers/commentSlice";
 
 const User = () => {
   const [comp, setComp] = useState("services");
   const { userInfo } = useAuth();
   const registered = auth.currentUser.metadata.creationTime;
+  const disp = useDispatch();
 
   const currentComponent = (cmpName) => {
     switch (cmpName) {
@@ -17,6 +20,7 @@ const User = () => {
         return "services";
         break;
       case "comments":
+        disp(getCommentsCollection());
         return <WrittenComs dontShowAll />;
       default:
         break;
