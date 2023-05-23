@@ -1,9 +1,12 @@
 import { Box, Avatar, Typography, Button } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
-import { Edit } from "@mui/icons-material";
+import { Edit, AutoStories, Inventory, Forum } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import { auth } from "../../firebase";
 
 const User = () => {
   const { userInfo } = useAuth();
+  const registered = auth.currentUser.metadata.creationTime;
   return (
     <Box sx={{ minHeight: "600px" }}>
       <Box
@@ -49,30 +52,43 @@ const User = () => {
             flexDirection: "column",
             justifyContent: "space-around",
           }}>
-          <Button color="secondary" fullWidth variant="contained">
-            <Edit />
-            Edit
+          <Link to="/settings">
+            <Button
+              sx={{ height: "60px", fontSize: "20px" }}
+              color="secondary"
+              fullWidth
+              variant="contained">
+              <Edit />
+              Edit profile
+            </Button>
+          </Link>
+          <Button
+            sx={{ height: "60px", fontSize: "20px" }}
+            color="secondary"
+            fullWidth
+            variant="contained">
+            <AutoStories />
+            &nbsp;all services order
           </Button>
-          <Button color="secondary" fullWidth variant="contained">
-            <Edit />
-            Edit
+          <Button
+            sx={{ height: "60px", fontSize: "20px" }}
+            color="secondary"
+            fullWidth
+            variant="contained">
+            <Inventory />
+            all bought cars
           </Button>
-          <Button color="secondary" fullWidth variant="contained">
-            <Edit />
-            Edit
+          <Button
+            sx={{ height: "60px", fontSize: "20px" }}
+            color="secondary"
+            fullWidth
+            variant="contained">
+            <Forum />
+            my comments
           </Button>
-          <Button color="secondary" fullWidth variant="contained">
-            <Edit />
-            Edit
-          </Button>
-          <Button color="secondary" fullWidth variant="contained">
-            <Edit />
-            Edit
-          </Button>
-          <Button color="secondary" fullWidth variant="contained">
-            <Edit />
-            Edit
-          </Button>
+
+          <Typography>I have been registered </Typography>
+          <Typography>{registered} </Typography>
         </Box>
         <Box sx={{ width: "73%", bgcolor: "grey" }}></Box>
       </Box>
