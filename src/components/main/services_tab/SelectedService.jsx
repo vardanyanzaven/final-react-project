@@ -19,6 +19,7 @@ export default function SelectedService() {
     disp(
       openDialog({
         isSignUpOpen: true,
+        isSignInOpen: false,
       })
     );
   };
