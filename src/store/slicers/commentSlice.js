@@ -26,23 +26,25 @@ export const getCommentsCollection = createAsyncThunk(
     const res = await Promise.all(
       commentsRef.map(
         async ({
-          favorite,
+          handleLikedPeople,
+          commentTime,
           thumbDown,
+          favorite,
+          writerId,
           thumbUp,
           comment,
-          writerId,
-          commentTime,
           id,
         }) => {
           const refData = await getDoc(writerId);
           const { fullName, photoURL } = refData.data();
           return {
-            comment,
+            handleLikedPeople,
+            commentTime,
+            thumbDown,
             fullName,
             photoURL,
-            commentTime,
             favorite,
-            thumbDown,
+            comment,
             thumbUp,
             id,
           };
@@ -58,21 +60,11 @@ export const getCommentsCollection = createAsyncThunk(
 
 const initialState = {
   commentsCol: [],
-  likes: {
-    thumbUp: 0,
-    thumbDown: 0,
-    favorite: 0,
-  },
 };
 
 const commentSlice = createSlice({
   name: "comments",
   initialState,
-  reducers: {
-    changeNumbers: (state, { payload }) => {
-      state.likes = payload;
-    },
-  },
   extraReducers: (builder) => {
     builder.addCase(getCommentsCollection.fulfilled, (state, { payload }) => {
       state.commentsCol = payload;

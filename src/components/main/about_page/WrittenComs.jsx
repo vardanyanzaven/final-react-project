@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { Box, Button } from "@mui/material";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase";
@@ -35,44 +38,70 @@ export const WrittenComs = () => {
   const auth = useAuth();
 
   const onHandleIcons = async (id, icon) => {
-    const point = -1;
     const mainRef = doc(db, "comments", id);
     const currentCommentRef = await getDoc(mainRef);
     const { thumbUp, thumbDown, favorite, handleLikedPeople } =
       currentCommentRef.data();
 
     const { thumbUpList, thumbDownList, favoriteList } = handleLikedPeople;
-
     if (icon === "thumbUp") {
-      if (thumbUpList.includes(auth.id)) {
-        const changedList = thumbUpList.splice(thumbUpList.indexOf(auth.id), 1);
-        await updateDoc(mainRef, {
-          handleLikedPeople: {
-            thumbUpList: changedList,
-          },
+      const index = thumbUpList.indexOf(auth.id);
+      const indexDown = thumbDownList.indexOf(auth.id);
+      const isDisliked = indexDown !== -1;
+      const d = index === -1 ? 1 : -1;
 
-          thumbUp: parseInt(thumbUp) + 1,
-        });
-      } else {
-        await updateDoc(mainRef, {
-          handleLikedPeople: {
-            thumbUpList: [...thumbUpList, auth.id],
-          },
-
-          thumbUp: parseInt(thumbUp) + 1,
-        });
-      }
+      await updateDoc(mainRef, {
+        thumbUp: +thumbUp + d,
+        thumbDown: isDisliked ? +thumbDown - 1 : +thumbDown,
+        handleLikedPeople: {
+          thumbUpList:
+            index === -1
+              ? [...thumbUpList, auth.id]
+              : [...thumbUpList.filter((id) => id !== auth.id)],
+          thumbDownList: isDisliked
+            ? [...thumbDownList.filter((id) => id !== auth.id)]
+            : thumbDownList,
+          favoriteList,
+        },
+      });
       dispatch(getCommentsCollection());
     }
     if (icon === "thumbDown") {
+      const index = thumbDownList.indexOf(auth.id);
+      const indexUp = thumbUpList.indexOf(auth.id);
+      const isLiked = indexUp !== -1;
+      const d = index === -1 ? 1 : -1;
+
       await updateDoc(mainRef, {
-        thumbDown: parseInt(thumbDown) + 1,
+        thumbDown: +thumbDown + d,
+        thumbUp: isLiked ? +thumbUp - 1 : thumbUp,
+        handleLikedPeople: {
+          thumbDownList:
+            index === -1
+              ? [...thumbDownList, auth.id]
+              : [...thumbDownList.filter((id) => id !== auth.id)],
+          thumbUpList: isLiked
+            ? thumbDownList.filter((id) => id !== auth.id)
+            : thumbUpList,
+          favoriteList,
+        },
       });
       dispatch(getCommentsCollection());
     }
     if (icon === "favorite") {
+      const index = favoriteList.indexOf(auth.id);
+      const d = index === -1 ? 1 : -1;
+
       await updateDoc(mainRef, {
-        favorite: parseInt(favorite) + 1,
+        favorite: +favorite + d,
+        handleLikedPeople: {
+          favoriteList:
+            index === -1
+              ? [...favoriteList, auth.id]
+              : [...favoriteList.filter((id) => id !== auth.id)],
+          thumbUpList,
+          thumbDownList,
+        },
       });
       dispatch(getCommentsCollection());
     }
@@ -83,6 +112,11 @@ export const WrittenComs = () => {
       <List sx={{ width: "100%", maxWidth: 800, bgcolor: "lightgray" }}>
         {curArr.map((m) => {
           const time = formatDate(m.commentTime);
+          const { thumbUpList, thumbDownList, favoriteList } =
+            m.handleLikedPeople;
+          const isThumbedUp = thumbUpList.includes(auth.id);
+          const isThumbedDown = thumbDownList.includes(auth.id);
+          const isFavorite = favoriteList.includes(auth.id);
           return (
             <React.Fragment key={Math.random()}>
               <ListItem alignItems="flex-start">
@@ -97,23 +131,36 @@ export const WrittenComs = () => {
                         sx={{ display: "inline", mr: "10px" }}
                         component="span"
                         variant="body2"
-                        color="text.primary"
-                      >
+                        color="text.primary">
                         {m.fullName}
-                        <Typography variant="body1">{m.comment}</Typography>
-                        <Typography variant="subtitle2">{time}</Typography>
                       </Typography>
+                      <Typography variant="body1">{m.comment}</Typography>
+                      <Typography variant="subtitle2">{time}</Typography>
                       <Box sx={{ display: "flex", ml: 1 }}>
                         <Button onClick={() => onHandleIcons(m.id, "thumbUp")}>
-                          <ThumbUpAltIcon /> {m.thumbUp}
+                          {isThumbedUp ? (
+                            <ThumbUpAltIcon />
+                          ) : (
+                            <ThumbUpOffAltIcon />
+                          )}
+                          {m.thumbUp}
                         </Button>
                         <Button onClick={() => onHandleIcons(m.id, "favorite")}>
-                          <FavoriteIcon /> {m.favorite}
+                          {isFavorite ? (
+                            <FavoriteIcon />
+                          ) : (
+                            <FavoriteBorderIcon />
+                          )}
+                          {m.favorite}
                         </Button>
                         <Button
-                          onClick={() => onHandleIcons(m.id, "thumbDown")}
-                        >
-                          <ThumbDownAltIcon /> {m.thumbDown}
+                          onClick={() => onHandleIcons(m.id, "thumbDown")}>
+                          {isThumbedDown ? (
+                            <ThumbDownAltIcon />
+                          ) : (
+                            <ThumbDownOffAltIcon />
+                          )}
+                          {m.thumbDown}
                         </Button>
                       </Box>
                     </>
