@@ -3,7 +3,7 @@ import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Input from "@mui/joy/Input";
 import { useState } from "react";
-import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 import { useAuth } from "../../../hooks/useAuth";
 import { SUCCESS_MESSAGE } from "../../../constants/common";
 import { auth, db } from "../../../firebase";
