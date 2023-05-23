@@ -26,12 +26,17 @@ const ServicesPage = ({ setActiveLinkId }) => {
       <Typography className="heading" variant="h3" color="#F2B918">
         Our services
       </Typography>
-      <ImageList cols={3} gap={20}>
+      <ImageList cols={3} gap={20} sx={{ ml: 8, mr: 8 }}>
         {SERVICE_DATA().map((ser) => (
           <Link to={ser.name} key={Math.random()}>
             <ImageListItem>
               <Typography variant="h4">{ser.name.toUpperCase()}</Typography>
-              <img src={ser.url} alt={ser.name} className="image" />
+              <img
+                src={ser.url}
+                alt={ser.name}
+                className="image"
+                sx={{ borderRadius: "50%" }}
+              />
             </ImageListItem>
           </Link>
         ))}
