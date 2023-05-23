@@ -1,4 +1,4 @@
-import { Menu, createTheme, styled } from "@material-ui/core";
+import { createTheme, styled } from "@material-ui/core";
 import { Button } from "@mui/material";
 
 const CatalogueTheme = createTheme({

@@ -1,5 +1,6 @@
-import { Box, Avatar, Typography } from "@mui/material";
+import { Box, Avatar, Typography, Button } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
+import { Edit } from "@mui/icons-material";
 
 const User = () => {
   const { userInfo } = useAuth();
@@ -28,10 +29,53 @@ const User = () => {
           />
           <Typography variant="h4" color="wheat">
             {userInfo.fullName}
+            {userInfo.type === "driver" && "(driver)"}
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ ml: "300px" }}></Box>
+      <Box
+        sx={{
+          mt: "100px",
+          minHeight: "500px",
+          display: "flex",
+          justifyContent: "space-around",
+        }}>
+        <Box
+          sx={{
+            width: "23%",
+            bgcolor: "grey",
+            paddingInline: 2,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-around",
+          }}>
+          <Button color="secondary" fullWidth variant="contained">
+            <Edit />
+            Edit
+          </Button>
+          <Button color="secondary" fullWidth variant="contained">
+            <Edit />
+            Edit
+          </Button>
+          <Button color="secondary" fullWidth variant="contained">
+            <Edit />
+            Edit
+          </Button>
+          <Button color="secondary" fullWidth variant="contained">
+            <Edit />
+            Edit
+          </Button>
+          <Button color="secondary" fullWidth variant="contained">
+            <Edit />
+            Edit
+          </Button>
+          <Button color="secondary" fullWidth variant="contained">
+            <Edit />
+            Edit
+          </Button>
+        </Box>
+        <Box sx={{ width: "73%", bgcolor: "grey" }}></Box>
+      </Box>
     </Box>
   );
 };
