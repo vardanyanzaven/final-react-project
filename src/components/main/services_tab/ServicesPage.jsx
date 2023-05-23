@@ -18,6 +18,9 @@ const ServicesPage = ({ setActiveLinkId }) => {
         textAlign: "center",
         alignItems: "center",
         flexDirection: "column",
+        "& .image:hover": {
+          transform: "translateY(-40px)",
+        },
       }}
     >
       <Typography className="heading" variant="h3" color="#F2B918">
@@ -28,7 +31,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
           <Link to={ser.name} key={Math.random()}>
             <ImageListItem>
               <Typography variant="h4">{ser.name.toUpperCase()}</Typography>
-              <img src={ser.url} alt={ser.name} />
+              <img src={ser.url} alt={ser.name} className="image" />
             </ImageListItem>
           </Link>
         ))}

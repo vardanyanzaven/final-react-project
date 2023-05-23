@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import SortIcon from "@mui/icons-material/Sort";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { Box, Button, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,7 +16,7 @@ import {
   setFetchVal,
 } from "../../../store/slicers/catalogueSlice";
 import { ThemeProvider } from "styled-components";
-import catalogueTheme from "../../../themes/CatalogueTheme";
+import catalogueTheme from "../../../themes/catalogueTheme";
 
 const FilterSort = ({
   activeSortOpt,
@@ -57,7 +64,6 @@ const FilterSort = ({
           size="large"
           sx={{
             display: { xs: "flex", sm: "none" },
-
           }}
         >
           <SortIcon />
@@ -83,13 +89,15 @@ const FilterSort = ({
               display: { xs: "none", md: "inline" },
               fontSize: "16px",
               mr: 1,
-            }}>
+            }}
+          >
             Sort By:
           </Typography>
           <Typography
             sx={{
               display: { xs: "none", sm: "inline" },
-            }}>
+            }}
+          >
             {`${sortValue ? sortValue.value : ""}`}
           </Typography>
         </Button>
@@ -107,7 +115,7 @@ const FilterSort = ({
           <FilterAltIcon />
         </IconButton>
         <Button
-        color="gold"
+          color="gold"
           id="filter-btn"
           aria-controls={filterOpen ? "filter-menu" : undefined}
           aria-haspopup="true"
@@ -152,7 +160,8 @@ const FilterSort = ({
           transformOrigin={{
             vertical: "top",
             horizontal: "left",
-          }}>
+          }}
+        >
           {SORT_OPTIONS.map((opt) => (
             <MenuItem
               key={opt.value}
@@ -187,7 +196,8 @@ const FilterSort = ({
           transformOrigin={{
             vertical: "top",
             horizontal: "right",
-          }}>
+          }}
+        >
           {FILTER_OPTIONS.map((opt) => (
             <MenuItem
               key={opt.value}

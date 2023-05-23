@@ -58,16 +58,28 @@ export const getCommentsCollection = createAsyncThunk(
 
 const initialState = {
   commentsCol: [],
+  likes: {
+    thumbUp: 0,
+    thumbDown: 0,
+    favorite: 0,
+  },
 };
 
 const commentSlice = createSlice({
   name: "comments",
   initialState,
+  reducers: {
+    changeNumbers: (state, { payload }) => {
+      state.likes = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getCommentsCollection.fulfilled, (state, { payload }) => {
       state.commentsCol = payload;
     });
   },
 });
+
+export const { changeNumbers } = commentSlice.actions;
 
 export default commentSlice.reducer;
