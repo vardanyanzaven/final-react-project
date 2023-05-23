@@ -27,7 +27,7 @@ export const Comments = () => {
   const onHandleButton = async () => {
     if (!text) return;
     if (!isAuth) {
-      disp(openDialog({ isSignUpOpen: true }));
+      disp(openDialog({ isSignUpOpen: true, isSignInOpen: false }));
       return;
     }
     try {
@@ -70,6 +70,7 @@ export const Comments = () => {
             alignItems: "center",
             justifyContent: "space-around",
             bgcolor: "#878787",
+            pb: 2,
           }}>
           <Avatar src={userInfo.photoURL} size="lg" sx={{ mt: 2, ml: 12 }} />
           <Input

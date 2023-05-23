@@ -1,15 +1,14 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
 
-export const PayPal = ({ setdisabled, value }) => {
+export const PayPal = ({ setDisabled, value }) => {
   return (
     <>
       <PayPalScriptProvider
         options={{
           "client-id":
             "Afx4MFjXwvT3u4jra9bDoFMPK4h0MAlhk-f_LrIXiHw2IlC0nxnYp_msUFPbuYpFt9JpHsmiG3OQ8Psc",
-        }}
-      >
+        }}>
         <PayPalButtons
           key={Math.random()}
           createOrder={(data, actions) => {
@@ -24,7 +23,7 @@ export const PayPal = ({ setdisabled, value }) => {
                 ],
               })
               .then((orderId) => {
-                setdisabled(false);
+                setDisabled(false);
                 return orderId;
               });
           }}

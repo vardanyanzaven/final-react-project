@@ -24,7 +24,6 @@ const getSavedCars = async (setSavedCarsList, id) => {
 const SavedCars = () => {
   const { id } = useAuth();
   const [savedCarsList, setSavedCarsList] = useState([]);
-  console.log(savedCarsList);
 
   useEffect(() => {
     getSavedCars(setSavedCarsList, id);

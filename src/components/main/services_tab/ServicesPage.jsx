@@ -21,8 +21,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
         "& .image:hover": {
           transform: "translateY(-40px)",
         },
-      }}
-    >
+      }}>
       <Typography className="heading" variant="h3" color="#F2B918">
         Our services
       </Typography>

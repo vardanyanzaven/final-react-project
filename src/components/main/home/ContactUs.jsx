@@ -21,10 +21,6 @@ const ContactUsInput = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Message:", message);
-
     setName("");
     setEmail("");
     setMessage("");
