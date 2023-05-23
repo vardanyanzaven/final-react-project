@@ -13,7 +13,7 @@ import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { getCommentsCollection } from "../../../store/slicers/commentSlice";
@@ -34,7 +34,6 @@ export const WrittenComs = () => {
   const dispatch = useDispatch();
   const commentsArr = useSelector((state) => state.comments.commentsCol);
   const curArr = [...commentsArr];
-  console.log(curArr);
   const auth = useAuth();
 
   const onHandleIcons = async (id, icon) => {
@@ -119,53 +118,68 @@ export const WrittenComs = () => {
           const isFavorite = favoriteList.includes(auth.id);
           return (
             <React.Fragment key={Math.random()}>
-              <ListItem alignItems="flex-start">
+              <ListItem
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                }}>
                 <ListItemAvatar>
                   <Avatar src={m?.photoURL} />
                 </ListItemAvatar>
-                <ListItemText
-                  sx={{ mt: 2 }}
-                  secondary={
-                    <>
-                      <Typography
-                        sx={{ display: "inline", mr: "10px" }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary">
-                        {m.fullName}
-                      </Typography>
-                      <Typography variant="body1">{m.comment}</Typography>
-                      <Typography variant="subtitle2">{time}</Typography>
-                      <Box sx={{ display: "flex", ml: 1 }}>
-                        <Button onClick={() => onHandleIcons(m.id, "thumbUp")}>
-                          {isThumbedUp ? (
-                            <ThumbUpAltIcon />
-                          ) : (
-                            <ThumbUpOffAltIcon />
-                          )}
-                          {m.thumbUp}
-                        </Button>
-                        <Button onClick={() => onHandleIcons(m.id, "favorite")}>
-                          {isFavorite ? (
-                            <FavoriteIcon />
-                          ) : (
-                            <FavoriteBorderIcon />
-                          )}
-                          {m.favorite}
-                        </Button>
-                        <Button
-                          onClick={() => onHandleIcons(m.id, "thumbDown")}>
-                          {isThumbedDown ? (
-                            <ThumbDownAltIcon />
-                          ) : (
-                            <ThumbDownOffAltIcon />
-                          )}
-                          {m.thumbDown}
-                        </Button>
-                      </Box>
-                    </>
-                  }
-                />
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
+                    alignItems: "end",
+                    mb: 2,
+                  }}>
+                  <ListItemText sx={{ mt: 2 }}>
+                    <Typography
+                      sx={{ display: "inline", mr: "10px" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary">
+                      {m.fullName}
+                    </Typography>
+                    <Typography variant="body1">{m.comment}</Typography>
+                    <Typography variant="subtitle2">{time}</Typography>
+                  </ListItemText>
+                  <Box sx={{ display: "flex", ml: 1 }}>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <IconButton
+                        color="primary"
+                        onClick={() => onHandleIcons(m.id, "thumbUp")}>
+                        {isThumbedUp ? (
+                          <ThumbUpAltIcon />
+                        ) : (
+                          <ThumbUpOffAltIcon />
+                        )}
+                      </IconButton>
+                      <Typography>{m.thumbUp}</Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <IconButton
+                        color="primary"
+                        onClick={() => onHandleIcons(m.id, "favorite")}>
+                        {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                      </IconButton>
+                      <Typography>{m.favorite}</Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <IconButton
+                        color="primary"
+                        onClick={() => onHandleIcons(m.id, "thumbDown")}>
+                        {isThumbedDown ? (
+                          <ThumbDownAltIcon />
+                        ) : (
+                          <ThumbDownOffAltIcon />
+                        )}
+                      </IconButton>
+                      <Typography>{m.thumbDown}</Typography>
+                    </Box>
+                  </Box>
+                </Box>
               </ListItem>
               <Divider />
             </React.Fragment>

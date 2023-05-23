@@ -51,7 +51,7 @@ export const getCommentsCollection = createAsyncThunk(
         }
       )
     ).catch((e) => {
-      console.log(e, "dafjkfdkj");
+      console.log(e);
       return [];
     });
     return res;

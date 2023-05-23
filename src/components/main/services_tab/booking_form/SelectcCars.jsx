@@ -1,11 +1,17 @@
-import { FormControl, MenuItem, Select, TextField } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCatalogue } from "../../../../store/slicers/catalogueSlice";
 import { useEffect } from "react";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../../../firebase";
 
-export default function SelectCars({ register }) {
-  const [open, setOpen] = useState(false);
+export default function SelectCars({
+  register,
+  error,
+  setDisabled,
+  setCarModels,
+}) {
   const { cars } = useSelector((state) => state.catalogue);
   const dispatch = useDispatch();
 
@@ -13,37 +19,40 @@ export default function SelectCars({ register }) {
     dispatch(setCatalogue());
   }, []);
 
-  // const onClose = () => {
-  //   setOpen(!open);
-  // };
-
-  // const handleChange = (e) => {
-  //   setcar(e.target.value);
-  // };
+  const handleChooseCar = async (e) => {
+    try {
+      const value = e.target.value;
+      const carsRef = collection(db, "catalogueCars");
+      const carQuery = await getDocs(
+        query(carsRef, where("carBrand", "==", value))
+      );
+      const carModels = [];
+      carQuery.forEach((car) => {
+        const res = car.data();
+        carModels.push({ name: res.carModel, price: res.price });
+      });
+      setCarModels(carModels);
+      setDisabled(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
-    // <div >
-    //   <FormControl  sx={{ width: 195, mt: 3 }}>
     <TextField
-      required
       select
-      displayEmpty
-      open={open}
-      // onClose={onClose}
-      onClick={() => setOpen(!open)}
-      inputProps={{ "aria-label": "Without label", ...register("car") }}
+      error={error}
+      defaultValue=""
+      label="Select Car Brand"
+      onChange={handleChooseCar}
+      inputProps={{ ...register("car") }}
       sx={{ width: 195, mt: 3 }}
-    >
-      <MenuItem disabled value="">
-        <em>Select Car Brand </em>
-      </MenuItem>
+      helperText={error}>
       {cars.map((c) => (
         <MenuItem key={Math.random()} value={c.carBrand}>
           {c.carBrand}
         </MenuItem>
       ))}
     </TextField>
-    /* /* </FormControl> */
-    /* </div> */
   );
 }

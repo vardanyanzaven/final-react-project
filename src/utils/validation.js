@@ -81,5 +81,5 @@ export const bookScheme = Yup.object().shape({
     .matches(/^\+?[1-9]\d{1,14}$/, "Phone number is not valid")
     .required("Phone number is required")
     .min(11, "Write correct mobile"),
-  pickUpDate: Yup.string().min(new Date(), "not valid date"),
+  pickUpDate: Yup.string().required("date is required"),
 });

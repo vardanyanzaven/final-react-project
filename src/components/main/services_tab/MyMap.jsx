@@ -10,6 +10,7 @@ import {
 } from "@geoapify/react-geocoder-autocomplete";
 import create from "zustand";
 import "./style.css";
+import { useEffect } from "react";
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -19,7 +20,7 @@ const icon = L.icon({
   shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
 });
 
-function MyComponent({ setcordinates, setPlace }) {
+function MyComponent({ setcordinates, setPlace, setDisabled, setAddress }) {
   const [marker, setmarker] = useState();
   const map = useMapEvents({
     click: (e) => {
@@ -30,7 +31,7 @@ function MyComponent({ setcordinates, setPlace }) {
       const newMarker = L.marker([lat, lng], { icon }).addTo(map);
       setmarker(newMarker);
       setcordinates([lat, lng]);
-      getAddressFromCoordinates(lat, lng, setPlace);
+      getAddressFromCoordinates(lat, lng, setPlace, setDisabled, setAddress);
     },
   });
   return null;
@@ -42,7 +43,13 @@ let props = {
   notify: () => console.log("callllinnnggg"),
 };
 
-const getAddressFromCoordinates = async (lat, lng, setPlace) => {
+const getAddressFromCoordinates = async (
+  lat,
+  lng,
+  setPlace,
+  setDisabled,
+  setAddress
+) => {
   axios
     .get("http://api.positionstack.com/v1/reverse", {
       params: {
@@ -51,8 +58,9 @@ const getAddressFromCoordinates = async (lat, lng, setPlace) => {
       },
     })
     .then((response) => {
-      console.log(response.data, "my console");
       setPlace(response.data.data[0].name);
+      setDisabled(false);
+      setAddress(response.data.data[0].name);
     })
     .catch((error) => {
       console.error("IMMM" + error);
@@ -74,12 +82,14 @@ const useAddressStore = create((set) => ({
   clear: () => set({ address: emptyAddress }),
 }));
 
-export default function MyMap({ setcordinates }) {
+export default function MyMap({ setcordinates, setDisabled, setAddress }) {
   const [place, setPlace] = useState("");
   const { address, set, clear } = useAddressStore();
   const onPlaceSelect = (value) => {
     let _props = value?.properties;
-    if (_props)
+    if (_props) {
+      setDisabled(false);
+      setAddress(_props.address_line2);
       set({
         address_line1: _props.address_line1,
         address_line2: _props.address_line2,
@@ -88,7 +98,7 @@ export default function MyMap({ setcordinates }) {
         postcode: _props.postcode,
         country: _props.country,
       });
-    else clear();
+    } else clear();
     props.notify();
     return value;
   };
@@ -125,13 +135,17 @@ export default function MyMap({ setcordinates }) {
           center={{ lat: 40.180094, lng: 44.515229 }}
           zoom={15}
           scrollWheelZoom={false}
-          style={{ height: "500px" }}
-        >
+          style={{ height: "500px" }}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <MyComponent setcordinates={setcordinates} setPlace={setPlace} />
+          <MyComponent
+            setcordinates={setcordinates}
+            setPlace={setPlace}
+            setDisabled={setDisabled}
+            setAddress={setAddress}
+          />
         </MapContainer>
       </div>
     </>
