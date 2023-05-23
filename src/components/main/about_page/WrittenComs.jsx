@@ -30,11 +30,13 @@ function formatDate(timestamp) {
   return day + "." + month + "." + year + " " + hours + ":" + minutes;
 }
 
-export const WrittenComs = () => {
+export const WrittenComs = ({ dontShowAll }) => {
   const dispatch = useDispatch();
   const commentsArr = useSelector((state) => state.comments.commentsCol);
-  const curArr = [...commentsArr];
   const auth = useAuth();
+  const curArr = dontShowAll
+    ? [...commentsArr].filter((com) => com.personId === auth.id)
+    : [...commentsArr];
 
   const onHandleIcons = async (id, icon) => {
     const mainRef = doc(db, "comments", id);
@@ -107,8 +109,8 @@ export const WrittenComs = () => {
   };
 
   return (
-    <div style={{ overflow: "auto", maxHeight: "400px" }}>
-      <List sx={{ width: "100%", maxWidth: 800, bgcolor: "lightgray" }}>
+    <div style={{ overflow: "auto", maxHeight: "400px", width: "100%" }}>
+      <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "lightgray" }}>
         {curArr.map((m) => {
           const time = formatDate(m.commentTime);
           const { thumbUpList, thumbDownList, favoriteList } =
@@ -148,6 +150,7 @@ export const WrittenComs = () => {
                   <Box sx={{ display: "flex", ml: 1 }}>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                       <IconButton
+                        disabled={dontShowAll}
                         color="primary"
                         onClick={() => onHandleIcons(m.id, "thumbUp")}>
                         {isThumbedUp ? (
@@ -160,6 +163,7 @@ export const WrittenComs = () => {
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                       <IconButton
+                        disabled={dontShowAll}
                         color="primary"
                         onClick={() => onHandleIcons(m.id, "favorite")}>
                         {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
@@ -168,6 +172,7 @@ export const WrittenComs = () => {
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                       <IconButton
+                        disabled={dontShowAll}
                         color="primary"
                         onClick={() => onHandleIcons(m.id, "thumbDown")}>
                         {isThumbedDown ? (

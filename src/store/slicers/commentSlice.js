@@ -34,6 +34,7 @@ export const getCommentsCollection = createAsyncThunk(
           thumbUp,
           comment,
           id,
+          personId,
         }) => {
           const refData = await getDoc(writerId);
           const { fullName, photoURL } = refData.data();
@@ -47,6 +48,7 @@ export const getCommentsCollection = createAsyncThunk(
             comment,
             thumbUp,
             id,
+            personId,
           };
         }
       )
