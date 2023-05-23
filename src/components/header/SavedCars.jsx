@@ -3,18 +3,6 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../hooks/useAuth";
 import CarsGrid from "../../shared/CarsGrid";
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Paper,
-  Tooltip,
-  Typography,
-} from "@mui/material";
 
 const getSavedCars = async (setSavedCarsList, id) => {
   try {

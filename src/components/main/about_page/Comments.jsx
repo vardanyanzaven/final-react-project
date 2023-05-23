@@ -33,6 +33,11 @@ export const Comments = () => {
     try {
       setText("");
       await addDoc(collection(db, "comments"), {
+        handleLikedPeople: {
+          thumbUpList: [],
+          thumbDownList: [],
+          favoriteList: [],
+        },
         comment: text,
         writerId: doc(db, "users", auth.currentUser.uid),
         commentTime: new Date().getTime(),
@@ -55,7 +60,8 @@ export const Comments = () => {
         alignItems: "center",
         mt: 2,
         bgcolor: "#454545",
-      }}>
+      }}
+    >
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Box
           sx={{
@@ -65,7 +71,8 @@ export const Comments = () => {
             alignItems: "center",
             justifyContent: "space-around",
             bgcolor: "#878787",
-          }}>
+          }}
+        >
           <Avatar src={userInfo.photoURL} size="lg" sx={{ mt: 2, ml: 12 }} />
           <Input
             sx={{ width: 350, height: 20, border: 1, mt: 2 }}
@@ -77,7 +84,8 @@ export const Comments = () => {
           />
           <Button
             sx={{ width: 100, height: 20, mt: 2, mr: 12 }}
-            onClick={onHandleButton}>
+            onClick={onHandleButton}
+          >
             Send
           </Button>
         </Box>
