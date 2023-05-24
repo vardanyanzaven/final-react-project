@@ -83,3 +83,10 @@ export const bookScheme = Yup.object().shape({
     .min(11, "Write correct mobile"),
   pickUpDate: Yup.string().required("date is required"),
 });
+
+export const carAddScheme = Yup.object().shape({
+  car: Yup.string().required("Car is required"),
+  model: Yup.string().required("Model is required"),
+  year: Yup.string().required("Year is required"),
+  type: Yup.string().required("Type is required"),
+});

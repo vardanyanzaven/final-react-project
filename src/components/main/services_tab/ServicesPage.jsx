@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
 import { SERVICE_DATA } from "../../../constants/common";
+import { servicePageStyle } from "./styles";
 
 const ServicesPage = ({ setActiveLinkId }) => {
   useEffect(() => {
@@ -11,17 +12,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
 
   return (
     // <ThemeProvider theme={ServiceTheme}>
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        textAlign: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        "& .image:hover": {
-          transform: "translateY(-40px)",
-        },
-      }}>
+    <Box sx={servicePageStyle.mainBox}>
       <Typography className="heading" variant="h3" color="#F2B918">
         Our services
       </Typography>

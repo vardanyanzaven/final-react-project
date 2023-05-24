@@ -4,18 +4,13 @@ import PersonalSettings from "../settings/PersonalSettings";
 import DriverRegister from "../settings/DriverRegister";
 import { useAuth } from "../../hooks/useAuth";
 import DriverSettings from "../settings/DriverSettings";
+import { userSettings } from "./styles";
 
 export const UserSettings = () => {
   const { userInfo } = useAuth();
   return (
     <>
-      <Box
-        sx={{
-          display: { lg: "flex", sm: "block" },
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          m: 3,
-        }}>
+      <Box sx={userSettings.mainBox}>
         <MainPhotoSettings />
         <PersonalSettings />
       </Box>

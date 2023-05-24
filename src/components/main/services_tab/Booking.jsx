@@ -1,26 +1,27 @@
+import React from "react";
 import { useDispatch } from "react-redux";
-import { changeMessage } from "../../../store/slicers/statusSlice";
-import { SUCCESS_MESSAGE } from "../../../constants/common";
+import PhoneInput from "react-phone-input-2";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm } from "react-hook-form";
+import "react-phone-input-2/lib/style.css";
+import { Link } from "react-router-dom";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { db } from "../../../firebase";
-import { Link } from "react-router-dom";
 import { addDoc, collection } from "@firebase/firestore";
 import { PayPal } from "./PayPal";
-import "react-phone-input-2/lib/style.css";
-import React from "react";
 import SelectCars from "./booking_form/SelectcCars";
 import MyMap from "./MyMap";
 import SelectCarModel from "./booking_form/SelectCarModel";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { bookScheme } from "../../../utils/validation";
-import PhoneInput from "react-phone-input-2";
+import { SUCCESS_MESSAGE } from "../../../constants/common";
+import { changeMessage } from "../../../store/slicers/statusSlice";
 import { styles } from "../../../shared/auth_dialog/styles";
 import { ERROR_MESSAGE } from "../../../constants/common";
 import { useAuth } from "../../../hooks/useAuth";
+import { bookingStyles, feedBackStyles } from "./styles";
 
-export const Booking = () => {
+export const Booking = ({ serviceName }) => {
   const {
     register,
     formState: { errors },
@@ -40,6 +41,7 @@ export const Booking = () => {
   const [address, setAddress] = useState("");
   const disp = useDispatch();
   const { id } = useAuth();
+
   const TEXT_FEEDBACK_FOR_USER = `The booking has been successfully done, we inform you that ${
     complitedData.pickUpDate
   } ${"1"}
@@ -61,6 +63,7 @@ export const Booking = () => {
       setDisabled(true);
       return;
     }
+
     await addDoc(collection(db, "bookings"), {
       carModel: carModel,
       car: car,
@@ -71,6 +74,7 @@ export const Booking = () => {
       price: value,
       address: address,
       personId: id,
+      service: serviceName,
     })
       .then(() => {
         setPage1(false);
@@ -81,48 +85,20 @@ export const Booking = () => {
   };
 
   return page1 ? (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          textAlign: "center",
-          width: 1200,
-          height: 600,
-        }}>
+    <Box sx={bookingStyles.mainBox}>
+      <Box sx={bookingStyles.secondBox}>
         <Box
           component="form"
           noValidate
           onSubmit={handleSubmit(anotherStep)}
-          sx={{
-            width: "400px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            ml: 10,
-          }}>
+          sx={bookingStyles.formBox}>
           <Typography variant="h4"> Book Here </Typography>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
             }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "400px",
-                alignItems: "center",
-                mb: 2,
-              }}>
+            <Box sx={bookingStyles.carBox}>
               <SelectCars
                 register={register}
                 error={errors.car?.message}
@@ -189,23 +165,8 @@ export const Booking = () => {
       </Box>
     </Box>
   ) : (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}>
-      <Paper
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-          textAlign: "center",
-          width: 800,
-          height: 600,
-          mt: 10,
-        }}>
+    <Box sx={feedBackStyles.mainBox}>
+      <Paper sx={feedBackStyles.paper}>
         <Box>
           <Typography variant="h4" sx={{ mt: 10 }}>
             {TEXT_FEEDBACK_FOR_USER}

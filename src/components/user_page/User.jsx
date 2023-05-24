@@ -1,12 +1,19 @@
 import { Box, Avatar, Typography, Button } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
-import { Edit, AutoStories, Inventory, Forum } from "@mui/icons-material";
+import {
+  Edit,
+  AutoStories,
+  Inventory,
+  Forum,
+  DirectionsCar,
+} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import { useState } from "react";
 import { WrittenComs } from "../main/about_page/WrittenComs";
 import { useDispatch } from "react-redux";
 import { getCommentsCollection } from "../../store/slicers/commentSlice";
+import { userStyles } from "./styles";
 import { MyBookings } from "./MyBookings";
 
 const User = () => {
@@ -31,24 +38,8 @@ const User = () => {
 
   return (
     <Box sx={{ minHeight: "600px" }}>
-      <Box
-        sx={{
-          height: "200px",
-          bgcolor: "#101010",
-          display: "flex",
-          alignItems: "end",
-        }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "150px",
-            left: "70px",
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-          }}
-        >
+      <Box sx={userStyles.mainBox}>
+        <Box sx={userStyles.personal}>
           <Avatar
             src={userInfo?.photoURL}
             sizes=""
@@ -60,31 +51,14 @@ const User = () => {
           </Typography>
         </Box>
       </Box>
-      <Box
-        sx={{
-          mt: "100px",
-          minHeight: "500px",
-          display: "flex",
-          justifyContent: "space-around",
-        }}
-      >
-        <Box
-          sx={{
-            width: "23%",
-            bgcolor: "grey",
-            paddingInline: 2,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
-          }}
-        >
+      <Box sx={userStyles.content}>
+        <Box sx={userStyles.contentLeft}>
           <Link to="/settings">
             <Button
               sx={{ height: "60px", fontSize: "20px" }}
               color="secondary"
               fullWidth
-              variant="contained"
-            >
+              variant="contained">
               <Edit />
               Edit profile
             </Button>
@@ -94,8 +68,7 @@ const User = () => {
             sx={{ height: "60px", fontSize: "20px" }}
             color="secondary"
             fullWidth
-            variant="contained"
-          >
+            variant="contained">
             <AutoStories />
             &nbsp;all services order
           </Button>
@@ -103,8 +76,7 @@ const User = () => {
             sx={{ height: "60px", fontSize: "20px" }}
             color="secondary"
             fullWidth
-            variant="contained"
-          >
+            variant="contained">
             <Inventory />
             all bought cars
           </Button>
@@ -113,18 +85,25 @@ const User = () => {
             color="secondary"
             fullWidth
             variant="contained"
-            onClick={() => setComp("comments")}
-          >
+            onClick={() => setComp("comments")}>
             <Forum />
             my comments
           </Button>
-
+          {userInfo.type === "driver" && (
+            <Button
+              sx={{ height: "60px", fontSize: "20px" }}
+              color="secondary"
+              fullWidth
+              variant="contained"
+              onClick={() => setComp("driverCars")}>
+              <DirectionsCar />
+              my cars
+            </Button>
+          )}
           <Typography>I have been registered </Typography>
           <Typography>{registered} </Typography>
         </Box>
-        <Box sx={{ width: "73%", bgcolor: "grey" }}>
-          {currentComponent(comp)}
-        </Box>
+        <Box sx={userStyles.contentRight}>{currentComponent(comp)}</Box>
       </Box>
     </Box>
   );
