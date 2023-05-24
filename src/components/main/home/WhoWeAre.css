@@ -1,7 +1,8 @@
 .whoweare-container {
-    background-color: black;
+    background-color: rgb(2, 2, 34);
     max-width: 100%;
-    height: 500px;
+    min-height: 500px;
+    
     padding: 3%;
     display: flex;
     align-items: center;
@@ -17,6 +18,7 @@
 
   .whoweare-text {
     color: white;
+    margin: 3%;
   }
   .underlined {
     

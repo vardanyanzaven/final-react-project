@@ -57,7 +57,11 @@ const CarsGrid = ({ carsList }) => {
         savedCars: savedCars.includes(carId)
           ? arrayRemove(doc(db, "catalogueCars", carId))
           : arrayUnion(doc(db, "catalogueCars", carId)),
+        savedCars: savedCars.includes(carId)
+          ? arrayRemove(doc(db, "catalogueCars", carId))
+          : arrayUnion(doc(db, "catalogueCars", carId)),
       });
+
 
       const isIdInSavedCars = savedCars.includes(carId);
       dispatch(
@@ -81,7 +85,6 @@ const CarsGrid = ({ carsList }) => {
       })
     );
   };
-  console.log(carsList);
 
   return (
     <ThemeProvider theme={carGridTheme}>

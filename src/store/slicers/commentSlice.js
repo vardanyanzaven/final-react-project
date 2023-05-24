@@ -1,33 +1,59 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { db } from "../../firebase";
-import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDoc,
+  getDocs,
+  query,
+  orderBy,
+} from "firebase/firestore";
 
 export const getCommentsCollection = createAsyncThunk(
   "comments/getCommentsCollection",
   async () => {
-    const result = [];
-    const col = query(collection(db, "comments"));
+    const commentsRef = [];
+    const col = query(
+      collection(db, "comments"),
+      orderBy("commentTime", "desc")
+    );
     const docs = await getDocs(col);
 
     docs.forEach((com) => {
       const data = com.data();
-
-      result.push(data);
+      commentsRef.push({ ...data, id: com.id });
     });
 
     const res = await Promise.all(
-      result.map(async ({ comment, writerId, commentTime }) => {
-        const refData = await getDoc(writerId);
-        const { fullName, photoURL } = refData.data();
-        return {
-          comment,
-          fullName,
-          photoURL,
+      commentsRef.map(
+        async ({
+          handleLikedPeople,
           commentTime,
-        };
-      })
+          thumbDown,
+          favorite,
+          writerId,
+          thumbUp,
+          comment,
+          id,
+          personId,
+        }) => {
+          const refData = await getDoc(writerId);
+          const { fullName, photoURL } = refData.data();
+          return {
+            handleLikedPeople,
+            commentTime,
+            thumbDown,
+            fullName,
+            photoURL,
+            favorite,
+            comment,
+            thumbUp,
+            id,
+            personId,
+          };
+        }
+      )
     ).catch((e) => {
-      console.log(e, "dafjkfdkj");
+      console.log(e);
       return [];
     });
     return res;
@@ -47,5 +73,7 @@ const commentSlice = createSlice({
     });
   },
 });
+
+export const { changeNumbers } = commentSlice.actions;
 
 export default commentSlice.reducer;

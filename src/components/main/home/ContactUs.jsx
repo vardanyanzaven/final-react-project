@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import "./ContactUs.css"
+import React, { useState } from "react";
+import "./ContactUs.css";
 
 const ContactUsInput = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -21,23 +21,17 @@ const ContactUsInput = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Message:', message);
-
-    
-    setName('');
-    setEmail('');
-    setMessage('');
+    setName("");
+    setEmail("");
+    setMessage("");
   };
 
   return (
-    <div className = "contactus">
-      <h1 className ="contactus-title">Contact Us</h1>
-      <h4 className ="contactus-text">We'd love to hear from you!</h4>
-      <form class="contactus-form"onSubmit={handleSubmit}>
-        <div className = "styled-input">
+    <div className="contactus">
+      <h1 className="contactus-title">Contact Us</h1>
+      <h4 className="contactus-text">We'd love to hear from you!</h4>
+      <form className="contactus-form" onSubmit={handleSubmit}>
+        <div className="styled-input">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -47,7 +41,7 @@ const ContactUsInput = () => {
             required
           />
         </div>
-        <div className = "styled-input">
+        <div className="styled-input">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -57,16 +51,17 @@ const ContactUsInput = () => {
             required
           />
         </div>
-        <div className = "styled-input">
+        <div className="styled-input">
           <label htmlFor="message">Message:</label>
           <textarea
             id="message"
             value={message}
             onChange={handleMessageChange}
-            required
-          ></textarea>
+            required></textarea>
         </div>
-        <button type="submit" className = "contactus-btn">Submit</button>
+        <button type="submit" className="contactus-btn">
+          Submit
+        </button>
       </form>
     </div>
   );

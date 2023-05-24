@@ -3,7 +3,7 @@ import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Input from "@mui/joy/Input";
 import { useState } from "react";
-import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 import { useAuth } from "../../../hooks/useAuth";
 import { SUCCESS_MESSAGE } from "../../../constants/common";
 import { auth, db } from "../../../firebase";
@@ -17,7 +17,7 @@ import { openDialog } from "../../../store/slicers/dialogSlice";
 
 export const Comments = () => {
   const [text, setText] = useState("");
-  const { userInfo, isAuth } = useAuth();
+  const { userInfo, isAuth, id } = useAuth();
   const disp = useDispatch();
 
   useEffect(() => {
@@ -27,15 +27,24 @@ export const Comments = () => {
   const onHandleButton = async () => {
     if (!text) return;
     if (!isAuth) {
-      disp(openDialog({ isSignUpOpen: true }));
+      disp(openDialog({ isSignUpOpen: true, isSignInOpen: false }));
       return;
     }
     try {
       setText("");
       await addDoc(collection(db, "comments"), {
+        handleLikedPeople: {
+          thumbUpList: [],
+          thumbDownList: [],
+          favoriteList: [],
+        },
         comment: text,
         writerId: doc(db, "users", auth.currentUser.uid),
         commentTime: new Date().getTime(),
+        thumbUp: 0,
+        thumbDown: 0,
+        favorite: 0,
+        personId: id,
       }).then(() => {
         disp(changeMessage(SUCCESS_MESSAGE.comment));
         disp(getCommentsCollection());
@@ -62,6 +71,7 @@ export const Comments = () => {
             alignItems: "center",
             justifyContent: "space-around",
             bgcolor: "#878787",
+            pb: 2,
           }}>
           <Avatar src={userInfo.photoURL} size="lg" sx={{ mt: 2, ml: 12 }} />
           <Input
