@@ -1,0 +1,38 @@
+
+.ouradvantages {
+    width: 100%;
+    background-color:rgb(2, 2, 34) ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+}
+
+.ouradvantages_container {
+    width: 70%;
+   
+}
+
+/* .ouradvantages_row {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+    padding: 3%;
+} */
+
+.ouradvantages-titles, .ouradvantages-texts {
+    color: white;
+}
+
+.ouradvantages-texts {
+        font-family: 'Roboto', sans-serif, 'arial';
+        font-weight: 400;
+        font-size: 20px;
+        color: white;
+        line-height: 1.5;
+}
+.ouradvantages-item {
+    padding: 3%;
+}

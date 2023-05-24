@@ -1,0 +1,18 @@
+.ourgallery_container {
+padding: 10%;
+background-color: rgb(2, 2, 34);
+}
+
+.ourgallery_title {
+    font-family: 'Poppins', sans-serif, 'arial';
+    font-weight: 600;
+    font-size: 72px;
+    color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
