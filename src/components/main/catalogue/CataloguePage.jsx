@@ -1,23 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  AppBar,
-  Box,
-  Container,
-  InputBase,
-  ThemeProvider,
-  Toolbar,
-} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { AppBar, Box, Container } from "@mui/material";
+import { InputBase, ThemeProvider, Toolbar } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useDispatch, useSelector } from "react-redux";
 import FilterSort from "./FilterSort";
 import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setCatalogue,
-  setFetchVal,
-} from "../../../store/slicers/catalogueSlice";
-
+import { setCatalogue } from "../../../store/slicers/catalogueSlice";
+import { setFetchVal } from "../../../store/slicers/catalogueSlice";
 import CarsGrid from "../../../shared/CarsGrid";
 import CatalogueTheme from "../../../themes/catalogueTheme";
+import { catalogueStyles } from "./styles";
 
 const CataloguePage = ({ setActiveLinkId }) => {
   // Redux
@@ -71,37 +63,13 @@ const CataloguePage = ({ setActiveLinkId }) => {
   return (
     <ThemeProvider theme={CatalogueTheme}>
       <Box sx={{ minHeight: "100vh" }}>
-        <AppBar
-          position="static"
-          sx={{ height: 75, mt: 10, background: "#192026" }}
-        >
+        <AppBar position="static" sx={catalogueStyles.appBar}>
           <Container>
-            <Toolbar
-              sx={{
-                display: "flex",
-                pt: { xs: 1.2, sm: 0.7 },
-                justifyContent: "space-between",
-                gap: 2,
-              }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  border: "1px solid #f2b90d",
-                  borderRadius: "5px",
-                  color: "white",
-                  pr: "8px",
-                  width: { xs: "50%", sm: "40%", md: "25%" },
-                }}>
+            <Toolbar sx={catalogueStyles.toolBar}>
+              <Box sx={catalogueStyles.mainBox}>
                 <InputBase
                   type="text"
-                  sx={{
-                    color: "white",
-                    width: "100%",
-                    pl: "10px",
-                    pr: "10px",
-                  }}
+                  sx={catalogueStyles.searchInput}
                   placeholder={
                     lastSearch === ""
                       ? "Search..."
@@ -117,11 +85,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
                   }}
                 />
                 <SearchIcon
-                  sx={{
-                    cursor: "pointer",
-                    transition: "color 0.1s",
-                    "&:hover": { color: "#f2b90d" },
-                  }}
+                  sx={catalogueStyles.searchIcon}
                   onClick={() => {
                     handleSearch();
                   }}

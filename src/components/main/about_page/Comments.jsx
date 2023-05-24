@@ -14,6 +14,7 @@ import { WrittenComs } from "./WrittenComs";
 import { getCommentsCollection } from "../../../store/slicers/commentSlice";
 import { useEffect } from "react";
 import { openDialog } from "../../../store/slicers/dialogSlice";
+import { commentStyles } from "./styles";
 
 export const Comments = () => {
   const [text, setText] = useState("");
@@ -54,25 +55,9 @@ export const Comments = () => {
     }
   };
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        mt: 2,
-        bgcolor: "#454545",
-      }}>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Box
-          sx={{
-            display: "flex",
-            background: "white",
-            width: 800,
-            alignItems: "center",
-            justifyContent: "space-around",
-            bgcolor: "#878787",
-            pb: 2,
-          }}>
+    <Box sx={commentStyles.box1}>
+      <Box sx={commentStyles.box2}>
+        <Box sx={commentStyles.box3}>
           <Avatar src={userInfo.photoURL} size="lg" sx={{ mt: 2, ml: 12 }} />
           <Input
             sx={{ width: 350, height: 20, border: 1, mt: 2 }}

@@ -13,7 +13,6 @@ export const SwitchButton = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("state changed");
     const root = document.querySelector(":root");
     root.style.setProperty("--background-color", backgroundColor);
   }, [backgroundColor]);

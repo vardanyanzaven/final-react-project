@@ -7,9 +7,8 @@ import { auth } from "../firebase";
 import { setUser } from "../store/slicers/userSlice";
 import { getUserDB, setUserDB } from "./dataBaseConfig";
 import { useAuth } from "../hooks/useAuth";
-import { getError } from "../utils/errors";
 import { changeMessage } from "../store/slicers/statusSlice";
-import { SUCCESS_MESSAGE } from "../constants/common";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../constants/common";
 
 export const emailSignUp = async (
   email,
@@ -26,8 +25,7 @@ export const emailSignUp = async (
     onClose();
     dispatch(changeMessage(SUCCESS_MESSAGE.loggedIn));
   } catch (e) {
-    const err = getError(e);
-    dispatch(changeMessage(err));
+    dispatch(changeMessage(ERROR_MESSAGE.something));
   }
 };
 
@@ -49,7 +47,7 @@ export const useAuthListener = (setLoading) => {
               ? {
                   ...userInfo,
                   ...dbData,
-                  savedCars: dbData.savedCars.map(ref => ref.id),
+                  savedCars: dbData.savedCars.map((ref) => ref.id),
                   photoURL: user.photoURL,
                 }
               : {},

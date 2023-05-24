@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import bgImg from "../../../assets/about/smiling-african-american-taxi-service-driver-expecting-client-near-luxury-car-2AMP6DG.jpg";
-import { WrittenComs } from "./WrittenComs";
 import { Comments } from "./Comments";
+import { aboutStyles } from "./styles";
 
 const AboutPage = ({ setActiveLinkId }) => {
   useEffect(() => {
@@ -13,30 +13,8 @@ const AboutPage = ({ setActiveLinkId }) => {
   return (
     <>
       <div
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-            "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
-          backgroundImage: `url(${bgImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100%",
-          opacity: "0.6",
-          overflow: "hidden",
-          height: "760px",
-        }}>
-        <Typography
-          variant="h4"
-          sx={{
-            color: "#787802",
-            fontFamily: "monospace",
-            width: "65%",
-            wordSpacing: "3px",
-            lineHeight: "30px",
-            userSelect: "none",
-            textShadow:
-              "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
-            m: "20px",
-          }}>
+        style={{ ...aboutStyles.aboutMain, backgroundImage: `url(${bgImg})` }}>
+        <Typography variant="h4" sx={aboutStyles.body}>
           Welcome to our website, created with the combined efforts of our
           dedicated team. Our goal is to provide you with a seamless and
           enjoyable browsing experience, as well as to share valuable

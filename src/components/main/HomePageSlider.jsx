@@ -5,18 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IMAGES_FOR_HOME_PAGE_SLIDER } from "../../constants/common";
 import { NavLink } from "react-router-dom";
-
-const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 3000,
-  arrows: false,
-  fade: true,
-};
+import { settings, sliderStyles } from "./styles";
 
 const HomePageSlider = () => {
   return (
@@ -27,28 +16,14 @@ const HomePageSlider = () => {
             <div
               className="slide-background"
               style={{
+                ...sliderStyles,
                 backgroundImage: `url(${slide.imgUrl})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                width: "100%",
-                height: "800px",
-              }}
-            >
+              }}>
               <div className="content">
-                <h2
-                  className="title"
-                  style={{
-                    fontSize: 80,
-                    color: "white",
-                    textAlign: "center",
-                  }}
-                >
+                <h2 className="title" style={sliderStyles.title}>
                   {slide.title}
                 </h2>
-                <p
-                  className="subtitle"
-                  style={{ fontSize: 50, color: "white", textAlign: "center" }}
-                >
+                <p className="subtitle" style={sliderStyles.subTitle}>
                   {slide.subtitle}
                 </p>
                 <NavLink to="services" className="slide-button">

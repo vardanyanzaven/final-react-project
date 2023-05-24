@@ -1,33 +1,22 @@
 import { ModalDialog } from "@mui/joy";
-import {
-  Box,
-  Button,
-  Checkbox,
-  CircularProgress,
-  Link,
-  Modal,
-  Step,
-} from "@mui/material";
+import { Box, Button, Checkbox, CircularProgress } from "@mui/material";
+import { Link, Modal, Step } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { StepLabel, Stepper, Typography } from "@mui/material";
-import React from "react";
-import { useState } from "react";
-import {
-  DRIVER_REGISTER_STEPS,
-  ERROR_MESSAGE,
-  SUCCESS_MESSAGE,
-} from "../../constants/common";
+import { v4 } from "uuid";
+import { useMemo } from "react";
+import { ref, uploadBytes } from "firebase/storage";
+import { doc, updateDoc } from "firebase/firestore";
+import React, { useState } from "react";
+import { DRIVER_REGISTER_STEPS } from "../../constants/common";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants/common";
 import PassportStep from "./all_steps/PassportStep";
 import DriverLicenseStepe from "./all_steps/DriverLicenseStep";
 import FinalStep from "./all_steps/FinalStep";
 import { changingSetting } from "../../services/userSettingsConfig";
-import { useDispatch } from "react-redux";
 import { useAuth } from "../../hooks/useAuth";
 import { changeMessage } from "../../store/slicers/statusSlice";
-import { v4 } from "uuid";
-import { useMemo } from "react";
-import { ref, uploadBytes } from "firebase/storage";
 import { auth, db, storage } from "../../firebase";
-import { doc, updateDoc } from "firebase/firestore";
 
 async function finalPart(data, passportRef, selfieRef) {
   const {

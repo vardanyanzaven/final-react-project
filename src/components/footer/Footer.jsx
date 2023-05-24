@@ -35,6 +35,5 @@ const Footer = () => {
     </ThemeProvider>
   );
 };
-// linkery constantnerum kpahes, ete hascnes dialogTheme-n el gri
 
 export default Footer;

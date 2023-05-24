@@ -25,6 +25,7 @@ import { useDispatch } from "react-redux";
 import { useAuth } from "../hooks/useAuth";
 import { openDialog } from "../store/slicers/dialogSlice";
 import { changeUserInfo } from "../store/slicers/userSlice";
+import { carsGridStyles } from "./styles";
 // doc(db, "catalogueCars", carId)
 
 const CarsGrid = ({ carsList }) => {
@@ -65,7 +66,7 @@ const CarsGrid = ({ carsList }) => {
   };
 
   return (
-    <Box sx={{ width: "100%", mt: { xs: 5, sm: 7, md: 10 } }}>
+    <Box sx={carsGridStyles.mainBox}>
       <Grid
         container
         rowSpacing={{ xs: 2, sm: 4 }}

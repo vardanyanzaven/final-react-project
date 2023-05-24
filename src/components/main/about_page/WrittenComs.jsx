@@ -13,11 +13,12 @@ import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import { Box, Button, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { getDoc, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { getCommentsCollection } from "../../../store/slicers/commentSlice";
 import { useAuth } from "../../../hooks/useAuth";
+import { writtenComStyles } from "./styles";
 
 function formatDate(timestamp) {
   var date = new Date(timestamp);
@@ -109,8 +110,8 @@ export const WrittenComs = ({ dontShowAll }) => {
   };
 
   return (
-    <div style={{ overflow: "auto", maxHeight: "400px", width: "100%" }}>
-      <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "lightgray" }}>
+    <div style={writtenComStyles.mainDiv}>
+      <List sx={writtenComStyles.list}>
         {curArr.map((m) => {
           const time = formatDate(m.commentTime);
           const { thumbUpList, thumbDownList, favoriteList } =
@@ -120,22 +121,11 @@ export const WrittenComs = ({ dontShowAll }) => {
           const isFavorite = favoriteList.includes(auth.id);
           return (
             <React.Fragment key={Math.random()}>
-              <ListItem
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                }}>
+              <ListItem sx={writtenComStyles.listItem}>
                 <ListItemAvatar>
                   <Avatar src={m?.photoURL} />
                 </ListItemAvatar>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                    alignItems: "end",
-                    mb: 2,
-                  }}>
+                <Box sx={writtenComStyles.mainBox}>
                   <ListItemText sx={{ mt: 2 }}>
                     <Typography
                       sx={{ display: "inline", mr: "10px" }}
