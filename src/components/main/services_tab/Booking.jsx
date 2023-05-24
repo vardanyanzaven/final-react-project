@@ -21,7 +21,7 @@ import { ERROR_MESSAGE } from "../../../constants/common";
 import { useAuth } from "../../../hooks/useAuth";
 import { bookingStyles, feedBackStyles } from "./styles";
 
-export const Booking = () => {
+export const Booking = ({ serviceName }) => {
   const {
     register,
     formState: { errors },
@@ -74,6 +74,7 @@ export const Booking = () => {
       price: value,
       address: address,
       personId: id,
+      service: serviceName,
     })
       .then(() => {
         setPage1(false);

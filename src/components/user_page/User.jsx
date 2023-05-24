@@ -95,7 +95,7 @@ const User = () => {
               color="secondary"
               fullWidth
               variant="contained"
-              onClick={() => setComp("comments")}>
+              onClick={() => setComp("driverCars")}>
               <DirectionsCar />
               my cars
             </Button>

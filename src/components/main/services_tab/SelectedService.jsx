@@ -47,6 +47,6 @@ export default function SelectedService() {
       </Card>
     </Box>
   ) : (
-    <Booking />
+    <Booking serviceName={info.name} />
   );
 }

@@ -29,3 +29,18 @@ export const userStyles = {
   },
   contentRight: { width: "73%", bgcolor: "grey" },
 };
+
+export const myBookingStyles = {
+  tableRow: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  styledTable: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+};
