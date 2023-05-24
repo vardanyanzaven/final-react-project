@@ -4,7 +4,6 @@ import { db } from "../../firebase";
 import { useAuth } from "../../hooks/useAuth";
 import CarsGrid from "../../shared/CarsGrid";
 import { ThemeProvider } from "styled-components";
-import CatalogueTheme from "../../themes/CatalogueTheme";
 import { Box, Button, Card, CardActions, CardContent, CardMedia, IconButton, Paper, Tooltip, Typography } from "@mui/material";
 import { Grid } from "swiper";
 
@@ -33,7 +32,10 @@ const SavedCars = () => {
     }, [])
 
   return (
-    <CarsGrid carsList={savedCarsList}/>
+    <Box sx={{minHeight: "100vh"}}>
+
+        <CarsGrid carsList={savedCarsList}/>
+    </Box>
   )
 }
 
