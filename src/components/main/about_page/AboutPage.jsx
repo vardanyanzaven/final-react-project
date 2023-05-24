@@ -1,11 +1,11 @@
 
 import React, { useEffect } from "react";
+
 import WhoWeAre from "../home/WhoWeAre";
 import ContactUs from "../home/ContacUs";
 import OurGallery from "./OurGallery" ; 
 import OurAdvantages from "./OurAdvantages" ; 
 import "./AboutUs.css";
-
 
 const AboutPage = ({ setActiveLinkId }) => {
   useEffect(() => {

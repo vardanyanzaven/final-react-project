@@ -1,41 +1,58 @@
-import { FormControl, MenuItem, Select } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
-import { SERVICE_DATA } from "./servicesData";
+import { useDispatch, useSelector } from "react-redux";
+import { setCatalogue } from "../../../../store/slicers/catalogueSlice";
+import { useEffect } from "react";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../../../firebase";
 
-export default function SelectCars({ car, setcar }) {
-  const [open, setOpen] = useState(false);
+export default function SelectCars({
+  register,
+  error,
+  setDisabled,
+  setCarModels,
+}) {
+  const { cars } = useSelector((state) => state.catalogue);
+  const dispatch = useDispatch();
 
-  const onClose = () => {
-    setOpen(!open);
-  };
+  useEffect(() => {
+    dispatch(setCatalogue());
+  }, []);
 
-  const handleChange = (e) => {
-    setcar(e.target.value);
+  const handleChooseCar = async (e) => {
+    try {
+      const value = e.target.value;
+      const carsRef = collection(db, "catalogueCars");
+      const carQuery = await getDocs(
+        query(carsRef, where("carBrand", "==", value))
+      );
+      const carModels = [];
+      carQuery.forEach((car) => {
+        const res = car.data();
+        carModels.push({ name: res.carModel, price: res.price });
+      });
+      setCarModels(carModels);
+      setDisabled(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
-    <div>
-      <FormControl sx={{ width: 195, mt: 3 }}>
-        <Select
-          required
-          displayEmpty
-          value={car}
-          onChange={handleChange}
-          open={open}
-          onClose={onClose}
-          onClick={() => setOpen(!open)}
-          inputProps={{ "aria-label": "Without label" }}
-        >
-          <MenuItem disabled value="">
-            <em>Select Car</em>
-          </MenuItem>
-          {SERVICE_DATA().map((c) => (
-            <MenuItem key={Math.random()} value={c.car}>
-              {c.car}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+    <TextField
+      select
+      error={error}
+      defaultValue=""
+      label="Select Car Brand"
+      onChange={handleChooseCar}
+      inputProps={{ ...register("car") }}
+      sx={{ width: 195, mt: 3 }}
+      helperText={error}>
+      {cars.map((c) => (
+        <MenuItem key={Math.random()} value={c.carBrand}>
+          {c.carBrand}
+        </MenuItem>
+      ))}
+    </TextField>
   );
 }
