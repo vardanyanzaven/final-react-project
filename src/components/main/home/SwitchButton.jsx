@@ -1,25 +1,25 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeColor } from "../../../store/slicers/backgroundColor";
+import { styled } from "@mui/material/styles";
+import * as React from "react";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 
 export const SwitchButton = () => {
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const [isSwitchOn, setIsSwitchOn] = useState(true);
   const backgroundColor = useSelector((state) => state.background.color);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const root = document.querySelector(":root");
     root.style.setProperty("--background-color", backgroundColor);
-  }, [backgroundColor]);
+  }, [isSwitchOn]);
 
   const handleSwitchToggle = () => {
-    setIsSwitchOn(!isSwitchOn);
     dispatch(changeColor(isSwitchOn ? "#ffffff" : "#48484f"));
+    setIsSwitchOn(!isSwitchOn);
   };
   return (
     <>
@@ -27,11 +27,11 @@ export const SwitchButton = () => {
         control={
           <MaterialUISwitch
             sx={{ m: 1 }}
-            defaultChecked={isSwitchOn}
+            checked={isSwitchOn}
             onChange={handleSwitchToggle}
           />
         }
-        label="Light & Dark"
+        label={isSwitchOn ? "Dark" : "Light"}
       />
     </>
   );

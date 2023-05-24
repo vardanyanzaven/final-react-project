@@ -23,18 +23,11 @@ export const aboutStyles = {
 };
 
 export const commentStyles = {
-  box1: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    mt: 2,
-    bgcolor: "#454545",
-  },
-  box2: { display: "flex", flexDirection: "column" },
+  box2: { display: "flex", flexDirection: "column", mt: 2, width: "100%" },
   box3: {
     display: "flex",
     background: "white",
-    width: 800,
+    width: "100%",
     alignItems: "center",
     justifyContent: "space-around",
     bgcolor: "#878787",
@@ -44,7 +37,7 @@ export const commentStyles = {
 
 export const writtenComStyles = {
   mainDiv: { overflow: "auto", maxHeight: "400px", width: "100%" },
-  list: { width: "100%", maxWidth: "100%", bgcolor: "lightgray" },
+  list: { width: "100%", bgcolor: "white", opacity: 0.9 },
   listItem: {
     display: "flex",
     alignItems: "center",
