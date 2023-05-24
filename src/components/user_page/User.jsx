@@ -14,23 +14,22 @@ import { WrittenComs } from "../main/about_page/WrittenComs";
 import { useDispatch } from "react-redux";
 import { getCommentsCollection } from "../../store/slicers/commentSlice";
 import { userStyles } from "./styles";
+import { MyBookings } from "./MyBookings";
 
 const User = () => {
-  const [comp, setComp] = useState("services");
+  const [comp, setComp] = useState("bookings");
   const { userInfo } = useAuth();
   const registered = auth.currentUser.metadata.creationTime;
   const disp = useDispatch();
 
   const currentComponent = (cmpName) => {
     switch (cmpName) {
-      case "services":
-        return "services";
-        break;
       case "comments":
         disp(getCommentsCollection());
         return <WrittenComs dontShowAll />;
         break;
-      case "purchased":
+      case "bookings":
+        return <MyBookings />;
         break;
       default:
         break;
@@ -65,6 +64,7 @@ const User = () => {
             </Button>
           </Link>
           <Button
+            onClick={() => setComp("bookings")}
             sx={{ height: "60px", fontSize: "20px" }}
             color="secondary"
             fullWidth
