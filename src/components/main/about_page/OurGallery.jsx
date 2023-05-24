@@ -49,11 +49,11 @@ const itemData = [
     title: 'galleryimg3',
   },
   {
-    img: galleryimg1,
+    img: galleryimg3,
     title: 'galleryimg4',
   },
   {
-    img: galleryimg1,
+    img: galleryimg2,
     title: 'galleryimg5',
   },
   {
@@ -65,11 +65,11 @@ const itemData = [
     title: 'galleryimg7',
   },
   {
-    img: galleryimg1,
+    img: galleryimg2,
     title: 'galleryimg8',
   },
   {
-    img: galleryimg1,
+    img: galleryimg3,
     title: 'galleryimg9',
   },
 ];
