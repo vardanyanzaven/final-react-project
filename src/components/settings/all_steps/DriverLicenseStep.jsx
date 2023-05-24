@@ -7,7 +7,6 @@ import { licenseSchema } from "../../../utils/validation";
 
 const DriverLicenseStepe = (props) => {
   const { setNext, completed, setCompleted } = props;
-  const [photo, setPhoto] = useState(null);
   const {
     register,
     handleSubmit,
@@ -16,19 +15,9 @@ const DriverLicenseStepe = (props) => {
     resolver: yupResolver(licenseSchema),
   });
 
-  const onSubmit = ({ license }) => {
-    setCompleted({ ...completed, license });
+  const onSubmit = ({ license, photo }) => {
+    setCompleted({ ...completed, photo: photo[0], license });
     setNext(false);
-  };
-
-  const photoChoose = (e) => {
-    if (!e.target.files[0]) {
-      setNext(true);
-      setPhoto(null);
-      return;
-    }
-    setPhoto(e.target.files[0]);
-    setCompleted({ ...completed, photo: e.target.files[0] });
   };
 
   return (
@@ -45,9 +34,13 @@ const DriverLicenseStepe = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={10}>
-          <Button variant="outlined" color="inherit" component="label">
-            {photo?.name || "File here"}
-            <input type="file" hidden accept="image/*" onChange={photoChoose} />
+          <Button
+            variant="outlined"
+            color="inherit"
+            component="label"
+            sx={{ border: errors.photo?.message && "1px solid red" }}>
+            {"File here"}
+            <input type="file" hidden {...register("photo")} />
           </Button>
         </Grid>
         <Grid item xs={6} sm={7}>

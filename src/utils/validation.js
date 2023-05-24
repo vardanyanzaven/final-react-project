@@ -50,9 +50,36 @@ export const passportSchema = Yup.object().shape({
   birthday: Yup.string().required("Birthday is required"),
   passportDate: Yup.string().required("Passport date is required"),
 });
+// file validation
 
+const validFileExtensions = {
+  image: ["jpg", "gif", "png", "jpeg", "svg", "webp"],
+};
+function isValidFileType(fileName, fileType) {
+  return (
+    fileName &&
+    validFileExtensions[fileType].indexOf(fileName.split(".").pop()) > -1
+  );
+}
 export const licenseSchema = Yup.object().shape({
   license: Yup.string()
     .required("license number is required")
     .matches(/^(?!^0+$)[a-zA-Z0-9]{3,20}$/, "Not valid!"),
+  photo: Yup.mixed()
+    .required("photo is required")
+    .test("is-valid-type", "Not a valid image type", (value) => {
+      if (!value.length) return false;
+      return isValidFileType(value[0] && value[0].name.toLowerCase(), "image");
+    }),
+});
+
+//----
+export const bookScheme = Yup.object().shape({
+  car: Yup.string().required("this filed is required"),
+  carModel: Yup.string().required("this field is required"),
+  phone: Yup.string()
+    .matches(/^\+?[1-9]\d{1,14}$/, "Phone number is not valid")
+    .required("Phone number is required")
+    .min(11, "Write correct mobile"),
+  pickUpDate: Yup.string().required("date is required"),
 });

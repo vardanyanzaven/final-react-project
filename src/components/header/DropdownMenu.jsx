@@ -64,6 +64,7 @@ const DropdownMenu = () => {
               sx={{
                 borderBottom: tab === "about" ? "none" : "2px solid #F2B90D",
                 transition: "background 0.1s",
+                color: "white",
                 "&:hover": {
                   background: "rgb(37, 47, 57)",
                 },

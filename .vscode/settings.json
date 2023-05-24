@@ -1,0 +1,10 @@
+{
+    "workbench.iconTheme": "vscode-icons", // or your preferred icon theme
+    "vsicons.associations.files": [
+      {
+        "icon": "jsx",
+        "extensions": ["jsx"]
+      }
+    ]
+  }
+  

@@ -77,6 +77,11 @@ export const ERROR_MESSAGE = {
     type: "error",
     isOpen: true,
   },
+  dateValidate: {
+    message: "Please enter the correct pickup date",
+    type: "error",
+    isOpen: true,
+  },
 };
 
 export const SETTINGS_NAME_LIST = () => {

@@ -43,10 +43,12 @@ const AvatarMenu = () => {
           open={isOpen}
           onClick={() => setOpen(false)}
           onClose={() => setOpen(false)}>
-          <MenuItem onClick={() => setOpen(false)}>
-            <Avatar src={userInfo?.photoURL} sx={{ m: 1 }} />
-            {userInfo.fullName}
-          </MenuItem>
+          <Link to="user">
+            <MenuItem onClick={() => setOpen(false)}>
+              <Avatar src={userInfo?.photoURL} sx={{ m: 1 }} />
+              {userInfo.fullName}
+            </MenuItem>
+          </Link>
           <Link to="settings">
             <MenuItem>
               <Settings sx={{ color: "black" }} />
@@ -57,10 +59,12 @@ const AvatarMenu = () => {
             <HistoryIcon />
             <Typography>History</Typography>
           </MenuItem>
-          <MenuItem>
-            <Bookmark />
-            <Typography>Saved</Typography>
-          </MenuItem>
+          <Link to="saved">
+            <MenuItem>
+              <Bookmark />
+              <Typography>Saved</Typography>
+            </MenuItem>
+          </Link>
           <Divider />
           <MenuItem onClick={() => signOut(auth)}>
             <Logout /> Log Out

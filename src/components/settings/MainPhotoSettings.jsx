@@ -8,7 +8,8 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
-import { auth, storage } from "../../firebase";
+import { updateDoc, doc } from "firebase/firestore";
+import { auth, db, storage } from "../../firebase";
 import { Avatar, Box, Button, IconButton, Menu, MenuItem } from "@mui/material";
 import { changeUserInfo } from "../../store/slicers/userSlice";
 import { AddAPhoto, Check, DeleteForever } from "@mui/icons-material";
@@ -40,9 +41,12 @@ const MainPhotoSettings = () => {
 
   const handleAddUrl = async () => {
     try {
+      setDisabled(true);
       await uploadBytes(storageRef, photoFile);
       const url = await getDownloadURL(storageRef);
-      setDisabled(true);
+      await updateDoc(doc(db, "users", auth.currentUser.uid), {
+        photoURL: url,
+      });
       updateProfile(auth.currentUser, { photoURL: url });
       disp(
         changeUserInfo({

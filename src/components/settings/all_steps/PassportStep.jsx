@@ -18,7 +18,6 @@ const PassportStep = ({ setIsNext, setCompleted }) => {
   });
 
   const onSubmit = (data, e) => {
-    console.log(sended);
     if (sended) {
       e.target.reset();
       reset();
