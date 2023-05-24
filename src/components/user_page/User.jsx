@@ -7,21 +7,23 @@ import { useState } from "react";
 import { WrittenComs } from "../main/about_page/WrittenComs";
 import { useDispatch } from "react-redux";
 import { getCommentsCollection } from "../../store/slicers/commentSlice";
+import { MyBookings } from "./MyBookings";
 
 const User = () => {
-  const [comp, setComp] = useState("services");
+  const [comp, setComp] = useState("bookings");
   const { userInfo } = useAuth();
   const registered = auth.currentUser.metadata.creationTime;
   const disp = useDispatch();
 
   const currentComponent = (cmpName) => {
     switch (cmpName) {
-      case "services":
-        return "services";
-        break;
       case "comments":
         disp(getCommentsCollection());
         return <WrittenComs dontShowAll />;
+        break;
+      case "bookings":
+        return <MyBookings />;
+        break;
       default:
         break;
     }
@@ -35,7 +37,8 @@ const User = () => {
           bgcolor: "#101010",
           display: "flex",
           alignItems: "end",
-        }}>
+        }}
+      >
         <Box
           sx={{
             position: "absolute",
@@ -44,7 +47,8 @@ const User = () => {
             display: "flex",
             alignItems: "center",
             gap: 2,
-          }}>
+          }}
+        >
           <Avatar
             src={userInfo?.photoURL}
             sizes=""
@@ -62,7 +66,8 @@ const User = () => {
           minHeight: "500px",
           display: "flex",
           justifyContent: "space-around",
-        }}>
+        }}
+      >
         <Box
           sx={{
             width: "23%",
@@ -71,22 +76,26 @@ const User = () => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-around",
-          }}>
+          }}
+        >
           <Link to="/settings">
             <Button
               sx={{ height: "60px", fontSize: "20px" }}
               color="secondary"
               fullWidth
-              variant="contained">
+              variant="contained"
+            >
               <Edit />
               Edit profile
             </Button>
           </Link>
           <Button
+            onClick={() => setComp("bookings")}
             sx={{ height: "60px", fontSize: "20px" }}
             color="secondary"
             fullWidth
-            variant="contained">
+            variant="contained"
+          >
             <AutoStories />
             &nbsp;all services order
           </Button>
@@ -94,7 +103,8 @@ const User = () => {
             sx={{ height: "60px", fontSize: "20px" }}
             color="secondary"
             fullWidth
-            variant="contained">
+            variant="contained"
+          >
             <Inventory />
             all bought cars
           </Button>
@@ -103,7 +113,8 @@ const User = () => {
             color="secondary"
             fullWidth
             variant="contained"
-            onClick={() => setComp("comments")}>
+            onClick={() => setComp("comments")}
+          >
             <Forum />
             my comments
           </Button>

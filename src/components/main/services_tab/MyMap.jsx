@@ -1,16 +1,15 @@
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
-import React from "react";
-import axios from "axios";
 import {
   GeoapifyGeocoderAutocomplete,
   GeoapifyContext,
 } from "@geoapify/react-geocoder-autocomplete";
 import create from "zustand";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import React from "react";
+import axios from "axios";
 import "./style.css";
-import { useEffect } from "react";
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -135,7 +134,8 @@ export default function MyMap({ setcordinates, setDisabled, setAddress }) {
           center={{ lat: 40.180094, lng: 44.515229 }}
           zoom={15}
           scrollWheelZoom={false}
-          style={{ height: "500px" }}>
+          style={{ height: "500px" }}
+        >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
