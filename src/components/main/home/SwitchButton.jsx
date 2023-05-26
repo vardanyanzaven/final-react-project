@@ -18,7 +18,7 @@ export const SwitchButton = () => {
   }, [isSwitchOn]);
 
   const handleSwitchToggle = () => {
-    dispatch(changeColor(isSwitchOn ? "#ffffff" : "#48484f"));
+    dispatch(changeColor(isSwitchOn ? "#ffffff" : "#3A3E47"));
     setIsSwitchOn(!isSwitchOn);
   };
   return (
