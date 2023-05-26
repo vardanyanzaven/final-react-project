@@ -39,7 +39,7 @@ function MyComponent({ setcordinates, setPlace, setDisabled, setAddress }) {
 let props = {
   apiKey: "efd16f450d0740278e0a0189acf69abd",
   countryCodes: [],
-  notify: () => console.log("callllinnnggg"),
+  notify: () => console.log(),
 };
 
 const getAddressFromCoordinates = async (
@@ -112,30 +112,31 @@ export default function MyMap({ setcordinates, setDisabled, setAddress }) {
 
   return (
     <>
-      <GeoapifyContext apiKey={props.apiKey}>
-        <GeoapifyGeocoderAutocomplete
-          placeholder="Search address here"
-          countryCodes={props.countryCodes}
-          placeSelect={onPlaceSelect}
-          suggestionsChange={onSuggestionsChange}
-          preprocessHook={preProcess}
-          postprocessHook={postProcess}
-          suggestionsFilter={filterSuggestions}
-          value={
-            address && address.address_line1 && address.address_line2
-              ? `${address.address_line1}, ${address.address_line2}`
-              : place
-          }
-        />
-      </GeoapifyContext>
+      <div style={{ marginBottom: "20px" }}>
+        <GeoapifyContext apiKey={props.apiKey}>
+          <GeoapifyGeocoderAutocomplete
+            placeholder="Search address here"
+            countryCodes={props.countryCodes}
+            placeSelect={onPlaceSelect}
+            suggestionsChange={onSuggestionsChange}
+            preprocessHook={preProcess}
+            postprocessHook={postProcess}
+            suggestionsFilter={filterSuggestions}
+            value={
+              address && address.address_line1 && address.address_line2
+                ? `${address.address_line1}, ${address.address_line2}`
+                : place
+            }
+          />
+        </GeoapifyContext>
+      </div>
       <div>
         <MapContainer
           className="Map"
           center={{ lat: 40.180094, lng: 44.515229 }}
           zoom={15}
           scrollWheelZoom={false}
-          style={{ height: "500px" }}
-        >
+          style={{ height: "500px" }}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

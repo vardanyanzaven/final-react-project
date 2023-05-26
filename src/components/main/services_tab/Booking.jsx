@@ -45,7 +45,7 @@ export const Booking = ({ serviceName }) => {
   const TEXT_FEEDBACK_FOR_USER = `The booking has been successfully done, we inform you that ${
     complitedData.pickUpDate
   } ${"1"}
-  machine will be on the ${address} (${cordinates}) cordinates you provided, on ${complitedData?.pickUpDate
+  machine will be on the ${address} cordinates you provided, on ${complitedData?.pickUpDate
     ?.toString()
     .slice(0, 15)} at ${complitedData?.pickUpDate
     ?.toString()
