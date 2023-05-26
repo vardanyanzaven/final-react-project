@@ -29,8 +29,9 @@ const DriverSettings = () => {
   const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
   const auth = useAuth();
-  const storageRefForSelfie = useMemo(() =>
-    ref(storage, `${auth.id}/cars/${v4()}.png`)
+  const storageRefForSelfie = useMemo(
+    () => ref(storage, `${auth.id}/cars/${v4()}.png`),
+    []
   );
   const {
     register,
@@ -52,6 +53,7 @@ const DriverSettings = () => {
   };
 
   const onSubmit = async ({ car, model, year, type }) => {
+    setLoading(true);
     try {
       const docc = doc(db, "users", auth.id);
       carSkeleto && (await uploadBytes(storageRefForSelfie, photo));
@@ -59,22 +61,22 @@ const DriverSettings = () => {
       const ref = await addDoc(collection(db, "catalogueCars"), {
         carBrand: car,
         carModel: model,
-        carProdYear: year,
+        carProdYear: +year,
         carType: type,
         photoURL: URL,
-        price: !price ? "contractual" : price,
+        price: !price ? "contractual" : +price,
       });
 
       await updateDoc(docc, {
         myCars: arrayUnion(ref),
       });
+      setLoading(false);
     } catch (error) {
       console.log("errrroorrrr", error);
     }
   };
 
   const setCurrentModels = (e) => {
-    setLoading(true);
     const car = e.target.value;
     setCar(car);
     axios({
@@ -99,8 +101,7 @@ const DriverSettings = () => {
         setModels(Array.from(data));
         setModelDisbl(false);
       })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
+      .catch((e) => console.log(e));
   };
 
   const setYear = (e) => {
@@ -256,7 +257,7 @@ const DriverSettings = () => {
         )}
       </Grid>
       {!!viewPhoto && (
-        <Box component="img" src={viewPhoto} sx={{ width: "30%" }} />
+        <Box component="img" src={viewPhoto} sx={{ height: "300px" }} />
       )}
     </Box>
   );

@@ -1,24 +1,8 @@
 import { db } from "../firebase";
-import {
-  arrayRemove,
-  arrayUnion,
-  doc,
-  getDoc,
-  updateDoc,
-} from "@firebase/firestore";
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  IconButton,
-  Paper,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { arrayRemove, arrayUnion, doc, updateDoc } from "@firebase/firestore";
+import { Box, Button, CardActions, CardContent } from "@mui/material";
+import { CardMedia, Card } from "@mui/material";
+import { Grid, IconButton, Paper, Tooltip, Typography } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useDispatch } from "react-redux";
@@ -26,7 +10,6 @@ import { useAuth } from "../hooks/useAuth";
 import { openDialog } from "../store/slicers/dialogSlice";
 import { changeUserInfo } from "../store/slicers/userSlice";
 import { carsGridStyles } from "./styles";
-// doc(db, "catalogueCars", carId)
 
 const CarsGrid = ({ carsList, exitFromProfile }) => {
   const dispatch = useDispatch();

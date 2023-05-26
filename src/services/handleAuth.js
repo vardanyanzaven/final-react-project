@@ -42,17 +42,19 @@ export const useAuthListener = (setLoading) => {
       try {
         const dbData = user && (await getUserDB(user.uid));
         const res =
-          userInfo["myCars"] || dbData["myCars"]
+          dbData?.type === "driver"
             ? { ...dbData, myCars: dbData.myCars.map((ref) => ref.id) }
             : dbData;
+
         console.log(userInfo["myCars"], res);
+
         disp(
           setUser({
             userInfo: user
               ? {
                   ...userInfo,
                   ...res,
-                  savedCars: dbData.savedCars.map((ref) => ref.id),
+                  savedCars: dbData?.savedCars.map((ref) => ref.id),
                   photoURL: user.photoURL,
                 }
               : {},
