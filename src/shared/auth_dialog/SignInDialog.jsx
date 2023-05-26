@@ -73,6 +73,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
                   type="email"
                   label="Email"
                   required
+                  error={!!errors.email}
                   fullWidth
                 />
                 <p style={styles.error}>{errors.email?.message}</p>
@@ -84,6 +85,7 @@ const SignInDialog = ({ open, onClose, onSignUpOpen }) => {
                   type={showPass ? "text" : "password"}
                   label="Password"
                   required
+                  error={!!errors.password}
                   InputProps={{
                     endAdornment: (
                       <IconButton

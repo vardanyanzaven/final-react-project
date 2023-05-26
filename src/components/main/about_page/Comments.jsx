@@ -26,11 +26,11 @@ export const Comments = () => {
   }, []);
 
   const onHandleButton = async () => {
-    if (!text) return;
     if (!isAuth) {
       disp(openDialog({ isSignUpOpen: true, isSignInOpen: false }));
       return;
     }
+    if (!text) return;
     try {
       setText("");
       await addDoc(collection(db, "comments"), {
