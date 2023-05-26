@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 import {
   GeoapifyGeocoderAutocomplete,
@@ -10,6 +10,7 @@ import L from "leaflet";
 import React from "react";
 import axios from "axios";
 import "./style.css";
+import { Box } from "@mui/material";
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -111,8 +112,14 @@ export default function MyMap({ setcordinates, setDisabled, setAddress }) {
   };
 
   return (
-    <>
-      <div style={{ marginBottom: "20px" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
+      <Box sx={{ mb: 2, ml: "25%", border: "1px solid", width: "50%" }}>
         <GeoapifyContext apiKey={props.apiKey}>
           <GeoapifyGeocoderAutocomplete
             placeholder="Search address here"
@@ -129,8 +136,8 @@ export default function MyMap({ setcordinates, setDisabled, setAddress }) {
             }
           />
         </GeoapifyContext>
-      </div>
-      <div>
+      </Box>
+      <Box>
         <MapContainer
           className="Map"
           center={{ lat: 40.180094, lng: 44.515229 }}
@@ -148,7 +155,7 @@ export default function MyMap({ setcordinates, setDisabled, setAddress }) {
             setAddress={setAddress}
           />
         </MapContainer>
-      </div>
-    </>
+      </Box>
+    </Box>
   );
 }
