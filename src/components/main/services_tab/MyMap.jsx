@@ -40,7 +40,7 @@ function MyComponent({ setcordinates, setPlace, setDisabled, setAddress }) {
 let props = {
   apiKey: "efd16f450d0740278e0a0189acf69abd",
   countryCodes: [],
-  notify: () => console.log("callllinnnggg"),
+  notify: () => console.log(),
 };
 
 const getAddressFromCoordinates = async (
@@ -143,8 +143,7 @@ export default function MyMap({ setcordinates, setDisabled, setAddress }) {
           center={{ lat: 40.180094, lng: 44.515229 }}
           zoom={15}
           scrollWheelZoom={false}
-          style={{ height: "500px" }}
-        >
+          style={{ height: "500px" }}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

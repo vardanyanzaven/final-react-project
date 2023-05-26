@@ -62,6 +62,11 @@ export const ERROR_MESSAGE = {
     type: "error",
     isOpen: true,
   },
+  invalidEmail: {
+    message: "Invalid email",
+    type: "error",
+    isOpen: true,
+  },
   emailExists: {
     message: "Email already exists!",
     type: "error",

@@ -1,24 +1,8 @@
 import { db } from "../firebase";
-import {
-  arrayRemove,
-  arrayUnion,
-  doc,
-  getDoc,
-  updateDoc,
-} from "@firebase/firestore";
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  IconButton,
-  Paper,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { arrayRemove, arrayUnion, doc, updateDoc } from "@firebase/firestore";
+import { Box, Button, CardActions, CardContent } from "@mui/material";
+import { CardMedia, Card } from "@mui/material";
+import { Grid, IconButton, Paper, Tooltip, Typography } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useDispatch } from "react-redux";
@@ -26,9 +10,8 @@ import { useAuth } from "../hooks/useAuth";
 import { openDialog } from "../store/slicers/dialogSlice";
 import { changeUserInfo } from "../store/slicers/userSlice";
 import { carsGridStyles } from "./styles";
-// doc(db, "catalogueCars", carId)
 
-const CarsGrid = ({ carsList }) => {
+const CarsGrid = ({ carsList, exitFromProfile }) => {
   const dispatch = useDispatch();
   const { isAuth, id, userInfo } = useAuth();
   const { savedCars } = userInfo;
@@ -133,34 +116,38 @@ const CarsGrid = ({ carsList }) => {
                       display: "flex",
                       justifyContent: "space-between",
                     }}>
-                    <Button
-                      // color="gold"
-                      variant="outlined"
-                      sx={{
-                        border: "2px solid",
-                        fontWeight: "bold",
-                        "&:hover": { border: "2px solid" },
-                        fontSize: "13px",
-                      }}
-                      onClick={() => !isAuth && openSignIn()}>
-                      Buy Now
-                    </Button>
-                    <Tooltip
-                      title='Add or remove from "Saved"'
-                      placement="bottom">
-                      <IconButton
+                    {!exitFromProfile && (
+                      <Button
                         // color="gold"
-                        sx={{ mr: 1 }}
-                        onClick={() =>
-                          isAuth ? handleSaveClick(car.id) : openSignIn()
-                        }>
-                        {savedCars?.includes(car.id) ? (
-                          <BookmarkIcon />
-                        ) : (
-                          <BookmarkBorderIcon />
-                        )}
-                      </IconButton>
-                    </Tooltip>
+                        variant="outlined"
+                        sx={{
+                          border: "2px solid",
+                          fontWeight: "bold",
+                          "&:hover": { border: "2px solid" },
+                          fontSize: "13px",
+                        }}
+                        onClick={() => !isAuth && openSignIn()}>
+                        Buy Now
+                      </Button>
+                    )}
+                    {!exitFromProfile && (
+                      <Tooltip
+                        title='Add or remove from "Saved"'
+                        placement="bottom">
+                        <IconButton
+                          // color="gold"
+                          sx={{ mr: 1 }}
+                          onClick={() =>
+                            isAuth ? handleSaveClick(car.id) : openSignIn()
+                          }>
+                          {savedCars?.includes(car.id) ? (
+                            <BookmarkIcon />
+                          ) : (
+                            <BookmarkBorderIcon />
+                          )}
+                        </IconButton>
+                      </Tooltip>
+                    )}
                   </CardActions>
                 </Box>
               </Card>

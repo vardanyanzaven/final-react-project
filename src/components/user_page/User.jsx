@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { getCommentsCollection } from "../../store/slicers/commentSlice";
 import { userStyles } from "./styles";
 import { MyBookings } from "./MyBookings";
+import MyCars from "./MyCars";
 
 const User = () => {
   const [comp, setComp] = useState("bookings");
@@ -31,6 +32,9 @@ const User = () => {
       case "bookings":
         return <MyBookings />;
         break;
+      case "driverCars":
+        return <MyCars />;
+        break;
       default:
         break;
     }
@@ -45,7 +49,7 @@ const User = () => {
             sizes=""
             sx={{ width: 200, height: 200 }}
           />
-          <Typography variant="h4" color="wheat">
+          <Typography variant="h4" color="black">
             {userInfo.fullName}
             {userInfo.type === "driver" && "(driver)"}
           </Typography>
