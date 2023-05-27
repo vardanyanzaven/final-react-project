@@ -23,26 +23,35 @@ export const aboutStyles = {
 };
 
 export const commentStyles = {
-  box2: { display: "flex", flexDirection: "column", mt: 2, width: "100%" },
+  box2: { margin: "100px", display: "flex", flexDirection: "column", mt: 2, width: "100%", bgcolor: "rgb(2, 2, 34)"},
   box3: {
     display: "flex",
-    background: "white",
+    marginTop: "5%",
+    background: "rgb(2, 2, 34)",
     width: "100%",
     alignItems: "center",
     justifyContent: "space-around",
-    bgcolor: "#878787",
+    bgcolor: "rgb(2, 2, 34)",
     pb: 2,
+    
   },
 };
 
 export const writtenComStyles = {
-  mainDiv: { overflow: "auto", maxHeight: "400px", width: "100%" },
-  list: { width: "100%", bgcolor: "white", opacity: 0.9 },
+  mainDiv: { overflow: "auto", height: "auto", maxWidth: "100%" },
+  list: { width: "auto", height:"auto",  bgcolor: "transparent", opacity: 0.9, display: "flex", flexDirection: "row" },
   listItem: {
+    minWidth: "400px", 
+    height:"400px",
+    overflow: "hidden",
     display: "flex",
+    margin: "2%",
+    
     alignItems: "center",
+    border: 2, borderColor: "white", borderRadius: "16px"
   },
   mainBox: {
+    margin: "2%",
     display: "flex",
     justifyContent: "space-between",
     width: "100%",

@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { aboutStyles } from "./styles";
+import "./AboutUs.css";
 
 import WhoWeAre from "../home/WhoWeAre";
 import ContactUs from "../home/ContactUs";
 import OurGallery from "./OurGallery";
 import OurAdvantages from "./OurAdvantages";
+import { Comments } from "./Comments";
+
 import "./AboutUs.css";
 
 const AboutPage = ({ setActiveLinkId }) => {
@@ -14,10 +17,11 @@ const AboutPage = ({ setActiveLinkId }) => {
   }, []);
 
   return (
-    <div>
+    <div className="aboutus_container">
       <WhoWeAre />
       <OurAdvantages />
       <OurGallery />
+      <Comments />
     </div>
   );
 };

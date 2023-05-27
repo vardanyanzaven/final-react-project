@@ -7,7 +7,7 @@ import "./OurGallery.css";
 import galleryimg1 from "../../../assets/about/galleryimg1.jpg";
 import galleryimg2 from "../../../assets/about/galleryimg2.jpg";
 import galleryimg3 from "../../../assets/about/galleryimg3.jpg";
-import { Comments } from "./Comments";
+
 
 export default function OurGallery() {
   return (
@@ -32,7 +32,7 @@ export default function OurGallery() {
       <Button className="ourgallery_btn" variant="contained">
         <Link to={"/services"}>Book Now! </Link>
       </Button>
-      <Comments />
+      
     </div>
   );
 }
