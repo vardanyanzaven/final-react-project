@@ -106,7 +106,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
                     </Typography>
                     <Typography sx={{ color: "#FFBD00", fontSize: "18px" }}>
                       <span style={{ color: "black" }}>Price</span>: $
-                      {car.price.toLocaleString()}
+                      {car?.price.toLocaleString()}
                     </Typography>
                   </CardContent>
                   <CardActions
@@ -171,7 +171,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
                     {car.carBrand} {car.carModel} ({car.carProdYear})
                   </Typography>
                   <Typography sx={{ fontSize: "15px", color: "#F2A800" }}>
-                    ${car.price.toLocaleString()}
+                    ${car?.price.toLocaleString()}
                   </Typography>
                 </CardContent>
                 <CardActions

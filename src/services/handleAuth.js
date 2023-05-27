@@ -46,8 +46,6 @@ export const useAuthListener = (setLoading) => {
             ? { ...dbData, myCars: dbData.myCars.map((ref) => ref.id) }
             : dbData;
 
-        console.log(userInfo["myCars"], res);
-
         disp(
           setUser({
             userInfo: user
