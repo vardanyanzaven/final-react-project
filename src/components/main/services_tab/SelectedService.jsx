@@ -32,16 +32,23 @@ export default function SelectedService() {
   return booking ? (
     <Box sx={selectedServiceStyle.mainBox}>
       <Card sx={selectedServiceStyle.card}>
-        <Typography variant="h4"> {info.name.toUpperCase()}</Typography>
-        <img component="img" height="400" src={info.url} alt="info.name" />
+        {/* <Typography variant="h4"> {info.name.toUpperCase()}</Typography> */}
+        <img
+          component="img"
+          height="400"
+          src={info.url}
+          alt="info.name"
+          style={{ marginTop: "8%" }}
+        />
         <Typography sx={{ m: 5, width: "65%" }}> {info.title}</Typography>
         <Button
           color="primary"
           disabled={false}
           size="medium"
           variant="outlined"
-          sx={{ m: 1 }}
-          onClick={isAuth ? handleBookClick : openSignUp}>
+          sx={{ m: 1, mt: 1 }}
+          onClick={isAuth ? handleBookClick : openSignUp}
+        >
           Book now
         </Button>
       </Card>

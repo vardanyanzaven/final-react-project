@@ -4,7 +4,8 @@
 
 
 :root {
-  --background-color: #48484f;
+  --background-color:"#3A3E47"
+   /* #48484f; */
 }
 
 body {

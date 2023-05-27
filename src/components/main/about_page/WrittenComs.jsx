@@ -21,7 +21,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { writtenComStyles } from "./styles";
 import { formatDate } from "../../../utils/formatDate";
 import "./Comments.css"
-
+import { openDialog } from "../../../store/slicers/dialogSlice";
 export const WrittenComs = ({ dontShowAll }) => {
   const dispatch = useDispatch();
   const commentsArr = useSelector((state) => state.comments.commentsCol);
@@ -31,6 +31,14 @@ export const WrittenComs = ({ dontShowAll }) => {
     : [...commentsArr];
 
   const onHandleIcons = async (id, icon) => {
+    if (!auth.isAuth) {
+      dispatch(
+        openDialog({
+          isSignUpOpen: true,
+          isSignInOpen: false,
+        })
+      );
+    }
     const mainRef = doc(db, "comments", id);
     const currentCommentRef = await getDoc(mainRef);
     const { thumbUp, thumbDown, favorite, handleLikedPeople } =

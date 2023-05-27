@@ -158,7 +158,7 @@ const SignUpDialog = ({ open, onClose, onSignInOpen }) => {
               Already have an account?
               <Button onClick={onSignInOpen}>Sign In</Button>
             </Typography>
-            <LoadingButton {...loading} type="submit" variant="contained">
+            <LoadingButton loading={loading} type="submit" variant="contained">
               Sign Up
             </LoadingButton>
           </Box>

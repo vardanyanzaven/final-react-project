@@ -6,6 +6,7 @@ import serviceSlice from "./slicers/serviceSlice";
 import dialogSlice from "./slicers/dialogSlice";
 import commentSlice from "./slicers/commentSlice";
 import backgroundSlice from "./slicers/backgroundColor";
+import loadingSlice from "./slicers/loadingSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     dialog: dialogSlice,
     comments: commentSlice,
     background: backgroundSlice,
+    loading: loadingSlice,
   },
 });
