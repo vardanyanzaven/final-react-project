@@ -8,7 +8,7 @@ import NotFoundPage from "./components/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
 import AboutPage from "./components/main/about_page/AboutPage";
 import CataloguePage from "./components/main/catalogue/CataloguePage";
-import ServicesPage from "./components/main/services_tab/ServicesPage";
+import {Services} from "./components/main/services_tab/Services";
 import Footer from "./components/footer/Footer";
 import SelectedService from "./components/main/services_tab/SelectedService";
 import Main from "./components/main/Main";
@@ -38,7 +38,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route
             path="services"
-            element={<ServicesPage setActiveLinkId={setActiveLinkId} />}
+            element={<Services setActiveLinkId={setActiveLinkId} />}
           />
           <Route path="services/:serve" element={<SelectedService />} />
           <Route

@@ -1,4 +1,4 @@
-.whoweare-container {
+.servicesintro-container {
     background-color: rgb(2, 2, 34);
     max-width: 100%;
     min-height: 500px;
@@ -10,13 +10,14 @@
     flex-direction: column;
 }
 
-.whoweare-title {
+.servicesintro-title {
     font-size: clamp(3rem, 15vmin, 8rem);
     font-family: sans-serif;
     color: white;
   }
 
-  .whoweare-text {
+  .servicesintro-text {
+
     color: white;
     margin: 3%;
   }
@@ -41,5 +42,5 @@
     left: 50%;
     transform: translate(-50%, -10%);
     border-radius: 50%;
-    border: 6px #FFBD00;
+    border: 6px solid #FFBD00;
   }

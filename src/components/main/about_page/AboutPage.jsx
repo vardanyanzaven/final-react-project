@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { aboutStyles } from "./styles";
 import "./AboutUs.css";
-
 import WhoWeAre from "../home/WhoWeAre";
 import ContactUs from "../home/ContactUs";
 import OurGallery from "./OurGallery";
