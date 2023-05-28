@@ -28,7 +28,8 @@ const AvatarMenu = () => {
             sx={{ ml: 2 }}
             aria-controls={isOpen && "account-menu"}
             aria-haspopup="true"
-            aria-expanded={isOpen && "true"}>
+            aria-expanded={isOpen && "true"}
+          >
             <Avatar src={userInfo?.photoURL} />
             {userInfo.type === "driver" && (
               <Typography sx={{ ml: 1 }} variant="subtitle2" color="white">
@@ -42,7 +43,8 @@ const AvatarMenu = () => {
           id="account-menu"
           open={isOpen}
           onClick={() => setOpen(false)}
-          onClose={() => setOpen(false)}>
+          onClose={() => setOpen(false)}
+        >
           <Link to="user">
             <MenuItem onClick={() => setOpen(false)}>
               <Avatar src={userInfo?.photoURL} sx={{ m: 1 }} />
@@ -55,10 +57,12 @@ const AvatarMenu = () => {
               <Typography color="black">Settings</Typography>
             </MenuItem>
           </Link>
-          <MenuItem>
-            <HistoryIcon />
-            <Typography>History</Typography>
-          </MenuItem>
+          <Link to="history">
+            <MenuItem>
+              <HistoryIcon />
+              <Typography>History</Typography>
+            </MenuItem>
+          </Link>
           <Link to="saved">
             <MenuItem>
               <Bookmark />

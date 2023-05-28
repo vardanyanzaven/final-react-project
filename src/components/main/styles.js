@@ -25,5 +25,5 @@ export const sliderStyles = {
 };
 
 export const mainStyles = {
-  box: { mt: "5rem", minHeight: "500px" },
+  box: { minHeight: "100vh", marginTop: "5rem" },
 };

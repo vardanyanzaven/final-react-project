@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Typography, Button, Box, ThemeProvider, Avatar } from "@mui/material";
+import { Typography, Button, Box, ThemeProvider, } from "@mui/material";
 import { AppBar, Container, Toolbar } from "@mui/material";
 import HeaderTheme from "../../themes/HeaderTheme";
 import { HEADER_TAB_LIST } from "../../constants/common";
@@ -18,7 +18,7 @@ const Header = ({ activeLinkId, setActiveLinkId }) => {
 
   return (
     <ThemeProvider theme={HeaderTheme}>
-      <AppBar position="fixed" sx={{ backgroundColor: "#192026" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "#192026!important" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={headStyles.toolBarStyle}>
             <DropdownMenu />

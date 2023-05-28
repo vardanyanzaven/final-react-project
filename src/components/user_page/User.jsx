@@ -1,4 +1,11 @@
-import { Box, Avatar, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Avatar,
+  Typography,
+  Button,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
 import {
   Edit,
@@ -22,6 +29,7 @@ const User = () => {
   const { userInfo } = useAuth();
   const registered = auth.currentUser.metadata.creationTime;
   const disp = useDispatch();
+  const [activeOpt, setActiveOpt] = useState(null);
 
   const currentComponent = (cmpName) => {
     switch (cmpName) {
@@ -40,76 +48,115 @@ const User = () => {
     }
   };
 
+  const userMenuTheme = createTheme({
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            "&.active-opt": {
+              background: "#F2B90D",
+              color: "#192026",
+              "&:hover": {
+                background: "#E8AE00",
+              }
+            },
+          },
+        },
+      },
+    },
+  });
+
   return (
-    <Box sx={{ minHeight: "600px" }}>
-      <Box sx={userStyles.mainBox}>
-        <Box sx={userStyles.personal}>
-          <Avatar
-            src={userInfo?.photoURL}
-            sizes=""
-            sx={{ width: 200, height: 200 }}
-          />
-          <Typography variant="h4" color="black">
-            {userInfo.fullName}
-            {userInfo.type === "driver" && "(driver)"}
-          </Typography>
+    <ThemeProvider theme={userMenuTheme}>
+      <Box sx={{ minHeight: "600px" }}>
+        <Box sx={userStyles.mainBox}>
+          <Box sx={userStyles.personal}>
+            <Avatar
+              src={userInfo?.photoURL}
+              sizes=""
+              sx={{ width: 200, height: 200 }}
+            />
+            <Typography variant="h4" color="wheat">
+              {userInfo.fullName}
+              {userInfo.type === "driver" && "(driver)"}
+            </Typography>
+          </Box>
         </Box>
-      </Box>
-      <Box sx={userStyles.content}>
-        <Box sx={userStyles.contentLeft}>
-          <Link to="/settings">
+        <Box sx={userStyles.content}>
+          <Box sx={userStyles.contentLeft}>
+            <Link to="/settings">
+              <Button
+                sx={{
+                  bgcolor: "#192026",
+                  textTransform: "capitalize",
+                  height: "60px",
+                  fontSize: "20px",
+                  "&:hover": { bgcolor: "rgb(37, 47, 57)" },
+                }}
+                fullWidth
+                variant="contained"
+              >
+                <Edit />
+                Edit profile
+              </Button>
+            </Link>
             <Button
-              sx={{ height: "60px", fontSize: "20px" }}
-              color="secondary"
-              fullWidth
-              variant="contained">
-              <Edit />
-              Edit profile
-            </Button>
-          </Link>
-          <Button
-            onClick={() => setComp("bookings")}
-            sx={{ height: "60px", fontSize: "20px" }}
-            color="secondary"
-            fullWidth
-            variant="contained">
-            <AutoStories />
-            &nbsp;all services order
-          </Button>
-          <Button
-            sx={{ height: "60px", fontSize: "20px" }}
-            color="secondary"
-            fullWidth
-            variant="contained">
-            <Inventory />
-            all bought cars
-          </Button>
-          <Button
-            sx={{ height: "60px", fontSize: "20px" }}
-            color="secondary"
-            fullWidth
-            variant="contained"
-            onClick={() => setComp("comments")}>
-            <Forum />
-            my comments
-          </Button>
-          {userInfo.type === "driver" && (
-            <Button
-              sx={{ height: "60px", fontSize: "20px" }}
-              color="secondary"
+              sx={{
+                bgcolor: "#192026",
+                textTransform: "capitalize",
+                height: "60px",
+                fontSize: "20px",
+                "&:hover": { bgcolor: "rgb(37, 47, 57)" },
+              }}
+              onClick={() => {
+                setComp("bookings");
+                setActiveOpt("all-services");
+              }}
+              className={activeOpt === "all-services" ? "active-opt" : ""}
               fullWidth
               variant="contained"
-              onClick={() => setComp("driverCars")}>
-              <DirectionsCar />
-              my cars
+            >
+              <AutoStories />
+              &nbsp;all services order
             </Button>
-          )}
-          <Typography>I have been registered </Typography>
-          <Typography>{registered} </Typography>
+            <Button
+              sx={{
+                bgcolor: "#192026",
+                textTransform: "capitalize",
+                height: "60px",
+                fontSize: "20px",
+                "&:hover": { bgcolor: "rgb(37, 47, 57)" },
+              }}
+              fullWidth
+              variant="contained"
+              className={activeOpt === "all-comments" ? "active-opt" : ""}
+              onClick={() => {
+                setComp("comments");
+                setActiveOpt("all-comments");
+              }}
+            >
+              <Forum />
+              My comments
+            </Button>
+            {userInfo.type === "driver" && (
+              <Button
+                sx={{ height: "60px", fontSize: "20px" }}
+                color="secondary"
+                fullWidth
+                variant="contained"
+                onClick={() => setComp("driverCars")}
+              >
+                <DirectionsCar />
+                my cars
+              </Button>
+            )}
+            <Typography>I have been registered </Typography>
+            <Typography>{registered} </Typography>
+          </Box>
+          <Box sx={userStyles.contentRight}>{currentComponent(comp)}</Box>
         </Box>
-        <Box sx={userStyles.contentRight}>{currentComponent(comp)}</Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 };
 
