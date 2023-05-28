@@ -19,7 +19,7 @@ export const SwitchButton = () => {
 
   const handleSwitchToggle = () => {
 
-    dispatch(changeColor(isSwitchOn ? "#b0b6bf" : "#39404d"));
+    dispatch(changeColor(isSwitchOn ? "#b0b6bf" : ""));
     setIsSwitchOn(!isSwitchOn);
   };
   return (
@@ -32,9 +32,7 @@ export const SwitchButton = () => {
             onChange={handleSwitchToggle}
           />
         }
-        label={
-          <span style={{ color: "white" }}>{isSwitchOn ? "Dark" : "Light"}</span>
-        }
+        label={isSwitchOn ? "Dark" : "Light"}
       />
     </>
   );

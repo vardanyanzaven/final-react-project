@@ -216,11 +216,6 @@ export const SUCCESS_MESSAGE = {
     type: "success",
     isOpen: true,
   },
-  purchaseSuccess: {
-    message: "Your purchase was successful!",
-    type: "success",
-    isOpen: true,
-  },
 };
 
 export const IMAGES_FOR_HOME_PAGE_SLIDER = [
