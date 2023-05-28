@@ -75,11 +75,18 @@ export const licenseSchema = Yup.object().shape({
 
 //----
 export const bookScheme = Yup.object().shape({
-  car: Yup.string().required("this filed is required"),
-  carModel: Yup.string().required("this field is required"),
+  car: Yup.string().required("This field is required"),
+  carModel: Yup.string().required("This field is required"),
   phone: Yup.string()
     .matches(/^\+?[1-9]\d{1,14}$/, "Phone number is not valid")
     .required("Phone number is required")
     .min(11, "Write correct mobile"),
   pickUpDate: Yup.string().required("date is required"),
+});
+
+export const carAddScheme = Yup.object().shape({
+  car: Yup.string().required("Car is required"),
+  model: Yup.string().required("Model is required"),
+  year: Yup.string().required("Year is required"),
+  type: Yup.string().required("Type is required"),
 });

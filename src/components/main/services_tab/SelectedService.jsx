@@ -7,6 +7,7 @@ import { openDialog } from "../../../store/slicers/dialogSlice";
 import { useAuth } from "../../../hooks/useAuth";
 import { SERVICE_DATA } from "../../../constants/common";
 import { Booking } from "./Booking";
+import { selectedServiceStyle } from "./styles";
 
 export default function SelectedService() {
   const { serve } = useParams();
@@ -29,24 +30,8 @@ export default function SelectedService() {
   };
 
   return booking ? (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
-      <Card
-        sx={{
-          maxWidth: "65%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          mt: 6,
-        }}
-      >
+    <Box sx={selectedServiceStyle.mainBox}>
+      <Card sx={selectedServiceStyle.card}>
         <Typography variant="h4"> {info.name.toUpperCase()}</Typography>
         <img component="img" height="400" src={info.url} alt="info.name" />
         <Typography sx={{ m: 5, width: "65%" }}> {info.title}</Typography>
@@ -56,13 +41,12 @@ export default function SelectedService() {
           size="medium"
           variant="outlined"
           sx={{ m: 1 }}
-          onClick={isAuth ? handleBookClick : openSignUp}
-        >
+          onClick={isAuth ? handleBookClick : openSignUp}>
           Book now
         </Button>
       </Card>
     </Box>
   ) : (
-    <Booking />
+    <Booking serviceName={info.name} />
   );
 }

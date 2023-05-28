@@ -1,10 +1,10 @@
-
 import React, { useEffect } from "react";
+import { aboutStyles } from "./styles";
 
 import WhoWeAre from "../home/WhoWeAre";
-import ContactUs from "../home/ContacUs";
-import OurGallery from "./OurGallery" ; 
-import OurAdvantages from "./OurAdvantages" ; 
+import ContactUs from "../home/ContactUs";
+import OurGallery from "./OurGallery";
+import OurAdvantages from "./OurAdvantages";
 import "./AboutUs.css";
 
 const AboutPage = ({ setActiveLinkId }) => {
@@ -15,11 +15,9 @@ const AboutPage = ({ setActiveLinkId }) => {
 
   return (
     <div>
-     <WhoWeAre/>
-     <OurAdvantages/>
-     <OurGallery/>
-     <ContactUs/> 
-     
+      <WhoWeAre />
+      <OurAdvantages />
+      <OurGallery />
     </div>
   );
 };

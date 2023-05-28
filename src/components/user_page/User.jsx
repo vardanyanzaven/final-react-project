@@ -1,12 +1,26 @@
-import { Box, Avatar, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Avatar,
+  Typography,
+  Button,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
-import { Edit, AutoStories, Inventory, Forum } from "@mui/icons-material";
+import {
+  Edit,
+  AutoStories,
+  Inventory,
+  Forum,
+  DirectionsCar,
+} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import { useState } from "react";
 import { WrittenComs } from "../main/about_page/WrittenComs";
 import { useDispatch } from "react-redux";
 import { getCommentsCollection } from "../../store/slicers/commentSlice";
+import { userStyles } from "./styles";
 import { MyBookings } from "./MyBookings";
 
 const User = () => {
@@ -14,6 +28,7 @@ const User = () => {
   const { userInfo } = useAuth();
   const registered = auth.currentUser.metadata.creationTime;
   const disp = useDispatch();
+  const [activeOpt, setActiveOpt] = useState(null);
 
   const currentComponent = (cmpName) => {
     switch (cmpName) {
@@ -29,104 +44,115 @@ const User = () => {
     }
   };
 
+  const userMenuTheme = createTheme({
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            "&.active-opt": {
+              background: "#F2B90D",
+              color: "#192026",
+              "&:hover": {
+                background: "#E8AE00",
+              }
+            },
+          },
+        },
+      },
+    },
+  });
+
   return (
-    <Box sx={{ minHeight: "600px" }}>
-      <Box
-        sx={{
-          height: "200px",
-          bgcolor: "#101010",
-          display: "flex",
-          alignItems: "end",
-        }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "150px",
-            left: "70px",
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-          }}
-        >
-          <Avatar
-            src={userInfo?.photoURL}
-            sizes=""
-            sx={{ width: 200, height: 200 }}
-          />
-          <Typography variant="h4" color="wheat">
-            {userInfo.fullName}
-            {userInfo.type === "driver" && "(driver)"}
-          </Typography>
+    <ThemeProvider theme={userMenuTheme}>
+      <Box sx={{ minHeight: "600px" }}>
+        <Box sx={userStyles.mainBox}>
+          <Box sx={userStyles.personal}>
+            <Avatar
+              src={userInfo?.photoURL}
+              sizes=""
+              sx={{ width: 200, height: 200 }}
+            />
+            <Typography variant="h4" color="wheat">
+              {userInfo.fullName}
+              {userInfo.type === "driver" && "(driver)"}
+            </Typography>
+          </Box>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          mt: "100px",
-          minHeight: "500px",
-          display: "flex",
-          justifyContent: "space-around",
-        }}
-      >
-        <Box
-          sx={{
-            width: "23%",
-            bgcolor: "grey",
-            paddingInline: 2,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
-          }}
-        >
-          <Link to="/settings">
+        <Box sx={userStyles.content}>
+          <Box sx={userStyles.contentLeft}>
+            <Link to="/settings">
+              <Button
+                sx={{
+                  bgcolor: "#192026",
+                  textTransform: "capitalize",
+                  height: "60px",
+                  fontSize: "20px",
+                  "&:hover": { bgcolor: "rgb(37, 47, 57)" },
+                }}
+                fullWidth
+                variant="contained"
+              >
+                <Edit />
+                Edit profile
+              </Button>
+            </Link>
             <Button
-              sx={{ height: "60px", fontSize: "20px" }}
-              color="secondary"
+              sx={{
+                bgcolor: "#192026",
+                textTransform: "capitalize",
+                height: "60px",
+                fontSize: "20px",
+                "&:hover": { bgcolor: "rgb(37, 47, 57)" },
+              }}
+              onClick={() => {
+                setComp("bookings");
+                setActiveOpt("all-services");
+              }}
+              className={activeOpt === "all-services" ? "active-opt" : ""}
               fullWidth
               variant="contained"
             >
-              <Edit />
-              Edit profile
+              <AutoStories />
+              &nbsp;all services order
             </Button>
-          </Link>
-          <Button
-            onClick={() => setComp("bookings")}
-            sx={{ height: "60px", fontSize: "20px" }}
-            color="secondary"
-            fullWidth
-            variant="contained"
-          >
-            <AutoStories />
-            &nbsp;all services order
-          </Button>
-          <Button
-            sx={{ height: "60px", fontSize: "20px" }}
-            color="secondary"
-            fullWidth
-            variant="contained"
-          >
-            <Inventory />
-            all bought cars
-          </Button>
-          <Button
-            sx={{ height: "60px", fontSize: "20px" }}
-            color="secondary"
-            fullWidth
-            variant="contained"
-            onClick={() => setComp("comments")}
-          >
-            <Forum />
-            my comments
-          </Button>
-
-          <Typography>I have been registered </Typography>
-          <Typography>{registered} </Typography>
-        </Box>
-        <Box sx={{ width: "73%", bgcolor: "grey" }}>
-          {currentComponent(comp)}
+            <Button
+              sx={{
+                bgcolor: "#192026",
+                textTransform: "capitalize",
+                height: "60px",
+                fontSize: "20px",
+                "&:hover": { bgcolor: "rgb(37, 47, 57)" },
+              }}
+              fullWidth
+              variant="contained"
+              className={activeOpt === "all-comments" ? "active-opt" : ""}
+              onClick={() => {
+                setComp("comments");
+                setActiveOpt("all-comments");
+              }}
+            >
+              <Forum />
+              My comments
+            </Button>
+            {userInfo.type === "driver" && (
+              <Button
+                sx={{ height: "60px", fontSize: "20px" }}
+                color="secondary"
+                fullWidth
+                variant="contained"
+                onClick={() => setComp("driverCars")}
+              >
+                <DirectionsCar />
+                my cars
+              </Button>
+            )}
+            <Typography>I have been registered </Typography>
+            <Typography>{registered} </Typography>
+          </Box>
+          <Box sx={userStyles.contentRight}>{currentComponent(comp)}</Box>
         </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 };
 

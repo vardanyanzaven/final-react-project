@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 import SortIcon from "@mui/icons-material/Sort";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import {
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
+import { Menu, MenuItem, Typography } from "@mui/material";
 import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setCatalogue,
-  setFetchVal,
-} from "../../../store/slicers/catalogueSlice";
+import { useDispatch } from "react-redux";
+import { setCatalogue } from "../../../store/slicers/catalogueSlice";
+import { setFetchVal } from "../../../store/slicers/catalogueSlice";
 import { ThemeProvider } from "styled-components";
 import catalogueTheme from "../../../themes/catalogueTheme";
+import { filterSortStyles } from "./styles";
 
 const FilterSort = ({
   activeSortOpt,
@@ -75,21 +68,8 @@ const FilterSort = ({
           aria-expanded={sortOpen ? "true" : undefined}
           onClick={handleSortClick}
           startIcon={<SortIcon />}
-          sx={{
-            // color: "#F2B90D",
-            border: "1px solid #F2B90D",
-            borderRadius: "10px",
-            p: "7px 15px",
-            display: { xs: "none", sm: "flex" },
-          }}>
-          <Typography
-            sx={{
-              display: { xs: "none", md: "inline" },
-              fontSize: "16px",
-              mr: 1,
-            }}>
-            Sort By:
-          </Typography>
+          sx={filterSortStyles.sortButton}>
+          <Typography sx={filterSortStyles.sortTpgh}>Sort By:</Typography>
           <Typography
             sx={{
               display: { xs: "none", sm: "inline" },
@@ -117,21 +97,8 @@ const FilterSort = ({
           aria-expanded={filterOpen ? "true" : undefined}
           onClick={handleFilterClick}
           startIcon={<FilterAltIcon />}
-          sx={{
-            border: "1px solid #F2B90D",
-            borderRadius: "10px",
-            p: "7px 15px",
-            fontSize: { xs: "14px", sm: "16px" },
-            display: { xs: "none", sm: "flex" },
-          }}>
-          <Typography
-            sx={{
-              display: { xs: "none", md: "inline" },
-              fontSize: { xs: "16px" },
-              mr: 1,
-            }}>
-            Filter:
-          </Typography>
+          sx={filterSortStyles.filterButton}>
+          <Typography sx={filterSortStyles.filterTpgh}>Filter:</Typography>
           <Typography
             sx={{
               display: { xs: "none", sm: "inline" },

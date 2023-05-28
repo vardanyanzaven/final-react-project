@@ -4,6 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { HEADER_TAB_LIST } from "../../constants/common";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { dropMenu } from "./styles";
 
 const NavbarMenu = styled(Menu)({
   "& .MuiMenu-paper": {
@@ -28,7 +29,7 @@ const DropdownMenu = () => {
   };
 
   return (
-    <Box sx={{ display: { xs: "flex", md: "none" }, flexGrow: 1, ml: -1 }}>
+    <Box sx={dropMenu.mainMenu}>
       <IconButton
         className={isNavOpened ? "nav-active" : ""}
         size="large"
@@ -62,16 +63,10 @@ const DropdownMenu = () => {
             <MenuItem
               onClick={closeNavMenu}
               sx={{
+                ...dropMenu.menuItem,
                 borderBottom: tab === "about" ? "none" : "2px solid #F2B90D",
-                transition: "background 0.1s",
-                color: "white",
-                "&:hover": {
-                  background: "rgb(37, 47, 57)",
-                },
               }}>
-              <Typography
-                sx={{ fontSize: { sm: 22, xs: 17 } }}
-                textAlign="center">
+              <Typography sx={dropMenu.tabFonts} textAlign="center">
                 {HEADER_TAB_LIST[tab]}
               </Typography>
             </MenuItem>
