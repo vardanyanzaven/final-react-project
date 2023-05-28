@@ -88,7 +88,7 @@ const carsGridTheme = createTheme({
   },
 });
 
-const CarsGrid = ({ carsList }) => {
+const CarsGrid = ({ carsList, exitFromProfile }) => {
   const dispatch = useDispatch();
   const { isAuth, id, userInfo } = useAuth();
   const { savedCars, purchases } = userInfo;

@@ -88,5 +88,4 @@ export const carAddScheme = Yup.object().shape({
   car: Yup.string().required("Car is required"),
   model: Yup.string().required("Model is required"),
   year: Yup.string().required("Year is required"),
-  type: Yup.string().required("Type is required"),
 });

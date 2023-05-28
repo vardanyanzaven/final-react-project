@@ -14,7 +14,7 @@ export default function PersonalSettings() {
       component={Paper}
       sx={{
         m: 3,
-        background: "#787878",
+        background: "rgba(15, 15, 15, 0.4)",
       }}>
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <caption>Your information settings</caption>

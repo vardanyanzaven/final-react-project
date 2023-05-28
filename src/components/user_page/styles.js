@@ -1,9 +1,13 @@
+import carBG from "../../assets/main_photos/2085166.jpg";
 export const userStyles = {
   mainBox: {
     height: "200px",
     bgcolor: "#101010",
     display: "flex",
     alignItems: "end",
+    backgroundImage: `url(${carBG})`,
+    backgroundSize: "100%",
+    backgroundPositionX: "start",
   },
   personal: {
     position: "absolute",

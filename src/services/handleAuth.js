@@ -41,6 +41,13 @@ export const useAuthListener = (setLoading) => {
     onAuthStateChanged(auth, async (user) => {
       try {
         const dbData = user && (await getUserDB(user.uid));
+        const res =
+          dbData?.type === "driver"
+            ? { ...dbData, myCars: dbData.myCars.map((ref) => ref.id) }
+            : dbData;
+
+        console.log(userInfo["myCars"], res);
+
         disp(
           setUser({
             userInfo: user

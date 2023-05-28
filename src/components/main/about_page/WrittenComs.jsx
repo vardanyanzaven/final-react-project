@@ -20,7 +20,8 @@ import { getCommentsCollection } from "../../../store/slicers/commentSlice";
 import { useAuth } from "../../../hooks/useAuth";
 import { writtenComStyles } from "./styles";
 import { formatDate } from "../../../utils/formatDate";
-
+import "./Comments.css"
+import { openDialog } from "../../../store/slicers/dialogSlice";
 export const WrittenComs = ({ dontShowAll }) => {
   const dispatch = useDispatch();
   const commentsArr = useSelector((state) => state.comments.commentsCol);
@@ -30,6 +31,14 @@ export const WrittenComs = ({ dontShowAll }) => {
     : [...commentsArr];
 
   const onHandleIcons = async (id, icon) => {
+    if (!auth.isAuth) {
+      dispatch(
+        openDialog({
+          isSignUpOpen: true,
+          isSignInOpen: false,
+        })
+      );
+    }
     const mainRef = doc(db, "comments", id);
     const currentCommentRef = await getDoc(mainRef);
     const { thumbUp, thumbDown, favorite, handleLikedPeople } =
@@ -100,7 +109,7 @@ export const WrittenComs = ({ dontShowAll }) => {
   };
 
   return (
-    <div style={writtenComStyles.mainDiv}>
+    <div className = "mainDiv" style={writtenComStyles.mainDiv}>
       <List sx={writtenComStyles.list}>
         {curArr.map((m) => {
           const time = formatDate(m.commentTime);
@@ -118,17 +127,19 @@ export const WrittenComs = ({ dontShowAll }) => {
                 <Box sx={writtenComStyles.mainBox}>
                   <ListItemText sx={{ mt: 2 }}>
                     <Typography
-                      sx={{ display: "inline", mr: "10px" }}
+                      sx={{ position: "absolute", top: "0", left: "0", margin: "20px" }}
                       component="span"
                       variant="body2"
-                      color="text.primary">
+                      color="#FFBD00">
                       {m.fullName}
                     </Typography>
-                    <Typography variant="body1">{m.comment}</Typography>
-                    <Typography variant="subtitle2">{time}</Typography>
+                    <Typography variant="body1" color="white">{m.comment}</Typography>
+                    <Typography 
+                    sx={{ position: "absolute", top: "0", right: "0", margin: "20px" }}
+                    variant="subtitle2" color="grey">{time}</Typography>
                   </ListItemText>
-                  <Box sx={{ display: "flex", ml: 1 }}>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Box sx={{ display: "flex",  ml: 1, position: "absolute", bottom: "0", right: "0", margin: "20px"}}>
+                    <Box sx={{ display: "flex", alignItems: "center"  }}>
                       <IconButton
                         disabled={dontShowAll}
                         color="primary"

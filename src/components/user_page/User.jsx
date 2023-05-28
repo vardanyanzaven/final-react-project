@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { getCommentsCollection } from "../../store/slicers/commentSlice";
 import { userStyles } from "./styles";
 import { MyBookings } from "./MyBookings";
+import MyCars from "./MyCars";
 
 const User = () => {
   const [comp, setComp] = useState("bookings");
@@ -38,6 +39,9 @@ const User = () => {
         break;
       case "bookings":
         return <MyBookings />;
+        break;
+      case "driverCars":
+        return <MyCars />;
         break;
       default:
         break;

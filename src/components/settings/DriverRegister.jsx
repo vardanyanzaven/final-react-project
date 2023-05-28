@@ -43,6 +43,7 @@ async function finalPart(data, passportRef, selfieRef) {
         passportDate,
         license,
       },
+      myCars: [],
     });
   } catch (error) {
     console.error(error.message);

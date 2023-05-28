@@ -15,6 +15,7 @@ import { getCommentsCollection } from "../../../store/slicers/commentSlice";
 import { useEffect } from "react";
 import { openDialog } from "../../../store/slicers/dialogSlice";
 import { commentStyles } from "./styles";
+import "./Comments.css";
 
 export const Comments = () => {
   const [text, setText] = useState("");
@@ -26,11 +27,11 @@ export const Comments = () => {
   }, []);
 
   const onHandleButton = async () => {
-    if (!text) return;
     if (!isAuth) {
       disp(openDialog({ isSignUpOpen: true, isSignInOpen: false }));
       return;
     }
+    if (!text) return;
     try {
       setText("");
       await addDoc(collection(db, "comments"), {
@@ -56,23 +57,25 @@ export const Comments = () => {
   };
   return (
     <Box sx={commentStyles.box2}>
+      <WrittenComs />
       <Box sx={commentStyles.box3}>
-        <Avatar src={userInfo.photoURL} size="lg" sx={{ mt: 2, ml: 12 }} />
+        
         <Input
-          sx={{ width: 350, height: 20, border: 1, mt: 2 }}
-          placeholder="Write us comment here…"
+          sx={{ width: "80%", height: 50, border: 3, borderColor: "white", borderRadius: '16px', mt: 2, bgcolor:  "rgb(2, 2, 34)", color: "white"}}
+          placeholder="Leave us a Review! "
           variant="outlined"
-          color="primary"
+          color="white"
+         
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
         <Button
           sx={{ width: 100, height: 20, mt: 2, mr: 12 }}
           onClick={onHandleButton}>
-          Send
+          Submit!
         </Button>
       </Box>
-      <WrittenComs />
+      
     </Box>
   );
 };
