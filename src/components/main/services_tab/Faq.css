@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.faq_container h3, p {
+.faq_container h3, .faq_container p {
    
   font-family: 'Roboto', sans-serif, 'arial';
   font-weight: 400;

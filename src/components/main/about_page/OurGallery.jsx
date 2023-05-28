@@ -7,6 +7,12 @@ import "./OurGallery.css";
 import galleryimg1 from "../../../assets/about/galleryimg1.jpg";
 import galleryimg2 from "../../../assets/about/galleryimg2.jpg";
 import galleryimg3 from "../../../assets/about/galleryimg3.jpg";
+import galleryimg4 from "../../../assets/about/galleryimg4.jpg";
+import galleryimg5 from "../../../assets/about/galleryimg5.jpg";
+import galleryimg6 from "../../../assets/about/galleryimg6.jpg";
+import galleryimg7 from "../../../assets/about/galleryimg7.jpg";
+import galleryimg8 from "../../../assets/about/galleryimg8.jpg";
+import galleryimg9 from "../../../assets/about/galleryimg9.jpg";
 import { Comments } from "./Comments";
 import { v4 } from "uuid";
 
@@ -31,8 +37,8 @@ export default function OurGallery() {
         ))}
       </ImageList>
 
-      <Button className="ourgallery_btn" variant="contained">
-        <Link to={"/services"}>Book Now! </Link>
+      <Button className="ourgallery_btn" variant="outlined">
+        <Link to={"/catalogue"}>Make a Reservation! </Link>
       </Button>
       
     </div>
@@ -53,27 +59,27 @@ const itemData = [
     title: "galleryimg3",
   },
   {
-    img: galleryimg3,
+    img: galleryimg4,
     title: "galleryimg4",
   },
   {
-    img: galleryimg2,
+    img: galleryimg5,
     title: "galleryimg5",
   },
   {
-    img: galleryimg1,
+    img: galleryimg6,
     title: "galleryimg6",
   },
   {
-    img: galleryimg1,
+    img: galleryimg7,
     title: "galleryimg7",
   },
   {
-    img: galleryimg2,
+    img: galleryimg8,
     title: "galleryimg8",
   },
   {
-    img: galleryimg3,
+    img: galleryimg9,
     title: "galleryimg9",
   },
 ];
