@@ -42,14 +42,12 @@ export const Booking = ({ serviceName }) => {
   const disp = useDispatch();
   const { id } = useAuth();
 
-  const TEXT_FEEDBACK_FOR_USER = `The booking has been successfully done, we inform you that ${
-    complitedData.pickUpDate
-  } ${"1"}
-  machine will be on the ${address} cordinates you provided, on ${complitedData?.pickUpDate
+  const TEXT_FEEDBACK_FOR_USER = `The booking was successful, we inform you that the 
+  vehicle will arrive to ${address}, on ${complitedData?.pickUpDate
     ?.toString()
     .slice(0, 15)} at ${complitedData?.pickUpDate
     ?.toString()
-    .slice(16, 21)} time, wish you enjoyable service.`;
+    .slice(16, 21)}.`;
 
   const anotherStep = async (data) => {
     const { car, carModel, pickUpDate, phone } = data;
@@ -91,13 +89,18 @@ export const Booking = ({ serviceName }) => {
           component="form"
           noValidate
           onSubmit={handleSubmit(anotherStep)}
-          sx={bookingStyles.formBox}>
-          <Typography variant="h4"> Book Here </Typography>
+          sx={bookingStyles.formBox}
+        >
+          <Typography variant="h4" color="#F2B90D">
+            {" "}
+            Book Here{" "}
+          </Typography>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-            }}>
+            }}
+          >
             <Box sx={bookingStyles.carBox}>
               <SelectCars
                 register={register}
@@ -136,7 +139,22 @@ export const Booking = ({ serviceName }) => {
               error={!!errors.pickUpDate}
               type="date"
               variant="outlined"
-              sx={{ mb: 2, mt: 2 }}
+              sx={{
+                mb: 2,
+                mt: 2,
+                "& .MuiInputBase-input": {
+                  color: "white",
+                },
+                "& .MuiSelect-select": {
+                  borderColor: "white",
+                },
+                "&.Mui-focused": {
+                  borderColor: "#F2B90D",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                },
+              }}
               helperText={errors.pickUpDate?.message}
               {...register("pickUpDate")}
             />
@@ -145,7 +163,8 @@ export const Booking = ({ serviceName }) => {
               variant="contained"
               sx={{ mt: 2 }}
               disabled={disabled}
-              type="submit">
+              type="submit"
+            >
               Continue
             </Button>
           </Box>
