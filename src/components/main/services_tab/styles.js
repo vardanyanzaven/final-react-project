@@ -61,7 +61,7 @@ export const selectedServiceStyle = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    p: "3rem 0"
+    p: "3rem 0",
   },
 };
 

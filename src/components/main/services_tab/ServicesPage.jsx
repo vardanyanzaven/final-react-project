@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
-import { Box, ImageList, ImageListItem, ThemeProvider, Typography } from "@mui/material";
+import {
+  Box,
+  ImageList,
+  ImageListItem,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
 import { SERVICE_DATA } from "../../../constants/common";
-import ServiceTheme from "../../../themes/ServiceTheme";
+import ServiceTheme from "../../../themes/serviceTheme";
 import { servicePageStyle } from "./styles";
-import {v4} from "uuid";
+import { v4 } from "uuid";
 
 const ServicesPage = () => {
   return (
@@ -15,8 +21,10 @@ const ServicesPage = () => {
         <ImageList cols={3} gap={25} sx={{ ml: 8, mr: 8 }}>
           {SERVICE_DATA().map((ser) => (
             <Link to={ser.name} key={v4()}>
-              <ImageListItem sx={{mt: "30px"}}>
-                <Typography sx={{fontSize: "33px"}}>{ser.name.toUpperCase()}</Typography>
+              <ImageListItem sx={{ mt: "30px" }}>
+                <Typography sx={{ fontSize: "33px" }}>
+                  {ser.name.toUpperCase()}
+                </Typography>
                 <img
                   src={ser.url}
                   alt={ser.name}
