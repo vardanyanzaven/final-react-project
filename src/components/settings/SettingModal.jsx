@@ -23,7 +23,7 @@ const SettingModal = ({ open, setOpen, setting }) => {
 
   return (
     <Modal open={open} onClose={handleModalClose}>
-      <ModalDialog>
+      <ModalDialog sx={{ bgcolor: "#888888", width: "360px" }}>
         <Typography>{editTitle}</Typography>
         {type === "input" && (
           <TextField
@@ -41,7 +41,9 @@ const SettingModal = ({ open, setOpen, setting }) => {
             <MenuItem value="Female">Female</MenuItem>
           </Select>
         )}
-        <Button onClick={handleSettingChange}>Confirm</Button>
+        <Button onClick={handleSettingChange} sx={{ mt: 2 }}>
+          Confirm
+        </Button>
       </ModalDialog>
     </Modal>
   );

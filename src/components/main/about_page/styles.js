@@ -23,7 +23,7 @@ export const aboutStyles = {
 };
 
 export const commentStyles = {
-  box2: { margin: "100px", display: "flex", flexDirection: "column", mt: 2, width: "100%", bgcolor: "rgb(2, 2, 34)"},
+  box2: { display: "flex", flexDirection: "column", mt: 2, width: "100%", bgcolor: "rgb(2, 2, 34)"},
   box3: {
     display: "flex",
     marginTop: "5%",

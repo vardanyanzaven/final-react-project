@@ -10,7 +10,7 @@ import { useState } from "react";
 import { db } from "../../../firebase";
 import { addDoc, collection } from "@firebase/firestore";
 import { PayPal } from "./PayPal";
-import SelectCars from "./booking_form/SelectCars";
+import SelectCars from "./booking_form/SelectcCars";
 import MyMap from "./MyMap";
 import SelectCarModel from "./booking_form/SelectCarModel";
 import { bookScheme } from "../../../utils/validation";
@@ -110,7 +110,7 @@ export const Booking = ({ serviceName }) => {
               />
               <SelectCarModel
                 register={register}
-                error={errors.carModel?.message}
+                error={!!errors.carModel}
                 disabled={modelDisabled}
                 carModels={carModels}
                 setValue={setValue}
@@ -136,7 +136,7 @@ export const Booking = ({ serviceName }) => {
               )}
             />
             <TextField
-              error={errors.pickUpDate?.message}
+              error={!!errors.pickUpDate}
               type="date"
               variant="outlined"
               sx={{

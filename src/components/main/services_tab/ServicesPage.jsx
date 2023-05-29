@@ -6,12 +6,7 @@ import ServiceTheme from "../../../themes/ServiceTheme";
 import { servicePageStyle } from "./styles";
 import {v4} from "uuid";
 
-const ServicesPage = ({ setActiveLinkId }) => {
-  useEffect(() => {
-    setActiveLinkId("services");
-    return () => setActiveLinkId(null);
-  }, []);
-
+const ServicesPage = () => {
   return (
     <ThemeProvider theme={ServiceTheme}>
       <Box sx={servicePageStyle.mainBox}>
@@ -22,7 +17,7 @@ const ServicesPage = ({ setActiveLinkId }) => {
           {SERVICE_DATA().map((ser) => (
             <Link to={ser.name} key={v4()}>
               <ImageListItem sx={{mt: "30px"}}>
-                <Typography variant="h4">{ser.name.toUpperCase()}</Typography>
+                <Typography sx={{fontSize: "33px"}}>{ser.name.toUpperCase()}</Typography>
                 <img
                   src={ser.url}
                   alt={ser.name}

@@ -62,7 +62,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
 
   return (
     <ThemeProvider theme={CatalogueTheme}>
-      <Box sx={{ minHeight: "100vh" }}>
+      <Box sx={{ minHeight: "100vh", marginBottom: "10px" }}>
         <AppBar position="static" sx={catalogueStyles.appBar}>
           <Container>
             <Toolbar sx={catalogueStyles.toolBar}>

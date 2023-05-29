@@ -10,10 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import PhoneInput from "react-phone-input-2";
 import { Transition } from "../../components/dialog/dialogTransition";
 import { emailSignUp } from "../../services/handleAuth";
-import { changeMessage } from "../../store/slicers/statusSlice";
-import { SUCCESS_MESSAGE } from "../../constants/common";
 import { schema } from "../../utils/validation";
-import { getError } from "../../utils/errors";
 import { styles } from "./styles";
 import "react-phone-input-2/lib/material.css";
 

@@ -70,6 +70,7 @@ export const Comments = () => {
           onChange={(e) => setText(e.target.value)}
         />
         <Button
+        variant="outlined"
           sx={{ width: 100, height: 20, mt: 2, mr: 12 }}
           onClick={onHandleButton}>
           Submit!

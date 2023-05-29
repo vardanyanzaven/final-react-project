@@ -1,12 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from "firebase/storage";
+import { deleteObject, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { updateDoc, doc } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase";
@@ -22,7 +18,7 @@ const MainPhotoSettings = () => {
   const [el, setEl] = useState(null);
   const [disabled, setDisabled] = useState(true);
   const { id, userInfo, email } = useAuth();
-  const storageRef = useMemo(() => ref(storage, id + "/" + email + ".png"));
+  const storageRef = useMemo(() => ref(storage, id + "/" + email + ".png"), []);
   const disp = useDispatch();
 
   const handleFileChange = (e) => {
@@ -75,7 +71,13 @@ const MainPhotoSettings = () => {
     }
   };
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+      }}>
       <IconButton
         disableRipple
         onClick={(e) => {
@@ -102,29 +104,23 @@ const MainPhotoSettings = () => {
           <DeleteForever color="error"></DeleteForever>
         </MenuItem>
       </Menu>
-      <Button
-        variant="text"
+      <IconButton
         component="label"
-        sx={{
-          left: "120px",
-          bottom: "30px",
-          borderRadius: "50%",
-          color: "#009900",
-        }}>
-        <AddAPhoto sx={{ fontSize: "35px" }}></AddAPhoto>
+        sx={{ width: "fit-content", color: "#FFC30F" }}>
+        <AddAPhoto sx={{ fontSize: "50px" }} />
         <input
           type="file"
           hidden
           accept="image/*"
           onChange={handleFileChange}
         />
-      </Button>
+      </IconButton>
       <Button
         color="success"
         onClick={handleAddUrl}
         disabled={disabled}
         variant={disabled ? "" : "contained"}>
-        {!disabled && <Check></Check>}
+        {!disabled && <Check />}
       </Button>
     </Box>
   );
