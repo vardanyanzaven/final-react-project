@@ -24,7 +24,7 @@ const ServicesPage = () => {
                   src={ser.url}
                   alt={ser.name}
                   className="image"
-                  style={{ borderRadius: "10px", marginTop: "30px" }}
+                  style={{ height: "320px", borderRadius: "10px", marginTop: "30px" }}
                 />
               </ImageListItem>
             </Link>
