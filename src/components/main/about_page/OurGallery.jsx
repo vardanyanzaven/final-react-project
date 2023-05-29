@@ -10,6 +10,7 @@ import galleryimg3 from "../../../assets/about/galleryimg3.jpg";
 import { Comments } from "./Comments";
 import { v4 } from "uuid";
 
+
 export default function OurGallery() {
   return (
     <div className="ourgallery_container">
@@ -33,7 +34,7 @@ export default function OurGallery() {
       <Button className="ourgallery_btn" variant="contained">
         <Link to={"/services"}>Book Now! </Link>
       </Button>
-      <Comments />
+      
     </div>
   );
 }
