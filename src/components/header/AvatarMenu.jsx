@@ -55,10 +55,12 @@ const AvatarMenu = () => {
               <Typography>Settings</Typography>
             </MenuItem>
           </Link>
-          <MenuItem>
-            <HistoryIcon />
-            <Typography>History</Typography>
-          </MenuItem>
+          <Link to="history">
+            <MenuItem>
+              <HistoryIcon />
+              <Typography>History</Typography>
+            </MenuItem>
+          </Link>
           <Link to="saved">
             <MenuItem>
               <Bookmark />

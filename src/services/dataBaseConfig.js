@@ -26,6 +26,7 @@ export const setUserDB = async ({ uid }, phone, fullName, gender) => {
     savedCars: [],
     type: "client",
     photoURL: null,
+    purchases: [],
   });
 };
 

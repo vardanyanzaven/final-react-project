@@ -1,8 +1,9 @@
-import { Box, Grid, ThemeProvider } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core";
 import { Typography, createTheme } from "@material-ui/core";
 import dayjs from "dayjs";
 import { useAuth } from "../../hooks/useAuth";
 import { uuidv4 } from "@firebase/util";
+import { Box, Grid } from "@mui/material";
 const userHistTheme = createTheme({
   typography: {
     fontFamily: ["Quicksand", "IBM Plex Sans", "Roboto", "sans-serif"].join(
@@ -21,20 +22,20 @@ const userHistTheme = createTheme({
 const UserHistory = () => {
   const { userInfo } = useAuth();
   const { purchases } = userInfo;
-  console.log(purchases);
+
   return (
     <ThemeProvider theme={userHistTheme}>
-      <Box sx={{ width: "fit-content", margin: "125px 50px" }}>
-        <Grid container spacing={3} sx={{ justifyContent: "center" }}>
+      <Box sx={{ padding: "50px 0" }}>
+        <Grid container spacing={6} sx={{ paddingInline: "50px" }}>
           {purchases.map((car) => {
             return (
-              <Grid item key={uuidv4()} xs={12} sm={6}>
+              <Grid item key={uuidv4()} xs={12} sm={6} md={4}>
                 <Box
                   sx={{
                     bgcolor: "white",
                     display: "flex",
                     flexDirection: "column",
-                    gap: 5,
+                    gap: 2,
                     borderRadius: "5px",
                     p: "1rem 1rem 1rem 3rem",
                   }}>

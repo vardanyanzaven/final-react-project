@@ -134,29 +134,33 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
   };
 
   const handlePurchaseClick = async (selectedCar, purchaseDate) => {
-    const userRef = doc(db, "users", id);
-    const { id: carId, carBrand, carProdYear, carModel, price } = selectedCar;
-    const newPurchase = {
-      id: carId,
-      carBrand,
-      carModel,
-      price,
-      carProdYear,
-      pickupDate: pickupDate.valueOf(),
-      purchaseDate: purchaseDate.valueOf(),
-    };
-    await updateDoc(userRef, { purchases: arrayUnion({ ...newPurchase }) });
-    dispatch(
-      changeUserInfo({
-        ...userInfo,
-        purchases: [...purchases, { ...newPurchase }].sort(
-          (a, b) => b.purchaseDate - a.purchaseDate
-        ),
-      })
-    );
-    setIsBuyNowClicked(false);
-    setPickupDate(dayjs());
-    dispatch(changeMessage(SUCCESS_MESSAGE.purchaseSuccess));
+    try {
+      const userRef = doc(db, "users", id);
+      const { id: carId, carBrand, carProdYear, carModel, price } = selectedCar;
+      const newPurchase = {
+        id: carId,
+        carBrand,
+        carModel,
+        price,
+        carProdYear,
+        pickupDate: pickupDate.valueOf(),
+        purchaseDate: purchaseDate.valueOf(),
+      };
+      await updateDoc(userRef, { purchases: arrayUnion({ ...newPurchase }) });
+      dispatch(
+        changeUserInfo({
+          ...userInfo,
+          purchases: [...purchases, { ...newPurchase }].sort(
+            (a, b) => b.purchaseDate - a.purchaseDate
+          ),
+        })
+      );
+      setIsBuyNowClicked(false);
+      setPickupDate(dayjs());
+      dispatch(changeMessage(SUCCESS_MESSAGE.purchaseSuccess));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -417,17 +421,3 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
   );
 };
 export default CarsGrid;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
