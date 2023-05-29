@@ -42,8 +42,8 @@ export default function SelectedService() {
   const openSignUp = () => {
     disp(
       openDialog({
-        isSignUpOpen: true,
-        isSignInOpen: false,
+        isSignUpOpen: false,
+        isSignInOpen: true,
       })
     );
   };
@@ -56,7 +56,10 @@ export default function SelectedService() {
     <ThemeProvider theme={selServiceTheme}>
       <Box sx={selectedServiceStyle.mainBox}>
         <Card sx={selectedServiceStyle.card}>
-          <Typography variant="h4" color="#F2B90D"> {info.name.toUpperCase()}</Typography>
+          <Typography variant="h4" color="#F2B90D">
+            {" "}
+            {info.name.toUpperCase()}
+          </Typography>
           <img
             height="500"
             src={info.url}
@@ -80,8 +83,7 @@ export default function SelectedService() {
                 transform: "scale(1.1)",
               },
             }}
-            onClick={isAuth ? handleBookClick : openSignUp}
-          >
+            onClick={isAuth ? handleBookClick : openSignUp}>
             Book now
           </Button>
         </Card>
