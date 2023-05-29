@@ -8,7 +8,7 @@ import NotFoundPage from "./components/NotFoundPage";
 import { useAuthListener } from "./services/handleAuth";
 import AboutPage from "./components/main/about_page/AboutPage";
 import CataloguePage from "./components/main/catalogue/CataloguePage";
-import {Services} from "./components/main/services_tab/Services";
+import { Services } from "./components/main/services_tab/Services";
 import Footer from "./components/footer/Footer";
 import SelectedService from "./components/main/services_tab/SelectedService";
 import Main from "./components/main/Main";
@@ -18,6 +18,7 @@ import { HomePage } from "./components/main/home/HomePage";
 import "./App.css";
 import User from "./components/user_page/User";
 import SavedCars from "./components/header/SavedCars";
+import UserHistory from "./components/header/UserHistory";
 
 function App() {
   const [activeLinkId, setActiveLinkId] = useState();
@@ -54,6 +55,7 @@ function App() {
               <Route path="settings" element={<UserSettings />} />
               <Route path="user" element={<User />} />
               <Route path="saved" element={<SavedCars />} />
+              <Route path="history" element={<UserHistory />} />
             </>
           ) : (
             <Route path="*" element={<Navigate to="/" />} />

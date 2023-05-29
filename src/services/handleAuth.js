@@ -58,8 +58,9 @@ export const useAuthListener = (setLoading) => {
               ? {
                   ...userInfo,
                   ...res,
-                  savedCars: dbData?.savedCars.map((ref) => ref.id),
+                  savedCars: dbData.savedCars.map((ref) => ref.id),
                   photoURL: user.photoURL,
+                  purchases: dbData.purchases,
                 }
               : {},
             email: user?.email,
