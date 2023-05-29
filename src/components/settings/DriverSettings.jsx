@@ -64,7 +64,7 @@ const DriverSettings = () => {
         carBrand: car,
         carModel: model,
         carProdYear: +year,
-        carType: type,
+        carType: type.toLowerCase(),
         photoURL: URL,
         price: !price ? "contractual" : +price,
       });
@@ -148,11 +148,14 @@ const DriverSettings = () => {
           flexDirection="column"
           alignItems="center">
           <Typography variant="h3">ADD A NEW CAR</Typography>
-          <IconButton color="success" onClick={() => setOpenSett(!openSett)}>
+          <IconButton
+            color="success"
+            sx={{ color: "#FFC30F" }}
+            onClick={() => setOpenSett(!openSett)}>
             {openSett ? (
-              <RemoveIcon sx={{ fontSize: 60 }} />
+              <RemoveIcon sx={{ fontSize: 60, color: "#FFC30F" }} />
             ) : (
-              <AddIcon sx={{ fontSize: 60 }} />
+              <AddIcon sx={{ fontSize: 60, color: "#FFC30F" }} />
             )}
           </IconButton>
         </Grid>
@@ -251,6 +254,7 @@ const DriverSettings = () => {
               <LoadingButton
                 loading={loading}
                 variant="contained"
+                sx={{ background: "#192026" }}
                 type="submit">
                 Add
               </LoadingButton>

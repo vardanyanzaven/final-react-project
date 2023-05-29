@@ -169,7 +169,13 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
             columnSpacing={{ xs: 0, sm: 2, md: 3 }}
             sx={{ mt: 6, p: "0 50px" }}>
             {carsList.map((car) => (
-              <Grid item key={car.id} xs={12} sm={12} md={6} lg={6}>
+              <Grid
+                item
+                key={car.id}
+                xs={12}
+                sm={12}
+                md={exitFromProfile ? 12 : 6}
+                lg={exitFromProfile ? 12 : 6}>
                 <Paper sx={{ height: "100%" }}>
                   <Card
                     sx={{
@@ -233,36 +239,40 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
                           display: "flex",
                           justifyContent: "space-between",
                         }}>
-                        <Button
-                          color="gold"
-                          variant="outlined"
-                          sx={{
-                            border: "2px solid",
-                            fontWeight: "bold",
-                            "&:hover": { border: "2px solid" },
-                            fontSize: "13px",
-                          }}
-                          onClick={() =>
-                            isAuth ? handleBuyNowClick(car) : openSignIn()
-                          }>
-                          Buy Now
-                        </Button>
-                        <Tooltip
-                          title='Add or remove from "Saved"'
-                          placement="bottom">
-                          <IconButton
+                        {!exitFromProfile && (
+                          <Button
                             color="gold"
-                            sx={{ mr: 1 }}
+                            variant="outlined"
+                            sx={{
+                              border: "2px solid",
+                              fontWeight: "bold",
+                              "&:hover": { border: "2px solid" },
+                              fontSize: "13px",
+                            }}
                             onClick={() =>
-                              isAuth ? handleSaveClick(car.id) : openSignIn()
+                              isAuth ? handleBuyNowClick(car) : openSignIn()
                             }>
-                            {savedCars?.includes(car.id) ? (
-                              <BookmarkIcon />
-                            ) : (
-                              <BookmarkBorderIcon />
-                            )}
-                          </IconButton>
-                        </Tooltip>
+                            Buy Now
+                          </Button>
+                        )}
+                        {!exitFromProfile && (
+                          <Tooltip
+                            title='Add or remove from "Saved"'
+                            placement="bottom">
+                            <IconButton
+                              color="gold"
+                              sx={{ mr: 1 }}
+                              onClick={() =>
+                                isAuth ? handleSaveClick(car.id) : openSignIn()
+                              }>
+                              {savedCars?.includes(car.id) ? (
+                                <BookmarkIcon />
+                              ) : (
+                                <BookmarkBorderIcon />
+                              )}
+                            </IconButton>
+                          </Tooltip>
+                        )}
                       </CardActions>
                     </Box>
                   </Card>

@@ -16,7 +16,7 @@ const SettingItem = ({ sett }) => {
           sx={{ color: "#FFC30F", fontSize: "20px" }}>
           {sett.name}
         </TableCell>
-        <TableCell align="left" sx={{ fontSize: "20px" }}>
+        <TableCell align="left" sx={{ fontSize: "20px", color: "white" }}>
           {sett.value}
         </TableCell>
         <TableCell align="right">

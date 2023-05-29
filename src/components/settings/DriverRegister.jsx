@@ -8,7 +8,10 @@ import { useMemo } from "react";
 import { ref, uploadBytes } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import { DRIVER_REGISTER_STEPS } from "../../constants/common";
+import {
+  DRIVER_CONDITIONS,
+  DRIVER_REGISTER_STEPS,
+} from "../../constants/common";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants/common";
 import PassportStep from "./all_steps/PassportStep";
 import DriverLicenseStepe from "./all_steps/DriverLicenseStep";
@@ -61,10 +64,14 @@ const DriverSettings = () => {
   const { userInfo, id } = useAuth();
   const disp = useDispatch();
   const [loading, setLoading] = useState(false);
-  const storageRefForPassport = useMemo(() =>
-    ref(storage, `${id}/${v4()}.png`)
+  const storageRefForPassport = useMemo(
+    () => ref(storage, `${id}/${v4()}.png`),
+    []
   );
-  const storageRefForSelfie = useMemo(() => ref(storage, `${id}/${v4()}.png`));
+  const storageRefForSelfie = useMemo(
+    () => ref(storage, `${id}/${v4()}.png`),
+    []
+  );
 
   const handleOpenModal = () => {
     setOpenModal(false);
@@ -112,9 +119,16 @@ const DriverSettings = () => {
             <>
               <Typography
                 variant="h6"
-                sx={{ lineHeight: "50px", paddingInline: "50px" }}>
-                Here will be your settings if you register as a driver. If you
-                want to register as a driver, you can find out by clicking
+                sx={{ lineHeight: "50px", paddingInline: "80px" }}>
+                Here will be your settings if you register as a driver. To
+                register as a driver you need to agree to our
+                {"  "}
+                <Link
+                  onClick={() => setOpenModal(true)}
+                  sx={{ color: "blue", cursor: "pointer" }}
+                  variant="subtitle2">
+                  Terms and Conditions
+                </Link>
                 <Checkbox
                   checked={!disable}
                   color="success"
@@ -125,21 +139,35 @@ const DriverSettings = () => {
                   disabled={disable}
                   sx={{ mr: "5px" }}
                   variant="contained">
-                  accept
+                  continue
                 </Button>
               </Typography>
-              <Link
-                onClick={() => setOpenModal(true)}
-                sx={{ color: "blue", cursor: "pointer" }}
-                variant="subtitle2">
-                copyright
-              </Link>
             </>
           ) : (
             <>
               <Stepper activeStep={step} sx={{ p: 3 }}>
                 {DRIVER_REGISTER_STEPS.map((step) => (
-                  <Step key={step.title}>
+                  <Step
+                    key={step.title}
+                    sx={{
+                      "& .MuiStepLabel-root .Mui-completed": {
+                        color: "#F2B90D", // circle color (COMPLETED)
+                      },
+                      "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
+                        {
+                          color: "grey.500", // Just text label (COMPLETED)
+                        },
+                      "& .MuiStepLabel-root .Mui-active": {
+                        color: "#F2B90D", // circle color (ACTIVE)
+                      },
+                      "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel":
+                        {
+                          color: "common.white", // Just text label (ACTIVE)
+                        },
+                      "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
+                        fill: "black", // circle's number (ACTIVE)
+                      },
+                    }}>
                     <StepLabel>{step.title}</StepLabel>
                   </Step>
                 ))}
@@ -201,24 +229,7 @@ const DriverSettings = () => {
 
       <Modal open={openModal} onClose={handleOpenModal}>
         <ModalDialog variant="soft">
-          Data collection: Explain what types of personal information you
-          collect from users, such as name, address, email address, phone
-          number, and payment information. Use of data: Describe how you will
-          use the data that you collect, such as to process payments, improve
-          your services, or respond to user inquiries. Sharing of data: Explain
-          whether or not you will share user data with third parties, such as
-          payment processors or other service providers. If you do share data,
-          be transparent about the reasons why and how the data will be used.
-          Data security: Describe the measures that you have in place to protect
-          user data from unauthorized access, such as encryption, firewalls, and
-          access controls. User rights: Inform users about their rights under
-          applicable privacy laws, such as the right to access, correct, or
-          delete their personal information. Cookies and other tracking
-          technologies: Explain what cookies and other tracking technologies
-          your website uses, and how they are used to collect data about user
-          behavior. Changes to the policy: Explain how you will notify users of
-          changes to your privacy policy, and how users can opt-out of any
-          changes that they do not agree with.
+          {DRIVER_CONDITIONS}
           <Button
             onClick={() => {
               setOpenModal(false);

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { myBookingStyles } from "./styles";
+import { Typography } from "@mui/material";
 
 export const MyBookings = () => {
   return <MyBookingsTable />;
@@ -44,7 +45,7 @@ const MyBookingsTable = () => {
           <TableRow sx={myBookingStyles.tableRow}>
             <StyledTableCell sx={{ width: "20%" }}>SERVICE</StyledTableCell>
             <StyledTableCell sx={{ width: "20%" }}>ADDRESS</StyledTableCell>
-            <StyledTableCell sx={{ width: "20%" }}>CAR</StyledTableCell>
+            <StyledTableCell sx={{ width: "20%", pl: 9 }}>CAR</StyledTableCell>
             <StyledTableCell sx={{ width: "20%" }}>PICKUP</StyledTableCell>
             <StyledTableCell sx={{ width: "20%" }}>PAYMENT</StyledTableCell>
           </TableRow>
@@ -60,19 +61,19 @@ const MyBookingsTable = () => {
                 sx={myBookingStyles.styledTable}
                 key={Math.random()}>
                 <StyledTableCell align="left" sx={{ width: "20%" }}>
-                  {row.service.toUpperCase()}
+                  <Typography>{row.service.toUpperCase()}</Typography>
+                </StyledTableCell>
+                <StyledTableCell align="left" sx={{ width: "27%" }}>
+                  <Typography>{row.address}</Typography>
                 </StyledTableCell>
                 <StyledTableCell align="left" sx={{ width: "20%" }}>
-                  {row.address}
+                  <Typography>{row.car}</Typography>
                 </StyledTableCell>
                 <StyledTableCell align="left" sx={{ width: "20%" }}>
-                  {row.car}
+                  <Typography>{row.pickUpTime}</Typography>
                 </StyledTableCell>
                 <StyledTableCell align="left" sx={{ width: "20%" }}>
-                  {row.pickUpTime}
-                </StyledTableCell>
-                <StyledTableCell align="left" sx={{ width: "20%" }}>
-                  {row.price}$
+                  <Typography>{row.price}$</Typography>
                 </StyledTableCell>
               </StyledTableRow>
             );

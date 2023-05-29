@@ -76,6 +76,7 @@ const MainPhotoSettings = () => {
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
+        alignItems: "center",
       }}>
       <IconButton
         disableRipple
@@ -103,7 +104,9 @@ const MainPhotoSettings = () => {
           <DeleteForever color="error"></DeleteForever>
         </MenuItem>
       </Menu>
-      <Button variant="text" component="label">
+      <IconButton
+        component="label"
+        sx={{ width: "fit-content", color: "#FFC30F" }}>
         <AddAPhoto sx={{ fontSize: "50px" }} />
         <input
           type="file"
@@ -111,7 +114,7 @@ const MainPhotoSettings = () => {
           accept="image/*"
           onChange={handleFileChange}
         />
-      </Button>
+      </IconButton>
       <Button
         color="success"
         onClick={handleAddUrl}

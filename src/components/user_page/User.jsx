@@ -7,7 +7,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
-import { Edit, AutoStories, Inventory } from "@mui/icons-material";
+import { Edit, AutoStories } from "@mui/icons-material";
 import { Forum, DirectionsCar } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
@@ -24,20 +24,17 @@ const User = () => {
   const { userInfo } = useAuth();
   const registered = auth.currentUser.metadata.creationTime;
   const disp = useDispatch();
-  const [activeOpt, setActiveOpt] = useState(null);
+  const [activeOpt, setActiveOpt] = useState("all-services");
 
   const currentComponent = (cmpName) => {
     switch (cmpName) {
       case "comments":
         disp(getCommentsCollection());
         return <WrittenComs dontShowAll />;
-        break;
       case "bookings":
         return <MyBookings />;
-        break;
       case "driverCars":
         return <MyCars />;
-        break;
       default:
         break;
     }
@@ -132,11 +129,20 @@ const User = () => {
             </Button>
             {userInfo.type === "driver" && (
               <Button
-                sx={{ height: "60px", fontSize: "20px" }}
-                color="secondary"
+                sx={{
+                  bgcolor: "#192026",
+                  textTransform: "capitalize",
+                  height: "60px",
+                  fontSize: "20px",
+                  "&:hover": { bgcolor: "rgb(37, 47, 57)" },
+                }}
                 fullWidth
                 variant="contained"
-                onClick={() => setComp("driverCars")}>
+                className={activeOpt === "all-my-cars" ? "active-opt" : ""}
+                onClick={() => {
+                  setComp("driverCars");
+                  setActiveOpt("all-my-cars");
+                }}>
                 <DirectionsCar />
                 my cars
               </Button>

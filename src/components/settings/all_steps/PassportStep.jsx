@@ -45,7 +45,7 @@ const PassportStep = ({ setIsNext, setCompleted }) => {
         <Grid item xs={6}>
           <TextField
             required
-            label="Firstname"
+            label="First name"
             variant="outlined"
             error={!!errors.firstName}
             helperText={errors.firstName?.message}
@@ -55,7 +55,7 @@ const PassportStep = ({ setIsNext, setCompleted }) => {
         <Grid item xs={6}>
           <TextField
             required
-            label="Lastname"
+            label="Last name"
             variant="outlined"
             error={!!errors.lastName}
             helperText={errors.lastName?.message}
@@ -112,7 +112,10 @@ const PassportStep = ({ setIsNext, setCompleted }) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <LoadingButton type="submit" variant="contained">
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            sx={{ bgcolor: "#192026", "&:hover": { bgcolor: "#252f39" } }}>
             {sended ? "Reset" : "Send"}
           </LoadingButton>
         </Grid>
