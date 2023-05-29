@@ -2,12 +2,11 @@ export const bookingStyles = {
   mainBox: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
   },
   secondBox: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center",
+    // alignItems: "center",
     textAlign: "center",
     width: 1200,
     height: 600,
@@ -54,6 +53,7 @@ export const selectedServiceStyle = {
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    m: "8rem 0 4rem 0",
   },
   card: {
     maxWidth: "65%",
@@ -61,19 +61,22 @@ export const selectedServiceStyle = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    mt: 6,
+    p: "3rem 0"
   },
 };
 
 export const servicePageStyle = {
   mainBox: {
+    mt: "8rem",
     display: "flex",
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
     flexDirection: "column",
+    gap: 3,
     "& .image:hover": {
-      transform: "translateY(-40px)",
+      transform: "translateY(-20px)",
+      transition: "transform 0.2s",
     },
   },
 };

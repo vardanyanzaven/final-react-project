@@ -25,9 +25,24 @@ export default function SelectCarModel({
           error={error}
           label="Select Car Model "
           defaultValue=""
+          sx={{
+            "& .MuiInputBase-input": {
+              color: "white",
+            },
+            "& .MuiSelect-select": {
+              borderColor: "white",
+            },
+            "&.Mui-focused": {
+              borderColor: "#F2B90D",
+            },
+            "& .MuiInputLabel-root": {
+              color: "white",
+            },
+          }}
           onChange={handlePriceChange}
           inputProps={{ ...register("carModel") }}
-          helperText={error}>
+          helperText={error}
+        >
           {carModels.map((model) => (
             <MenuItem key={Math.random()} value={model.name}>
               {model.name}

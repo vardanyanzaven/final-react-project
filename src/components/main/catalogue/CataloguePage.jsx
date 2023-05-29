@@ -8,7 +8,7 @@ import { SORT_OPTIONS, FILTER_OPTIONS } from "../../../constants/common";
 import { setCatalogue } from "../../../store/slicers/catalogueSlice";
 import { setFetchVal } from "../../../store/slicers/catalogueSlice";
 import CarsGrid from "../../../shared/CarsGrid";
-import CatalogueTheme from "../../../themes/catalogueTheme";
+import CatalogueTheme from "../../../themes/CatalogueTheme";
 import { catalogueStyles } from "./styles";
 
 const CataloguePage = ({ setActiveLinkId }) => {
