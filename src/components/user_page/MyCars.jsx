@@ -28,11 +28,7 @@ const MyCars = () => {
   useEffect(() => {
     getMyGars(setMyCars, id);
   }, []);
-  return (
-    <Box>
-      <CarsGrid carsList={myCars} exitFromProfile />
-    </Box>
-  );
+  return <CarsGrid carsList={myCars} exitFromProfile />;
 };
 
 export default MyCars;

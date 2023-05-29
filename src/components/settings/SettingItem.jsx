@@ -10,14 +10,24 @@ const SettingItem = ({ sett }) => {
   return (
     <>
       <TableRow key={sett.name}>
-        <TableCell component="th" scope="row">
+        <TableCell
+          component="th"
+          scope="row"
+          sx={{ color: "#FFC30F", fontSize: "20px" }}>
           {sett.name}
         </TableCell>
-        <TableCell align="left">{sett.value}</TableCell>
-        <TableCell align="left">
+        <TableCell align="left" sx={{ fontSize: "20px", color: "white" }}>
+          {sett.value}
+        </TableCell>
+        <TableCell align="right">
           {sett.edit && (
-            <Button disableRipple onClick={() => setOpenModal(true)}>
-              <DriveFileRenameOutline />
+            <Button
+              disableRipple
+              onClick={() => setOpenModal(true)}
+              sx={{ flex: "end" }}>
+              <DriveFileRenameOutline
+                sx={{ color: "#FFC30F", fontSize: "30px" }}
+              />
             </Button>
           )}
         </TableCell>

@@ -53,8 +53,8 @@ const AvatarMenu = () => {
           </Link>
           <Link to="settings">
             <MenuItem>
-              <Settings sx={{ color: "black" }} />
-              <Typography color="black">Settings</Typography>
+              <Settings />
+              <Typography>Settings</Typography>
             </MenuItem>
           </Link>
           <Link to="history">

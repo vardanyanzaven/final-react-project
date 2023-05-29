@@ -137,19 +137,21 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
     const userRef = doc(db, "users", id);
     const { id: carId, carBrand, carProdYear, carModel, price } = selectedCar;
     const newPurchase = {
-        id: carId,
-        carBrand,
-        carModel,
-        price,
-        carProdYear,
-        pickupDate: pickupDate.valueOf(),
-        purchaseDate: purchaseDate.valueOf(),
+      id: carId,
+      carBrand,
+      carModel,
+      price,
+      carProdYear,
+      pickupDate: pickupDate.valueOf(),
+      purchaseDate: purchaseDate.valueOf(),
     };
-    await updateDoc(userRef, {purchases: arrayUnion({...newPurchase})});
+    await updateDoc(userRef, { purchases: arrayUnion({ ...newPurchase }) });
     dispatch(
       changeUserInfo({
         ...userInfo,
-        purchases: [...purchases, {...newPurchase}].sort((a, b) => b.purchaseDate - a.purchaseDate),
+        purchases: [...purchases, { ...newPurchase }].sort(
+          (a, b) => b.purchaseDate - a.purchaseDate
+        ),
       })
     );
     setIsBuyNowClicked(false);
@@ -165,10 +167,15 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
             container
             rowSpacing={{ xs: 2, sm: 4 }}
             columnSpacing={{ xs: 0, sm: 2, md: 3 }}
-            sx={{ mt: 6, p: "0 50px" }}
-          >
+            sx={{ mt: 6, p: "0 50px" }}>
             {carsList.map((car) => (
-              <Grid item key={car.id} xs={12} sm={12} md={6} lg={6}>
+              <Grid
+                item
+                key={car.id}
+                xs={12}
+                sm={12}
+                md={exitFromProfile ? 12 : 6}
+                lg={exitFromProfile ? 12 : 6}>
                 <Paper sx={{ height: "100%" }}>
                   <Card
                     sx={{
@@ -177,8 +184,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
                       margin: "0 auto",
                       display: { xs: "none", sm: "flex" },
                       gap: 2,
-                    }}
-                  >
+                    }}>
                     <CardMedia
                       component="img"
                       height="245"
@@ -192,39 +198,36 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
                         display: "flex",
                         flexDirection: "column",
                         pt: 1,
-                      }}
-                    >
+                      }}>
                       <CardContent
                         sx={{
                           display: "flex",
                           flexDirection: "column",
                           gap: 0.8,
-                        }}
-                      >
+                        }}>
                         <Typography
                           sx={{ color: "#FFBD00", fontSize: "18px" }}
-                          noWrap
-                        >
+                          noWrap>
                           <span style={{ color: "black" }}>Brand: </span>
                           {car.carBrand}
                         </Typography>
                         <Typography
                           sx={{ color: "#FFBD00", fontSize: "18px" }}
-                          noWrap
-                        >
+                          noWrap>
                           <span style={{ color: "black" }}>Model: </span>
                           {car.carModel}
                         </Typography>
                         <Typography
                           sx={{ color: "#FFBD00", fontSize: "18px" }}
-                          noWrap
-                        >
+                          noWrap>
                           <span style={{ color: "black" }}>
                             Production year:{" "}
                           </span>
                           {car.carProdYear}
                         </Typography>
-                        <Typography sx={{ color: "#FFBD00", fontSize: "18px" }} noWrap>
+                        <Typography
+                          sx={{ color: "#FFBD00", fontSize: "18px" }}
+                          noWrap>
                           <span style={{ color: "black" }}>Price</span>: $
                           {car.price.toLocaleString()}
                         </Typography>
@@ -235,41 +238,41 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
                           ml: 1,
                           display: "flex",
                           justifyContent: "space-between",
-                        }}
-                      >
-                        <Button
-                          color="gold"
-                          variant="outlined"
-                          sx={{
-                            border: "2px solid",
-                            fontWeight: "bold",
-                            "&:hover": { border: "2px solid" },
-                            fontSize: "13px",
-                          }}
-                          onClick={() =>
-                            isAuth ? handleBuyNowClick(car) : openSignIn()
-                          }
-                        >
-                          Buy Now
-                        </Button>
-                        <Tooltip
-                          title='Add or remove from "Saved"'
-                          placement="bottom"
-                        >
-                          <IconButton
+                        }}>
+                        {!exitFromProfile && (
+                          <Button
                             color="gold"
-                            sx={{ mr: 1 }}
+                            variant="outlined"
+                            sx={{
+                              border: "2px solid",
+                              fontWeight: "bold",
+                              "&:hover": { border: "2px solid" },
+                              fontSize: "13px",
+                            }}
                             onClick={() =>
-                              isAuth ? handleSaveClick(car.id) : openSignIn()
-                            }
-                          >
-                            {savedCars?.includes(car.id) ? (
-                              <BookmarkIcon />
-                            ) : (
-                              <BookmarkBorderIcon />
-                            )}
-                          </IconButton>
-                        </Tooltip>
+                              isAuth ? handleBuyNowClick(car) : openSignIn()
+                            }>
+                            Buy Now
+                          </Button>
+                        )}
+                        {!exitFromProfile && (
+                          <Tooltip
+                            title='Add or remove from "Saved"'
+                            placement="bottom">
+                            <IconButton
+                              color="gold"
+                              sx={{ mr: 1 }}
+                              onClick={() =>
+                                isAuth ? handleSaveClick(car.id) : openSignIn()
+                              }>
+                              {savedCars?.includes(car.id) ? (
+                                <BookmarkIcon />
+                              ) : (
+                                <BookmarkBorderIcon />
+                              )}
+                            </IconButton>
+                          </Tooltip>
+                        )}
                       </CardActions>
                     </Box>
                   </Card>
@@ -280,8 +283,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
                       margin: "0 auto",
                       display: { sm: "none" },
                       pb: 1,
-                    }}
-                  >
+                    }}>
                     <CardMedia
                       component="img"
                       height="150"
@@ -303,8 +305,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
                         ml: 1,
                         display: "flex",
                         justifyContent: "space-between",
-                      }}
-                    >
+                      }}>
                       <Button
                         color="gold"
                         variant="outlined"
@@ -316,21 +317,18 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
                         }}
                         onClick={() =>
                           isAuth ? handleBuyNowClick(car) : openSignIn()
-                        }
-                      >
+                        }>
                         Buy Now
                       </Button>
                       <Tooltip
                         title='Add or remove from "Saved"'
-                        placement="bottom"
-                      >
+                        placement="bottom">
                         <IconButton
                           color="gold"
                           sx={{ mr: 1 }}
                           onClick={() =>
                             isAuth ? handleSaveClick(car.id) : openSignIn()
-                          }
-                        >
+                          }>
                           {savedCars?.includes(car.id) ? (
                             <BookmarkIcon />
                           ) : (
@@ -356,16 +354,14 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
             margin: "5rem auto 0 auto",
             padding: "3rem",
           }}
-          elevation={5}
-        >
+          elevation={5}>
           <Typography
             variant="h4"
-            sx={{ fontWeight: "bold", textAlign: "center", mb: 1 }}
-          >
+            sx={{ fontWeight: "bold", textAlign: "center", mb: 1 }}>
             Buy Now
           </Typography>
           <Typography sx={{ fontSize: "20px" }}>
-            Selected car: 
+            Selected car:
             <span style={{ color: "#F2B90D" }}>
               {selectedCar.carBrand} {selectedCar.carModel} (
               {selectedCar.carProdYear})
@@ -400,8 +396,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
               fontWeight: "bold",
               "&:hover": { border: "2px solid #F2B90D" },
             }}
-            onClick={() => setIsBuyNowClicked(false)}
-          >
+            onClick={() => setIsBuyNowClicked(false)}>
             Cancel
           </Button>
           <Button
@@ -413,13 +408,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
               fontWeight: "bold",
               "&:hover": { border: "2px solid #F2B90D" },
             }}
-            onClick={() =>
-              handlePurchaseClick(
-                selectedCar,
-                dayjs()
-              )
-            }
-          >
+            onClick={() => handlePurchaseClick(selectedCar, dayjs())}>
             Purchase
           </Button>
         </Paper>

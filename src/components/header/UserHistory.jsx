@@ -1,10 +1,5 @@
-import {
-  Box,
-  Grid,
-  ThemeProvider,
-  Typography,
-  createTheme,
-} from "@material-ui/core";
+import { Box, Grid, ThemeProvider } from "@material-ui/core";
+import { Typography, createTheme } from "@material-ui/core";
 import dayjs from "dayjs";
 import { useAuth } from "../../hooks/useAuth";
 import { uuidv4 } from "@firebase/util";
@@ -28,7 +23,7 @@ const userHistTheme = createTheme({
 const UserHistory = () => {
   const { userInfo } = useAuth();
   const { purchases } = userInfo;
- console.log(purchases);
+  console.log(purchases);
 
   return (
     <ThemeProvider theme={userHistTheme}>
@@ -45,8 +40,7 @@ const UserHistory = () => {
                     gap: 5,
                     borderRadius: "5px",
                     p: "1rem 1rem 1rem 3rem",
-                  }}
-                >
+                  }}>
                   <Typography variant="h6">
                     Car Brand:{" "}
                     <span style={{ color: "#F2B90D" }}>{car.carBrand}</span>
@@ -61,7 +55,9 @@ const UserHistory = () => {
                   </Typography>
                   <Typography variant="h6">
                     Price:{" "}
-                    <span style={{ color: "#F2B90D" }}>${car.price.toLocaleString()}</span>
+                    <span style={{ color: "#F2B90D" }}>
+                      ${car.price.toLocaleString()}
+                    </span>
                   </Typography>
                   <Typography variant="h6">
                     Purchase date:{" "}
