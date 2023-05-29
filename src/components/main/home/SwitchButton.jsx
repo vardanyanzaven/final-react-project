@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeColor } from "../../../store/slicers/backgroundColor";
 import { styled } from "@mui/material/styles";
-import * as React from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
@@ -15,11 +14,10 @@ export const SwitchButton = () => {
   useEffect(() => {
     const root = document.querySelector(":root");
     root.style.setProperty("--background-color", backgroundColor);
-  }, [isSwitchOn]);
+  }, [backgroundColor]);
 
   const handleSwitchToggle = () => {
-
-    dispatch(changeColor(isSwitchOn ? "#b0b6bf" : ""));
+    dispatch(changeColor(isSwitchOn ? "#b0b6bf" : "#39404d"));
     setIsSwitchOn(!isSwitchOn);
   };
   return (
@@ -32,7 +30,11 @@ export const SwitchButton = () => {
             onChange={handleSwitchToggle}
           />
         }
-        label={isSwitchOn ? "Dark" : "Light"}
+        label={
+          <span style={{ color: "white" }}>
+            {isSwitchOn ? "Dark" : "Light"}
+          </span>
+        }
       />
     </>
   );

@@ -47,8 +47,7 @@ export default function SelectedService() {
           size="medium"
           variant="outlined"
           sx={{ m: 1, mt: 1 }}
-          onClick={isAuth ? handleBookClick : openSignUp}
-        >
+          onClick={isAuth ? handleBookClick : openSignUp}>
           Book now
         </Button>
       </Card>

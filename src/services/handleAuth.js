@@ -8,7 +8,8 @@ import { setUser } from "../store/slicers/userSlice";
 import { getUserDB, setUserDB } from "./dataBaseConfig";
 import { useAuth } from "../hooks/useAuth";
 import { changeMessage } from "../store/slicers/statusSlice";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../constants/common";
+import { SUCCESS_MESSAGE } from "../constants/common";
+import { getError } from "../utils/errors";
 
 export const emailSignUp = async (
   email,
@@ -19,13 +20,18 @@ export const emailSignUp = async (
   onClose,
   dispatch
 ) => {
-  const { user } = await createUserWithEmailAndPassword(auth, email, password);
   try {
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     setUserDB(user, mobile, fullName, gender);
     onClose();
     dispatch(changeMessage(SUCCESS_MESSAGE.loggedIn));
   } catch (e) {
-    dispatch(changeMessage(ERROR_MESSAGE.something));
+    const error = getError(e);
+    dispatch(changeMessage(error));
   }
 };
 
@@ -45,8 +51,6 @@ export const useAuthListener = (setLoading) => {
           dbData?.type === "driver"
             ? { ...dbData, myCars: dbData.myCars.map((ref) => ref.id) }
             : dbData;
-
-        console.log(userInfo["myCars"], res);
 
         disp(
           setUser({

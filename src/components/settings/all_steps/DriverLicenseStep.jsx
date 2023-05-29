@@ -53,7 +53,14 @@ const DriverLicenseStepe = (props) => {
           />
         </Grid>
         <Grid item xs={7} sm={2}>
-          <Button sx={{ height: "54px" }} type="submit" variant="contained">
+          <Button
+            sx={{
+              height: "54px",
+              bgcolor: "#192026",
+              "&:hover": { bgcolor: "#252f39" },
+            }}
+            type="submit"
+            variant="contained">
             Confirm
           </Button>
         </Grid>
