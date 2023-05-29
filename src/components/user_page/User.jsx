@@ -1,12 +1,7 @@
 import { Box, Avatar, Typography, Button } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
-import {
-  Edit,
-  AutoStories,
-  Inventory,
-  Forum,
-  DirectionsCar,
-} from "@mui/icons-material";
+import { Edit, AutoStories, Inventory } from "@mui/icons-material";
+import { Forum, DirectionsCar } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import { useState } from "react";
@@ -59,46 +54,41 @@ const User = () => {
         <Box sx={userStyles.contentLeft}>
           <Link to="/settings">
             <Button
-              sx={{ height: "60px", fontSize: "20px" }}
-              color="secondary"
+              sx={{ height: "60px", fontSize: "20px", color: "#FFC30F" }}
               fullWidth
-              variant="contained">
+              variant="text">
               <Edit />
               Edit profile
             </Button>
           </Link>
           <Button
             onClick={() => setComp("bookings")}
-            sx={{ height: "60px", fontSize: "20px" }}
-            color="secondary"
+            sx={{ height: "60px", fontSize: "20px", color: "#FFC30F" }}
             fullWidth
-            variant="contained">
+            variant="text">
             <AutoStories />
             &nbsp;all services order
           </Button>
           <Button
-            sx={{ height: "60px", fontSize: "20px" }}
-            color="secondary"
+            sx={{ height: "60px", fontSize: "20px", color: "#FFC30F" }}
             fullWidth
-            variant="contained">
+            variant="text">
             <Inventory />
             all bought cars
           </Button>
           <Button
-            sx={{ height: "60px", fontSize: "20px" }}
-            color="secondary"
+            sx={{ height: "60px", fontSize: "20px", color: "#FFC30F" }}
             fullWidth
-            variant="contained"
+            variant="text"
             onClick={() => setComp("comments")}>
             <Forum />
             my comments
           </Button>
           {userInfo.type === "driver" && (
             <Button
-              sx={{ height: "60px", fontSize: "20px" }}
-              color="secondary"
+              sx={{ height: "60px", fontSize: "20px", color: "#FFC30F" }}
               fullWidth
-              variant="contained"
+              variant="text"
               onClick={() => setComp("driverCars")}>
               <DirectionsCar />
               my cars

@@ -1,11 +1,36 @@
 *:focus {
   outline: none;
+  scrollbar-width: thin;
+  scrollbar-color: #303438 #f5f5f5;
 }
 
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #FFC30F;
+  border-radius: 20px;
+  border: 2px solid #f5f5f5;
+
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #bf9106;
+  width: 20px
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #987305;
+}
 
 :root {
-  --background-color:"#3A3E47"
-   /* #48484f; */
+  --background-color: "#48484f"
+    /* #48484f; */
 }
 
 body {
