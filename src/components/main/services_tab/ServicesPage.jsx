@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, ImageList, ImageListItem, ThemeProvider, Typography } from "@mui/material";
 import { SERVICE_DATA } from "../../../constants/common";

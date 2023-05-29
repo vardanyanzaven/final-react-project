@@ -1,6 +1,13 @@
-import { Box, Avatar, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Avatar,
+  Typography,
+  Button,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
-import { Edit, AutoStories } from "@mui/icons-material";
+import { Edit, AutoStories, Inventory } from "@mui/icons-material";
 import { Forum, DirectionsCar } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
@@ -201,7 +208,6 @@ const User = () => {
         <Box sx={userStyles.contentRight}>{currentComponent(comp)}</Box>
       </Box>
     </ThemeProvider>
-    
   );
 };
 

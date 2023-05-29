@@ -1,26 +1,26 @@
 .howwework-container {
-    background-color: white;
-    max-width: 100%;
-    height: 300px;
-    padding: 3%;
-    margin: 3%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction:row;
+  background-color: white;
+  max-width: 100%;
+  height: 300px;
+  padding: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }
 
 .howwework-item {
   /* align-items: center;
   justify-content: center; */
-  margin: 20px ; 
+  margin: 20px;
   width: auto;
   max-width: 25%;
-  
+
 }
 
-.howwework-container h2, .howwework-container p {
-   
+.howwework-container h2,
+.howwework-container p {
+
   font-family: 'Roboto', sans-serif, 'arial';
   font-weight: 400;
   font-size: 20px;
