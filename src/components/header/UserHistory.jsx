@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { useAuth } from "../../hooks/useAuth";
 import { uuidv4 } from "@firebase/util";
 import { Box, Grid } from "@mui/material";
+
 const userHistTheme = createTheme({
   typography: {
     fontFamily: ["Quicksand", "IBM Plex Sans", "Roboto", "sans-serif"].join(
@@ -38,7 +39,8 @@ const UserHistory = () => {
                     gap: 2,
                     borderRadius: "5px",
                     p: "1rem 1rem 1rem 3rem",
-                  }}>
+                  }}
+                >
                   <Typography variant="h6">
                     Car Brand:{" "}
                     <span style={{ color: "#F2B90D" }}>{car.carBrand}</span>

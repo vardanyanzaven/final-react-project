@@ -86,7 +86,8 @@ const User = () => {
                   "&:hover": { bgcolor: "rgb(37, 47, 57)" },
                 }}
                 fullWidth
-                variant="contained">
+                variant="contained"
+              >
                 <Edit />
                 Edit profile
               </Button>
@@ -105,7 +106,8 @@ const User = () => {
               }}
               className={activeOpt === "all-services" ? "active-opt" : ""}
               fullWidth
-              variant="contained">
+              variant="contained"
+            >
               <AutoStories />
               &nbsp;all services order
             </Button>
@@ -123,7 +125,8 @@ const User = () => {
               onClick={() => {
                 setComp("comments");
                 setActiveOpt("all-comments");
-              }}>
+              }}
+            >
               <Forum />
               My comments
             </Button>
@@ -142,7 +145,8 @@ const User = () => {
                 onClick={() => {
                   setComp("driverCars");
                   setActiveOpt("all-my-cars");
-                }}>
+                }}
+              >
                 <DirectionsCar />
                 my cars
               </Button>
