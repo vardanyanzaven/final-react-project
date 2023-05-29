@@ -19,7 +19,7 @@ import "./Comments.css";
 
 export const Comments = () => {
   const [text, setText] = useState("");
-  const { userInfo, isAuth, id } = useAuth();
+  const { isAuth, id } = useAuth();
   const disp = useDispatch();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const Comments = () => {
 
   const onHandleButton = async () => {
     if (!isAuth) {
-      disp(openDialog({ isSignUpOpen: true, isSignInOpen: false }));
+      disp(openDialog({ isSignUpOpen: false, isSignInOpen: true }));
       return;
     }
     if (!text) return;
@@ -59,24 +59,30 @@ export const Comments = () => {
     <Box sx={commentStyles.box2}>
       <WrittenComs />
       <Box sx={commentStyles.box3}>
-        
         <Input
-          sx={{ width: "80%", height: 50, border: 3, borderColor: "white", borderRadius: '16px', mt: 2, bgcolor:  "rgb(2, 2, 34)", color: "white"}}
+          sx={{
+            width: "80%",
+            height: 50,
+            border: 3,
+            borderColor: "white",
+            borderRadius: "16px",
+            mt: 2,
+            bgcolor: "rgb(2, 2, 34)",
+            color: "white",
+          }}
           placeholder="Leave us a Review! "
           variant="outlined"
           color="white"
-         
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
         <Button
-        variant="outlined"
+          variant="outlined"
           sx={{ width: 100, height: 20, mt: 2, mr: 12 }}
           onClick={onHandleButton}>
           Submit!
         </Button>
       </Box>
-      
     </Box>
   );
 };

@@ -4,11 +4,11 @@ import PhoneInput from "react-phone-input-2";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import "react-phone-input-2/lib/style.css";
-import { Link } from "react-router-dom";
+import { addDoc, collection } from "@firebase/firestore";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { db } from "../../../firebase";
-import { addDoc, collection } from "@firebase/firestore";
 import { PayPal } from "./PayPal";
 import SelectCars from "./booking_form/SelectcCars";
 import MyMap from "./MyMap";
@@ -45,9 +45,7 @@ export const Booking = ({ serviceName }) => {
   const TEXT_FEEDBACK_FOR_USER = `The booking was successful, we inform you that the 
   vehicle will arrive to ${address}, on ${complitedData?.pickUpDate
     ?.toString()
-    .slice(0, 15)} at ${complitedData?.pickUpDate
-    ?.toString()
-    .slice(16, 21)}.`;
+    .slice(0, 15)} at ${complitedData?.pickUpDate?.toString().slice(16, 21)}.`;
 
   const anotherStep = async (data) => {
     const { car, carModel, pickUpDate, phone } = data;
@@ -89,8 +87,7 @@ export const Booking = ({ serviceName }) => {
           component="form"
           noValidate
           onSubmit={handleSubmit(anotherStep)}
-          sx={bookingStyles.formBox}
-        >
+          sx={bookingStyles.formBox}>
           <Typography variant="h4" color="#F2B90D">
             {" "}
             Book Here{" "}
@@ -99,8 +96,7 @@ export const Booking = ({ serviceName }) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-            }}
-          >
+            }}>
             <Box sx={bookingStyles.carBox}>
               <SelectCars
                 register={register}
@@ -142,18 +138,6 @@ export const Booking = ({ serviceName }) => {
               sx={{
                 mb: 2,
                 mt: 2,
-                "& .MuiInputBase-input": {
-                  color: "white",
-                },
-                "& .MuiSelect-select": {
-                  borderColor: "white",
-                },
-                "&.Mui-focused": {
-                  borderColor: "#F2B90D",
-                },
-                "& .MuiInputLabel-root": {
-                  color: "white",
-                },
               }}
               helperText={errors.pickUpDate?.message}
               {...register("pickUpDate")}
@@ -163,8 +147,7 @@ export const Booking = ({ serviceName }) => {
               variant="contained"
               sx={{ mt: 2 }}
               disabled={disabled}
-              type="submit"
-            >
+              type="submit">
               Continue
             </Button>
           </Box>

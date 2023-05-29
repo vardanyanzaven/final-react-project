@@ -42,8 +42,8 @@ export const SelectedService = () => {
   const openSignUp = () => {
     disp(
       openDialog({
-        isSignUpOpen: true,
-        isSignInOpen: false,
+        isSignUpOpen: false,
+        isSignInOpen: true,
       })
     );
   };
@@ -57,7 +57,7 @@ export const SelectedService = () => {
       <Box sx={selectedServiceStyle.mainBox}>
         <Card sx={selectedServiceStyle.card}>
           <Typography variant="h4" color="#F2B90D">
-            {/* {info.name.toUpperCase()} */}
+            {info.name.toUpperCase()}
           </Typography>
           <img
             height="500"
@@ -74,6 +74,16 @@ export const SelectedService = () => {
             color="gold"
             onClick={isAuth ? handleBookClick : openSignUp}
           >
+            sx={{
+              border: "2px solid",
+              fontWeight: "bold",
+              transition: "all 0.15s",
+              "&:hover": {
+                border: "2px solid",
+                transform: "scale(1.1)",
+              },
+            }}
+            onClick={isAuth ? handleBookClick : openSignUp}>
             Book now
           </Button>
         </Card>

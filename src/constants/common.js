@@ -7,7 +7,7 @@ import airport from "../assets/service_images/Empire_limousine_1.jpg";
 import casino from "../assets/service_images/hong-kong-casinos-cover.webp";
 import party from "../assets/service_images/nightclub-girls-768x512.jpg";
 import birthday from "../assets/service_images/pexels-photo-3171837.jpeg";
-import picnic from "../assets/service_images/Obsessed-with-picnicking-2-02de801d4e8d443280c30c1ec3e93453.jpg";
+import cruise from "../assets/service_images/cruise-image.webp";
 
 export const HEADER_TAB_LIST = {
   services: "services",
@@ -186,12 +186,10 @@ export const SERVICE_DATA = (f) => {
       `,
     },
     {
-      url: picnic,
-      name: "picnic",
+      url: cruise,
+      name: "pier and cruise",
       title: `
-      Spending time in nature can be a wonderful way to relax and recharge. Whether you're taking a hike through the mountains,
-       strolling through a peaceful forest, or simply
-       sitting by a tranquil lake, being surrounded by natural beauty can help calm your mind and reduce stress.
+      We offer transportation to all cruise terminals and piers worldwide. Worried about fitting all of your luggage? Our Limo service has a diverse fleet of luxury vehicles that can accommodate any group size, large or small.
       `,
     },
   ];

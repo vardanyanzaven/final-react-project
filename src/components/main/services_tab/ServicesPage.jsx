@@ -34,6 +34,7 @@ export const ServicesPage = () => {
                     border: "3px solid",
                     fontWeight: "bold",
                   }}
+                  style={{ height: "320px", borderRadius: "10px", marginTop: "30px" }}
                 />
               </ImageListItem>
             </Link>
