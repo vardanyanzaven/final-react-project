@@ -52,7 +52,7 @@ const HomePageSlider = () => {
                 >
                   {slide.subtitle}
                 </p>
-                <Button variant="contained">
+                <Button variant="outlined">
                   <Link to={"/services"}>Get Started </Link>
                 </Button>
               </div>

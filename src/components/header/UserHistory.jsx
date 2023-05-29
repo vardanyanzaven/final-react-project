@@ -3,7 +3,6 @@ import { Typography, createTheme } from "@material-ui/core";
 import dayjs from "dayjs";
 import { useAuth } from "../../hooks/useAuth";
 import { uuidv4 } from "@firebase/util";
-
 const userHistTheme = createTheme({
   typography: {
     fontFamily: ["Quicksand", "IBM Plex Sans", "Roboto", "sans-serif"].join(
@@ -19,12 +18,10 @@ const userHistTheme = createTheme({
     },
   },
 });
-
 const UserHistory = () => {
   const { userInfo } = useAuth();
   const { purchases } = userInfo;
   console.log(purchases);
-
   return (
     <ThemeProvider theme={userHistTheme}>
       <Box sx={{ width: "fit-content", margin: "125px 50px" }}>
@@ -74,5 +71,4 @@ const UserHistory = () => {
     </ThemeProvider>
   );
 };
-
 export default UserHistory;

@@ -10,7 +10,7 @@ export const headStyles = {
     borderRadius: "50%",
   },
   title1: {
-    fontSize: { xs: "15px!important", sm: "30px!important" },
+    fontSize: { xs: 15, sm: 30 },
     color: "#F2B90D",
     bgcolor: "#161617",
     p: "0 5px",
@@ -19,7 +19,7 @@ export const headStyles = {
   title2: {
     display: "flex",
     alignItems: "center",
-    fontSize: { xs: "15px!important", sm: "30px!important" },
+    fontSize: { xs: 15, sm: 30 },
     p: "0 5px",
     color: "#161617",
     bgcolor: "#F2B90D",

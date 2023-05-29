@@ -10,7 +10,7 @@ import { useState } from "react";
 import { db } from "../../../firebase";
 import { addDoc, collection } from "@firebase/firestore";
 import { PayPal } from "./PayPal";
-import SelectCars from "./booking_form/SelectCars";
+import SelectCars from "./booking_form/SelectcCars";
 import MyMap from "./MyMap";
 import SelectCarModel from "./booking_form/SelectCarModel";
 import { bookScheme } from "../../../utils/validation";

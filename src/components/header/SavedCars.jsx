@@ -3,7 +3,6 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../hooks/useAuth";
 import CarsGrid from "../../shared/CarsGrid";
-import { Box } from "@material-ui/core";
 
 const getSavedCars = async (setSavedCarsList, id) => {
   try {
@@ -30,11 +29,7 @@ const SavedCars = () => {
     getSavedCars(setSavedCarsList, id);
   }, []);
 
-  return (
-    <Box sx={{ pt: 1 }}>
-      <CarsGrid carsList={savedCarsList} />
-    </Box>
-  );
+  return <CarsGrid carsList={savedCarsList} />;
 };
 
 export default SavedCars;

@@ -1,11 +1,4 @@
-import {
-  Box,
-  Avatar,
-  Typography,
-  Button,
-  createTheme,
-  ThemeProvider,
-} from "@mui/material";
+import { Box, Avatar, Typography, Button } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
 import { Edit, AutoStories } from "@mui/icons-material";
 import { Forum, DirectionsCar } from "@mui/icons-material";
@@ -153,7 +146,62 @@ const User = () => {
           <Box sx={userStyles.contentRight}>{currentComponent(comp)}</Box>
         </Box>
       </Box>
+      <Box sx={userStyles.content}>
+        <Box sx={userStyles.contentLeft}>
+          <Link to="/settings">
+            <Button
+              sx={{ height: "60px", fontSize: "20px" }}
+              color="secondary"
+              fullWidth
+              variant="contained">
+              <Edit />
+              Edit profile
+            </Button>
+          </Link>
+          <Button
+            onClick={() => setComp("bookings")}
+            sx={{ height: "60px", fontSize: "20px" }}
+            color="secondary"
+            fullWidth
+            variant="contained">
+            <AutoStories />
+            &nbsp;all services order
+          </Button>
+          <Button
+            sx={{ height: "60px", fontSize: "20px" }}
+            color="secondary"
+            fullWidth
+            variant="contained">
+            <Inventory />
+            all bought cars
+          </Button>
+          <Button
+            sx={{ height: "60px", fontSize: "20px" }}
+            color="secondary"
+            fullWidth
+            variant="contained"
+            onClick={() => setComp("comments")}>
+            <Forum />
+            my comments
+          </Button>
+          {userInfo.type === "driver" && (
+            <Button
+              sx={{ height: "60px", fontSize: "20px" }}
+              color="secondary"
+              fullWidth
+              variant="contained"
+              onClick={() => setComp("driverCars")}>
+              <DirectionsCar />
+              my cars
+            </Button>
+          )}
+          <Typography>I have been registered </Typography>
+          <Typography>{registered} </Typography>
+        </Box>
+        <Box sx={userStyles.contentRight}>{currentComponent(comp)}</Box>
+      </Box>
     </ThemeProvider>
+    
   );
 };
 

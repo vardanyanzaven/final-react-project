@@ -4,23 +4,16 @@ import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
 import { SERVICE_DATA } from "../../../constants/common";
 import { servicePageStyle } from "./styles";
 
-const ServicesPage = ({ setActiveLinkId }) => {
-  useEffect(() => {
-    setActiveLinkId("services");
-    return () => setActiveLinkId(null);
-  }, []);
-
+const ServicesPage = () => {
   return (
     // <ThemeProvider theme={ServiceTheme}>
     <Box sx={servicePageStyle.mainBox}>
-      <Typography className="heading" variant="h3" color="#F2B918">
-        Our services
-      </Typography>
+      
       <ImageList cols={3} gap={20} sx={{ ml: 8, mr: 8 }}>
         {SERVICE_DATA().map((ser) => (
           <Link to={ser.name} key={Math.random()}>
             <ImageListItem>
-              <Typography variant="h4">{ser.name.toUpperCase()}</Typography>
+              <Typography variant="h4" color= "#020222" padding="10%">{ser.name}</Typography>
               <img
                 src={ser.url}
                 alt={ser.name}

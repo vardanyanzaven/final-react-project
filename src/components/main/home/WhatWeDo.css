@@ -9,7 +9,7 @@
     flex-direction:row;
 }
 
-.whatwedo-item {
+.whatwedo_item_text {
   align-items: center;
   justify-content: center;
   margin: 20px ; 
@@ -18,6 +18,20 @@
   
 }
 
-.whatwedo-img {
-  width: 100%;
+
+.whatwedo-container h2, .whatwedo-container p{
+   
+  font-family: 'Roboto', sans-serif, 'arial';
+  font-weight: 400;
+  font-size: 20px;
+  color: #020222;
+  line-height: 1.5;
+}
+
+.whatwedo_item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
 }
