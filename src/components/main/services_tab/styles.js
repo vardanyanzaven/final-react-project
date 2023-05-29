@@ -67,7 +67,7 @@ export const selectedServiceStyle = {
 
 export const servicePageStyle = {
   mainBox: {
-    mt: "8rem",
+    mt: "4rem",
     display: "flex",
     justifyContent: "center",
     textAlign: "center",
