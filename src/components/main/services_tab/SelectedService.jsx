@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import {
   Box,
@@ -32,7 +32,7 @@ const selServiceTheme = createTheme({
   },
 });
 
-export const SelectedService = () => {
+export const SelectedService = ({setActiveLinkId}) => {
   const { serve } = useParams();
   const [info] = SERVICE_DATA(serve);
   const [booking, setbooking] = useState(true);
@@ -51,6 +51,11 @@ export const SelectedService = () => {
   const handleBookClick = () => {
     setbooking(false);
   };
+
+  useEffect(() => {
+    setActiveLinkId("services");
+    return () => setActiveLinkId(null);
+  }, [setActiveLinkId]);
 
   return booking ? (
     <ThemeProvider theme={selServiceTheme}>
@@ -72,8 +77,6 @@ export const SelectedService = () => {
             variant="outlined"
             size="large"
             color="gold"
-            onClick={isAuth ? handleBookClick : openSignUp}
-          >
             sx={{
               border: "2px solid",
               fontWeight: "bold",
@@ -83,7 +86,8 @@ export const SelectedService = () => {
                 transform: "scale(1.1)",
               },
             }}
-            onClick={isAuth ? handleBookClick : openSignUp}>
+            onClick={isAuth ? handleBookClick : openSignUp}
+          >
             Book now
           </Button>
         </Card>

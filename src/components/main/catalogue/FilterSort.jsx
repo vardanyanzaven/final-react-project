@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setCatalogue } from "../../../store/slicers/catalogueSlice";
 import { setFetchVal } from "../../../store/slicers/catalogueSlice";
 import { ThemeProvider } from "styled-components";
-import CatalogueTheme from "../../../themes/catalogueTheme";
+import CatalogueTheme from "../../../themes/CatalogueTheme";
 import { filterSortStyles } from "./styles";
 
 const FilterSort = ({

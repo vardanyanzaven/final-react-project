@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Box, ImageList, ImageListItem } from "@mui/material";
 import { ThemeProvider, Typography } from "@mui/material";
 import { SERVICE_DATA } from "../../../constants/common";
-import ServiceTheme from "../../../themes/serviceTheme";
+import ServiceTheme from "../../../themes/ServiceTheme";
 
 export const ServicesPage = () => {
   return (

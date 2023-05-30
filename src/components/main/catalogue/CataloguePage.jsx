@@ -9,7 +9,7 @@ import { setCatalogue } from "../../../store/slicers/catalogueSlice";
 import { setFetchVal } from "../../../store/slicers/catalogueSlice";
 import CarsGrid from "../../../shared/CarsGrid";
 import { catalogueStyles } from "./styles";
-import CatalogueTheme from "../../../themes/catalogueTheme";
+import CatalogueTheme from "../../../themes/CatalogueTheme";
 
 const CataloguePage = ({ setActiveLinkId }) => {
   // Redux

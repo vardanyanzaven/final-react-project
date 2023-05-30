@@ -12,7 +12,7 @@ export const Services = ({ setActiveLinkId }) => {
 
   return (
     <div className="homepage-slider">
-      <ServicesPage />
+      <ServicesPage/>
       <ServicesIntro />
       <FAQ />
     </div>
