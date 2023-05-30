@@ -45,7 +45,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
   // Helper functions for handling search input dispatch
   const handleSearch = () => {
     // Handling redux
-    dispatch(setFetchVal(["searchVal", searchInputVal]));
+    dispatch(setFetchVal(["searchVal", searchInputVal.trim().length === 0 ? "" : searchInputVal]));
     dispatch(setFetchVal(["sortVal", null]));
     dispatch(setFetchVal(["filterVal", null]));
     dispatch(setCatalogue("search"));
@@ -56,7 +56,7 @@ const CataloguePage = ({ setActiveLinkId }) => {
     setActiveSortOpt(SORT_OPTIONS[0].value);
     setActiveFilterOpt(FILTER_OPTIONS[0].value);
 
-    setLastSearch(searchInputVal);
+    setLastSearch(searchInputVal.trim().length === 0 ? "" : searchInputVal);
     setSearchInputVal("");
   };
 

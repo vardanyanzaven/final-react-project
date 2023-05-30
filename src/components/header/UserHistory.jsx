@@ -26,7 +26,7 @@ const UserHistory = () => {
 
   return (
     <ThemeProvider theme={userHistTheme}>
-      <Box sx={{ padding: "50px 0" }}>
+      <Box sx={{ padding: "50px 0", minHeight: "100vh" }}>
         <Grid container spacing={6} sx={{ paddingInline: "50px" }}>
           {purchases.map((car) => {
             return (

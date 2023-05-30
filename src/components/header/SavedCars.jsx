@@ -33,14 +33,34 @@ const SavedCars = () => {
     getSavedCars(setSavedCarsList, id, setIsLoading);
   }, []);
 
-  if(isLoading) return <LinearProgress />
+  if (isLoading)
+    return (
+      <Box
+        sx={{
+          width: "100%",
+          minHeight: "100vh",
+          textAlign: "center",
+        }}
+      >
+        <LinearProgress />
+      </Box>
+    );
 
   return (
-    <Box sx={{ width: "100%", minHeight: "100vh", textAlign: "center", mt: "120px" }}>
+    <Box
+      sx={{
+        width: "100%",
+        minHeight: "100vh",
+        textAlign: "center",
+        mt: "120px",
+      }}
+    >
       {savedCarsList.length !== 0 ? (
         <CarsGrid carsList={savedCarsList} />
       ) : (
-        <Typography variant="h2" color="#F2B90D">There aren't any saved cars yet.</Typography>
+        <Typography variant="h2" color="#F2B90D">
+          There aren't any saved cars yet.
+        </Typography>
       )}
     </Box>
   );
