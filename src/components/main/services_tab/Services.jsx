@@ -1,4 +1,4 @@
-import ServicesPage from "./ServicesPage";
+import { ServicesPage } from "./ServicesPage";
 import React from "react";
 import { useEffect } from "react";
 import ServicesIntro from "./ServicesIntro";
@@ -12,8 +12,8 @@ export const Services = ({ setActiveLinkId }) => {
 
   return (
     <div className="homepage-slider">
-      <ServicesIntro />
       <ServicesPage />
+      <ServicesIntro />
       <FAQ />
     </div>
   );

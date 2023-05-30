@@ -32,7 +32,7 @@ const selServiceTheme = createTheme({
   },
 });
 
-export default function SelectedService() {
+export const SelectedService = () => {
   const { serve } = useParams();
   const [info] = SERVICE_DATA(serve);
   const [booking, setbooking] = useState(true);
@@ -57,7 +57,6 @@ export default function SelectedService() {
       <Box sx={selectedServiceStyle.mainBox}>
         <Card sx={selectedServiceStyle.card}>
           <Typography variant="h4" color="#F2B90D">
-            {" "}
             {info.name.toUpperCase()}
           </Typography>
           <img
@@ -67,13 +66,14 @@ export default function SelectedService() {
             style={{ margin: "3rem 0 1rem 0" }}
           />
           <Typography variant="h6" sx={{ m: 5, width: "65%" }}>
-            {" "}
             {info.title}
           </Typography>
           <Button
             variant="outlined"
             size="large"
             color="gold"
+            onClick={isAuth ? handleBookClick : openSignUp}
+          >
             sx={{
               border: "2px solid",
               fontWeight: "bold",
@@ -92,4 +92,4 @@ export default function SelectedService() {
   ) : (
     <Booking serviceName={info.name} />
   );
-}
+};
