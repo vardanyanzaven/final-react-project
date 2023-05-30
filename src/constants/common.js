@@ -171,18 +171,9 @@ export const SERVICE_DATA = (f) => {
       name: "party",
       car: "Lexus",
       title: `
-              If you're looking to throw a memorable party, there's no better way to make a statement than by
+      If you're looking to throw a memorable party, there's no better way to make a statement than by
               renting a limousine from our service. Our sleek and luxurious limousines provide the perfect backdrop for any
               celebration, whether it's a birthday, prom, bachelor/bachelorette party, or even a night out on the town.
-      `,
-    },
-    {
-      url: birthday,
-      name: "birthday",
-      title: `
-            Happy Birthday! I hope this day is filled with joy, laughter, and all the things that make you happy. May this new
-            year of your life bring you exciting adventures, personal growth, and new opportunities to fulfill your dreams. Enjoy
-             your special day and make unforgettable memories that you will cherish for years to come!
       `,
     },
     {
@@ -192,6 +183,15 @@ export const SERVICE_DATA = (f) => {
       Spending time in nature can be a wonderful way to relax and recharge. Whether you're taking a hike through the mountains,
        strolling through a peaceful forest, or simply
        sitting by a tranquil lake, being surrounded by natural beauty can help calm your mind and reduce stress.
+      `,
+    },
+    {
+      url: birthday,
+      name: "birthday",
+      title: `
+      Happy Birthday! I hope this day is filled with joy, laughter, and all the things that make you happy. May this new
+            year of your life bring you exciting adventures, personal growth, and new opportunities to fulfill your dreams. Enjoy
+             your special day and make unforgettable memories that you will cherish for years to come!
       `,
     },
   ];
