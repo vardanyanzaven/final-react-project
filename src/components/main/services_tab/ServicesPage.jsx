@@ -24,14 +24,15 @@ export const ServicesPage = () => {
                   {ser.name.toUpperCase()}
                 </Typography>
                 <img
+                  className="image"
                   src={ser.url}
                   alt={ser.name}
                   style={{
                     borderRadius: "10px",
                     marginTop: "30px",
                     width: 400,
-                    border: "3px solid",
                     fontWeight: "bold",
+                    height: "320px",
                   }}
                 />
               </ImageListItem>

@@ -15,7 +15,7 @@ export const UserSettings = () => {
         <PersonalSettings />
       </Box>
       <Divider />
-      {userInfo.type !== "driver" ? <DriverSettings /> : <DriverRegister />}
+      {userInfo.type === "driver" ? <DriverSettings /> : <DriverRegister />}
     </>
   );
 };

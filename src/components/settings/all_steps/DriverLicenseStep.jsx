@@ -45,7 +45,7 @@ const DriverLicenseStepe = (props) => {
         </Grid>
         <Grid item xs={6} sm={7}>
           <TextField
-            label="License number"
+            label="License ID"
             required
             error={!!errors.license}
             helperText={errors.license?.message}
