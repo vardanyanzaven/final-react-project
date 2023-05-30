@@ -41,7 +41,7 @@ function App() {
             path="services"
             element={<Services setActiveLinkId={setActiveLinkId} />}
           />
-          <Route path="services/:serve" element={<SelectedService />} />
+          <Route path="services/:serve" element={<SelectedService setActiveLinkId={setActiveLinkId}/>} />
           <Route
             path="catalogue"
             element={<CataloguePage setActiveLinkId={setActiveLinkId} />}

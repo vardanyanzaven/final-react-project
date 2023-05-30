@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { Box, Button, Card } from "@mui/material";
 import { ThemeProvider, Typography, createTheme } from "@mui/material";
@@ -26,7 +26,7 @@ const selServiceTheme = createTheme({
   },
 });
 
-export const SelectedService = () => {
+export const SelectedService = ({setActiveLinkId}) => {
   const { serve } = useParams();
   const [info] = SERVICE_DATA(serve);
   const [booking, setbooking] = useState(true);
@@ -45,6 +45,11 @@ export const SelectedService = () => {
   const handleBookClick = () => {
     setbooking(false);
   };
+
+  useEffect(() => {
+    setActiveLinkId("services");
+    return () => setActiveLinkId(null);
+  }, [setActiveLinkId]);
 
   return booking ? (
     <ThemeProvider theme={selServiceTheme}>
