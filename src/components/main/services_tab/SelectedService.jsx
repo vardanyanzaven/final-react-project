@@ -1,13 +1,7 @@
 import * as React from "react";
 import { useParams } from "react-router";
-import {
-  Box,
-  Button,
-  Card,
-  ThemeProvider,
-  Typography,
-  createTheme,
-} from "@mui/material";
+import { Box, Button, Card } from "@mui/material";
+import { ThemeProvider, Typography, createTheme } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { openDialog } from "../../../store/slicers/dialogSlice";
@@ -73,7 +67,6 @@ export const SelectedService = () => {
             size="large"
             color="gold"
             onClick={isAuth ? handleBookClick : openSignUp}
-          >
             sx={{
               border: "2px solid",
               fontWeight: "bold",
@@ -82,8 +75,7 @@ export const SelectedService = () => {
                 border: "2px solid",
                 transform: "scale(1.1)",
               },
-            }}
-            onClick={isAuth ? handleBookClick : openSignUp}>
+            }}>
             Book now
           </Button>
         </Card>
