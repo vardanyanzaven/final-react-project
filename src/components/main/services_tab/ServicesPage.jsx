@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Box, ImageList, ImageListItem } from "@mui/material";
 import { ThemeProvider, Typography } from "@mui/material";
 import { SERVICE_DATA } from "../../../constants/common";
-import ServiceTheme from "../../../themes/ServiceTheme";
+import ServiceTheme from "../../../themes/serviceTheme";
 import { servicePageStyle } from "./styles";
 import { v4 } from "uuid";
 
@@ -24,7 +24,11 @@ const ServicesPage = () => {
                   src={ser.url}
                   alt={ser.name}
                   className="image"
-                  style={{ height: "320px", borderRadius: "10px", marginTop: "30px" }}
+                  style={{
+                    height: "320px",
+                    borderRadius: "10px",
+                    marginTop: "30px",
+                  }}
                 />
               </ImageListItem>
             </Link>
