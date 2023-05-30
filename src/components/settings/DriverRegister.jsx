@@ -66,11 +66,11 @@ const DriverSettings = () => {
   const [loading, setLoading] = useState(false);
   const storageRefForPassport = useMemo(
     () => ref(storage, `${id}/${v4()}.png`),
-    []
+    [id]
   );
   const storageRefForSelfie = useMemo(
     () => ref(storage, `${id}/${v4()}.png`),
-    []
+    [id]
   );
 
   const handleOpenModal = () => {
