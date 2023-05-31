@@ -1,10 +1,10 @@
-import ServiceTheme from "../../../themes/ServiceTheme";
 import { servicePageStyle } from "./styles";
 import { v4 } from "uuid";
 import { Link } from "react-router-dom";
 import { Box, ImageList, ImageListItem } from "@mui/material";
 import { ThemeProvider, Typography } from "@mui/material";
 import { SERVICE_DATA } from "../../../constants/common";
+import ServiceTheme from "../../../themes/serviceTheme";
 
 export const ServicesPage = () => {
   return (
@@ -19,20 +19,20 @@ export const ServicesPage = () => {
               <ImageListItem
                 sx={{
                   mt: "30px",
-                }}
-              >
+                }}>
                 <Typography sx={{ fontSize: "33px" }}>
                   {ser.name.toUpperCase()}
                 </Typography>
                 <img
+                  className="image"
                   src={ser.url}
                   alt={ser.name}
                   style={{
                     borderRadius: "10px",
                     marginTop: "30px",
                     width: 400,
-                    border: "3px solid",
                     fontWeight: "bold",
+                    height: "320px",
                   }}
                 />
               </ImageListItem>

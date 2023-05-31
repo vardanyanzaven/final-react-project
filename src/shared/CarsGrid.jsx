@@ -1,20 +1,8 @@
 import { db } from "../firebase";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "@firebase/firestore";
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  IconButton,
-  Paper,
-  ThemeProvider,
-  Tooltip,
-  Typography,
-  createTheme,
-} from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent } from "@mui/material";
+import { CardMedia, Grid, IconButton, Paper } from "@mui/material";
+import { ThemeProvider, Tooltip, Typography, createTheme } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useDispatch } from "react-redux";
@@ -95,6 +83,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
   const [isBuyNowClicked, setIsBuyNowClicked] = useState(false);
   const [selectedCar, setSelectedCar] = useState();
   const [pickupDate, setPickupDate] = useState(dayjs());
+  const [disabled, setDisabled] = useState(true);
 
   const handleBuyNowClick = (car) => {
     setIsBuyNowClicked(true);
@@ -161,6 +150,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
     } catch (e) {
       console.log(e);
     }
+    setDisabled(true);
   };
 
   return (
@@ -390,7 +380,7 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
               }}
             />
           </LocalizationProvider>
-          <PayPal value={selectedCar.price} />
+          <PayPal setDisabled={setDisabled} value={selectedCar.price} />
           <Button
             color="gold"
             variant="outlined"
@@ -400,15 +390,20 @@ const CarsGrid = ({ carsList, exitFromProfile }) => {
               fontWeight: "bold",
               "&:hover": { border: "2px solid #F2B90D" },
             }}
-            onClick={() => setIsBuyNowClicked(false)}>
+            onClick={() => {
+              setIsBuyNowClicked(false);
+              setDisabled(true);
+            }}>
             Cancel
           </Button>
           <Button
+            disabled={disabled}
             color="gold"
             variant="contained"
             sx={{
               color: "white",
-              border: "2px solid #F2B90D",
+              border: "2px solid",
+              borderColor: disabled ? "" : "#f2b90d",
               fontWeight: "bold",
               "&:hover": { border: "2px solid #F2B90D" },
             }}

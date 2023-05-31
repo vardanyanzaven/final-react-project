@@ -8,11 +8,11 @@ export const Services = ({ setActiveLinkId }) => {
   useEffect(() => {
     setActiveLinkId("services");
     return () => setActiveLinkId(null);
-  }, []);
+  }, [setActiveLinkId]);
 
   return (
     <div className="homepage-slider">
-      <ServicesPage />
+      <ServicesPage/>
       <ServicesIntro />
       <FAQ />
     </div>

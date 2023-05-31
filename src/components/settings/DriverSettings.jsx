@@ -33,7 +33,7 @@ const DriverSettings = () => {
   const auth = useAuth();
   const storageRefForSelfie = useMemo(
     () => ref(storage, `${auth.id}/cars/${v4()}.png`),
-    []
+    [auth.id]
   );
   const {
     register,
@@ -134,7 +134,7 @@ const DriverSettings = () => {
 
   return (
     <Box
-      sx={{ display: "flex", justifyContent: "center" }}
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       gap={6}
       component="form"
       noValidate

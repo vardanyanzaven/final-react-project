@@ -1,13 +1,7 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
-import {
-  Box,
-  Button,
-  Card,
-  ThemeProvider,
-  Typography,
-  createTheme,
-} from "@mui/material";
+import { Box, Button, Card } from "@mui/material";
+import { ThemeProvider, Typography, createTheme } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { openDialog } from "../../../store/slicers/dialogSlice";
@@ -32,7 +26,7 @@ const selServiceTheme = createTheme({
   },
 });
 
-export const SelectedService = () => {
+export const SelectedService = ({setActiveLinkId}) => {
   const { serve } = useParams();
   const [info] = SERVICE_DATA(serve);
   const [booking, setbooking] = useState(true);
@@ -42,8 +36,8 @@ export const SelectedService = () => {
   const openSignUp = () => {
     disp(
       openDialog({
-        isSignUpOpen: true,
-        isSignInOpen: false,
+        isSignUpOpen: false,
+        isSignInOpen: true,
       })
     );
   };
@@ -52,12 +46,17 @@ export const SelectedService = () => {
     setbooking(false);
   };
 
+  useEffect(() => {
+    setActiveLinkId("services");
+    return () => setActiveLinkId(null);
+  }, [setActiveLinkId]);
+
   return booking ? (
     <ThemeProvider theme={selServiceTheme}>
       <Box sx={selectedServiceStyle.mainBox}>
         <Card sx={selectedServiceStyle.card}>
           <Typography variant="h4" color="#F2B90D">
-            {/* {info.name.toUpperCase()} */}
+            {info.name.toUpperCase()}
           </Typography>
           <img
             height="500"
@@ -73,7 +72,15 @@ export const SelectedService = () => {
             size="large"
             color="gold"
             onClick={isAuth ? handleBookClick : openSignUp}
-          >
+            sx={{
+              border: "2px solid",
+              fontWeight: "bold",
+              transition: "all 0.15s",
+              "&:hover": {
+                border: "2px solid",
+                transform: "scale(1.1)",
+              },
+            }}>
             Book now
           </Button>
         </Card>

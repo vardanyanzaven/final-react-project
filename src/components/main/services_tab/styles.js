@@ -10,6 +10,7 @@ export const bookingStyles = {
     textAlign: "center",
     width: 1200,
     height: 600,
+    bgcolor: "white",
   },
   formBox: {
     width: "400px",
