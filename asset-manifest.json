@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6f6e7c56.css",
+    "main.js": "/static/js/main.4e5e6142.js",
+    "static/media/sliderImg3.jpg": "/static/media/sliderImg3.05186f9215be6f6ce3d1.jpg",
+    "static/media/sliderImg1.jpg": "/static/media/sliderImg1.41643403143c255e5216.jpg",
+    "static/media/sliderImg2.jpg": "/static/media/sliderImg2.07108f04fa493af34f94.jpg",
+    "static/media/Empire_limousine_1.jpg": "/static/media/Empire_limousine_1.0f48fbd5da9ef467e7e5.jpg",
+    "static/media/2085166.jpg": "/static/media/2085166.0763d19099a86e59d715.jpg",
+    "static/media/galleryimg7.jpg": "/static/media/galleryimg7.347f6eba13cf501fecaa.jpg",
+    "static/media/galleryimg1.jpg": "/static/media/galleryimg1.939d34653cc273cfe3ef.jpg",
+    "static/media/galleryimg8.jpg": "/static/media/galleryimg8.939d34653cc273cfe3ef.jpg",
+    "static/media/galleryimg6.jpg": "/static/media/galleryimg6.da2aea4d1eac0c9cb938.jpg",
+    "static/media/galleryimg9.jpg": "/static/media/galleryimg9.19a402f845755e526105.jpg",
+    "static/media/galleryimg2.jpg": "/static/media/galleryimg2.d87d155ec9feb99f08d1.jpg",
+    "static/media/galleryimg3.jpg": "/static/media/galleryimg3.7e975315696783407160.jpg",
+    "static/media/galleryimg4.jpg": "/static/media/galleryimg4.610022615eac6c367fb5.jpg",
+    "static/media/galleryimg5.jpg": "/static/media/galleryimg5.8a795f23eb3f66b16d4d.jpg",
+    "static/media/heart-529607_960_720.jpg": "/static/media/heart-529607_960_720.397a1169faa9132d1c0f.jpg",
+    "static/media/cruise-image.webp": "/static/media/cruise-image.8609a62af4071b43712d.webp",
+    "static/media/nightclub-girls-768x512.jpg": "/static/media/nightclub-girls-768x512.4e0216ab75237517a5db.jpg",
+    "static/media/hong-kong-casinos-cover.webp": "/static/media/hong-kong-casinos-cover.a115e85b2cf95b653cf5.webp",
+    "static/media/pexels-photo-3171837.jpeg": "/static/media/pexels-photo-3171837.70dedc23c5e8ecd8f34f.jpeg",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.6f6e7c56.css.map": "/static/css/main.6f6e7c56.css.map",
+    "main.4e5e6142.js.map": "/static/js/main.4e5e6142.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6f6e7c56.css",
+    "static/js/main.4e5e6142.js"
+  ]
+}
