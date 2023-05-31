@@ -42,7 +42,7 @@ export const Booking = ({ serviceName }) => {
   const disp = useDispatch();
   const { id } = useAuth();
 
-  const TEXT_FEEDBACK_FOR_USER = `The booking was successful, we inform you that the 
+  const TEXT_FEEDBACK_FOR_USER = `The booking has been successfuly done, we inform you that the 
   vehicle will arrive to ${address}, on ${complitedData?.pickUpDate
     ?.toString()
     .slice(0, 15)} at ${complitedData?.pickUpDate?.toString().slice(16, 21)}.`;

@@ -171,7 +171,7 @@ export const SERVICE_DATA = (f) => {
       name: "party",
       car: "Lexus",
       title: `
-              If you're looking to throw a memorable party, there's no better way to make a statement than by
+      If you're looking to throw a memorable party, there's no better way to make a statement than by
               renting a limousine from our service. Our sleek and luxurious limousines provide the perfect backdrop for any
               celebration, whether it's a birthday, prom, bachelor/bachelorette party, or even a night out on the town.
       `,
